@@ -21,7 +21,7 @@ domainUrl: 'http://blog.tmaize.net'
 baseurl: ''
 
 # 吐个槽地址，会在chat页面中重定向到该地址
-tucaoUrl: https://support.qq.com/product/86335
+tucaoUrl: null
 
 # 菜单
 menu:
@@ -34,7 +34,7 @@ menu:
   - title: 友链
     url: /pages/links.html
   - title: 留言
-    url: /pages/chat.html
+    url: /pages/about.html
   - title: 关于
     url: /pages/about.html
 
@@ -47,7 +47,7 @@ extAdsense: false
 
 # 腾讯MTA移动分析,不需要请设置为false
 # _includes/ext-adsense.html 里面修改为自己的配置
-extMTA: true
+extMTA: false 
 
 # 百度收录自动推送,不需要请设置为false
 extBaidu: true
@@ -56,13 +56,4 @@ extBaidu: true
 extMath: false
 
 # 友情链接
-links:
-<img src="http://ops.dgsrz.com/assets/img/logo.png" width="200px" />
-
-**osu!droid**:[_Arair237_](http://ops.dgsrz.com/profile.php?uid=262756)
-
-----
-<img sizes="180x180" src="https://osu.ppy.sh/apple-touch-icon.png">
-
-**OSU!**:[_Arair237_](https://osu.ppy.sh/users/19273483)
-
+links:
