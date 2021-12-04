@@ -1,7 +1,7 @@
 ---
 layout: mypost
 title: Termux启动语改为Screenfect
-categories: [Termux] [Linux]
+categories: [Termux] 
 ---
 
 > 最近更新了下termux，结果配置被清了，启动语变成了原版，所以借此机会记录下修改termux启动语为screenfetch，以免下次忘记。
