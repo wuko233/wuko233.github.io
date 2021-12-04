@@ -1,7 +1,7 @@
 ---
-layout:mypost
-title:修改termux启动提示语为screenfecth
-categories:[Jekyll]
+layout: mypost
+title: termux启动语改为Screenfect
+categories: [Jekyll]
 ---
 
 > 最近更新了下termux，结果配置被清了，启动语变成了原版，所以借此机会记录下修改termux启动语为screenfetch，以免下次忘记。
@@ -20,4 +20,6 @@ categories:[Jekyll]
 
 大功告成！
 
+```html
 <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=22785170&auto=0&height=66"></iframe>
+```
