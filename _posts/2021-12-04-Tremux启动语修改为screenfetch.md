@@ -21,5 +21,8 @@ categories: [Termux]
 大功告成！
 
 ```html
-<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=22785170&auto=0&height=66"></iframe>
+<!-- 属性什么的不要错了，最好用双引号括住 -->
+<!-- 网易云的iframe需要做些调整，调整如下 -->
+<iframe src="//music.163.com/outchain/player?type=2&id=22785170&auto=0&height=66" frameborder="0" width="100%" height="86px">
+</iframe>
 ```
