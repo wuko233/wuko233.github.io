@@ -1,18 +1,9 @@
 ---
 layout: mypost
 title: 捐赠
-date: 2020-10-18
 ---
 
 ## **万分感谢您对我的支持！**
-
-![wechat](posts/wechatpay.jpg)
-
-                微信捐赠码
-
-![ali](posts/alipay.jpg)
-
-                支付宝捐赠码
 
 > **捐赠鸣谢**
 
@@ -28,3 +19,13 @@ date: 2020-10-18
 |billfrisk|2020-08-01<br> 08:38:19|1.00|  |微信|
 ||||||
 |  名称  |  时间  |  金额/RMB  |  备注  |  平台  |
+
+![wechat](posts/wechatpay.jpg)
+
+                微信捐赠码
+
+![ali](posts/alipay.jpg)
+
+                支付宝捐赠码
+
+
