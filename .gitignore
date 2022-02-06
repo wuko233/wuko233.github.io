@@ -3,3 +3,5 @@
 /dist.tar.gz
 /Gemfile.lock
 /.jekyll-cache
+/*.bak
+/*.swp
