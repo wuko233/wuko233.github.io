@@ -1,5 +1,7 @@
 <!DOCTYPE html>
 <html>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
 {% include head.html -%}
 <body ondragstart="return false;">
 {% include header.html -%}
@@ -20,7 +22,7 @@
 <script>  var gitalk = new Gitalk({
   clientID: '107ccf93ebf75ad753bf', 
   clientSecret: '22481d8d165b256890d7b3ac34017dd1e9742a24', 
-  repo: 'wuko233/wuko233.github.io', 
+  repo: 'wuko233.github.io', 
   owner: 'wuko233', 
   admin: ['wuko233'], 
   id: location.pathname,    
