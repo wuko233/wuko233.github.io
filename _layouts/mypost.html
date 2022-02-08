@@ -22,10 +22,10 @@
 <script>  var gitalk = new Gitalk({
   clientID: '107ccf93ebf75ad753bf', 
   clientSecret: '22481d8d165b256890d7b3ac34017dd1e9742a24', 
-  repo: 'wuko233.github.io', 
+  repo: 'wuko233/wuko233.github.io', 
   owner: 'wuko233', 
   admin: ['wuko233'], 
-  id: location.pathname,    
+  id: md5(location.pathname),    
   distractionFreeMode: false
 })
 gitalk.render('gitalk-container');
