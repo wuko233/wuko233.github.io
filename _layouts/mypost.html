@@ -25,9 +25,7 @@
   repo: 'wuko233.github.io', 
   owner: 'wuko233', 
   admin: ['wuko233'], 
-  id: md5(location.pathname),    
-  title: document.title,
-  body:  '文章链接：'+ decodeURIComponent(location.origin+location.pathname),
+  id: location.pathname,    
   distractionFreeMode: false
 })
 gitalk.render('gitalk-container');
