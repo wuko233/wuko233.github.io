@@ -1,6 +1,6 @@
 <footer class="footer">
   <span>{{ site.footerText }}</span>
-  <a href="{{ site.baseurl }}/static/xml/rss.xml">RSS </a>
+  <a href="{{ site.baseurl }}/static/xml/rss.xml">RSS</a>
   <a href="{{ site.baseurl }}/static/xml/sitemap.xml">SITEMAP</a>
   <span>Theme By</span>
   <a href="https://github.com/TMaize/tmaize-blog">TMaize</a>
