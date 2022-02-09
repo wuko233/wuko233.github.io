@@ -1,12 +1,12 @@
 <footer class="footer">
   <span>{{ site.footerText }}</span>
-  <a href="{{ site.baseurl }}/static/xml/rss.xml">RSS订阅</a>
+  <a href="{{ site.baseurl }}/static/xml/rss.xml">RSS </a>
+  <a href="{{ site.baseurl }}/static/xml/sitemap.xml">SITEMAP</a>
   <span>Theme By</span>
   <a href="https://github.com/TMaize/tmaize-blog">TMaize</a>
-<p style="text-align:center;padding-top:5px;">本站运行：<span id="days">0</span>天｜
-<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-本站总访问量<span id="busuanzi_value_site_pv">0</span>次
+<p style="text-align:center;padding-top:5px;">本站运行：<span id="days">0</span>天｜本站总访问量<span id="busuanzi_value_site_pv">0</span>次
 </p>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 <script>
     var s1 = '2020-01-03';
     s1 = new Date(s1.replace(/-/g, "/"));
