@@ -3,9 +3,9 @@ encoding: utf-8
 # SEO相关信息
 title: wuko blog
 description: 无空的个人博客
-keywords: wuko,wuko233,Arair237,灵冰M无
+keywords: wuko,wuko233,Arair237,灵冰M无,无空,无空的博客
 author: wuko
-footerText: 'Copyright © 2021'
+footerText: 'Copyright © 2020 - 2021'
 
 # 这些不要动
 permalink: /posts/:year/:month/:day/:title.html
