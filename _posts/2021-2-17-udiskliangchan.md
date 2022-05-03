@@ -1,7 +1,7 @@
 ---
 layout: mypost
 title: 【分享】记一次成功的u盘量产
-date: 2021-5-17
+date: 2021-2-17
 categories: [硬件]
 ---
 
@@ -80,6 +80,8 @@ USB设备ID: VID = 090C PID = 3000
 <p>点击<strong>"Scan USB"</strong>或<strong>"扫描USB"</strong>，会出现下图样式：</p>
 <!-- /wp:paragraph -->
 
+[![OAtlQg.jpg](https://s1.ax1x.com/2022/05/03/OAtlQg.jpg)](https://imgtu.com/i/OAtlQg)
+
 <!-- wp:image {"id":59,"sizeSlug":"large","linkDestination":"attachment"} -->
 <figure class="wp-block-image size-large"><a href="http://wuko.top/?attachment_id=59"><img src="http://wuko.top/wp-content/uploads/2021/02/Screenshot_20210217113019_compress97-1024x751.jpg" alt="" class="wp-image-59"/></a></figure>
 <!-- /wp:image -->
@@ -104,14 +106,4 @@ USB设备ID: VID = 090C PID = 3000
 <p>打开我的电脑，进入u盘，测试读写，成功！</p>
 <!-- /wp:paragraph -->
 
-<!-- wp:image {"id":61,"sizeSlug":"large","linkDestination":"attachment"} -->
-<figure class="wp-block-image size-large"><a href="http://wuko.top/?attachment_id=61"><img src="http://wuko.top/wp-content/uploads/2021/02/Screenshot_20210217113116_compress36-856x1024.jpg" alt="" class="wp-image-61"/></a></figure>
-<!-- /wp:image -->
-
-<!-- wp:image {"id":62,"sizeSlug":"large","linkDestination":"attachment"} -->
-<figure class="wp-block-image size-large"><a href="http://wuko.top/?attachment_id=62"><img src="http://wuko.top/wp-content/uploads/2021/02/Screenshot_20210217113051_compress27-1024x763.jpg" alt="" class="wp-image-62"/></a></figure>
-<!-- /wp:image -->
-
-<!-- wp:image {"id":63,"sizeSlug":"large","linkDestination":"attachment"} -->
-<figure class="wp-block-image size-large"><a href="http://wuko.top/?attachment_id=63"><img src="http://wuko.top/wp-content/uploads/2021/02/72369076b56e25e4.png" alt="" class="wp-image-63"/></a><figcaption><strong>祝你好运！</strong></figcaption></figure>
-<!-- /wp:image -->
+[![OAtwSU.jpg](https://s1.ax1x.com/2022/05/03/OAtwSU.jpg)](https://imgtu.com/i/OAtwSU)
