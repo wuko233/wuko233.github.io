@@ -1,6 +1,6 @@
 ---
 layout: mypost
-title: [旧]QQ机器人&#124;如何利用QRSpeed查看闪照？
+title: [旧]QQ机器人:如何利用QRSpeed查看闪照？
 date: 2020-6-20
 categories: [QQbot]
 ---

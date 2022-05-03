@@ -1,6 +1,6 @@
 ---
 layout: mypost
-title: [旧]QQ机器人&#124;如何用QRspeed调用json格式的API接口
+title: [旧]QQ机器人:如何用QRspeed调用json格式的API接口
 date: 2022-6-20
 categories: [QQbot]
 ---
