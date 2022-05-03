@@ -5,13 +5,7 @@ date: 2022-6-20
 categories: [QQbot]
 ---
 
-		<title>QQ机器人&#124;如何用QRspeed调用json格式的API接口</title>
-		<link>http://wuko.top/index.php/81/</link>
-		<pubDate>Sat, 20 Jun 2020 02:41:12 +0000</pubDate>
-		<dc:creator><![CDATA[lingbingMwu]]></dc:creator>
-		<guid isPermaLink="false">http://linko.dowy.cn/?p=81</guid>
-		<description></description>
-		<content:encoded><![CDATA[<!-- wp:paragraph -->
+Sat, 20 Jun 2020 02:41:12 +0000
 <p>我的讨论群:877789015，欢迎加群共同进步！<a rel="noreferrer noopener" href="https://jq.qq.com/?_wv=1027&amp;k=WHAMgWba" target="_blank">戳我加群</a></p>
 <!-- /wp:paragraph -->
 

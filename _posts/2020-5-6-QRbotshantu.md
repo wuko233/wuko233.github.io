@@ -5,11 +5,7 @@ date: 2020-6-20
 categories: [QQbot]
 ---
 
-		<title>QQ机器人&#124;如何利用QRSpeed查看闪照？</title>
-		<link>http://wuko.top/index.php/39/</link>
-		<pubDate>Wed, 06 May 2020 16:54:26 +0000</pubDate>
-		<dc:creator><![CDATA[lingbingMwu]]></dc:creator>
-		<guid isPermaLink="false">http://lingbingmwu.aote.xyz/?p=39</guid>
+Wed, 06 May 2020 16:54:26 +0000
 <p>我的讨论群:877789015，欢迎加群共同进步！<a href="https://jq.qq.com/?_wv=1027&amp;k=WHAMgWba">戳我加群</a></p>
 <h4>一，检测闪照</h4>
 <!-- /wp:heading -->
