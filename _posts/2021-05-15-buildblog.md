@@ -2,7 +2,7 @@
 layout: mypost
 title: 从无到有丨零基础个人博客搭建
 date: 2021-05-15
-categories: [wordpress]
+categories: [web]
 ---
 
 <!-- wp:paragraph -->
