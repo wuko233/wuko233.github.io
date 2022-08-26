@@ -9,7 +9,7 @@
         "state": {
           "type": "markdown",
           "state": {
-            "file": "2022-07-23-buildblog2.md",
+            "file": "2022-8-25-gssmtk.md",
             "mode": "source",
             "source": false
           }
@@ -58,7 +58,7 @@
         "state": {
           "type": "backlink",
           "state": {
-            "file": "2022-07-23-buildblog2.md",
+            "file": "2022-8-25-gssmtk.md",
             "collapseAll": false,
             "extraContext": false,
             "sortOrder": "alphabetical",
@@ -74,6 +74,9 @@
   },
   "active": "08dbc18c23c3758e",
   "lastOpenFiles": [
+    "2022-8-25-gssmtk.md",
+    "1970-01-01-主题演示.md",
+    "1970-01-01-imgbed.md",
     "2022-07-23-buildblog2.md"
   ]
 }
