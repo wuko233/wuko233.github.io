@@ -9,7 +9,7 @@
         "state": {
           "type": "markdown",
           "state": {
-            "file": "2022-8-25-gssmtk.md",
+            "file": "2022-9-30-1000Days.md",
             "mode": "source",
             "source": false
           }
@@ -58,7 +58,7 @@
         "state": {
           "type": "backlink",
           "state": {
-            "file": "2022-8-25-gssmtk.md",
+            "file": "2022-9-30-1000Days.md",
             "collapseAll": false,
             "extraContext": false,
             "sortOrder": "alphabetical",
@@ -74,9 +74,12 @@
   },
   "active": "08dbc18c23c3758e",
   "lastOpenFiles": [
+    "2022-9-30-1000Days.md",
+    "2021-12-04-Tremux启动语修改为screenfetch.md",
+    "2021-2-17-udiskliangchan.md",
+    "1970-01-01-imgbed.md",
     "2022-8-25-gssmtk.md",
     "1970-01-01-主题演示.md",
-    "1970-01-01-imgbed.md",
     "2022-07-23-buildblog2.md"
   ]
 }
