@@ -21,7 +21,7 @@ Xiaomi xaga即Redmi Note11TPro/Poco X4 GT的工程代码，仅作业系统与发
 
 当时是22年的11月初，连续一个多月的网课使旧手机本就不富裕的电池容量更是雪上加霜。在一次线上考试途中手机直接黑屏断电后，本人毅然决然决定换手机。
 
-<img src="./2023-02-02-xiaomixagafeelings/001.jpg" alt="崩掉的续航" style="zoom:50%;" />
+<img src="posts/2023/02/02/2023-02-02-xiaomixagafeelings/001.jpg" alt="崩掉的续航" style="zoom:50%;" />
 
 
 
@@ -35,7 +35,7 @@ Xiaomi xaga即Redmi Note11TPro/Poco X4 GT的工程代码，仅作业系统与发
 
 拼夕夕北京发货，发货后就有了IMEI，在[小米香港官网](https://m.buy.mi.com/hk/registration)查询出库日期，为发货前7天，后封机概率比较低，此时我悬着的心下放了一半。
 
-![出库查询](./2023-02-02-xiaomixagafeelings/002.png)
+![出库查询](posts/2023/02/02/2023-02-02-xiaomixagafeelings/002.png)
 
 到货后，检查完包装外观确认无瑕疵后，通电开机，通过系统引导，便开始了激动人心的MIUI体验。
 
@@ -61,7 +61,7 @@ Xiaomi xaga即Redmi Note11TPro/Poco X4 GT的工程代码，仅作业系统与发
 
 这是我第一次长期使用MIUI，对比我之前使用的EMUI，体验升级了许多，不得不感慨技术的发展。比如先前为了实现全自动任务折腾Tasker，换MIUI后直接有了系统级的代替。但还是要批评MIUI机型区别对待，并且许多功能都需折腾后才能使用，比如自动任务、自动字幕等等。瑕不掩瑜，MIUI是目前我最喜欢的系统了，虽然还有许多能做得更好的地方。
 
-### 拍照![003](.\2023-02-02-xiaomixagafeelings\003.jpg)
+### 拍照![003](posts/2023/02/02/2023-02-02-xiaomixagafeelings/003.jpg)
 
 *无压缩，图片较大，加载可能较慢*
 
