@@ -22,13 +22,13 @@
 
 点击 **Fork**
 
-![Fork](/posts/2023/00)
+![Fork](/posts/2023/005.png)
 
 Fork之后转到你Fork的仓库，点击绿色的 **Code** 按钮，选择 HTTPS或SSH。
 
 这里以https来举例：
 
-![Code](/posts/2023/00)
+![Code](/posts/2023/006.png)
 
 点击 **Https** ，点击复制按钮或者自行复制。
 
@@ -38,7 +38,7 @@ Fork之后转到你Fork的仓库，点击绿色的 **Code** 按钮，选择 HTTP
 
 【1】
 
-![输入复制的链接](/posts/2023/00)
+![输入复制的链接](/posts/2023/007.png)
 
 ````bash
  git clone [你复制的链接] 
@@ -64,7 +64,7 @@ git checkout -b [分支名]
 
 注：分支名建议以 **add-** 开头
 
-![三个命令演示](/posts/2023/00)
+![三个命令演示](/posts/2023/008.png)
 
 ### 3，添加自己到贡献者列表并推送
 
@@ -78,7 +78,7 @@ git checkout -b [分支名]
 
 这会将你的名字与主页添加到贡献者列表。
 
-![插入列表](/posts/2023/00)
+![插入列表](/posts/2023/009.png)
 
 【1】
 
@@ -108,7 +108,7 @@ git commit -m "Add [Yourname] to Contributors list"
 
 记得把空改了。
 
-![添加改动](/posts/2023/00)
+![添加改动](/posts/2023/010.png)
 
 ### 4，推送，然后合并
 
@@ -124,9 +124,11 @@ git push origin add-[你自己的名字]
 
 打开你克隆的仓库的主页，你会看到一个绿色的按钮 **Compare & pull request** 。
 
+![push](/posts/2023/010-2.png)
+
 点击它，进入pr界面，此页面显示了一些相关的信息，默认无需更改。
 
-![pr界面](/posts/2023/00)
+![pr界面](/posts/2023/011.png)
 
 点击 **Create pull request** ，将你的分支汇入主分支。
 
@@ -134,7 +136,7 @@ git push origin add-[你自己的名字]
 
 此项目已启用bot来审核pr，所以如果你前面的步骤都ok，那么你很快就会从GitHub网页和Email收到成功通知；如果你的pr被驳回了，不要沮丧，检查你的每一步是否有错误。
 
-![通过通知](/posts/2023/00)
+![通过通知](/posts/2023/012.png)
 
 ## 尾声
 
