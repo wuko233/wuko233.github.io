@@ -1,3 +1,9 @@
+---
+layout: mypost
+title: 什么是pr?如何pr?一个面向小白的Github项目——first-contributions
+categories: [git]
+---
+
 # 什么是pr?如何pr?一个面向小白的Github项目——first-contributions
 
 ## 前言
