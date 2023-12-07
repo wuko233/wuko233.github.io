@@ -20,12 +20,6 @@ title: 捐赠
 ||||||
 |  名称  |  时间  |  金额/RMB  |  备注  |  平台  |
 
-![wechat](posts/wechatpay.jpg)
-
-                微信捐赠码
-
-![ali](posts/alipay.jpg)
-
-                支付宝捐赠码
+别给我打钱了orz
 
 
