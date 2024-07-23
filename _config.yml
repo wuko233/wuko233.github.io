@@ -102,4 +102,6 @@ theme: amazing
 # Deployment
 ## Docs: https://hexo.io/docs/one-command-deployment
 deploy:
-  type: ''
+  type: git
+  repo: git@github.com:wuko233/wuko233.github.io.git
+  branch: hexo
