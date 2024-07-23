@@ -104,4 +104,4 @@ theme: amazing
 deploy:
   type: git
   repo: git@github.com:wuko233/wuko233.github.io.git
-  branch: hexo
+  branch: main
