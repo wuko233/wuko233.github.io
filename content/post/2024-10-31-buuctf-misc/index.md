@@ -2,7 +2,7 @@
 title: 【更新中】buuctf杂项misc解密记录
 date: 2024-10-31
 slug: buuctf-misc
-image: cover.jpg
+image: cover.png
 tag: 
     - CTF
     - 网络安全
