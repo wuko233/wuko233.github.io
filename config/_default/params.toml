@@ -147,7 +147,7 @@ owner = "wuko233"
 admin = "[wuko233]"
 repo = "wuko233.github.io"
 clientID = "107ccf93ebf75ad753bf"
-clientSecret = "22481d8d165b256890d7b3ac34017dd1e9742a24"
+clientSecret = "059c255171eb214ab9f59249dc687cfb6513f713"
 
 [comments.cusdis]
 host = ""
