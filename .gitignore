@@ -1,7 +1,3 @@
-/_site
-/dist
-/dist.tar.gz
-/Gemfile.lock
-/.jekyll-cache
-/*.bak
-/*.swp
+public
+resources
+.hugo_build.lock
