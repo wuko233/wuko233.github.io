@@ -81,7 +81,7 @@ enabled = true
 ## Comments
 [comments]
 enabled = true
-provider = "gitalk"
+provider = "cactus"
 
 [comments.disqusjs]
 shortname = ""
@@ -129,7 +129,7 @@ lang = ""
 [comments.cactus]
 defaultHomeserverUrl = "https://matrix.cactus.chat:8448"
 serverName = "cactus.chat"
-siteName = ""
+siteName = "wuko-blog-comment"
 
 [comments.giscus]
 repo = ""
