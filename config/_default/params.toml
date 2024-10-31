@@ -144,7 +144,7 @@ emitMetadata = 0
 
 [comments.gitalk]
 owner = "wuko233"
-admin = "wuko233"
+admin = "[wuko233]"
 repo = "wuko233.github.io"
 clientID = "107ccf93ebf75ad753bf"
 clientSecret = "22481d8d165b256890d7b3ac34017dd1e9742a24"
