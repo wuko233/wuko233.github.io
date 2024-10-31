@@ -2,7 +2,7 @@
 title: "About"
 date: 2024-10-31
 layout: "about"
-slug: "about"
+slug: "about.html"
 menu:
     main:
         weight: 2
