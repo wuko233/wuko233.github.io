@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>QQbot on wuko's blog</title><link>https://blog.wuko.top/tags/qqbot/</link><description>Recent content in QQbot on wuko's blog</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Sat, 20 Jun 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.wuko.top/tags/qqbot/index.xml" rel="self" type="application/rss+xml"/><item><title>【旧】QQ机器人:如何用QRspeed调用json格式的API接口</title><link>https://blog.wuko.top/posts/2020/06/20/qrbotusejson.html/</link><pubDate>Sat, 20 Jun 2020 00:00:00 +0000</pubDate><guid>https://blog.wuko.top/posts/2020/06/20/qrbotusejson.html/</guid><description>&lt;p>Sat, 20 Jun 2020 02:41:12 +0000&lt;/p>
+&lt;p>我的讨论群:877789015，欢迎加群共同进步！&lt;a rel="noreferrer noopener" href="https://jq.qq.com/?_wv=1027&amp;amp;k=WHAMgWba" target="_blank">戳我加群&lt;/a>&lt;/p>
+&lt;!-- /wp:paragraph -->
+&lt;!-- wp:heading {"level":4} -->
+&lt;h4>一，认识JSON中的键与值&lt;/h4>
+&lt;!-- /wp:heading -->
+&lt;!-- wp:paragraph -->
+&lt;p>以下内容摘自:百度百科&lt;/p>
+&lt;!-- /wp:paragraph -->
+&lt;!-- wp:quote -->
+&lt;blockquote class="wp-block-quote">&lt;p>JSON(JavaScript Object Notation, JS 对象简谱) 是一种轻量级的数据交换格式。它基于 ECMAScript (欧洲计算机协会制定的js规范)的一个子集，采用完全独立于编程语言的文本格式来存储和表示数据。&lt;/p>&lt;/blockquote>
+&lt;!-- /wp:quote -->
+&lt;!-- wp:paragraph -->
+&lt;p>当然，你并不需要彻底了解JSON的格式用法，因为我们只需要用到一部分，所以你只需要记住键与值是什么意思，便于阅读下文。详情请看下图:&lt;/p>
+&lt;!-- /wp:paragraph -->
+&lt;!-- wp:image {"id":82,"sizeSlug":"large"} -->
+&lt;figure class="wp-block-image size-large">&lt;img src="http://xxx/wp-content/uploads/2020/06/qrjson1.jpg" alt="" class="wp-image-82"/>&lt;figcaption>键与值&lt;/figcaption>&lt;/figure>
+&lt;!-- /wp:image -->
+&lt;!-- wp:heading {"level":4} -->
+&lt;h4>二，$访问$命令&lt;/h4>
+&lt;!-- /wp:heading -->
+&lt;!-- wp:paragraph -->
+&lt;p>想要调用api数据，就要先了解HTTP其中的两种请求方式:GET与POST。(什么是HTTP请自行使用搜索引擎，这里不多赘述)&lt;/p>
+&lt;!-- /wp:paragraph -->
+&lt;!-- wp:paragraph -->
+&lt;p>&lt;strong>GET - 从指定的资源请求数据。&lt;/strong>&lt;/p>
+&lt;!-- /wp:paragraph -->
+&lt;!-- wp:paragraph -->
+&lt;p>&lt;strong>POST - 向指定的资源提交要被处理的数据&lt;/strong>&lt;/p>
+&lt;!-- /wp:paragraph -->
+&lt;!-- wp:paragraph -->
+&lt;p>通俗来讲，GET就是直接获取，而POST是向服务器发送数据，服务器再返回结果。&lt;/p>
+&lt;!-- /wp:paragraph -->
+&lt;!-- wp:paragraph -->
+&lt;p>那我们如何在QR的词库中应用呢？那就要用到&lt;strong>$访问$&lt;/strong>命令了。$访问$主要有两种格式，分别对应GET与POST:&lt;/p>
+&lt;!-- /wp:paragraph -->
+&lt;!-- wp:paragraph -->
+&lt;p>&lt;strong>$访问 网址$&lt;/strong>&lt;/p>
+&lt;!-- /wp:paragraph -->
+&lt;!-- wp:paragraph -->
+&lt;p>&lt;strong>$访问 POST 网址 post参数$&lt;/strong>&lt;/p>
+&lt;!-- /wp:paragraph -->
+&lt;!-- wp:paragraph -->
+&lt;p>因为大多数API接口都是GET方法，所以下面以GET形式为例。&lt;/p>
+&lt;!-- /wp:paragraph -->
+&lt;!-- wp:heading {"level":4} -->
+&lt;h4>三，应用&lt;/h4>
+&lt;!-- /wp:heading -->
+&lt;!-- wp:paragraph -->
+&lt;p>嘿嘿，我们这儿有一个API的接口，直接使用$访问 链接$或用浏览器访问，就会出现以下结果:&lt;/p>
+&lt;!-- /wp:paragraph -->
+&lt;!-- wp:image {"id":83,"sizeSlug":"large"} -->
+&lt;figure class="wp-block-image size-large">&lt;img src="http://xxxxx/wp-content/uploads/2020/06/qrjson2.jpg" alt="" class="wp-image-83"/>&lt;figcaption>(静态的。。。仅供参考)&lt;/figcaption>&lt;/figure>
+&lt;!-- /wp:image -->
+&lt;!-- wp:paragraph -->
+&lt;p>但我们需要的是msg和content里的文本，那该怎么办呢？&lt;/p>
+&lt;!-- /wp:paragraph -->
+&lt;!-- wp:paragraph -->
+&lt;p>先来看msg:&lt;/p>
+&lt;!-- /wp:paragraph -->
+&lt;!-- wp:paragraph -->
+&lt;p>&lt;strong>API测试&lt;/strong> &lt;em>//命令&lt;/em>&lt;/p>
+&lt;!-- /wp:paragraph -->
+&lt;!-- wp:paragraph -->
+&lt;p>&lt;strong>A:$访问 xxxxxxxxx$&lt;/strong>&lt;/p>
+&lt;!-- /wp:paragraph -->
+&lt;!-- wp:paragraph -->
+&lt;p>&lt;strong>B:@A[msg]&lt;/strong>&lt;/p>
+&lt;!-- /wp:paragraph -->
+&lt;!-- wp:paragraph -->
+&lt;p>首先，我们先将变量A赋予$访问$命令，接下来在变量B中赋予@%A%[键名] (解释一下，取一个键的值命令为@数据[键名])，这样，我们就能获得键msg的值A了。&lt;/p>
+&lt;!-- /wp:paragraph -->
+&lt;!-- wp:paragraph -->
+&lt;p>那么，如何获取data中content的值呢？其实是差不多的:&lt;/p>
+&lt;!-- /wp:paragraph -->
+&lt;!-- wp:image {"id":84,"sizeSlug":"large"} -->
+&lt;figure class="wp-block-image size-large">&lt;img src="http://xxxx/wp-content/uploads/2020/06/qrjson3.jpg" alt="" class="wp-image-84"/>&lt;/figure>
+&lt;!-- /wp:image -->
+&lt;!-- wp:paragraph -->
+&lt;p>我们来试试，可以看到，我们顺利的获取到了content的值:&lt;/p>
+&lt;!-- /wp:paragraph -->
+&lt;!-- wp:image {"id":85,"sizeSlug":"large"} -->
+&lt;figure class="wp-block-image size-large">&lt;img src="http://xxxx/wp-content/uploads/2020/06/qrjson4.jpg" alt="" class="wp-image-85"/>&lt;/figure>
+&lt;!-- /wp:image -->
+&lt;!-- wp:paragraph -->
+&lt;p>最后补充一下，一般提供api服务的都会标明提供的API的返回格式，请求方法，请求/返回参数等，根据个人需求来运用。&lt;/p>
+&lt;!-- /wp:paragraph -->
+&lt;!-- wp:image {"id":86,"sizeSlug":"large"} -->
+&lt;figure class="wp-block-image size-large">&lt;img src="http://xxxxx/wp-content/uploads/2020/06/qrjson5.jpg" alt="" class="wp-image-86"/>&lt;/figure>
+&lt;!-- /wp:image --></description></item><item><title>【旧】QQ机器人:如何利用QRSpeed查看闪照？</title><link>https://blog.wuko.top/posts/2020/05/06/qrbotshantu.html/</link><pubDate>Wed, 06 May 2020 00:00:00 +0000</pubDate><guid>https://blog.wuko.top/posts/2020/05/06/qrbotshantu.html/</guid><description>&lt;p>Wed, 06 May 2020 16:54:26 +0000&lt;/p>
+&lt;p>我的讨论群:877789015，欢迎加群共同进步！&lt;a href="https://jq.qq.com/?_wv=1027&amp;amp;k=WHAMgWba">戳我加群&lt;/a>&lt;/p>
+&lt;h4>一，检测闪照&lt;/h4>
+&lt;!-- /wp:heading -->
+&lt;!-- wp:media-text {"mediaId":41,"mediaLink":"http://xxxxxxxx/?attachment_id=41","mediaType":"image","verticalAlignment":"center"} -->
+&lt;div class="wp-block-media-text alignwide is-stacked-on-mobile is-vertically-aligned-center">
+&lt;figure class="wp-block-media-text__media">&lt;img class="wp-image-41" src="http://xxxxxxx/wp-content/uploads/2020/06/IMG_20200504_144337.jpg" alt="" />&lt;/figure>
+&lt;div class="wp-block-media-text__content">&lt;!-- wp:paragraph {"align":"center"} -->
+&lt;p class="has-text-align-center">成果展示&lt;/p>
+&lt;!-- /wp:paragraph -->&lt;/div>
+&lt;/div>
+&lt;p>首先，第一行需要能够检测到闪照:&lt;/p>
+&lt;pre class="wp-block-code">&lt;code>[高级].*闪照.*&lt;/code>&lt;/pre>
+&lt;p>其中，&lt;strong>[高级]&lt;/strong>指高级信息，如闪照、xml信息等。因为在老版本QQ中，闪照消息为:[闪照]请使用新版手机QQ查看闪照。故我们只需要确定信息中有“闪照”二字，就能检测到闪照。&lt;/p>
+&lt;h4>二，获取闪照直链&lt;/h4>
+&lt;!-- /wp:heading -->
+&lt;!-- wp:paragraph -->
+&lt;p>我们已经检测到了闪照，接下来只需要把它以图片或直链形式反馈回来:&lt;/p>
+&lt;!-- /wp:paragraph -->
+&lt;!-- wp:paragraph -->
+&lt;p>我们要用到变量&lt;strong>%FIMG0%&lt;/strong>。%FIMG0%的用法和%IMG0%差不多，都是用来表示图片的代号。&lt;/p>
+&lt;!-- /wp:paragraph -->
+&lt;!-- wp:paragraph -->
+&lt;p>首先，我们先新建一个变量A，设A值为&lt;strong>1%FIMG0%&lt;/strong>&lt;/p>
+&lt;!-- /wp:paragraph -->
+&lt;!-- wp:paragraph -->
+&lt;p>在A的下方再创建一个变量B，值为:$取中间 Э %A%Э1Э.$&lt;/p>
+&lt;!-- /wp:paragraph -->
+&lt;!-- wp:paragraph -->
+&lt;p>(这里解释下，$取中间 Э 原内容Э开头Э结尾$，所以变量B意为取变量A中1与.之间的内容，在%FIMG0%前加个1就是为了方便，因为直接%FIMG0%后内容是XXX.图片格式)&lt;/p>
+&lt;!-- /wp:paragraph -->
+&lt;!-- wp:paragraph -->
+&lt;p>在我们写好上面的内容后，加上下面这段前缀，就是图片的直链。&lt;/p>
+&lt;!-- /wp:paragraph -->
+&lt;!-- wp:quote -->
+&lt;blockquote class="wp-block-quote">
+&lt;p>http://gchat.qpic.cn/gchatpic_new/2641296238/735524882-3219132080-%B%/0&lt;/p>
+&lt;cite>腾讯图片直链&lt;/cite>&lt;/blockquote>
+&lt;!-- /wp:quote -->
+&lt;!-- wp:heading {"level":4} -->
+&lt;h4>三，发送闪照&lt;/h4>
+&lt;!-- /wp:heading -->
+&lt;!-- wp:paragraph -->
+&lt;p>图片直链有了，图片也就好发了，只要用&lt;strong>±img=图片直链/本地路径±&lt;/strong>就能把闪照发出去了！&lt;/p>
+&lt;!-- /wp:paragraph -->
+&lt;!-- wp:paragraph -->
+&lt;p>例子:&lt;/p>
+&lt;!-- /wp:paragraph -->
+&lt;!-- wp:paragraph -->
+&lt;p>±img=http://gchat.qpic.cn/gchatpic_new/2641296238/735524882-3219132080-%B%/0±&lt;/p>
+&lt;!-- /wp:paragraph -->
+&lt;!-- wp:heading {"level":4} -->
+&lt;h4>四，完整实例&lt;/h4>
+&lt;!-- /wp:heading -->
+&lt;!-- wp:paragraph -->
+&lt;p>[hide reply_to_this="true"]&lt;/p>
+&lt;p>[高级].*闪照.*&lt;/p>
+&lt;!-- /wp:paragraph -->
+&lt;!-- wp:paragraph -->
+&lt;p>A:1%FIMG0%&lt;/p>
+&lt;!-- /wp:paragraph -->
+&lt;!-- wp:group -->
+&lt;div class="wp-block-group">
+&lt;div class="wp-block-group__inner-container">&lt;!-- wp:paragraph -->
+&lt;p>B:$取中间 Э %A%Э1Э.$±img=http://gchat.qpic.cn/gchatpic_new/2641296238/735524882-3219132080-%B%/0±&lt;/p>
+&lt;!-- /wp:paragraph -->
+&lt;!-- wp:paragraph -->
+&lt;p>发送者:%昵称%(%QQ%)\r&lt;/p>
+&lt;!-- /wp:paragraph -->
+&lt;!-- wp:paragraph -->
+&lt;p>http://gchat.qpic.cn/gchatpic_new/2641296238/735524882-3219132080-%B%/0&lt;/p>
+&lt;!-- /wp:paragraph -->&lt;/div>
+&lt;/div>
+&lt;p>[/hide]&lt;/p>
+&lt;p>&amp;nbsp;&lt;/p></description></item></channel></rss>

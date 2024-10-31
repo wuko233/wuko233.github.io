@@ -1,0 +1,614 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>网络安全 on wuko's blog</title><link>https://blog.wuko.top/categories/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/</link><description>Recent content in 网络安全 on wuko's blog</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Thu, 31 Oct 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.wuko.top/categories/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/index.xml" rel="self" type="application/rss+xml"/><item><title>【更新中】buuctf杂项misc解密记录</title><link>https://blog.wuko.top/posts/2024/10/31/buuctf-misc.html/</link><pubDate>Thu, 31 Oct 2024 00:00:00 +0000</pubDate><guid>https://blog.wuko.top/posts/2024/10/31/buuctf-misc.html/</guid><description>&lt;img src="https://blog.wuko.top/posts/2024/10/31/buuctf-misc.html/cover.png" alt="Featured image of post 【更新中】buuctf杂项misc解密记录" />&lt;h2 id="签到">签到
+&lt;/h2>&lt;p>&lt;code>flag{buu_ctf}&lt;/code>&lt;/p>
+&lt;h2 id="金三胖">金三胖
+&lt;/h2>&lt;p>给定GIF文件，可以很明显看到flag文字，对文件进行拆解，在&lt;code>20&lt;/code>、&lt;code>50&lt;/code>与&lt;code>78&lt;/code>帧找到flag：&lt;/p>
+&lt;p>&lt;img src="https://blog.wuko.top/posts/2024/10/31/buuctf-misc.html/j_20.png"
+width="219"
+height="186"
+srcset="https://blog.wuko.top/posts/2024/10/31/buuctf-misc.html/j_20_hu5309208176571147590.png 480w, https://blog.wuko.top/posts/2024/10/31/buuctf-misc.html/j_20_hu9134215854692141964.png 1024w"
+loading="lazy"
+alt="20"
+class="gallery-image"
+data-flex-grow="117"
+data-flex-basis="282px"
+> &lt;img src="https://blog.wuko.top/posts/2024/10/31/buuctf-misc.html/j_50.png"
+width="219"
+height="186"
+srcset="https://blog.wuko.top/posts/2024/10/31/buuctf-misc.html/j_50_hu16102295754427472348.png 480w, https://blog.wuko.top/posts/2024/10/31/buuctf-misc.html/j_50_hu11268408520341003400.png 1024w"
+loading="lazy"
+alt="50"
+class="gallery-image"
+data-flex-grow="117"
+data-flex-basis="282px"
+> &lt;img src="https://blog.wuko.top/posts/2024/10/31/buuctf-misc.html/j_78.png"
+width="219"
+height="186"
+srcset="https://blog.wuko.top/posts/2024/10/31/buuctf-misc.html/j_78_hu2953572223524848583.png 480w, https://blog.wuko.top/posts/2024/10/31/buuctf-misc.html/j_78_hu244559741389829029.png 1024w"
+loading="lazy"
+alt="78"
+class="gallery-image"
+data-flex-grow="117"
+data-flex-basis="282px"
+>&lt;/p>
+&lt;h2 id="你竟然赶我走">你竟然赶我走
+&lt;/h2>&lt;p>查看文件元数据，末尾得到flag：&lt;/p>
+&lt;p>&lt;img src="https://blog.wuko.top/posts/2024/10/31/buuctf-misc.html/sc1.png"
+width="1088"
+height="253"
+srcset="https://blog.wuko.top/posts/2024/10/31/buuctf-misc.html/sc1_hu16899393618416593707.png 480w, https://blog.wuko.top/posts/2024/10/31/buuctf-misc.html/sc1_hu2680858608685506945.png 1024w"
+loading="lazy"
+alt="sc1"
+class="gallery-image"
+data-flex-grow="430"
+data-flex-basis="1032px"
+>&lt;/p>
+&lt;p>&lt;code>flag{stego_is_s0_bor1ing}&lt;/code>&lt;/p>
+&lt;h2 id="二维码">二维码
+&lt;/h2>&lt;p>&lt;img src="https://blog.wuko.top/posts/2024/10/31/buuctf-misc.html/QR_code.png"
+width="280"
+height="280"
+srcset="https://blog.wuko.top/posts/2024/10/31/buuctf-misc.html/QR_code_hu4446632039196267122.png 480w, https://blog.wuko.top/posts/2024/10/31/buuctf-misc.html/QR_code_hu10624095176395150321.png 1024w"
+loading="lazy"
+alt="qrcode"
+class="gallery-image"
+data-flex-grow="100"
+data-flex-basis="240px"
+>&lt;/p>
+&lt;p>直接扫码得到flag&amp;hellip;并没有，扫码得到：&lt;code>secret is here&lt;/code>&lt;/p>
+&lt;p>十六进制分析，发现有zip文件，使用&lt;code>binwalk&lt;/code>分离，发现有一个名为&lt;code>4number.txt&lt;/code>加密文件，使用&lt;code>APCHPR&lt;/code>秒了：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">Advanced Archive Password Recovery 统计信息:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">加密的 ZIP/RAR/ACE/ARJ 文件: D:\BUU\misc\二维码\_QR_code.png.extracted\1D7.zip
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">总计口令: 8,741
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">总计时间: 10ms
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">平均速度(口令/秒): 874,100
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">这个文件的口令 : 7639
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">十六进制口令: 37 36 33 39
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>得到&lt;code>CTF{vjpw_wnoei}&lt;/code>&lt;/p></description></item><item><title>某高校CTF招新题MD——初试CTF</title><link>https://blog.wuko.top/posts/2024/10/30/newbiectf.html/</link><pubDate>Wed, 30 Oct 2024 00:00:00 +0000</pubDate><guid>https://blog.wuko.top/posts/2024/10/30/newbiectf.html/</guid><description>&lt;img src="https://blog.wuko.top/posts/2024/10/30/newbiectf.html/cover.jpg" alt="Featured image of post 某高校CTF招新题MD——初试CTF" />&lt;h2 id="前言">前言
+&lt;/h2>&lt;p>上个月参加了某高校网络安全社团的招新题，记录一下部分题的解题过程。&lt;/p>
+&lt;blockquote>
+&lt;p>&lt;mark>&lt;strong>很多题非原创，无法标明出处还请谅解&lt;/strong>&lt;/mark>&lt;/p>
+&lt;/blockquote>
+&lt;h2 id="misc">misc
+&lt;/h2>&lt;h3 id="misc1">misc1
+&lt;/h3>&lt;p>&lt;img src="https://blog.wuko.top/posts/2024/10/30/newbiectf.html/misc1.png"
+width="240"
+height="240"
+srcset="https://blog.wuko.top/posts/2024/10/30/newbiectf.html/misc1_hu10354779845161925884.png 480w, https://blog.wuko.top/posts/2024/10/30/newbiectf.html/misc1_hu10479758606616733686.png 1024w"
+loading="lazy"
+alt="misc1"
+class="gallery-image"
+data-flex-grow="100"
+data-flex-basis="240px"
+>&lt;/p>
+&lt;blockquote>
+&lt;p>提示：flag在图片数据中&lt;/p>
+&lt;/blockquote>
+&lt;p>嗯，根据提示，使用&lt;code>WinHEX&lt;/code>打开图片查看16进制元数据，发现flag：&lt;/p>
+&lt;p>&lt;img src="https://blog.wuko.top/posts/2024/10/30/newbiectf.html/misc1_1.png"
+width="1885"
+height="361"
+srcset="https://blog.wuko.top/posts/2024/10/30/newbiectf.html/misc1_1_hu7871839201506083490.png 480w, https://blog.wuko.top/posts/2024/10/30/newbiectf.html/misc1_1_hu6025428871597820838.png 1024w"
+loading="lazy"
+alt="misc1_1"
+class="gallery-image"
+data-flex-grow="522"
+data-flex-basis="1253px"
+>&lt;/p>
+&lt;p>&lt;code>geek{unbelievable}&lt;/code>&lt;/p>
+&lt;h3 id="misc2">misc2
+&lt;/h3>&lt;p>&lt;img src="https://blog.wuko.top/posts/2024/10/30/newbiectf.html/misc2.png"
+width="1860"
+height="1798"
+srcset="https://blog.wuko.top/posts/2024/10/30/newbiectf.html/misc2_hu9439625977773339056.png 480w, https://blog.wuko.top/posts/2024/10/30/newbiectf.html/misc2_hu18167751659464539628.png 1024w"
+loading="lazy"
+alt="misc2"
+class="gallery-image"
+data-flex-grow="103"
+data-flex-basis="248px"
+>&lt;/p>
+&lt;blockquote>
+&lt;p>提示：这不只是个图片&lt;/p>
+&lt;/blockquote>
+&lt;p>&lt;code>WinHEX&lt;/code>查看16进制，发现里面有zip的头尾：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">ZIP
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">50 4B 03 04
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">50 4B 05 06
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;code>binwalk&lt;/code>提取出压缩包，解压得到第二张图片，扫码得到flag：&lt;/p>
+&lt;p>&lt;img src="https://blog.wuko.top/posts/2024/10/30/newbiectf.html/misc2_2.png"
+width="1706"
+height="1279"
+srcset="https://blog.wuko.top/posts/2024/10/30/newbiectf.html/misc2_2_hu8705883669154433653.png 480w, https://blog.wuko.top/posts/2024/10/30/newbiectf.html/misc2_2_hu7952245374788092403.png 1024w"
+loading="lazy"
+alt="misc2_2"
+class="gallery-image"
+data-flex-grow="133"
+data-flex-basis="320px"
+>&lt;/p>
+&lt;p>&lt;code>geek{Amazing}&lt;/code>&lt;/p>
+&lt;h3 id="misc3">misc3
+&lt;/h3>&lt;p>&lt;img src="https://blog.wuko.top/posts/2024/10/30/newbiectf.html/misc3_1.png"
+width="1611"
+height="937"
+srcset="https://blog.wuko.top/posts/2024/10/30/newbiectf.html/misc3_1_hu1393974999765817317.png 480w, https://blog.wuko.top/posts/2024/10/30/newbiectf.html/misc3_1_hu13596937491369835350.png 1024w"
+loading="lazy"
+alt="misc3_1"
+class="gallery-image"
+data-flex-grow="171"
+data-flex-basis="412px"
+>&lt;/p>
+&lt;blockquote>
+&lt;p>提示：为啥图片不全呢？&lt;/p>
+&lt;/blockquote>
+&lt;p>根据提示，对图片进行长宽高修复，得到：&lt;/p>
+&lt;p>&lt;img src="https://blog.wuko.top/posts/2024/10/30/newbiectf.html/misc3-fixed.png"
+width="1706"
+height="1279"
+srcset="https://blog.wuko.top/posts/2024/10/30/newbiectf.html/misc3-fixed_hu12562750906809051060.png 480w, https://blog.wuko.top/posts/2024/10/30/newbiectf.html/misc3-fixed_hu6606467951166528962.png 1024w"
+loading="lazy"
+alt="misc3-fixed"
+class="gallery-image"
+data-flex-grow="133"
+data-flex-basis="320px"
+>&lt;/p>
+&lt;p>&lt;code>geek{HAPPY}&lt;/code>&lt;/p>
+&lt;h3 id="misc4">misc4
+&lt;/h3>&lt;p>&lt;img src="https://blog.wuko.top/posts/2024/10/30/newbiectf.html/misc4.jpg"
+width="1080"
+height="1080"
+srcset="https://blog.wuko.top/posts/2024/10/30/newbiectf.html/misc4_hu13591414652916174773.jpg 480w, https://blog.wuko.top/posts/2024/10/30/newbiectf.html/misc4_hu12735305196860009024.jpg 1024w"
+loading="lazy"
+alt="misc4"
+class="gallery-image"
+data-flex-grow="100"
+data-flex-basis="240px"
+>&lt;/p>
+&lt;p>16位编辑器查看，末尾发现有misc4.mp3字样，以及zip的头尾&lt;/p>
+&lt;p>&lt;img src="https://blog.wuko.top/posts/2024/10/30/newbiectf.html/misc4_1.png"
+width="1095"
+height="549"
+srcset="https://blog.wuko.top/posts/2024/10/30/newbiectf.html/misc4_1_hu4084605846687595574.png 480w, https://blog.wuko.top/posts/2024/10/30/newbiectf.html/misc4_1_hu9077857965639256612.png 1024w"
+loading="lazy"
+alt="misc4_4"
+class="gallery-image"
+data-flex-grow="199"
+data-flex-basis="478px"
+>&lt;/p>
+&lt;p>使用&lt;code>foremost&lt;/code>分离，得到带密码的压缩包&amp;mdash;&lt;code>APCHPR&lt;/code>爆破出zip文件密码：2024&lt;/p>
+&lt;p>解压得到&lt;code>misc4.mp3&lt;/code>，一耳听出莫斯码，得出flag：&lt;/p>
+&lt;p>&lt;code>geek{MORSEISGOOD}&lt;/code>&lt;/p>
+&lt;h2 id="crypto">crypto
+&lt;/h2>&lt;h3 id="crypto1">crypto1
+&lt;/h3>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">密文：Z2Vla3tDb21lIG9uIX0=
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">提示：Base Base ~~
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;code>base64&lt;/code>解密得出flag:&lt;/p>
+&lt;p>&lt;code>geek{Come on!}&lt;/code>&lt;/p>
+&lt;h3 id="crypto2">crypto2
+&lt;/h3>&lt;p>&lt;img src="https://blog.wuko.top/posts/2024/10/30/newbiectf.html/crypto2.png"
+width="1280"
+height="960"
+srcset="https://blog.wuko.top/posts/2024/10/30/newbiectf.html/crypto2_hu11994337903806300105.png 480w, https://blog.wuko.top/posts/2024/10/30/newbiectf.html/crypto2_hu12851822250463243030.png 1024w"
+loading="lazy"
+alt="crypto2"
+class="gallery-image"
+data-flex-grow="133"
+data-flex-basis="320px"
+>&lt;/p>
+&lt;p>猪圈密码解密得到：&lt;/p>
+&lt;p>&lt;code>geek{welcometogeek}&lt;/code>&lt;/p>
+&lt;h3 id="crypto3">crypto3
+&lt;/h3>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;span class="lnt">22
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">题目：
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">在一个阳光明媚的早晨，小兔子跳跳正在森林里玩耍。它一边跳跃，一边享受着清新的空气和美丽的景色。忽然，它在一棵大树下发现了一个奇怪的盒子，盒子的外观很古老，上面刻着复杂的花纹。
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">好奇的小兔子决定打开这个盒子。经过一番努力，盒子终于打开了，里面是一封信和一个看似重要的古老符号。信上写着：“这是一个通往秘密世界的钥匙，但你需要找到正确的密码才能进入。”
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">小兔子心里充满了探险的热情，开始寻找这个密码。它想到了朋友们，决定去问问聪明的小狐狸和勇敢的小熊。
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">小狐狸听了小兔子的故事，建议道：“或许这个密码就藏在我们平时的生活中。我们可以想象一下，什么事情对我们来说是最重要的。”
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">小熊则说：“我觉得应该是我们友情的象征，或者我们一起度过的快乐时光。”
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">小兔子灵机一动，突然想到了一个词：“冒险！”它相信这个词是打开新世界的钥匙。于是，它带着小狐狸和小熊再次回到那个神秘的盒子前，大声喊出了那个词。
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">然而，盒子却没有反应。小兔子感到有些失望，但它没有放弃，决定再观察一下那个古老的符号。它注意到符号中有一些像是数字和字母的组合。经过一番分析，小兔子想到了一个线索：“如果我们把这些符号想象成一种密码，那会不会是字母和数字的结合？”
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">经过一番讨论和尝试，它们最终拼出了一个神秘的字符串。小兔子觉得这个字符串有种特别的感觉，可能就是那个通往秘密世界的关键。
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">小兔子再次勇敢地对着盒子大声说出这个字符串。随着最后一个字母的发出，盒子发出了一声“咔嚓”声，缓缓打开了。里面闪烁着五彩斑斓的光芒，不同的奇幻生物纷纷出现，它们带来了无数的新奇和冒险。
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">小兔子、小狐狸和小熊兴奋地跳了起来，决定一起探索这个全新的世界。他们知道，只要团结在一起，任何谜题都能被解开，未来的冒险一定会更加精彩！
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">至于那条密文“U2FsdGVkX1/saBrBFn5W/3kLIuGaSpo1BS+F4PyHJSNglsQ=”，它仿佛是这个神秘世界的另一把钥匙，等待着他们去解锁更多未知的宝藏和故事。冒险才刚刚开始！
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>这道题一开始以为是base混合加密，因为一开始前半部分base64解码出了Salted_完整字符，尝试了好久都没解出来。之后看官方WP，才知道原来是&lt;code>rabbit密码&lt;/code>；&lt;/p>
+&lt;p>&lt;code>geek{you are great}&lt;/code>&lt;/p>
+&lt;h3 id="crypto4">crypto4
+&lt;/h3>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">小张把女儿出生日期的哈希值写在纸上，结果不小心将外卖洒在了上面，只能看到后10位是2b74d3e7a1，你能猜到他女儿的生日吗？哦!他女儿属兔哦。（提示：flag为密码的哈希值）
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>通过python程序暴力列举得到生日20231028&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-python" data-lang="python">&lt;span class="line">&lt;span class="cl">&lt;span class="kn">import&lt;/span> &lt;span class="nn">hashlib&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kn">import&lt;/span> &lt;span class="nn">itertools&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kn">import&lt;/span> &lt;span class="nn">hmac&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">#https://blog.csdn.net/mails2008/article/details/140398473&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">key&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s2">&amp;#34;2b74d3e7a1&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">characters&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s2">&amp;#34;1234567890&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">dir_list&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">itertools&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">product&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">characters&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">repeat&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="mi">8&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">for&lt;/span> &lt;span class="n">i&lt;/span> &lt;span class="ow">in&lt;/span> &lt;span class="n">dir_list&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">res&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">hashlib&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">md5&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;&amp;#39;&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">join&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">i&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">encode&lt;/span>&lt;span class="p">())&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">hexdigest&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="n">res&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="mi">10&lt;/span>&lt;span class="p">:]&lt;/span> &lt;span class="o">==&lt;/span> &lt;span class="n">key&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nb">print&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;birthday;&amp;#34;&lt;/span> &lt;span class="o">+&lt;/span> &lt;span class="nb">str&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">i&lt;/span>&lt;span class="p">))&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nb">print&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nb">str&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">res&lt;/span>&lt;span class="p">))&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">#output:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">#birthday;(&amp;#39;2&amp;#39;, &amp;#39;0&amp;#39;, &amp;#39;2&amp;#39;, &amp;#39;3&amp;#39;, &amp;#39;1&amp;#39;, &amp;#39;0&amp;#39;, &amp;#39;2&amp;#39;, &amp;#39;8&amp;#39;)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">#2473ff35a9ae66a24b8995&amp;lt;mark&amp;gt;2b74d3e7a1&amp;lt;/mark&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;img src="https://blog.wuko.top/posts/2024/10/30/newbiectf.html/crypto-output.png"
+width="1280"
+height="1517"
+srcset="https://blog.wuko.top/posts/2024/10/30/newbiectf.html/crypto-output_hu9570623928596128690.png 480w, https://blog.wuko.top/posts/2024/10/30/newbiectf.html/crypto-output_hu3099802382456035407.png 1024w"
+loading="lazy"
+alt="crypto4-output"
+class="gallery-image"
+data-flex-grow="84"
+data-flex-basis="202px"
+>&lt;/p>
+&lt;blockquote>
+&lt;p>参考了 &lt;a class="link" href="https://blog.csdn.net/mails2008/article/details/140398473" target="_blank" rel="noopener"
+>csdn&lt;/a> 做了一些修改、&lt;/p>
+&lt;/blockquote>
+&lt;h3 id="crypto5">crypto5
+&lt;/h3>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">题目：三个小姐两个爹JM2VMRKVKYZUGSJVINMFKWSDJBEEMVSWJVGUGMSHIZBUMTKRKNEEWWSMI5DU2Q2YJZFEQRSBKZCEYTCFLJDEWVSCKFEEMSKGJFGUENI=
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">提示1：大老爷有一个女儿，二老爷有两个女儿
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">提示2：老爷留了12个金条，剩下16条都给了小姐
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>提取所有数字得到key&lt;code>1221216&lt;/code>,base26-32-64-91混合解码得到&lt;code>Z2Vla3todWFuPFUW4Z3ONF6Q====&lt;/code>,base64解码得到一半是乱码&amp;hellip;得到了&lt;code>geek{huan&lt;/code>&lt;/p>
+&lt;p>后来查看官方WP，原来是两部分。。。：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">Z2Vla3todWFu
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">PFUW4Z3ONF6Q====
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>将第一个用base64解码得到geek{huan，第二个用base32解码得yingni}拼接后得到flag是&lt;code>geek{huanyingni}&lt;/code>&lt;/p>
+&lt;blockquote>
+&lt;p>只有大写字母和数字，像base32加密&lt;/p>
+&lt;/blockquote>
+&lt;p>学到了。。。&lt;/p>
+&lt;h2 id="web">web
+&lt;/h2>&lt;h3 id="web1">web1
+&lt;/h3>&lt;p>注释找到&lt;code>ZmxhZ+WcqC93ZWIvd2ViM59mbGFnL2ZsYWcudHh0&lt;/code>&lt;/p>
+&lt;p>base64解码得到&lt;/p>
+&lt;p>&lt;code>flag在http://ip/web/web1/flag/flag.txt&lt;/code>&lt;/p>
+&lt;p>&lt;img src="https://blog.wuko.top/posts/2024/10/30/newbiectf.html/web1.png"
+width="803"
+height="358"
+srcset="https://blog.wuko.top/posts/2024/10/30/newbiectf.html/web1_hu11932581412840536766.png 480w, https://blog.wuko.top/posts/2024/10/30/newbiectf.html/web1_hu10076901585374546124.png 1024w"
+loading="lazy"
+alt="web1"
+class="gallery-image"
+data-flex-grow="224"
+data-flex-basis="538px"
+>&lt;/p>
+&lt;p>访问得到&lt;code>geek{crazy}&lt;/code>&lt;/p>
+&lt;h3 id="web2">web2
+&lt;/h3>&lt;p>注释base64解码得到&lt;code>你会用dirsearch吗？&lt;/code>&lt;/p>
+&lt;p>&lt;code>dirsearch&lt;/code>扫描网站目录&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-cmd" data-lang="cmd">&lt;span class="line">&lt;span class="cl">python.exe ./dirsearch.py -u http://ip/web/web2/
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>得到http://ip/web/web2/flag.php，访问得到flag:&lt;code>geek{Excellent}&lt;/code>&lt;/p>
+&lt;h3 id="web3">web3
+&lt;/h3>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-php" data-lang="php">&lt;span class="line">&lt;span class="cl"> &lt;span class="o">&amp;lt;?&lt;/span>&lt;span class="nx">php&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nx">error_reporting&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">0&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">if&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">isset&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nv">$_GET&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="s1">&amp;#39;c&amp;#39;&lt;/span>&lt;span class="p">])){&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nv">$c&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nv">$_GET&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="s1">&amp;#39;c&amp;#39;&lt;/span>&lt;span class="p">];&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="o">!&lt;/span>&lt;span class="nx">preg_match&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;/flag|system|php|cat|sort|shell|\.| |\&amp;#39;|\`|echo|\;|\(|\:|&lt;/span>&lt;span class="se">\&amp;#34;&lt;/span>&lt;span class="s2">/i&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nv">$c&lt;/span>&lt;span class="p">)){&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">eval&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nv">$c&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>&lt;span class="k">else&lt;/span>&lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">highlight_file&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="no">__FILE__&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>利用PHP命令&lt;code>eval()&lt;/code>可以执行系统命令：&lt;/p>
+&lt;p>&lt;code>http://ip/web/web3/index.php?c=include$_GET[&amp;quot;a&amp;quot;]?&amp;gt;&amp;amp;a=php://filter/read=convert.base64-encode/resource=flag.php&lt;/code>&lt;/p>
+&lt;p>得到&lt;code>PD9waHANCiRmbGFnPsInZWVre3ByZXR0eWdvb2R9ljsNCj8+&lt;/code>&lt;/p>
+&lt;p>base64解码得到&amp;lt;?php$flag=&amp;quot;&lt;code>geek{prettygood}&lt;/code>&amp;quot;;?&lt;/p>
+&lt;p>原理：&lt;/p>
+&lt;blockquote>
+&lt;p>preg_match()：执行一个正则表达式匹配,过滤掉&lt;code>/flag|system|php|cat|sort|shell|\.| |\'|\|echo|\;|\(/&lt;/code>，为了使正则失效，在输入c后加上&lt;code>&amp;gt;&lt;/code>来闭合PHP代码，再通过PHP伪协议获取flag的base64。&lt;/p>
+&lt;/blockquote>
+&lt;h3 id="web4">web4
+&lt;/h3>&lt;p>&lt;img src="https://blog.wuko.top/posts/2024/10/30/newbiectf.html/web4.jpg"
+width="789"
+height="404"
+srcset="https://blog.wuko.top/posts/2024/10/30/newbiectf.html/web4_hu2330833800200589664.jpg 480w, https://blog.wuko.top/posts/2024/10/30/newbiectf.html/web4_hu17856289135897834123.jpg 1024w"
+loading="lazy"
+alt="web4"
+class="gallery-image"
+data-flex-grow="195"
+data-flex-basis="468px"
+>&lt;/p>
+&lt;p>分析可得，需要传入一个值，该值的MD5的MD5还等于该值的MD5。。。&lt;/p>
+&lt;p>谷歌一下，找到相关知识点&lt;code>0e漏洞&lt;/code>：&lt;/p>
+&lt;blockquote>
+&lt;p>PHP在处理哈希字符串时，会利用”!=”或”==”来对哈希值进行比较，它把每一个以”0E”开头的哈希值都解释为0，所以如果两个不同的密码经过哈希以后，其哈希值都是以”0E”开头的，那么PHP将会认为他们相同，都是0。from: &lt;a class="link" href="https://www.cnblogs.com/m-r-lee/p/13664402.html" target="_blank" rel="noopener"
+>[md5 collision碰撞]即PHP对0e的缺陷漏洞&lt;/a>&lt;/p>
+&lt;/blockquote>
+&lt;p>没找到。。。看官方WP找到值：&lt;code>0e215962017&lt;/code>&lt;/p>
+&lt;p>传入&lt;code>server.php?md5=0e215962017&lt;/code>&lt;/p>
+&lt;p>得到flag:&lt;code>geek{wonderful}&lt;/code>&lt;/p>
+&lt;h3 id="web5">web5
+&lt;/h3>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-php" data-lang="php">&lt;span class="line">&lt;span class="cl">&lt;span class="o">&amp;lt;?&lt;/span>&lt;span class="nx">php&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// flag in flag.php
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="nx">highlight_file&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="no">__FILE__&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="nx">isset&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nv">$_GET&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="s1">&amp;#39;a&amp;#39;&lt;/span>&lt;span class="p">])&lt;/span> &lt;span class="o">&amp;amp;&amp;amp;&lt;/span> &lt;span class="nx">isset&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nv">$_GET&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="s1">&amp;#39;b&amp;#39;&lt;/span>&lt;span class="p">])&lt;/span> &lt;span class="o">&amp;amp;&amp;amp;&lt;/span> &lt;span class="nx">isset&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nv">$_POST&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="s1">&amp;#39;c&amp;#39;&lt;/span>&lt;span class="p">])&lt;/span> &lt;span class="o">&amp;amp;&amp;amp;&lt;/span> &lt;span class="nx">isset&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nv">$_COOKIE&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="s1">&amp;#39;name&amp;#39;&lt;/span>&lt;span class="p">]))&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nv">$a&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nv">$_GET&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="s1">&amp;#39;a&amp;#39;&lt;/span>&lt;span class="p">];&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nv">$b&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nv">$_GET&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="s1">&amp;#39;b&amp;#39;&lt;/span>&lt;span class="p">];&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nv">$c&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nv">$_POST&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="s1">&amp;#39;c&amp;#39;&lt;/span>&lt;span class="p">];&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nv">$name&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nv">$_COOKIE&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="s1">&amp;#39;name&amp;#39;&lt;/span>&lt;span class="p">];&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="nv">$a&lt;/span> &lt;span class="o">!=&lt;/span> &lt;span class="nv">$b&lt;/span> &lt;span class="o">&amp;amp;&amp;amp;&lt;/span> &lt;span class="nx">md5&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nv">$a&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">==&lt;/span> &lt;span class="nx">md5&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nv">$b&lt;/span>&lt;span class="p">))&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="o">!&lt;/span>&lt;span class="nx">is_numeric&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nv">$c&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">&amp;amp;&amp;amp;&lt;/span> &lt;span class="nv">$c&lt;/span> &lt;span class="o">!=&lt;/span> &lt;span class="mi">1024&lt;/span> &lt;span class="o">&amp;amp;&amp;amp;&lt;/span> &lt;span class="nx">intval&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nv">$c&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">==&lt;/span> &lt;span class="mi">1024&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">include&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nv">$name&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="s1">&amp;#39;.php&amp;#39;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cp">?&amp;gt;&lt;/span>&lt;span class="err">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>需要a不为b且他俩md5值一样，c是不为1024但取整后是1024，并且要通过cookie传入一个名字：&lt;/p>
+&lt;p>payload:&lt;code>/?a=240610708&amp;amp;b=314826850 POST：c=1024.1a COOKIE=name=php://filter/read=convert.base64-encode/resource=flag.php&lt;/code>&lt;/p>
+&lt;p>&lt;code>hackbar&lt;/code>拓展传入，得到base64密文&lt;code>PD9waHAgIA0KJGZsYWcgPSAnZ2Vla3tZb3UgYXJlIGdyZWF0fSc7IA0KPz4=&lt;/code>&lt;/p>
+&lt;p>base64解码得到flag：&lt;code>geek{You are great}&lt;/code>&lt;/p>
+&lt;h3 id="web6">web6
+&lt;/h3>&lt;p>查看源码找到&lt;code>&amp;lt;!-- visit '/api.php?source' for hint --&amp;gt;&lt;/code>&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;span class="lnt">22
+&lt;/span>&lt;span class="lnt">23
+&lt;/span>&lt;span class="lnt">24
+&lt;/span>&lt;span class="lnt">25
+&lt;/span>&lt;span class="lnt">26
+&lt;/span>&lt;span class="lnt">27
+&lt;/span>&lt;span class="lnt">28
+&lt;/span>&lt;span class="lnt">29
+&lt;/span>&lt;span class="lnt">30
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-php" data-lang="php">&lt;span class="line">&lt;span class="cl">&lt;span class="o">&amp;lt;?&lt;/span>&lt;span class="nx">php&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">function&lt;/span> &lt;span class="nf">sanitize&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nv">$s&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nv">$s&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">str_replace&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;;&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s1">&amp;#39;&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nv">$s&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nv">$s&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">str_replace&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39; &amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s1">&amp;#39;&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nv">$s&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nv">$s&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">str_replace&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;/&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s1">&amp;#39;&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nv">$s&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nv">$s&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">str_replace&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;flag&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s1">&amp;#39;&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nv">$s&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="nv">$s&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="nx">isset&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nv">$_GET&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="s1">&amp;#39;source&amp;#39;&lt;/span>&lt;span class="p">]))&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">highlight_file&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="no">__FILE__&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">die&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="o">!&lt;/span>&lt;span class="nx">isset&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nv">$_POST&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="s1">&amp;#39;ip&amp;#39;&lt;/span>&lt;span class="p">]))&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">die&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;No IP Address&amp;#39;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nv">$ip&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nv">$_POST&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="s1">&amp;#39;ip&amp;#39;&lt;/span>&lt;span class="p">];&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nv">$ip&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">sanitize&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nv">$ip&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="o">!&lt;/span>&lt;span class="nx">preg_match&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;/((\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.){3}(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])/&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nv">$ip&lt;/span>&lt;span class="p">))&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">die&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;Invalid IP Address&amp;#39;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nx">system&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;ping -c 4 &amp;#39;&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="nv">$ip&lt;/span>&lt;span class="o">.&lt;/span> &lt;span class="s1">&amp;#39; 2&amp;gt;&amp;amp;1&amp;#39;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cp">?&amp;gt;&lt;/span>&lt;span class="err">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>参考&lt;a class="link" href="https://blog.csdn.net/m0_74317362/article/details/133947590" target="_blank" rel="noopener"
+>0xGame 2023 - CSDN&lt;/a>&lt;/p>
+&lt;p>&lt;code>; &lt;/code>⽤ &lt;code>%0a&lt;/code> 绕过, 空格⽤ &lt;code>${IFS}&lt;/code> 绕过, &lt;code>/&lt;/code> 以及 &lt;code>flag&lt;/code> ⽤ base64 编码绕过:&lt;/p>
+&lt;p>post&lt;code>ip=127.0.0.1|ls%09..&lt;/code>发现&lt;code>geek&lt;/code>目录;&lt;/p>
+&lt;p>post&lt;code>ip=127.0.0.1|echo%09&amp;quot;PD9waHAgc3lzdGVtKCdscyAuLi9nZWVrJyk7&amp;quot;|base64%09-d%09&amp;gt;2.php&lt;/code>，执行无响应。。。&lt;/p>
+&lt;p>然后就解不出来了。。。查看WP:&lt;/p>
+&lt;p>&lt;code>输入127.0.0.1&amp;amp;&amp;amp;cd${IFS}..&amp;amp;&amp;amp;cd${IFS}geek&amp;amp;&amp;amp;ls切换到geek目录中，发现flag.php&lt;/code>&lt;/p>
+&lt;blockquote>
+&lt;p>因为过滤了flag，所以可以用&lt;code>cat${IFS}fla*&lt;/code>来查看其中内容&lt;/p>
+&lt;/blockquote>
+&lt;p>通配符绕过过滤！学到了！&lt;/p>
+&lt;p>得到flag:&lt;code>geek{hello geeker}&lt;/code>&lt;/p>
+&lt;h2 id="reverse">reverse
+&lt;/h2>&lt;h3 id="reverse1">reverse1
+&lt;/h3>&lt;p>&lt;code>IDA Pro&lt;/code>反编译在main函数中找到了flag{ajsju19hLDUkdrs8KB6Sl}&lt;/p>
+&lt;p>&lt;img src="https://blog.wuko.top/posts/2024/10/30/newbiectf.html/reverse1.png"
+width="2558"
+height="1527"
+srcset="https://blog.wuko.top/posts/2024/10/30/newbiectf.html/reverse1_hu9463629634252685365.png 480w, https://blog.wuko.top/posts/2024/10/30/newbiectf.html/reverse1_hu16725100383396805891.png 1024w"
+loading="lazy"
+alt="reverse1"
+class="gallery-image"
+data-flex-grow="167"
+data-flex-basis="402px"
+>&lt;/p>
+&lt;h3 id="reverse2">reverse2
+&lt;/h3>&lt;p>反编译查找胜利字符，找到 &lt;code>KSLSHDDOWskldrfsKSJ&lt;/code>&lt;/p>
+&lt;p>&lt;img src="https://blog.wuko.top/posts/2024/10/30/newbiectf.html/reverse2.png"
+width="2558"
+height="1527"
+srcset="https://blog.wuko.top/posts/2024/10/30/newbiectf.html/reverse2_hu6948432431722471271.png 480w, https://blog.wuko.top/posts/2024/10/30/newbiectf.html/reverse2_hu6939039416294071925.png 1024w"
+loading="lazy"
+alt="reverse2"
+class="gallery-image"
+data-flex-grow="167"
+data-flex-basis="402px"
+>&lt;/p>
+&lt;p>&lt;code>geek{KSLSHDDOWskldrfsKSJ}&lt;/code>&lt;/p>
+&lt;h2 id="结尾">结尾
+&lt;/h2>&lt;p>初知CTF，刚看到题就沉迷进去了，除了吃饭和睡觉满脑子都是题XDDD，有几道题还是上课摸鱼解出来的。最快乐的时候莫过于解出一道题，最痛苦的时候莫过于写WP（（（。&lt;/p></description></item></channel></rss>

