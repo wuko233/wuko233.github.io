@@ -49,3 +49,31 @@ Advanced Archive Password Recovery 统计信息:
 ````
 
 得到`CTF{vjpw_wnoei}`
+
+## 大白
+
+修复图片长宽高，得到:`flag{He1l0_d4_ba1}`
+
+![dabai](dabai.png)
+
+## 乌镇峰会种图
+
+同[你居然赶我走](#你竟然赶我走)，查看文件元数据末尾得到flag：
+
+`flag{97314e7864a8f62627b26f3f998c37f1}`
+
+## wireshark
+
+用`wireshark`打开，查找关键词找到password：
+
+![wireshark](wireshark'.png)
+
+`flag{ffb7567a1d4f4abdffdb54e022f8facd}`
+
+## N种方法解决
+
+下载下来发现是`.exe`文件，直接运行失败，拖到`IDA pro`里查看，发现其开头为`data:image/jpg;base64`后跟一串base64，将它转换为图片：
+
+![n1](n1.png)
+
+得到：`KEY{dca57f966e4e4e31fd5b15417da63269}`
