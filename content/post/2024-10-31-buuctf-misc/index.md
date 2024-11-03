@@ -154,6 +154,30 @@ base64解码: `flag{70354300a5100ba78068805661b93a5c}`
 
 ## easycap
 
-发现全是`TCP`，右键`追踪流`得到：
+`wireshark`发现全是`TCP`，右键`追踪流`得到：
 
 `FLAG:385b87afc8671dee07550290d16a8071`
+
+## 隐藏的钥匙
+
+查看图片元数据，找到文本：`flag:base64:(Mzc3Y2JhZGRhMWVjYTJmMmY3M2QzNjI3Nzc4MWYwMGE=).`
+
+base64解码得到：`377cbadda1eca2f2f73d36277781f00a`
+
+## 另外一个世界
+
+图片查看元数据，结尾发现
+
+`01101011011011110110010101101011011010100011001101110011`
+
+判断为2进制，转换成文字为：`koekj3s`
+
+## 数据包中的线索
+
+`wireshark`追踪http流，得到一大串base64码，转换成图片：
+
+![ga](ga.png)
+
+`flag{209acebf6324a09671abc31c869de72c}`
+
+
