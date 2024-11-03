@@ -96,7 +96,7 @@ base64解码: `flag{70354300a5100ba78068805661b93a5c}`
 
 ## zip伪加密
 
-谜底出在谜面上，对它使用zip伪加密修复把！
+谜底出在谜面上，对它使用zip伪加密修复吧！
 
 得到flag.txt:`flag{Adm1N-B2G-kU-SZIP}`
 
@@ -107,3 +107,53 @@ base64解码: `flag{70354300a5100ba78068805661b93a5c}`
 ![out](out.png)
 
 扫描得到：`cumtctf{1sb_i4_s0_Ea4y}`
+
+## 被嗅探的流量
+
+`wireshark`打开，http分类，找到upload:
+
+![lostdata](lostdata.png)
+
+`flag{da73d88936010da1eeeb36e945ec4b97}`
+
+## rar
+
+已知密码是4位，使用`APCHPR`秒了：`8795`
+
+解压得到：`flag{1773c5da790bd3caff38e3decd180eb7}`
+
+## qr
+
+扫码得到：`欢迎参加本次比赛，密码为 Flag{878865ce73370a4ce607d21ca01b5e59}`
+
+## 镜子里面的世界
+
+`Stegsolve.jar`打开提取数据：
+
+![lsb2](lsb2.png)
+
+`Hey I think we can write safely in this file without any one seeing it. Anyway, the secret key is: st3g0_ saurus_wr3cks`
+
+`flag{st3g0_saurus_wr3cks}`
+
+## 爱因斯坦
+
+查看图片16进制，好家伙，塞了一个zip，使用`binwalk`分离，得到一个加密的zip，`APCHPR`失败，继续寻找密码。。。图片exif找到：`this_is_not_password`，尝试，得到flag：`flag{dd22a92bf2cceb6c0cd0d6b83ff51606}`
+
+## ningen
+
+下载图片查看十六进制，发现还有其他文件，使用`foremost`提取出加密的zip，结合提示`秋明特别讨厌中国的六位银行密码，喜欢四位数`,`APCHPR`秒了:`8368`
+
+`flag{b025fc9ca797a67d2103bfbc407a6d5f}`
+
+## 小明的保险箱
+
+和[ningen](#ningen)一样，`binwalk`分离得到rar文件，根据提示4位数，`APCHPR`秒了：`7869`
+
+`flag{75a3d68bf071ee188c418ea6cf0bb043}`
+
+## easycap
+
+发现全是`TCP`，右键`追踪流`得到：
+
+`FLAG:385b87afc8671dee07550290d16a8071`
