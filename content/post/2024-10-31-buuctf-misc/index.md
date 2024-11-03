@@ -102,4 +102,8 @@ base64解码: `flag{70354300a5100ba78068805661b93a5c}`
 
 ## LSB
 
-使用`Stegsolve.jar`
+使用`Stegsolve.jar`提取RGB通道数据，得到二维码：
+
+![out](out.png)
+
+扫描得到：`cumtctf{1sb_i4_s0_Ea4y}`
