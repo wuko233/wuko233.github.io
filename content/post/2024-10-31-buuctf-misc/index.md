@@ -76,4 +76,30 @@ Advanced Archive Password Recovery 统计信息:
 
 ![n1](n1.png)
 
-得到：`KEY{dca57f966e4e4e31fd5b15417da63269}`
+扫码得到：`KEY{dca57f966e4e4e31fd5b15417da63269}`
+
+## 基础破解
+
+> 给你一个压缩包，你并不能获得什么，因为他是四位数字加密的哈哈哈哈哈哈哈。。。不对= =我说了什么了不得的东西。。
+
+使用`APCHPR`秒了：`2563`
+
+解压得到flag.txt，内容`ZmxhZ3s3MDM1NDMwMGE1MTAwYmE3ODA2ODgwNTY2MWI5M2E1Y30=`
+
+base64解码: `flag{70354300a5100ba78068805661b93a5c}`
+
+## 文件中的秘密
+
+下载，直接查看图片属性，得到flag：`flag{870c5a72806115cb5439345d8b014396}`
+
+![secret](secret1.png)
+
+## zip伪加密
+
+谜底出在谜面上，对它使用zip伪加密修复把！
+
+得到flag.txt:`flag{Adm1N-B2G-kU-SZIP}`
+
+## LSB
+
+使用`Stegsolve.jar`
