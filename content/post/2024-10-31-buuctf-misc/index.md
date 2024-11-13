@@ -180,4 +180,55 @@ base64解码得到：`377cbadda1eca2f2f73d36277781f00a`
 
 `flag{209acebf6324a09671abc31c869de72c}`
 
+## 神秘龙卷风
+
+根据提示4位数，`APCHPR`秒了：`5463`
+
+解压打开一看，不是哥们：
+
+![ljf](ljf.png)
+
+查阅得知，这是`brainfuck`加密，很形象的名字，差点大脑升级，，，
+
+> brainfuck在线解密：[https://www.splitbrain.org/services/ook](https://www.splitbrain.org/services/ook)
+
+`flag{e4bbef8bdf9743f8bf5b727a9f6332a8}`
+
+## FLAG （教练，我...我想打CTF）
+
+`Stegsolve.jar`打开提取数据，得到zip文件
+
+打开提示损坏，但仍然可解压出1文件，得到flag:
+
+`ctf{dd0gf4c3tok3yb0ard4g41n~~~}`
+
+## 假如给我三天光明
+
+下载下来文件，解压得到一个加密的zip和一张图片，图片里有神秘图形，查找得知，这是`盲文`，网上搜对照表解密得出；`kmdonowg`，尝试用这个密码解压压缩包，得到wav音频文件，听出是莫斯电码，解码得到：`CTFWPEI08732?23DZ`，去掉ctf并且全小写即为flag。
+
+## 后门查杀
+
+下载文件会被拦截。。无视风险下载后，找到一个可疑的文件`web.php`，内容是一个典型的webshell:
+
+````php
+<?php
+  include($_GET[act] . ".php");
+?>
+````
+
+通过向其传入`act`参数，可以执行任意php文件。但是我们要找的是md5密码，所以继续查找，找到了`attacktest.sql`，里面找到管理员密码：`0192023a7bbd73250516f069df18b500`，遗憾的是这并不是flag，继续查找。
+
+找了半天，在`include/include.php`的第40行找到flag：`6ac45fb83b3bc355c024f5034b947dd3`，后查阅WP才知道，原来有专门的webshell查杀工具。。可以直接得到flag。。。
+
+## webshell后门
+
+这次直接下载了`D盾`，一顿扫描：
+
+![webshell](webshell1.png)
+
+在`/member/zp.php`中31行找到flag：`ba8e6c6f35a53933b871480bb9a9545c`
+
+## 来首歌吧
+
+下载打开，是彩虹猫！
 
