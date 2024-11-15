@@ -1,6 +1,6 @@
 ---
 title: 【随缘更新中】ctf web类解密
-date: 2024-10-31
+date: 2024-11-14
 slug: web-ctf
 image: cover.png
 tag: 
