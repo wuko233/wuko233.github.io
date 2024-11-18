@@ -287,3 +287,10 @@ bV1g6t5wZDJif^J7
 ````
 
 用这个解压压缩包，得到flag：`flag{1RTo8w@&4nK@z*XL}`
+
+## [BJDCTF2020]认真你就输了
+
+解压，在`xl/charts/flag.txt`
+
+找到：`flag{M9eVfi2Pcs#}`
+
