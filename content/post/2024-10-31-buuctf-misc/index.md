@@ -294,3 +294,41 @@ bV1g6t5wZDJif^J7
 
 找到：`flag{M9eVfi2Pcs#}`
 
+## 被劫持的神秘礼物
+
+第四个数据，得到`name:admina,word:adminb`，拼接得到：`adminaadminb`转换为md5 32位全小写：
+
+`1d240aafe21a86afc11f38a45b541a49`
+
+## 被偷走的文件
+
+导出ftp协议传输文件，得到`flag.rar`，加密了，使用`APCHPR`秒了：`5790`
+
+解压得到`flag.txt`:
+
+`flag{6fe99a5d03fb01f833ec3caa80358fa3}`
+
+## [BJDCTF2020]藏藏藏
+
+解压得到图片，用`foremost`提取出zip，解压得到flag：
+
+`flag{you are the best!}`
+
+## [GXYCTF2019]佛系青年
+
+zip伪加密修复，解压得到文本与图片：
+
+````
+以上略
+佛曰：遮等諳勝能礙皤藐哆娑梵迦侄羅哆迦梵者梵楞蘇涅侄室實真缽朋能。奢怛俱道怯都諳怖梵尼怯一罰心缽謹缽薩苦奢夢怯帝梵遠朋陀諳陀穆諳所呐知涅侄以薩怯想夷奢醯數羅怯諸
+````
+
+佛曰密码，[与佛论禅](https://www.keyfc.net/bbs/tools/tudoucode.aspx)解密得到:
+
+`flag{w0_fo_ci_Be1}`
+
+## [BJDCTF2020]你猜我是个啥
+
+直接无法解压，查看文件十六进制，发现是png图片格式，更改后缀，得到一个二维码，扫描得到：`flag²»ÔÚÕâ`实测并不是flag，最后在图片16进制末尾发现flag：
+
+`flag{i_am_fl@g}`
