@@ -115,7 +115,7 @@ msf6> show target
 The connection was refused by the remote host (192.168.91.131:445).
 ````
 
-默认`target`为第一个（0），可能后面会使用`set TARGET 序号/名称`来设定`target`：
+默认`target`为第一个（0），使用`set TARGET 序号/名称`来设定`target`：
 
 ````bash
 msf6> set TARGET 'Windows XP SP3 Chinese - Simplified(NX)'
