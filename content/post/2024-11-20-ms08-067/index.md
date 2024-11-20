@@ -121,7 +121,7 @@ The connection was refused by the remote host (192.168.91.131:445).
 msf6> set TARGET 'Windows XP SP3 Chinese - Simplified(NX)'
 ````
 
-效果图在下一张图片。
+效果图在最后面的图片。
 
 不建议复制我的，因为不同环境它的序号和名字也会变，比如我的简中XP序号是35，朋友的是10。
 
