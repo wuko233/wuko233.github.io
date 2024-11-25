@@ -335,3 +335,116 @@ zip伪加密修复，解压得到文本与图片：
 
 ## 刷新过的图片
 
+尝试众多方法，无果，查阅wp，原来是`F5隐写`：
+
+[F5-steganography](https://github.com/matthewgao/F5-steganography)
+
+安装：`git clone https://github.com/matthewgao/F5-steganography`
+
+需要`java8`环境，而且不知道为啥我Windows环境跑啥反应也没有。。。于是在kali装了java8并且解密出了一个`out.txt`:
+
+`java Extract Misc.jpg`
+
+![out](f5.png)
+
+解密得到的文件查看16进制，发现是zip，改后缀发现加密，使用伪加密修复，解压得到flag：
+
+`flag{96efd0a2037d06f34199e921079778ee}`
+
+## 秘密文件
+
+wireshark打开，过滤ftp，发现可疑数据：
+
+![file](secrectfile.png)
+
+恢复到时间排序，找到文件的传输数据(`tcp.stream eq 6`)，~~ 追踪流导出文件，得到rar压缩包 ~~，这样导出只能得到一部分文件。。。用foremost提取文件，得到加密的rar，使用`APCHPR`秒了：`1903`
+
+解压得到flag：`flag{d72e5a671aa50fa5f400e5d10eedeaa5}`
+
+## [BJDCTF2020]鸡你太美
+
+小鸡子漏出黑脚了，解压得到两个gif，其中副本无法打开。用`010 editor`打开，发现副本缺少GIF头文件`47 49 46 38`，插入，复制自十六进制文本，成功得到flag：
+
+`flag{zhi_yin_you_are_beautiful}`
+
+## [BJDCTF2020]just_a_rar
+
+解压得到加密的rar，名字为四位数，使用`APCHPR`秒了：`2016`
+
+解压得到一jpg，exif中找到flag：`flag{Wadf_123}`
+
+## snake
+
+下载得到一图片，`foremost`分离出一zip，解压得到：
+
+`ciper`: 疑似二进制文件
+
+`key`: 内容为`V2hhdCBpcyBOaWNraSBNaW5haidzIGZhdm9yaXRlIHNvbmcgdGhhdCByZWZlcnMgdG8gc25ha2VzPwo=` base64解码得到：`What is Nicki Minaj's favorite song that refers to snakes?`，谷歌得到：`"Anaconda" is a song by rapper Nicki Minaj.`所以秘钥应是`Anaconda`。
+
+没头绪，查阅wp，原来是`serpent`加密，使用在线解密工具[serpent encryptipn](http://serpent.online-domain-tools.com/)解密得到：
+
+`CTF{who_knew_serpent_cipher_existed}`
+
+## 菜刀666
+
+分析好像是恶意利用eval()注入某些东西，怪不得电脑报毒。。。里面有`z1`和`z2`，目测一个是base64一个是十六进制：
+
+````
+z1=RDpcd2FtcDY0XHd3d1x1cGxvYWRcNjY2Ni5qcGc%3D&z2=FFD8FFE000104A4...(后略)
+````
+
+z1解码为：`D:\wamp64\www\upload\6666.jpg`
+
+那么z2就应该是这个图片了，用010 editor新建文件，把值复制进去，得到图片：
+
+![psd](6666.jpg)
+
+`Th1s_1s_p4sswd_!!!`
+
+
+在1367找到一个zip文件以及一串字符：`well,you need passwd!`
+
+foremost提取出zip，发现加密，输入之前找到的密码，得到flag：
+
+`flag{3OpWdJ-JP6FzK-koCMAK-VkfWBq-75Un2z}`
+
+## [BJDCTF2020]一叶障目
+
+修复长宽高，得到：`xaflag{66666}`
+
+## [SWPU2019]神奇的二维码
+
+扫码得到：swpuctf{flag_is_not_here}
+
+`binwalk`提取出4个rar，第一个解压出一张图片和一个加密的压缩包，第二个得到一TXT，内容为base64编码，解码得到：`asdfghjkl1234567890`，试着解压上一个压缩包，发现解压出来的图片和原本的图片是一样的。。。。第三个得到.doc文件，里面是一大堆字符，第四个是加密压缩包。
+
+让AI写了循环解码脚本，得到：`comEON_YOuAreSOSoS0great`
+
+![decrypto](decrypto.png)
+
+````python
+import base64
+
+encoded_string = input("请输入要解码的 base64 字符串：")
+count = 0
+
+while encoded_string:
+    decoded_string = base64.b64decode(encoded_string).decode('utf-8')
+    print(f"解码 {count} 次后的结果：{decoded_string}")
+    count += 1
+    encoded_string = decoded_string
+````
+
+解压压缩包，得到音频文件，判断为摩斯电码，得到：
+
+`morseisveryveryeasy`
+
+## [BJDCTF2020]纳尼
+
+纳尼？GIF是假滴！不慌，看下十六进制先，发现该文件没有gif格式头文件，于是010 editor启动！新建个文件，添加文件头（`47 49 46 38 39 61`）后把源文件拷过去试试，轻松秒杀！得到一张含文本的GIF图片，随后我们拆帧，得到：
+
+![n1](nn0%20(1).png) ![n2](nn0%20(2).png) ![n3](nn0%20(3).png) ![n4](nn0%20(4).png)
+
+`Q1RGe3dhbmdfYmFvX3FpYW5nX2lzX3NhZH0=`
+
+base64解码得到：`CTF{wang_bao_qiang_is_sad}`

