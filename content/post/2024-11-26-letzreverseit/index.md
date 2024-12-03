@@ -3,7 +3,7 @@ title: ctf reverse解题+学习
 date: 2024-11-26
 description: 小学就接触的项目（指安卓逆向破解游戏XD）
 slug: letzreverseit
-image: xor.jpg
+image: cover.jpg
 tag: 
     - CTF
     - 网络安全
