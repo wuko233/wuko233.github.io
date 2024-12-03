@@ -448,3 +448,179 @@ while encoded_string:
 `Q1RGe3dhbmdfYmFvX3FpYW5nX2lzX3NhZH0=`
 
 base64解码得到：`CTF{wang_bao_qiang_is_sad}`
+
+## [HBNIS2018]excel破解
+
+16进制直接查找flag字符：
+
+flag is here `CTF{office_easy_cracked}`
+
+ture dude.
+
+## [HBNIS2018]来题中等的吧
+
+读图得到摩斯电码：`.-/.-../.--./..../.-/.-../.-/-...`
+
+破译得到：`ALPHALAB`
+
+。。。查了半天图片，发现这个全小写就是flag。。。说好的中等的呢。。。
+
+## 梅花香之苦寒来
+
+exif：
+
+````
+Image Artist：出题人已跑路~
+Image ImageDescription：图穷flag见
+````
+
+十六进制查看，发现末尾有许多数字和字母，初步判断为十六进制字符，010editor提取出来，发现是一堆坐标。。。查阅wp，原来是要靠这些坐标生成矢量图。。。
+
+于是在kali安装`gnuplot`:
+
+````bash
+apt-get install gnuplot
+````
+
+copy过来的脚本稍加修改，把格式转换一下：(x,y) -> x y
+
+````python
+with open('xy.txt', 'r') as a:
+    a = a.read()
+a = a.split()
+tem = ''
+
+with open('changed.txt', 'w') as f:
+    for i in range(0, len(a)):
+        tem = a[i]
+        tem = tem.lstrip('(')
+        tem = tem.rstrip(')')
+        for j in range(0, len(tem)):
+            if tem[j] == ',':
+                tem = tem[:j] + ' ' + tem[j + 1:]
+        f.write(tem + '\n')
+````
+
+gnuplot生成：
+
+````
+gnuplot> plot "changed.txt"
+````
+
+得到：
+
+![gnuplot](gnuplot.png)
+
+扫码得到：`flag{40fc0a979f759c8892f4dc045e28b820}`
+
+## 谁赢了比赛？
+
+foremost提取出rar，里面有个加密的`hehe.gif`，使用`APCHPR`秒了：`1020`
+
+解压打开，发现是一个棋局，只需要看到最后就能得到flag啦！（被打死
+
+看半天，发现第308和309帧不一样，其中309帧写着：`do_you_know_where is_the_flag`
+
+放到`StegSolve.jar`， red plane得到二维码：
+
+![StegSolve](StegSolve.png)
+
+扫码得到：`flag{shanxiajingwu_won_the_game}`
+
+## [ACTF新生赛2020]outguess
+
+图片exif中的备注: `公正民主公正文明公正和谐`
+
+`社会主义核心价值观`解密：`abc`
+
+`outguess`加密
+
+安装outguess:
+
+````bash
+git clone https://github.com/crorvick/outguess
+
+./configure && make && make install 
+````
+
+解密：
+
+````bash
+outguess -k 'abc' -r mmm.jpg out.txt
+
+cat out.txt 
+````
+
+得到：
+
+`ACTF{gue33_Gu3Ss!2020}`
+
+## [WUSTCTF2020]find_me
+
+备注里找到了：`⡇⡓⡄⡖⠂⠀⠂⠀⡋⡉⠔⠀⠔⡅⡯⡖⠔⠁⠔⡞⠔⡔⠔⡯⡽⠔⡕⠔⡕⠔⡕⠔⡕⠔⡕⡍=`
+
+似曾相识，盲文，[假如给我三天光明](#假如给我三天光明)
+
+在线解密网站：[文本加密为盲文,可自设密码|文本在线加密解密工具](https://www.qqxiuzi.cn/bianma/wenbenjiami.php?s=mangwen)
+
+解密得到：`wctf2020{y$0$u_f$1$n$d$_M$e$e$e$e$e}`
+
+## 穿越时空的思念
+
+`audacity`打开，发现是摩斯电码:
+
+`..-. ----- ..--- ----. -... -.. -.... ..-. ..... ..... .---- .---- ...-- ----. . . -.. . -... ---.. . ....- ..... .- .---- --... ..... -... ----- --... ---.. -....`
+
+解码得到：
+
+`F029BD6F551139EEDEB8E45A175B0786`
+
+即为`flag{f029bd6f551139eedeb8e45a175b0786}`
+
+## [SWPU2019]我有一只马里奥
+
+双击打开，得到文本：
+
+````
+ntfs      
+flag.txt
+````
+
+查阅wp得知，命令行打开：
+
+`notepad 1.txt:flag.txt`
+
+得到`swupctf{ddg_is_cute}`
+
+## [GUET-CTF2019]KO
+
+[https://www.splitbrain.org/services/ook](https://www.splitbrain.org/services/ook)
+
+解密得到：`welcome to CTF`
+
+## [ACTF新生赛2020]base64隐写
+
+参考wp脚本，多次解密base64:
+
+````python
+import base64
+b64chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/'
+with open('./base64.txt', 'rb') as f:
+    flag = ''
+    bin_str = ''
+    for line in f.readlines():
+        stegb64 = str(line, "utf-8").strip("\n")
+        rowb64 = str(base64.b64encode(base64.b64decode(stegb64)), "utf-8").strip("\n")
+        offset = abs(b64chars.index(stegb64.replace('=', '')[-1]) - b64chars.index(rowb64.replace('=', '')[-1]))
+        equalnum = stegb64.count('=')  # no equalnum no offset
+        if equalnum:
+            bin_str += bin(offset)[2:].zfill(equalnum * 2)
+            # flag += chr(int(bin(offset)[2:].zfill(equalnum * 2), 2))
+            # print(flag) 这样写得不出正确结果
+        print([chr(int(bin_str[i:i + 8], 2)) for i in range(0, len(bin_str), 8)])
+
+
+# ['A', 'C', 'T', 'F', '{', '6', 'a', 's', 'e', 'b', '4', '_', 'f', '3', '3', '!', '}'
+````
+
+`flag{6aseb4_f33!}`
