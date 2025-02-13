@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Linux on wuko's blog</title><link>https://blog.wuko.top/tags/linux/</link><description>Recent content in Linux on wuko's blog</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Sat, 23 Jul 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.wuko.top/tags/linux/index.xml" rel="self" type="application/rss+xml"/><item><title>记：ECS 云服务器初体验——搭建一个WP站点</title><link>https://blog.wuko.top/posts/2022/07/23/buildblog2.html/</link><pubDate>Sat, 23 Jul 2022 00:00:00 +0000</pubDate><guid>https://blog.wuko.top/posts/2022/07/23/buildblog2.html/</guid><description>&lt;img src="https://blog.wuko.top/posts/2022/07/23/buildblog2.html/cover.jpg" alt="Featured image of post 记：ECS 云服务器初体验——搭建一个WP站点" />&lt;h1 id="记ecs-云服务器初体验搭建一个wp站点">记：ECS 云服务器初体验——搭建一个WP站点
+&lt;/h1>&lt;h2 id="一前言">一，前言
+&lt;/h2>&lt;p>本人为一名在校学生，未来方向为计算机软件工程。之前一直对于服务器有浓厚兴趣，并在本地也搭建过，但苦于没有公网地址以及专门的机器。经网上查阅以及朋友推荐，发现了阿里云的这个&lt;strong>飞天加速计划&lt;/strong>，并成功领取到了一台ECS服务器。&lt;/p>
+&lt;p>相对于我之前使用智能手机搭建的服务器，它有许多优点：公网IP、更强大的性能、更稳定的运行、更完整的操作系统&amp;hellip;这次就来一了我之前想要搭建一个网页导航的愿望。&lt;/p>
+&lt;p>环境：Ubuntu 20.04&lt;/p>
+&lt;h2 id="二连接服务器">二，连接服务器
+&lt;/h2>&lt;p>一开始我打算使用我的PC连接，但因为win7并不自带ssh，遂手动安装，后也是成功连接到了服务器：
+&lt;a class="link" href="https://imgtu.com/i/jX96dP" target="_blank" rel="noopener"
+>&lt;img src="https://s1.ax1x.com/2022/07/23/jX96dP.png"
+loading="lazy"
+alt="jX96dP.png"
+>&lt;/a>
+但ssh在我的win7系统中频繁崩溃，便打算在手机上用Termux连接到服务器，但&amp;hellip;这不是又得戳屏幕吗？&lt;/p>
+&lt;p>就在我百思不得其解时，我发现在阿里云的控制面板中有一个名为&lt;strong>Workbench远程连接&lt;/strong>的功能。在输入密码后，终于是可以开搞了。&lt;/p>
+&lt;p>&lt;a class="link" href="https://imgtu.com/i/jOpPrq" target="_blank" rel="noopener"
+>&lt;img src="https://s1.ax1x.com/2022/07/22/jOpPrq.png"
+loading="lazy"
+alt="jOpPrq.png"
+>&lt;/a>&lt;/p>
+&lt;h2 id="三安装环境与依赖">三，安装环境与依赖
+&lt;/h2>&lt;h3 id="安装apache">安装Apache:
+&lt;/h3>&lt;p>想要运行一个网站，就需要一个强大的后端。这里我选用了很多人都在用的 &lt;strong>Apache&lt;/strong>。&lt;/p>
+&lt;p>使用apt命令安装Apache和他的拓展包：&lt;/p>
+&lt;p>&lt;code>apt install apache2&lt;/code>&lt;/p>
+&lt;p>安装后用 &lt;code>service apache2 status&lt;/code>查看状态：&lt;/p>
+&lt;p>&lt;a class="link" href="https://imgtu.com/i/jOCXa6" target="_blank" rel="noopener"
+>&lt;img src="https://s1.ax1x.com/2022/07/22/jOCXa6.png"
+loading="lazy"
+alt="jOCXa6.png"
+>&lt;/a>&lt;/p>
+&lt;h3 id="安装mysql">安装mysql:
+&lt;/h3>&lt;p>&lt;code>apt-get install mysql-server mysql-client&lt;/code>&lt;/p>
+&lt;p>同样使用 &lt;code>service mysql status&lt;/code>查看状态&lt;/p>
+&lt;p>使用命令 &lt;strong>cat&lt;/strong>查看默认密码 &lt;strong>/etc/mysql/debian.cnf&lt;/strong>：&lt;/p>
+&lt;p>&lt;code>sudo cat /etc/mysql/debian.cnf&lt;/code>&lt;/p>
+&lt;p>返回：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;span class="lnt">13
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-gdscript3" data-lang="gdscript3">&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">Automatically&lt;/span> &lt;span class="n">generated&lt;/span> &lt;span class="k">for&lt;/span> &lt;span class="n">Debian&lt;/span> &lt;span class="n">scripts&lt;/span>&lt;span class="o">.&lt;/span> &lt;span class="n">DO&lt;/span> &lt;span class="n">NOT&lt;/span> &lt;span class="n">TOUCH&lt;/span>&lt;span class="o">!&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">[&lt;/span>&lt;span class="n">client&lt;/span>&lt;span class="p">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">host&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">localhost&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">user&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">debian&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">sys&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">maint&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">password&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="o">********&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">socket&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="o">/&lt;/span>&lt;span class="k">var&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="n">run&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="n">mysqld&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="n">mysqld&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">sock&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="p">[&lt;/span>&lt;span class="n">mysql_upgrade&lt;/span>&lt;span class="p">]&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">host&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">localhost&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">user&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="n">debian&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">sys&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">maint&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">password&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="o">********&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="n">socket&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="o">/&lt;/span>&lt;span class="k">var&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="n">run&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="n">mysqld&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="n">mysqld&lt;/span>&lt;span class="o">.&lt;/span>&lt;span class="n">sock&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>记住你的密码（Password），后面要用到。&lt;/p>
+&lt;h3 id="开放端口">开放端口
+&lt;/h3>&lt;p>在 &lt;strong>控制面板&amp;gt;网络与安全&amp;gt;安全组&lt;/strong>中新增入方向：&lt;/p>
+&lt;p>&lt;a class="link" href="https://imgtu.com/i/jOiZ01" target="_blank" rel="noopener"
+>&lt;img src="https://s1.ax1x.com/2022/07/22/jOiZ01.png"
+loading="lazy"
+alt="jOiZ01.png"
+>&lt;/a>&lt;/p>
+&lt;p>&lt;strong>注意：开放端口意味着其他人也可以在公网下访问你的服务器&lt;/strong>&lt;/p>
+&lt;p>完成后访问 &lt;strong>http://YOURIP/&lt;/strong>:&lt;/p>
+&lt;p>&lt;a class="link" href="https://imgtu.com/i/jOiKfO" target="_blank" rel="noopener"
+>&lt;img src="https://s1.ax1x.com/2022/07/22/jOiKfO.png"
+loading="lazy"
+alt="jOiKfO.png"
+>&lt;/a>&lt;/p>
+&lt;p>成功工作！&lt;/p>
+&lt;h3 id="安装php">安装PHP
+&lt;/h3>&lt;p>&lt;code>sudo apt install php libapache2-mod-php&lt;/code>&lt;/p>
+&lt;p>安装后重启Apache：&lt;/p>
+&lt;p>&lt;code>sudo systemctl restart apache2&lt;/code>&lt;/p>
+&lt;p>使用 &lt;strong>echo&lt;/strong> 命令创建一个PHP页面：&lt;/p>
+&lt;p>&lt;code>echo &amp;quot;&amp;lt;?php phpinfo(); ?&amp;gt;&amp;quot; &amp;gt; /var/www/html/phpinfo.php&lt;/code>&lt;/p>
+&lt;p>访问 &lt;strong>http://YOURIP/phpinfo.php&lt;/strong>，出现页面即为成功安装PHP&lt;/p>
+&lt;p>&lt;a class="link" href="https://imgtu.com/i/jOAip8" target="_blank" rel="noopener"
+>&lt;img src="https://s1.ax1x.com/2022/07/22/jOAip8.png"
+loading="lazy"
+alt="jOAip8.png"
+>&lt;/a>&lt;/p>
+&lt;p>至此，所有的环境与依赖安装完毕。&lt;/p>
+&lt;h2 id="四wordpress的安装">四、wordpress的安装
+&lt;/h2>&lt;p>下载Wordpress的安装包（建议直接下载到 **/var/www/**下）：&lt;/p>
+&lt;p>&lt;code>wget https://cn.wordpress.org/latest-zh_CN.tar.gz&lt;/code>&lt;/p>
+&lt;p>下载后使用 &lt;strong>tar&lt;/strong>命令解压：&lt;/p>
+&lt;p>&lt;code>tar -xvf latest-zh_CN.tar.gz&lt;/code>&lt;/p>
+&lt;p>解压后切换到wordpress目录，使用 &lt;strong>cp&lt;/strong>命令重命名示例配置文件为 &lt;strong>wp-config.php&lt;/strong>&lt;/p>
+&lt;p>&lt;code>cp wp-config-sample.php wp-config.php&lt;/code>&lt;/p>
+&lt;p>编辑它，将你的数据库信息放进去。&lt;/p>
+&lt;p>之后打开 &lt;strong>http://YOURIP/wordpress/wp-admin/install.php&lt;/strong>，按照提示即可！&lt;/p>
+&lt;p>大功告成！&lt;/p>
+&lt;p>&lt;a class="link" href="https://imgtu.com/i/jOX0HS" target="_blank" rel="noopener"
+>https://imgtu.com/i/jOX0HS&lt;/a>)&lt;/p>
+&lt;h2 id="五踩到的坑与总结">五，踩到的坑与总结
+&lt;/h2>&lt;h3 id="初次接触mysql无法登陆root用户">初次接触MySQL，无法登陆root用户
+&lt;/h3>&lt;p>原来只在内网环境下搭建过WP，当时只懂得对着教程CTRL+C/V。因为当时数据库和电脑是在同一个IP下，所以安装完MySQL后不用配置就直接可以安装WP；而这次数据库并不在本地，因此在本地连接时我遇到了这样的问题：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-sql" data-lang="sql">&lt;span class="line">&lt;span class="cl">&lt;span class="n">mysqli_real_connect&lt;/span>&lt;span class="p">():&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="n">HY000&lt;/span>&lt;span class="o">/&lt;/span>&lt;span class="mi">1698&lt;/span>&lt;span class="p">):&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="k">Access&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">denied&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="k">for&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="k">user&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="s1">&amp;#39;root&amp;#39;&lt;/span>&lt;span class="o">@&lt;/span>&lt;span class="s1">&amp;#39;localhost&amp;#39;&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>当时遇到这个问题，我卡了4个多小时，尝试过重启MySQL、Apache等等，但都没有解决。后来上网查发现可能是root用户主机设置的问题，于是在服务器进入查询：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt"> 1
+&lt;/span>&lt;span class="lnt"> 2
+&lt;/span>&lt;span class="lnt"> 3
+&lt;/span>&lt;span class="lnt"> 4
+&lt;/span>&lt;span class="lnt"> 5
+&lt;/span>&lt;span class="lnt"> 6
+&lt;/span>&lt;span class="lnt"> 7
+&lt;/span>&lt;span class="lnt"> 8
+&lt;/span>&lt;span class="lnt"> 9
+&lt;/span>&lt;span class="lnt">10
+&lt;/span>&lt;span class="lnt">11
+&lt;/span>&lt;span class="lnt">12
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-sql" data-lang="sql">&lt;span class="line">&lt;span class="cl">&lt;span class="o">&amp;gt;&lt;/span>&lt;span class="n">use&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">mysql&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="o">&amp;gt;&lt;/span>&lt;span class="k">select&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="k">host&lt;/span>&lt;span class="p">,&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="k">user&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="k">from&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="k">user&lt;/span>&lt;span class="p">;&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="o">+&lt;/span>&lt;span class="c1">-----------+------------------+
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="o">|&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="k">host&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="o">|&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="k">user&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="o">|&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="o">+&lt;/span>&lt;span class="c1">-----------+------------------+
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="o">|&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">localhost&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="o">|&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">root&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="o">|&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="o">|&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">localhost&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="o">|&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">debian&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">sys&lt;/span>&lt;span class="o">-&lt;/span>&lt;span class="n">maint&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="o">|&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="o">|&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">localhost&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="o">|&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">mysql&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">infoschema&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="o">|&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="o">|&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">localhost&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="o">|&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">mysql&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="k">session&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="o">|&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="o">|&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">localhost&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="o">|&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">mysql&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="n">sys&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="o">|&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="o">+&lt;/span>&lt;span class="c1">-----------+------------------+
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1">&lt;/span>&lt;span class="mi">8&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="k">rows&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="k">in&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="k">set&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="p">(&lt;/span>&lt;span class="mi">0&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="mi">00&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">sec&lt;/span>&lt;span class="p">)&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>果然我的root用户仅允许我在本地登录，于是我按照教程说的修改host：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-sql" data-lang="sql">&lt;span class="line">&lt;span class="cl">&lt;span class="k">update&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="k">user&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="k">set&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="k">host&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s1">&amp;#39;%&amp;#39;&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="k">where&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="k">user&lt;/span>&lt;span class="o">=&lt;/span>&lt;span class="s1">&amp;#39;root&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="n">flush&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="k">privileges&lt;/span>&lt;span class="p">;&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>查询后发现root的host确实变成了%，于是我再次尝试登录，却发现问题依然存在：&lt;/p>
+&lt;p>&lt;code>mysqli_real_connect(): (HY000/1698): Access denied for user 'root'@'localhost'&lt;/code>&lt;/p>
+&lt;p>最后没招了，突然有个想法，新建一个用户并给予其最大权限：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-sql" data-lang="sql">&lt;span class="line">&lt;span class="cl">&lt;span class="k">CREATE&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="k">USER&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="s1">&amp;#39;pmauser&amp;#39;&lt;/span>&lt;span class="o">@&lt;/span>&lt;span class="s1">&amp;#39;%&amp;#39;&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="n">IDENTIFIED&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="k">BY&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="s1">&amp;#39;mypassword&amp;#39;&lt;/span>&lt;span class="p">;&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="w">&lt;/span>&lt;span class="k">GRANT&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="k">ALL&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="k">PRIVILEGES&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="k">ON&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="o">*&lt;/span>&lt;span class="p">.&lt;/span>&lt;span class="o">*&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="k">TO&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="s1">&amp;#39;pmauser&amp;#39;&lt;/span>&lt;span class="o">@&lt;/span>&lt;span class="s1">&amp;#39;%&amp;#39;&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="k">WITH&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="k">GRANT&lt;/span>&lt;span class="w"> &lt;/span>&lt;span class="k">OPTION&lt;/span>&lt;span class="p">;&lt;/span>&lt;span class="w">
+&lt;/span>&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>然后用这个用户登录，果然成功登录！&lt;/p>
+&lt;h3 id="上传的文件大小超过phpini文件中定义的upload_max_filesize值">上传的文件大小超过php.ini文件中定义的upload_max_filesize值。
+&lt;/h3>&lt;p>在我为我的WP站点上传主题zip时，我遇到了这个问题。报错也非常明了，于是我在之前安装PHP时生成的phpinfo.php页面找到了我的php.ini文件路径：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">Loaded Configuration File /etc/php/7.4/apache2/php.ini
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>直接vim编辑，在里面找到了：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-ini" data-lang="ini">&lt;span class="line">&lt;span class="cl">&lt;span class="na">upload_max_filesize&lt;/span> &lt;span class="o">=&lt;/span> &lt;span class="s">2M&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>修改为7M，这个问题解决！然后新的问题又出现了。&lt;/p>
+&lt;h3 id="无法创建目录-wp-contentuploads202207它的父目录是否可以被服务器写入">无法创建目录 wp-content/uploads/2022/07。它的父目录是否可以被服务器写入
+&lt;/h3>&lt;p>修了一个bug,又出来一个，此时我心情复杂。继续上网查，发现可能是文件读取权限不够，于是直接使用&lt;strong>chmod&lt;/strong>命令把www文件夹以及里面的文件权限都改为777：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-shell" data-lang="shell">&lt;span class="line">&lt;span class="cl">chmod -R &lt;span class="m">777&lt;/span> /www
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;p>后再次尝试，终于成功！&lt;/p>
+&lt;h3 id="最后的话">最后的话
+&lt;/h3>&lt;p>这次很荣幸能试用这台ECS服务器，也了解到了许多之前没有了解过的领域：比如Apache、MySQL等等，并且又学到了许多新的Linux和SQL命令。也感谢阿里云能够推出这项活动来使全国各地的高校学生能够亲自上手体验一台云服务器。&lt;/p>
+&lt;h2 id="六成品展示">六，成品展示
+&lt;/h2>&lt;p>&lt;a class="link" href="https://imgtu.com/i/jOxc3d" target="_blank" rel="noopener"
+>&lt;img src="https://s1.ax1x.com/2022/07/23/jOxc3d.png"
+loading="lazy"
+alt="jOxc3d.png"
+>&lt;/a>&lt;/p></description></item></channel></rss>

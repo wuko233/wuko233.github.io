@@ -1,0 +1,165 @@
+<!doctype html><html lang=zh-CN dir=ltr><head><meta charset=utf-8><meta name=viewport content='width=device-width,initial-scale=1'><meta name=description content="新坑！记录下我的第一块开发板esp32s3wroom配置测试点亮乐一地等等..."><title>【第一块开发板】记录esp32s3wroom在platformIO的配置与点亮LED</title>
+<link rel=canonical href=https://blog.wuko.top/posts/2025/02/10/esp32s3wroom1.html/><link rel=stylesheet href=/scss/style.min.663803bebe609202d5b39d848f2d7c2dc8b598a2d879efa079fa88893d29c49c.css><meta property='og:title' content="【第一块开发板】记录esp32s3wroom在platformIO的配置与点亮LED"><meta property='og:description' content="新坑！记录下我的第一块开发板esp32s3wroom配置测试点亮乐一地等等..."><meta property='og:url' content='https://blog.wuko.top/posts/2025/02/10/esp32s3wroom1.html/'><meta property='og:site_name' content="wuko's blog"><meta property='og:type' content='article'><meta property='article:section' content='Post'><meta property='article:published_time' content='2025-02-10T00:00:00+00:00'><meta property='article:modified_time' content='2025-02-10T00:00:00+00:00'><meta property='og:image' content='https://blog.wuko.top/posts/2025/02/10/esp32s3wroom1.html/turnonzlight.jpg'><meta name=twitter:title content="【第一块开发板】记录esp32s3wroom在platformIO的配置与点亮LED"><meta name=twitter:description content="新坑！记录下我的第一块开发板esp32s3wroom配置测试点亮乐一地等等..."><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content='https://blog.wuko.top/posts/2025/02/10/esp32s3wroom1.html/turnonzlight.jpg'><link rel="shortcut icon" href=/favicon.png></head><body class=article-page><script>(function(){const e="StackColorScheme";localStorage.getItem(e)||localStorage.setItem(e,"auto")})()</script><script>(function(){const t="StackColorScheme",e=localStorage.getItem(t),n=window.matchMedia("(prefers-color-scheme: dark)").matches===!0;e=="dark"||e==="auto"&&n?document.documentElement.dataset.scheme="dark":document.documentElement.dataset.scheme="light"})()</script><div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky"><button class="hamburger hamburger--spin" type=button id=toggle-menu aria-label=切换菜单>
+<span class=hamburger-box><span class=hamburger-inner></span></span></button><header><figure class=site-avatar><a href=/><img src=/img/avatar_hu_eeb2260e26cf875e.png width=300 height=300 class=site-logo loading=lazy alt=Avatar>
+</a><span class=emoji>💭</span></figure><div class=site-meta><h1 class=site-name><a href=/>wuko's blog</a></h1><h2 class=site-description>从零开始，由心而发。欢迎共同交流学习！</h2></div></header><ol class=menu-social><li><a href=https://github.com/wuko233 target=_blank title=GitHub rel=me><svg class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6.0 00-1.3-3.2 4.2 4.2.0 00-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3.0 00-6.2.0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2.0 00-.1 3.2A4.6 4.6.0 004 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"/></svg></a></li><li><a href=https://twitter.com/@Arair237 target=_blank title=Twitter rel=me><svg class="icon icon-tabler icon-tabler-brand-twitter" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M22 4.01c-1 .49-1.98.689-3 .99-1.121-1.265-2.783-1.335-4.38-.737S11.977 6.323 12 8v1c-3.245.083-6.135-1.395-8-4 0 0-4.182 7.433 4 11-1.872 1.247-3.739 2.088-6 2 3.308 1.803 6.913 2.423 10.034 1.517 3.58-1.04 6.522-3.723 7.651-7.742a13.84 13.84.0 00.497-3.753C20.18 7.773 21.692 5.25 22 4.009z"/></svg></a></li></ol><ol class=menu id=main-menu><li><a href=/><svg class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><polyline points="5 12 3 12 12 3 21 12 19 12"/><path d="M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"/><path d="M9 21v-6a2 2 0 012-2h2a2 2 0 012 2v6"/></svg>
+<span>Home</span></a></li><li><a href=/pages/about.html/><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-vocabulary"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10 19H4a1 1 0 01-1-1V4a1 1 0 011-1h6a2 2 0 012 2 2 2 0 012-2h6a1 1 0 011 1v14a1 1 0 01-1 1h-6a2 2 0 00-2 2 2 2 0 00-2-2z"/><path d="M12 5v16"/><path d="M7 7h1"/><path d="M7 11h1"/><path d="M16 7h1"/><path d="M16 11h1"/><path d="M16 15h1"/></svg>
+<span>About</span></a></li><li><a href=/pages/archives/><svg class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><rect x="3" y="4" width="18" height="4" rx="2"/><path d="M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8"/><line x1="10" y1="12" x2="14" y2="12"/></svg>
+<span>Archives</span></a></li><li><a href=/pages/search/><svg class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="10" cy="10" r="7"/><line x1="21" y1="21" x2="15" y2="15"/></svg>
+<span>Search</span></a></li><li><a href=/pages/links/><svg class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M10 14a3.5 3.5.0 005 0l4-4a3.5 3.5.0 00-5-5l-.5.5"/><path d="M14 10a3.5 3.5.0 00-5 0l-4 4a3.5 3.5.0 005 5l.5-.5"/></svg>
+<span>Links</span></a></li><li class=menu-bottom-section><ol class=menu><li id=dark-mode-toggle><svg class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="8" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg>
+<svg class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="16" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg>
+<span>暗色模式</span></li></ol></li></ol></aside><aside class="sidebar right-sidebar sticky"><section class="widget archives"><div class=widget-icon><svg class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><line x1="5" y1="9" x2="19" y2="9"/><line x1="5" y1="15" x2="19" y2="15"/><line x1="11" y1="4" x2="7" y2="20"/><line x1="17" y1="4" x2="13" y2="20"/></svg></div><h2 class="widget-title section-title">目录</h2><div class=widget--toc><nav id=TableOfContents><ol><li><a href=#前言>前言</a><ol><li><a href=#购入>购入</a></li><li><a href=#参数>参数</a></li></ol></li><li><a href=#准备工作>准备工作</a><ol><li><a href=#驱动>驱动</a></li></ol></li><li><a href=#点灯串口通讯输出与监听>点灯&串口通讯输出与监听</a><ol><li><a href=#一些困惑>一些困惑</a></li><li><a href=#点亮外部引脚led>点亮外部引脚LED</a></li></ol></li></ol></nav></div></section></aside><main class="main full-width"><article class="has-image main-article"><header class=article-header><div class=article-image><a href=/posts/2025/02/10/esp32s3wroom1.html/><img src=/posts/2025/02/10/esp32s3wroom1.html/turnonzlight_hu_11fa0b0df67456bf.jpg srcset="/posts/2025/02/10/esp32s3wroom1.html/turnonzlight_hu_11fa0b0df67456bf.jpg 800w, /posts/2025/02/10/esp32s3wroom1.html/turnonzlight_hu_6729eb7ae676e254.jpg 1600w" width=800 height=804 loading=lazy alt="Featured image of post 【第一块开发板】记录esp32s3wroom在platformIO的配置与点亮LED"></a></div><div class=article-details><header class=article-category><a href=/categories/%E7%A1%AC%E4%BB%B6/>硬件</a></header><div class=article-title-wrapper><h2 class=article-title><a href=/posts/2025/02/10/esp32s3wroom1.html/>【第一块开发板】记录esp32s3wroom在platformIO的配置与点亮LED</a></h2><h3 class=article-subtitle>新坑！记录下我的第一块开发板esp32s3wroom配置测试点亮乐一地等等...</h3></div><footer class=article-time><div><svg class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M11.795 21H5a2 2 0 01-2-2V7a2 2 0 012-2h12a2 2 0 012 2v4"/><circle cx="18" cy="18" r="4"/><path d="M15 3v4"/><path d="M7 3v4"/><path d="M3 11h16"/><path d="M18 16.496V18l1 1"/></svg>
+<time class=article-time--published>Feb 10, 2025</time></div><div><svg class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/></svg>
+<time class=article-time--reading>阅读时长: 3 分钟</time></div></footer></div></header><section class=article-content><iframe frameborder=no border=0 marginwidth=0 marginheight=0 width=330 height=86 src="//music.163.com/outchain/player?type=2&id=34923690&auto=0&height=66"></iframe><p>电耗室。</p><h2 id=前言>前言</h2><p><strong>本文偏向于小白记录生活，大佬轻喷</strong></p><p>为了得到大创课那点学分，决定做个软硬件结合的物联网项目。软件方面比较好说，但是硬件方面本人是从来没有接触过的，先前最多就是刷刷固件，修修小家电之类的。故决定踏入这个未知的领域，技多不压身嘛~</p><h3 id=购入>购入</h3><p>PDD花了44.3购入了一块<code>ESP32-S3 N16R8</code>开发板和一个<code>OV2640</code>摄像头（因为大创项目大概要涉及到WiFi通讯和视频传输，所以先买来练练手），苦等一个星期终于到货，迫不及待就开始操作。</p><h3 id=参数>参数</h3><div class=table-wrapper><table><thead><tr><th>类别</th><th>参数</th></tr></thead><tbody><tr><td><strong>主控芯片</strong></td><td>ESP32-S3 (双核 LX7 32 位处理器，主频 240 MHz)</td></tr><tr><td><strong>开发板品牌</strong></td><td>freenova</td></tr><tr><td><strong>存储配置</strong></td><td>- Flash: 16 MB<br>- PSRAM: 8 MB</td></tr><tr><td><strong>开发环境</strong></td><td>VSCode/PlatformIO</td></tr></tbody></table></div><h2 id=准备工作>准备工作</h2><p>VSCode里安装<code>PlatformIO</code>拓展，配置信息：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-ini data-lang=ini><span class=line><span class=cl><span class=na>platform</span> <span class=o>=</span> <span class=s>espressif32</span>
+</span></span><span class=line><span class=cl><span class=na>board</span> <span class=o>=</span> <span class=s>esp32-s3-devkitc-1</span>
+</span></span><span class=line><span class=cl><span class=na>framework</span> <span class=o>=</span> <span class=s>arduino</span>
+</span></span></code></pre></td></tr></table></div></div><p>等待漫长的环境配置&mldr;</p><p>因为<code>esp32-s3-devkitc-1</code>默认存储信息和这个开发板不符，所以修改<code>platformio.ini</code>，加入以下内容:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-ini data-lang=ini><span class=line><span class=cl><span class=c1>; 指定为16MB的FLASH分区表</span>
+</span></span><span class=line><span class=cl><span class=na>board_build.arduino.partitions</span> <span class=o>=</span> <span class=s>default_16MB.csv</span>
+</span></span><span class=line><span class=cl><span class=c1>; 指定FLASH和PSRAM的运行模式</span>
+</span></span><span class=line><span class=cl><span class=na>board_build.arduino.memory_type</span> <span class=o>=</span> <span class=s>qio_opi</span>
+</span></span><span class=line><span class=cl><span class=c1>; 预定义宏，启用PSRAM</span>
+</span></span><span class=line><span class=cl><span class=na>build_flags</span> <span class=o>=</span> <span class=s>-DBOARD_HAS_PSRAM</span>
+</span></span><span class=line><span class=cl><span class=c1>; 指定FLASH容量为16MB</span>
+</span></span><span class=line><span class=cl><span class=na>board_upload.flash_size</span> <span class=o>=</span> <span class=s>16MB</span>
+</span></span></code></pre></td></tr></table></div></div><blockquote><p>来自：<a class=link href=https://blog.csdn.net/CD391/article/details/139878023 target=_blank rel=noopener>CSDN</a></p></blockquote><h3 id=驱动>驱动</h3><p><code>CH343</code>:<a class=link href="http://www.wch-ic.com/search?t=all&amp;q=ch343" target=_blank rel=noopener>http://www.wch-ic.com/search?t=all&amp;q=ch343</a></p><p>完成预安装后连接板子就完成了驱动的安装。</p><h2 id=点灯串口通讯输出与监听>点灯&串口通讯输出与监听</h2><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-cpp data-lang=cpp><span class=line><span class=cl><span class=cp>#include</span> <span class=cpf>&lt;Arduino.h&gt;</span><span class=cp>
+</span></span></span><span class=line><span class=cl><span class=cp></span>
+</span></span><span class=line><span class=cl><span class=cp>#define LED_BUILTIN 2
+</span></span></span><span class=line><span class=cl><span class=cp></span><span class=c1>// 定义LED GPIO引脚为2
+</span></span></span><span class=line><span class=cl><span class=c1></span>
+</span></span><span class=line><span class=cl><span class=c1>// put function declarations here:
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kt>int</span> <span class=nf>myFunction</span><span class=p>(</span><span class=kt>int</span><span class=p>,</span> <span class=kt>int</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kt>void</span> <span class=nf>setup</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=c1>// put your setup code here, to run once:
+</span></span></span><span class=line><span class=cl><span class=c1></span>  <span class=kt>int</span> <span class=n>result</span> <span class=o>=</span> <span class=n>myFunction</span><span class=p>(</span><span class=mi>2</span><span class=p>,</span> <span class=mi>3</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=n>pinMode</span><span class=p>(</span><span class=n>LED_BUILTIN</span><span class=p>,</span> <span class=n>OUTPUT</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=c1>// 设置LED为输出模式
+</span></span></span><span class=line><span class=cl><span class=c1></span>  <span class=n>Serial</span><span class=p>.</span><span class=n>begin</span><span class=p>(</span><span class=mi>115200</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=c1>// 初始化串口通信为115200
+</span></span></span><span class=line><span class=cl><span class=c1></span>  <span class=n>delay</span><span class=p>(</span><span class=mi>1000</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=n>Serial</span><span class=p>.</span><span class=n>printf</span><span class=p>(</span><span class=s>&#34;Chip Model: %s</span><span class=se>\n</span><span class=s>&#34;</span><span class=p>,</span> <span class=n>ESP</span><span class=p>.</span><span class=n>getChipModel</span><span class=p>());</span>
+</span></span><span class=line><span class=cl>  <span class=n>Serial</span><span class=p>.</span><span class=n>printf</span><span class=p>(</span><span class=s>&#34;Flash Size: %d MB</span><span class=se>\n</span><span class=s>&#34;</span><span class=p>,</span> <span class=n>ESP</span><span class=p>.</span><span class=n>getFlashChipSize</span><span class=p>()</span> <span class=o>/</span> <span class=p>(</span><span class=mi>1024</span> <span class=o>*</span> <span class=mi>1024</span><span class=p>));</span>
+</span></span><span class=line><span class=cl>  <span class=n>Serial</span><span class=p>.</span><span class=n>printf</span><span class=p>(</span><span class=s>&#34;PSRAM Size: %d MB</span><span class=se>\n</span><span class=s>&#34;</span><span class=p>,</span> <span class=n>ESP</span><span class=p>.</span><span class=n>getPsramSize</span><span class=p>()</span> <span class=o>/</span> <span class=p>(</span><span class=mi>1024</span> <span class=o>*</span> <span class=mi>1024</span><span class=p>));</span>
+</span></span><span class=line><span class=cl>  <span class=c1>// 输出芯片信息
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kt>void</span> <span class=nf>loop</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=c1>// put your main code here, to run repeatedly:
+</span></span></span><span class=line><span class=cl><span class=c1></span>  <span class=n>digitalWrite</span><span class=p>(</span><span class=n>LED_BUILTIN</span><span class=p>,</span> <span class=n>HIGH</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=n>delay</span><span class=p>(</span><span class=mi>1000</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=n>digitalWrite</span><span class=p>(</span><span class=n>LED_BUILTIN</span><span class=p>,</span> <span class=n>LOW</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=n>delay</span><span class=p>(</span><span class=mi>1000</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=c1>// 高电平亮，低电平熄，间隔一秒
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>// put function definitions here:
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=kt>int</span> <span class=nf>myFunction</span><span class=p>(</span><span class=kt>int</span> <span class=n>x</span><span class=p>,</span> <span class=kt>int</span> <span class=n>y</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=k>return</span> <span class=n>x</span> <span class=o>+</span> <span class=n>y</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>串口通讯需在<code>platformio.ini</code>中添加：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-ini data-lang=ini><span class=line><span class=cl><span class=na>monitor_speed</span> <span class=o>=</span> <span class=s>115200</span>
+</span></span></code></pre></td></tr></table></div></div><p>左下角<code>upload</code>（→）后，再点击<code>serial monitor</code>（插头），即可看到输出：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-gdscript3 data-lang=gdscript3><span class=line><span class=cl><span class=n>ESP</span><span class=o>-</span><span class=n>ROM</span><span class=p>:</span><span class=n>esp32s3</span><span class=o>-</span><span class=mi>20210327</span>
+</span></span><span class=line><span class=cl><span class=n>Build</span><span class=p>:</span><span class=n>Mar</span> <span class=mi>27</span> <span class=mi>2021</span>
+</span></span><span class=line><span class=cl><span class=n>rst</span><span class=p>:</span><span class=mh>0x1</span> <span class=p>(</span><span class=n>POWERON</span><span class=p>),</span><span class=n>boot</span><span class=p>:</span><span class=mh>0x8</span> <span class=p>(</span><span class=n>SPI_FAST_FLASH_BOOT</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>SPIWP</span><span class=p>:</span><span class=mh>0xee</span>
+</span></span><span class=line><span class=cl><span class=n>mode</span><span class=p>:</span><span class=n>DIO</span><span class=p>,</span> <span class=n>clock</span> <span class=n>div</span><span class=p>:</span><span class=mi>1</span>
+</span></span><span class=line><span class=cl><span class=nb>load</span><span class=p>:</span><span class=mh>0x3fce3808</span><span class=p>,</span><span class=n>len</span><span class=p>:</span><span class=mh>0x4bc</span>
+</span></span><span class=line><span class=cl><span class=nb>load</span><span class=p>:</span><span class=mh>0x403c9700</span><span class=p>,</span><span class=n>len</span><span class=p>:</span><span class=mh>0xbd8</span>
+</span></span><span class=line><span class=cl><span class=nb>load</span><span class=p>:</span><span class=mh>0x403cc700</span><span class=p>,</span><span class=n>len</span><span class=p>:</span><span class=mh>0x2a0c</span>
+</span></span><span class=line><span class=cl><span class=n>entry</span> <span class=mh>0x403c98d0</span>
+</span></span><span class=line><span class=cl><span class=n>Chip</span> <span class=n>Model</span><span class=p>:</span> <span class=n>ESP32</span><span class=o>-</span><span class=n>S3</span>
+</span></span><span class=line><span class=cl><span class=n>Flash</span> <span class=n>Size</span><span class=p>:</span> <span class=mi>16</span> <span class=n>MB</span>
+</span></span><span class=line><span class=cl><span class=n>PSRAM</span> <span class=n>Size</span><span class=p>:</span> <span class=mi>7</span> <span class=n>MB</span>
+</span></span></code></pre></td></tr></table></div></div><h3 id=一些困惑>一些困惑</h3><p>开发板手册直接写了LED—IO2的GPIO是2，但是看开发板定义图里GPIO2定义的是ON那个LED，上传代码后亮的却是IO2的LED（这个LED在定义图里没有定义），不太明白。。</p><p>还有<code>PSRAM</code>理论上来说应该是8MB，不知道为啥输出是7MB。。</p><h3 id=点亮外部引脚led>点亮外部引脚LED</h3><p>其实是一个原理，设置某个引脚是高电平，然后和LED串联起来，最后接到GND就行。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-cpp data-lang=cpp><span class=line><span class=cl><span class=p>...</span>
+</span></span><span class=line><span class=cl><span class=c1>// 定义外接LED针脚为GPIO12
+</span></span></span><span class=line><span class=cl><span class=c1></span><span class=cp>#define LED_OUTBRD 12
+</span></span></span><span class=line><span class=cl><span class=cp></span>
+</span></span><span class=line><span class=cl><span class=kt>void</span> <span class=n>setup</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=c1>// 设置GPIO12为输出模式
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=n>pinMode</span><span class=p>(</span><span class=n>LED_OUTBRD</span><span class=p>,</span> <span class=n>OUTPUT</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=c1>// 设置高电平点亮LED
+</span></span></span><span class=line><span class=cl><span class=c1></span>    <span class=n>digitalWrite</span><span class=p>(</span><span class=n>LED_OUTBRD</span><span class=p>,</span> <span class=n>HIGH</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=p>...</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=p>...</span>
+</span></span></code></pre></td></tr></table></div></div><p>接了1k的电阻防止烧坏LED。</p><p><img src=/posts/2025/02/10/esp32s3wroom1.html/turnonzlight.jpg width=853 height=857 srcset="/posts/2025/02/10/esp32s3wroom1.html/turnonzlight_hu_970e4fe56bd2bd60.jpg 480w, /posts/2025/02/10/esp32s3wroom1.html/turnonzlight_hu_ce2cac76025680d1.jpg 1024w" loading=lazy alt="Turn ON the light！" class=gallery-image data-flex-grow=99 data-flex-basis=238px></p><p>还写了个简单的程序接入了deepseek的api，等后面再说吧，懒= =。</p></section><footer class=article-footer><section class=article-copyright><svg class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentcolor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><path d="M14.5 9a3.5 4 0 100 6"/></svg>
+<span>Licensed under CC BY-NC-SA 4.0</span></section></footer></article><aside class=related-content--wrapper><h2 class=section-title>相关文章</h2><div class=related-content><div class="flex article-list--tile"><article class=has-image><a href=/posts/2025/02/13/esp32s3-platformio-i2c-u8g2.html/><div class=article-image><img src=/posts/2025/02/13/esp32s3-platformio-i2c-u8g2.html/ciallo.b698fbe1af036f34617ab6ea4944bef1_hu_4439ccdfb5434060.png width=250 height=150 loading=lazy alt="Featured image of post 【第一块开发板】记录esp32在platformIO通过U8g2库点亮i2c协议OLED屏幕的全过程" data-key=esp32s3-platformio-i2c-u8g2 data-hash="md5-tpj74a8DbzRherbqSUS+8Q=="></div><div class=article-details><h2 class=article-title>【第一块开发板】记录esp32在platformIO通过U8g2库点亮i2c协议OLED屏幕的全过程</h2></div></a></article><article class=has-image><a href=/posts/2024/06/09/pczhuangji.html/><div class=article-image><img src=/posts/2024/06/09/pczhuangji.html/004.3562d6d3b5ca9b768e37fac39dc9b65b_hu_e569f475b6140e4d.jpg width=250 height=150 loading=lazy alt="Featured image of post 第一次捡垃圾装PC&我的电脑历程" data-key=pczhuangji data-hash="md5-NWLW07XKm3aON/rDncm2Ww=="></div><div class=article-details><h2 class=article-title>第一次捡垃圾装PC&我的电脑历程</h2></div></a></article><article class=has-image><a href=/posts/2023/10/14/my_first_eironexperence.html/><div class=article-image><img src=/posts/2023/10/14/my_first_eironexperence.html/013.75c2a2b562710acab1406f94e34aa54d_hu_a10095ed95073e0a.png width=250 height=150 loading=lazy alt="Featured image of post 记：小白初试电烙铁之鼠标微动更换" data-key=my_first_EironExperence data-hash="md5-dcKitWJxCsqxQG+U40qlTQ=="></div><div class=article-details><h2 class=article-title>记：小白初试电烙铁之鼠标微动更换</h2></div></a></article><article class=has-image><a href=/posts/2023/02/02/xiaomi-xaga-%E8%B4%AD%E6%9C%BA%E4%B8%8E%E4%BD%BF%E7%94%A8%E4%BD%93%E9%AA%8C.html/><div class=article-image><img src=/posts/2023/02/02/xiaomi-xaga-%E8%B4%AD%E6%9C%BA%E4%B8%8E%E4%BD%BF%E7%94%A8%E4%BD%93%E9%AA%8C.html/003.001e583309262a52fffee4b7ca0e20fe_hu_4fa39afea17d1524.jpg width=250 height=150 loading=lazy alt="Featured image of post Xiaomi XAGA 购机与使用体验" data-hash="md5-AB5YMwkmKlL//uS3yg4g/g=="></div><div class=article-details><h2 class=article-title>Xiaomi XAGA 购机与使用体验</h2></div></a></article><article><a href=/posts/2022/03/21/tianyigwpj.html/><div class=article-details><h2 class=article-title>记:天翼网关ZXHN F650V2.0.0P1T3超管破解</h2></div></a></article></div></div></aside><div id=gitalk-container></div><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.css><script src=https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.min.js></script><script src=https://cdn.jsdelivr.net/npm/blueimp-md5@2.18.0/js/md5.min.js></script><script>const gitalk=new Gitalk({clientID:"107ccf93ebf75ad753bf",clientSecret:"059c255171eb214ab9f59249dc687cfb6513f713",repo:"wuko233.github.io",owner:"wuko233",admin:["[wuko233]"],distractionFreeMode:!1,id:md5(location.pathname),proxy:null});(function(){if(["localhost","127.0.0.1"].indexOf(window.location.hostname)!=-1){document.getElementById("gitalk-container").innerHTML="Gitalk comments not available by default when the website is previewed locally.";return}gitalk.render("gitalk-container")})()</script><footer class=site-footer><section class=copyright>&copy;
+2020 -
+2025 wuko's blog</section><section class=powerby>本站总访问量<span id=busuanzi_value_site_pv>0</span>次<br><a href="https://icp.gov.moe/?keyword=20220237" target=_blank>萌ICP备20220237号</a><script async src=//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js></script><br>使用 <a href=https://gohugo.io/ target=_blank rel=noopener>Hugo</a> 构建<br>主题 <b><a href=https://github.com/CaiJimmy/hugo-theme-stack target=_blank rel=noopener data-version=3.30.0>Stack</a></b> 由 <a href=https://jimmycai.com target=_blank rel=noopener>Jimmy</a> 设计</section></footer><div class=pswp tabindex=-1 role=dialog aria-hidden=true><div class=pswp__bg></div><div class=pswp__scroll-wrap><div class=pswp__container><div class=pswp__item></div><div class=pswp__item></div><div class=pswp__item></div></div><div class="pswp__ui pswp__ui--hidden"><div class=pswp__top-bar><div class=pswp__counter></div><button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+<button class="pswp__button pswp__button--share" title=Share></button>
+<button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+<button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button><div class=pswp__preloader><div class=pswp__preloader__icn><div class=pswp__preloader__cut><div class=pswp__preloader__donut></div></div></div></div></div><div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap"><div class=pswp__share-tooltip></div></div><button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+</button>
+<button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button><div class=pswp__caption><div class=pswp__caption__center></div></div></div></div></div><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo=" crossorigin=anonymous defer></script><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU=" crossorigin=anonymous defer></script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css crossorigin=anonymous><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css crossorigin=anonymous></main></div><script src=https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z+KMkF24hUW8WePSA9HM=" crossorigin=anonymous></script><script type=text/javascript src=/ts/main.1e9a3bafd846ced4c345d084b355fb8c7bae75701c338f8a1f8a82c780137826.js defer></script><script>(function(){const e=document.createElement("link");e.href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap",e.type="text/css",e.rel="stylesheet",document.head.appendChild(e)})()</script></body></html>
