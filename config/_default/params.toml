@@ -81,7 +81,7 @@ enabled = true
 ## Comments
 [comments]
 enabled = true
-provider = "gitalk"
+provider = "giscus"
 
 [comments.disqusjs]
 shortname = ""
@@ -132,13 +132,13 @@ serverName = "cactus.chat"
 siteName = "wuko-blog-comment"
 
 [comments.giscus]
-repo = ""
-repoID = ""
-category = ""
-categoryID = ""
-mapping = ""
-lightTheme = ""
-darkTheme = ""
+repo = "wuko233/wuko233.github.io"
+repoID = "MDEwOlJlcG9zaXRvcnk0MDAxMzU0ODE="
+category = "Announcements"
+categoryID = "DIC_kwDOF9mVOc4CnNtv"
+mapping = "pathname"
+lightTheme = "light_high_contrast"
+darkTheme = "noborder_dark"
 reactionsEnabled = 1
 emitMetadata = 0
 
