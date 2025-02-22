@@ -136,7 +136,7 @@ repo = "wuko233/wuko233.github.io"
 repoID = "MDEwOlJlcG9zaXRvcnk0MDAxMzU0ODE="
 category = "Announcements"
 categoryID = "DIC_kwDOF9mVOc4CnNtv"
-mapping = "pathname"
+mapping = "title"
 lightTheme = "light_high_contrast"
 darkTheme = "noborder_dark"
 reactionsEnabled = 1
