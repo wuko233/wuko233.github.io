@@ -22,7 +22,7 @@ menu:
 > 头像来自[猫豆腐老师(ねことうふ)](https://x.com/nekotou)的[深夜雀食堂](https://www.pixiv.net/user/159912/series/34515)中的[Ibuki Suika](https://www.thwiki.cc/%E4%BC%8A%E5%90%B9%E8%90%83%E9%A6%99)，由AI上色。
 
 ## ~~丢人~~技术栈
-
+    
 会用Python、C，在学Java，能写前端，在接触网络安全，玩嵌入式是我的兴趣。
 
 总结就是**啥都不行**，毕竟我学习这些最大的动力就是**兴趣**。

@@ -146,8 +146,8 @@ emitMetadata = 0
 owner = "wuko233"
 admin = "[wuko233]"
 repo = "wuko233.github.io"
-clientID = "107ccf93ebf75ad753bf"
-clientSecret = "059c255171eb214ab9f59249dc687cfb6513f713"
+clientID = "Ov23liWO1TjxHllU3nsS"
+clientSecret = "d8ae4bc15626d3585eac5488dff853e8b9c357a7"
 
 [comments.cusdis]
 host = ""
