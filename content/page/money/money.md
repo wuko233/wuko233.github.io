@@ -1,5 +1,5 @@
 ---
-title: "捐赠"
+title: "Donate"
 date: 2025-02-24
 layout: "about"
 slug: "money"
