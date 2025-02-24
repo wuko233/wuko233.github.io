@@ -5,7 +5,7 @@ layout: "about"
 slug: "money"
 menu:
     main:
-        weight: 2
+        weight: 10
         params:
             icon: donate
         
