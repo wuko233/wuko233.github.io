@@ -225,3 +225,159 @@ print(flag)
 ````
 
 得到：`flag{QianQiuWanDai_YiTongJiangHu}`
+
+## reverse3
+
+````c
+nt __cdecl main_0(int argc, const char **argv, const char **envp)
+{
+  size_t v3; // eax
+  const char *v4; // eax
+  size_t v5; // eax
+  char v7; // [esp+0h] [ebp-188h]
+  char v8; // [esp+0h] [ebp-188h]
+  signed int j; // [esp+DCh] [ebp-ACh]
+  int i; // [esp+E8h] [ebp-A0h]
+  signed int v11; // [esp+E8h] [ebp-A0h]
+  char Destination[108]; // [esp+F4h] [ebp-94h] BYREF
+  char Str[28]; // [esp+160h] [ebp-28h] BYREF
+  char v14[8]; // [esp+17Ch] [ebp-Ch] BYREF
+
+  for ( i = 0; i < 100; ++i )
+  {
+    if ( (unsigned int)i >= 0x64 )
+      j____report_rangecheckfailure();
+    Destination[i] = 0;
+  }
+  sub_41132F("please enter the flag:", v7);
+  sub_411375("%20s", (char)Str);
+  v3 = j_strlen(Str);
+  v4 = (const char *)sub_4110BE(Str, v3, v14);
+  strncpy(Destination, v4, 0x28u);
+  v11 = j_strlen(Destination);
+  for ( j = 0; j < v11; ++j )
+    Destination[j] += j;
+  v5 = j_strlen(Destination);
+  if ( !strncmp(Destination, Str2, v5) )
+    sub_41132F("rigth flag!\n", v8);
+  else
+    sub_41132F("wrong flag!\n", v8);
+  return 0;
+}
+````
+
+先查看`Str2`变量，得到值`e3nifIH9b_C@n@dH`，然后一步一步往上推。
+
+````c
+  for ( j = 0; j < v11; ++j )
+    Destination[j] += j;
+````
+
+`Destination`为输入的flag后经过处理的字符串，在这个循环中又经过了位移处理：
+
+每个字符向右偏移它位置的值。
+
+举个例子就好理解了：
+
+假设`Destination`为`{'A', 'B'}`，那么`A = A + 0`(A位于0)，`B = B + 1 = C`(B位于1，B+1为C，ASCII码)。
+
+AI写个逆向脚本：
+
+````python
+original_str = "e3nifIH9b_C@n@dH"
+result_str = ""
+index = 0
+
+for char in original_str:
+    # 获取ASCII码 → 减索引 → 转回字符
+    decoded_char = chr(ord(char) - index)
+    result_str += decoded_char
+    index += 1
+
+print(result_str) #e2lfbDB2ZV95b3V9
+````
+
+`e2lfbDB2ZV95b3V9`
+
+然后继续溯源，`sub_4110BE()`返回`sub_411AB0()`函数处理后的内容，先查看它传入411了什么参数：
+
+````c
+char v14[8];
+v4 = (const char *)sub_4110BE(Str, v3, (int *)v14);
+````
+
+````c
+void *__cdecl sub_411AB0(char *a1, unsigned int a2, int *a3)
+{
+  int v4; // [esp+D4h] [ebp-38h]
+  int v5; // [esp+D4h] [ebp-38h]
+  int v6; // [esp+D4h] [ebp-38h]
+  int v7; // [esp+D4h] [ebp-38h]
+  int i; // [esp+E0h] [ebp-2Ch]
+  unsigned int v9; // [esp+ECh] [ebp-20h]
+  int v10; // [esp+ECh] [ebp-20h]
+  int v11; // [esp+ECh] [ebp-20h]
+  void *v12; // [esp+F8h] [ebp-14h]
+  char *v13; // [esp+104h] [ebp-8h]
+
+  if ( !a1 || !a2 )
+    return 0;
+  v9 = a2 / 3;
+  if ( (int)(a2 / 3) % 3 )
+    ++v9;
+  v10 = 4 * v9;
+  *a3 = v10;
+  v12 = malloc(v10 + 1);
+  if ( !v12 )
+    return 0;
+  j_memset(v12, 0, v10 + 1);
+  v13 = a1;
+  v11 = a2;
+  v4 = 0;
+  while ( v11 > 0 )
+  {
+    byte_41A144[2] = 0;
+    byte_41A144[1] = 0;
+    byte_41A144[0] = 0;
+    for ( i = 0; i < 3 && v11 >= 1; ++i )
+    {
+      byte_41A144[i] = *v13;
+      --v11;
+      ++v13;
+    }
+    if ( !i )
+      break;
+    switch ( i )
+    {
+      case 1:
+        *((_BYTE *)v12 + v4) = aAbcdefghijklmn[(int)(unsigned __int8)byte_41A144[0] >> 2];
+        v5 = v4 + 1;
+        *((_BYTE *)v12 + v5) = aAbcdefghijklmn[((byte_41A144[1] & 0xF0) >> 4) | (16 * (byte_41A144[0] & 3))];
+        *((_BYTE *)v12 + ++v5) = aAbcdefghijklmn[64];
+        *((_BYTE *)v12 + ++v5) = aAbcdefghijklmn[64];
+        v4 = v5 + 1;
+        break;
+      case 2:
+        *((_BYTE *)v12 + v4) = aAbcdefghijklmn[(int)(unsigned __int8)byte_41A144[0] >> 2];
+        v6 = v4 + 1;
+        *((_BYTE *)v12 + v6) = aAbcdefghijklmn[((byte_41A144[1] & 0xF0) >> 4) | (16 * (byte_41A144[0] & 3))];
+        *((_BYTE *)v12 + ++v6) = aAbcdefghijklmn[((byte_41A144[2] & 0xC0) >> 6) | (4 * (byte_41A144[1] & 0xF))];
+        *((_BYTE *)v12 + ++v6) = aAbcdefghijklmn[64];
+        v4 = v6 + 1;
+        break;
+      case 3:
+        *((_BYTE *)v12 + v4) = aAbcdefghijklmn[(int)(unsigned __int8)byte_41A144[0] >> 2];
+        v7 = v4 + 1;
+        *((_BYTE *)v12 + v7) = aAbcdefghijklmn[((byte_41A144[1] & 0xF0) >> 4) | (16 * (byte_41A144[0] & 3))];
+        *((_BYTE *)v12 + ++v7) = aAbcdefghijklmn[((byte_41A144[2] & 0xC0) >> 6) | (4 * (byte_41A144[1] & 0xF))];
+        *((_BYTE *)v12 + ++v7) = aAbcdefghijklmn[byte_41A144[2] & 0x3F];
+        v4 = v7 + 1;
+        break;
+    }
+  }
+  *((_BYTE *)v12 + v4) = 0;
+  return v12;
+}
+````
+
+未完待续...
