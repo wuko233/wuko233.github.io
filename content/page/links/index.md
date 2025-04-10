@@ -1,7 +1,7 @@
 ---
 title: Links
 links:
-  - title: 白色乐土
+  - title: 白色乐土 - aCuteKiller的博客
     description: 热爱技术与设计，追求极致的用户体验,喜欢分享开发经验和生活见闻。
     website: http://www.baifun.top/
     image: mako-1-CgWecjlm.jpg
