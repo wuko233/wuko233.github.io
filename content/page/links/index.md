@@ -14,4 +14,11 @@ menu:
 comments: true
 ---
 
+````yaml
+title: wuko's blog
+description: 从零开始，由心而发。欢迎共同交流学习！
+website: https://blog.wuko.top
+image: https://blog.wuko.top/favicon.png
+````
+
 欢迎留言交换友链OvO！
