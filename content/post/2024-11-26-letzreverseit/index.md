@@ -380,4 +380,10 @@ void *__cdecl sub_411AB0(char *a1, unsigned int a2, int *a3)
 }
 ````
 
-未完待续...
+AI分析，这是一个`Base64编码函数`:
+
+````c
+char* base64_encode(const void* input, size_t len, int* out_len);
+````
+
+解码得到：`{i_l0ve_you}`
