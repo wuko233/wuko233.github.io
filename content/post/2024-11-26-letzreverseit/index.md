@@ -387,3 +387,11 @@ char* base64_encode(const void* input, size_t len, int* out_len);
 ````
 
 解码得到：`{i_l0ve_you}`
+
+## helloword
+
+下载，发现是安卓逆向，同样可以用`IDA Pro`解决：
+
+新建项目，拖入主类`classes.dex`，加载过后，查看所有字符串`Shift+F12`，再接一个`Ctrl+F`查找，输入flag，找到：
+
+`flag{7631a988259a00816deda84afb29430a}`
