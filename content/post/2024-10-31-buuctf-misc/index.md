@@ -1,5 +1,5 @@
 ---
-title: 【更新中】buuctf杂项misc解密记录
+title: 【更新中】杂项misc解密记录
 date: 2024-10-31
 slug: buuctf-misc
 image: cover.png
@@ -624,3 +624,24 @@ with open('./base64.txt', 'rb') as f:
 ````
 
 `flag{6aseb4_f33!}`
+
+## [第五空间 2021]alpha10
+
+`foremost`提取文件，得到一张jpg一张png，推测双图盲水印：
+
+随波逐流没反应。。。用下面这个仓库：
+
+(BlindWaterMark)[https://github.com/chishaxie/BlindWaterMark]
+
+安装依赖后执行：
+
+````cmd
+PS D:\CTF\Tools\BlindWaterMark> python bwmforpy3.py decode .\alpha0\00001537.png .\alpha0\00001404.jpg .\alpha0\outwm.png
+image<.\alpha0\00001537.png> + image(encoded)<.\alpha0\00001404.jpg> -> watermark<.\alpha0\outwm.png>
+````
+
+得到：
+
+![outwm](outwm.png)
+
+`flag{XqAe3QzK2ehD5fWv8jfBitPqHUw0}`
