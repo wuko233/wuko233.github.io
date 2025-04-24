@@ -1,7 +1,7 @@
 ---
 title: ctf reverse解题+学习
 date: 2024-11-26
-description: 小学就接触的项目（指安卓逆向破解游戏XD）
+description: 详细解题过程与心得。小学就接触的项目（指安卓逆向破解游戏XD
 slug: letzreverseit
 image: cover.jpg
 tag: 
@@ -14,7 +14,9 @@ categories:
 
 ---
 
-## easyre
+> [平台]题目
+
+## [BUU]easyre
 
 IDA pro查看伪代码快捷键`F5`
 
@@ -36,7 +38,7 @@ int __fastcall main(int argc, const char **argv, const char **envp)
 
 EZ，`flag{this_Is_a_EaSyRe}`
 
-## reverse1
+## [BUU]reverse1
 
 IDA Pro查看字符串类型快捷键：`Shift + F12`
 
@@ -83,7 +85,7 @@ for ( j = 0; ; ++j )
 
 双击str2，可以看到str2是`{hello_world}`，那么flag即为：`{hell0_w0rld}`
 
-## reverse2
+## [BUU]reverse2
 
 一样的步骤，F5分析main:
 
@@ -119,7 +121,7 @@ for ( i = 0; i <= strlen(&flag); ++i )
 
 所以flag处理前是`{hacking_for_fun}`，处理后就是：`{hack1ng_fo1_fun}`
 
-## 内涵的软件
+## [BUU]内涵的软件
 
 `shift + F12`秒了...
 
@@ -167,7 +169,7 @@ int __cdecl main_0(int argc, const char **argv, const char **envp)
 
 定义了字符串v5但是没有使用，所以是`忘记把变量写进来了`
 
-## 新年快乐
+## [BUU]新年快乐
 
 `DIE`查壳：UPX(3.91)[NRV,best]
 
@@ -187,7 +189,7 @@ else
 
 得到了`HappyNewYear!`
 
-## xor
+## [BUU]xor
 
 ````c
 memset(__b, 0, 0x100uLL);
@@ -226,7 +228,7 @@ print(flag)
 
 得到：`flag{QianQiuWanDai_YiTongJiangHu}`
 
-## reverse3
+## [BUU]reverse3
 
 ````c
 nt __cdecl main_0(int argc, const char **argv, const char **envp)
@@ -388,10 +390,161 @@ char* base64_encode(const void* input, size_t len, int* out_len);
 
 解码得到：`{i_l0ve_you}`
 
-## helloword
+## [BUU]helloword
 
 下载，发现是安卓逆向，同样可以用`IDA Pro`解决：
 
 新建项目，拖入主类`classes.dex`，加载过后，查看所有字符串`Shift+F12`，再接一个`Ctrl+F`查找，输入flag，找到：
 
 `flag{7631a988259a00816deda84afb29430a}`
+
+## [BUU]不一样的flag
+
+找到主函数：
+
+````c
+int __cdecl __noreturn main(int argc, const char **argv, const char **envp)
+{
+  _BYTE v3[29]; // [esp+17h] [ebp-35h] BYREF
+  int v4; // [esp+34h] [ebp-18h]
+  int v5; // [esp+38h] [ebp-14h] BYREF
+  int i; // [esp+3Ch] [ebp-10h]
+  _BYTE v7[12]; // [esp+40h] [ebp-Ch] BYREF
+
+  __main();
+  v3[26] = 0;
+  *&v3[27] = 0;
+  v4 = 0;
+  strcpy(v3, "*11110100001010000101111#");
+  while ( 1 )
+  {
+    puts("you can choose one action to execute");
+    puts("1 up");
+    puts("2 down");
+    puts("3 left");
+    printf("4 right\n:");
+    scanf("%d", &v5);
+    if ( v5 == 2 )
+    {
+      ++*&v3[25];
+    }
+    else if ( v5 > 2 )
+    {
+      if ( v5 == 3 )
+      {
+        --v4;
+      }
+      else
+      {
+        if ( v5 != 4 )
+LABEL_13:
+          exit(1);
+        ++v4;
+      }
+    }
+    else
+    {
+      if ( v5 != 1 )
+        goto LABEL_13;
+      --*&v3[25];
+    }
+    for ( i = 0; i <= 1; ++i )
+    {
+      if ( *&v3[4 * i + 25] >= 5u )
+        exit(1);
+    }
+    if ( v7[5 * *&v3[25] - 41 + v4] == 49 )
+      exit(1);
+    if ( v7[5 * *&v3[25] - 41 + v4] == 35 )
+    {
+      puts("\nok, the order you enter is the flag!");
+      exit(0);
+    }
+  }
+}
+````
+
+首先，它开头定义了一个字符数组`v3`，存放`*11110100001010000101111#`。
+
+对代码分析可得，在经过多次输入操作后，满足`v7[5 * *&v3[25] - 41 + v4] == 35`后，也就是`v7[5 * *&v3[25] - 41 + v4] == '#'`，输出`ok, the order you enter is the flag!`，flag即是输入的命令。
+
+
+AI分析，原来是个迷宫游戏：
+
+````c
+int __cdecl __noreturn main() {
+    char game_map[27] = "*11110100001010000101111#"; // 5x5迷宫地图
+    int current_col = 0;  // 当前列坐标
+    int current_row = 0;  // 当前行坐标 (存储在game_map[25]的位置)
+    int user_input;       // 用户输入的方向
+
+    while(1) {
+        // 打印操作选项
+        puts("1 up\n2 down\n3 left\n4 right");
+        scanf("%d", &user_input);
+
+        // 根据输入调整坐标
+        switch(user_input) {
+            case 1: current_row--; break;    // 上移
+            case 2: current_row++; break;    // 下移
+            case 3: current_col--; break;    // 左移
+            case 4: current_col++; break;    // 右移
+            default: exit(1);                // 非法输入
+        }
+
+        // 边界检查（地图范围0-4）
+        if(current_row < 0 || current_row >4 || current_col <0 || current_col >4) {
+            exit(1); // 越界
+        }
+
+        // 获取当前位置的字符
+        char current_cell = game_map[1 + 5*current_row + current_col]; // +1跳过首字符*
+
+        if(current_cell == '1') {    // 撞到障碍物
+            exit(1);
+        } else if(current_cell == '#') { // 到达终点
+            puts("Flag是你的操作序列!");
+            exit(0);
+        }
+    }
+}
+````
+
+对着箭画靶子，再来分析源代码：
+
+`*&v3[25]`即是y轴坐标，输入2执行++，1执行--
+
+`v4`即是x轴坐标，初始为零，输入3执行--，4执行++
+
+`LABEL_13`用于处理异常
+
+````c
+for ( i = 0; i <= 1; ++i )  // 边界检查
+    {
+      if ( *&v3[4 * i + 25] >= 5u ) // 等价于 v3[25 + 4*i] 大于等于5
+        exit(1); // 越界退出
+    }
+if ( v7[5 * *&v3[25] - 41 + v4] == '1' ) // 5 * 当前行 - 41 + 当前列
+      exit(1); // 撞墙退出
+if ( v7[5 * *&v3[25] - 41 + v4] == '#' )
+      //输出成功
+````
+`v7` 的地址紧接在 `v3` 之后（栈空间连续）
+
+`v7[0]` 对应 `v3[41]`（因为 `v7` 是 `_BYTE[12]`）
+
+所以v7要刻意减去41，也就是转化为v3。
+
+地图：
+
+````
+* 1 1 1 1
+0 1 0 0 0
+0 1 0 1 0
+0 0 0 1 0
+1 1 1 1 #
+````
+
+可以得到flag:
+
+`222441144222`
