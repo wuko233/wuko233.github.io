@@ -548,3 +548,43 @@ if ( v7[5 * *&v3[25] - 41 + v4] == '#' )
 可以得到flag:
 
 `222441144222`
+
+## [SWPUCTF 2021 新生赛]非常简单的逻辑题
+
+先分析一波源码：
+
+````python
+flag = 'xxxxxxxxxxxxxxxxxxxxx'
+s = 'wesyvbniazxchjko1973652048@$+-&*<>' # 秘钥
+result = ''
+for i in range(len(flag)):
+    s1 = ord(flag[i])//17  # 商
+    s2 = ord(flag[i])%17 # 余数
+    result += s[(s1+i)%34]+s[-(s2+i+1)%34]
+print(result)
+# result = 'v0b9n1nkajz@j0c4jjo3oi1h1i937b395i5y5e0e$i' 
+````
+
+暴力破解：
+
+````python
+result = 'v0b9n1nkajz@j0c4jjo3oi1h1i937b395i5y5e0e$i'
+s = 'wesyvbniazxchjko1973652048@$+-&*<>'
+flag = ''
+index = 0 # flag的索引
+
+for j in range(0, len(result), 2): # 
+    for i in range(0, 255):
+        s1 = i // 17
+        s2 = i % 17
+        ss1 = s[(s1+index)%34]
+        ss2 = s[-(s2+index+1)%34]
+        r = ss1 + ss2
+        if r == result[j:j+2]:
+            flag += chr(i)
+            index += 1
+
+print(flag)
+````
+
+输出：`NSSCTF{Fake_RERE_QAQ}`
