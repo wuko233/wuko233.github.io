@@ -382,7 +382,9 @@ payload:`/?id=999||id=1000`
 
 `ctfshow{1f31bdb8-81ae-4546-a1d2-c9af01aadb46}`
 
-## web5
+## [SWPUCTF 2021 新生赛]Do_you_know_http
 
-## [极客大挑战 2019]LoveSQL
+`hackbar`，先修改`User-Agent`为`WLLM`，转到`a.php`，要求从本地访问。
+
+添加`X-Forwarded-For`，内容`127.0.0.1`，得到flag。
 
