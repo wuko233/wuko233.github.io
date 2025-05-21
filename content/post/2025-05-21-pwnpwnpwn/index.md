@@ -20,7 +20,7 @@ categories:
 
 先用`checksec`检查下：
 
-![checksec1](./1-1.png)
+![checksec1](1-1.png)
 
 1. **RELRO**  
    `Partial` → GOT 表可写（易被 `GOT overwrite` 攻击）。`Full` 时 GOT 只读更安全。
@@ -45,7 +45,7 @@ categories:
 
 再拖到`IDA Pro`里看看:
 
-![ida1](./1-2.png)
+![ida1](1-2.png)
 
 ````c
 int __fastcall main(int argc, const char **argv, const char **envp)
@@ -61,6 +61,6 @@ int __fastcall main(int argc, const char **argv, const char **envp)
 nc ip port
 ````
 
-![nc1](./1-3.png)
+![nc1](1-3.png)
 
 发现直接连接上了，根目录就有flag，得到：`flag{b6588539-d35f-4fde-b2b9-8c56d7fb66bd}`
