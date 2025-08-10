@@ -3,7 +3,7 @@ title: 超详细教程：B站批量取关不活跃用户脚本
 date: 2025-08-10
 slug: bili-follow-cleaner
 categories: 
-    - 脚本
+    - Python
 tags: 
     - B站
     - python
