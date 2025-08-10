@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>B站 on wuko's blog</title><link>https://blog.wuko.top/tags/b%E7%AB%99/</link><description>Recent content in B站 on wuko's blog</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Sun, 10 Aug 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.wuko.top/tags/b%E7%AB%99/index.xml" rel="self" type="application/rss+xml"/><item><title>超详细教程：B站批量取关不活跃用户脚本</title><link>https://blog.wuko.top/posts/2025/08/10/bili-follow-cleaner.html/</link><pubDate>Sun, 10 Aug 2025 00:00:00 +0000</pubDate><guid>https://blog.wuko.top/posts/2025/08/10/bili-follow-cleaner.html/</guid><description>&lt;p>&lt;strong>工具名称：&lt;/strong> bili-follow-cleaner（B站关注清理器）&lt;br>
+&lt;strong>功能说明：&lt;/strong> 自动扫描B站关注列表，批量取关超过设定天数未发动态的用户&lt;br>
+&lt;strong>仓库地址：&lt;/strong> &lt;a class="link" href="https://github.com/wuko233/bili-follow-cleaner" target="_blank" rel="noopener"
+>https://github.com/wuko233/bili-follow-cleaner&lt;/a>&lt;/p>
+&lt;h2 id="-第一步安装python环境5分钟">🔰 第一步：安装Python环境（5分钟）
+&lt;/h2>&lt;blockquote>
+&lt;p>这是运行脚本的基础，就像手机需要操作系统才能运行APP&lt;/p>&lt;/blockquote>
+&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>Windows用户&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>访问&lt;a class="link" href="https://www.python.org/downloads/" target="_blank" rel="noopener"
+>Python官网&lt;/a>&lt;/li>
+&lt;li>点击黄色按钮下载 &lt;strong>Python 3.9+&lt;/strong> 版本&lt;/li>
+&lt;li>安装时务必勾选 &lt;code>Add Python to PATH&lt;/code>（重要！）&lt;/li>
+&lt;li>完成安装后，按 &lt;code>Win+R&lt;/code> 输入 &lt;code>cmd&lt;/code> 打开黑窗口&lt;/li>
+&lt;li>输入 &lt;code>python --version&lt;/code> 出现版本号即成功&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Mac用户&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>打开终端（应用程序→实用工具→终端）&lt;/li>
+&lt;li>粘贴安装命令：
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">/bin/bash -c &lt;span class="s2">&amp;#34;&lt;/span>&lt;span class="k">$(&lt;/span>curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh&lt;span class="k">)&lt;/span>&lt;span class="s2">&amp;#34;&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">brew install python@3.10
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>Linux用户&lt;/strong>&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;p>都用Linux了，不会的话罚你装十遍archOvO&lt;/p>
+&lt;hr>
+&lt;h2 id="-第二步获取脚本文件2分钟">📥 第二步：获取脚本文件（2分钟）
+&lt;/h2>&lt;ol>
+&lt;li>下载脚本压缩包 → &lt;strong>&lt;a class="link" href="https://github.com/wuko233/bili-follow-cleaner/archive/refs/heads/main.zip" target="_blank" rel="noopener"
+>点我下载（github）&lt;/a>&lt;/strong> &lt;strong>&lt;a class="link" href="http://go.wuko.top/https://github.com/wuko233/bili-follow-cleaner/archive/refs/heads/main.zip" target="_blank" rel="noopener"
+>点我下载（cf镜像，内地推荐）&lt;/a>&lt;/strong>&lt;/li>
+&lt;li>解压后得到文件夹（建议放在桌面方便查找）&lt;/li>
+&lt;li>记住文件夹路径（如 &lt;code>C:\Users\你的名字\Desktop\bili-follow-cleaner&lt;/code>）&lt;/li>
+&lt;/ol>
+&lt;hr>
+&lt;h2 id="-第三步安装必要组件3分钟">⚙ 第三步：安装必要组件（3分钟）
+&lt;/h2>&lt;ol>
+&lt;li>
+&lt;p>打开命令提示符（Windows）或终端（Mac）&lt;/p>
+&lt;/li>
+&lt;li>
+&lt;p>输入安装命令（逐行执行）：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 安装基础组件&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">pip install httpx requests
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="c1"># 安装B站API库&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">pip install bilibili-api
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;/li>
+&lt;/ol>
+&lt;hr>
+&lt;h2 id="-第四步运行脚本首次需登录">🚀 第四步：运行脚本（首次需登录）
+&lt;/h2>&lt;ol>
+&lt;li>在脚本文件夹空白处 &lt;strong>按住Shift+右键&lt;/strong> → 选择&amp;quot;在此处打开命令窗口&amp;quot;&lt;/li>
+&lt;li>输入启动命令：
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-bash" data-lang="bash">&lt;span class="line">&lt;span class="cl">python main.py
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;/li>
+&lt;li>&lt;strong>扫码登录流程：&lt;/strong>
+&lt;ul>
+&lt;li>终端会出现二维码 → 用B站APP扫码&lt;/li>
+&lt;li>登录成功后自动保存凭证（生成 &lt;code>cookies.json&lt;/code> 文件）&lt;/li>
+&lt;li>下次运行无需重复登录&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ol>
+&lt;hr>
+&lt;h2 id="-第五步参数设置指南关键步骤">⚡ 第五步：参数设置指南（关键步骤）
+&lt;/h2>&lt;p>运行后会出现配置菜单，按提示操作：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;span class="lnt">4
+&lt;/span>&lt;span class="lnt">5
+&lt;/span>&lt;span class="lnt">6
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-markdown" data-lang="markdown">&lt;span class="line">&lt;span class="cl">&lt;span class="k">1.&lt;/span> 每页爬取数量 → 默认50（直接回车）
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">2.&lt;/span> 白名单用户 → 输入要保护的UID（如喜欢的UP主）
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">3.&lt;/span> 不活跃阈值 → 输入天数（365=1年未更新）
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">4.&lt;/span> 跳过最近关注 → 输入数字（保护新关注的UP主）
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">5.&lt;/span> 移除无动态用户 → 输入 &lt;span class="sb">`n`&lt;/span>
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">&lt;span class="k">6.&lt;/span> 请求延迟 → 默认5-20秒（直接回车）
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;blockquote>
+&lt;p>💡 示例：想清理2年未更新的用户，在&amp;quot;不活跃阈值&amp;quot;输入 &lt;code>730&lt;/code>&lt;/p>&lt;/blockquote>
+&lt;hr>
+&lt;h2 id="-第六步执行清理">✅ 第六步：执行清理
+&lt;/h2>&lt;ol>
+&lt;li>确认参数后开始运行&lt;/li>
+&lt;li>脚本会自动：
+&lt;ul>
+&lt;li>扫描所有关注用户&lt;/li>
+&lt;li>检查最后发动态时间&lt;/li>
+&lt;li>跳过白名单和互关用户&lt;/li>
+&lt;li>记录日志到 &lt;code>unfollow.log&lt;/code>&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>完成后显示统计结果：
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;span class="lnt">2
+&lt;/span>&lt;span class="lnt">3
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">共扫描328个关注
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">取关成功47个，失败0个！
+&lt;/span>&lt;/span>&lt;span class="line">&lt;span class="cl">总耗时：0:12:45
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;/li>
+&lt;/ol>
+&lt;hr>
+&lt;h2 id="-重要注意事项">⚠ 重要注意事项
+&lt;/h2>&lt;ol>
+&lt;li>
+&lt;p>&lt;strong>安全提示&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>不要分享 &lt;code>cookies.json&lt;/code> 文件（包含登录凭证）&lt;/li>
+&lt;li>首次使用建议设置高阈值（如365天）测试&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>风控规避&lt;/strong>&lt;/p>
+&lt;ul>
+&lt;li>单次清理建议不超过100人&lt;/li>
+&lt;li>遇到错误代码 &lt;code>-352&lt;/code> 需增大延迟参数&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;li>
+&lt;p>&lt;strong>数据恢复&lt;/strong>&lt;br>
+误删用户可对照日志，通过B站官网手动重新关注：&lt;/p>
+&lt;div class="highlight">&lt;div class="chroma">
+&lt;table class="lntable">&lt;tr>&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code>&lt;span class="lnt">1
+&lt;/span>&lt;/code>&lt;/pre>&lt;/td>
+&lt;td class="lntd">
+&lt;pre tabindex="0" class="chroma">&lt;code class="language-fallback" data-lang="fallback">&lt;span class="line">&lt;span class="cl">空间主页 → 关注 → 全部关注 → 查找用户
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/td>&lt;/tr>&lt;/table>
+&lt;/div>
+&lt;/div>&lt;/li>
+&lt;/ol>
+&lt;hr>
+&lt;h2 id="-进阶技巧非必须">💻 进阶技巧（非必须）
+&lt;/h2>&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>操作&lt;/th>
+&lt;th>方法&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>修改白名单&lt;/td>
+&lt;td>用记事本打开 &lt;code>main.py&lt;/code> → 搜索 &lt;code>ignore_list&lt;/code> → 添加UID&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>重新登录&lt;/td>
+&lt;td>删除文件夹里的 &lt;code>cookies.json&lt;/code> 重新运行&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>查看日志&lt;/td>
+&lt;td>打开同目录下的 &lt;code>unfollow.log&lt;/code> 文件&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;blockquote>
+&lt;p>✨ &lt;strong>脚本优势&lt;/strong>：自动跳过互关用户/特别关注，避免误删亲友账号&lt;/p>&lt;/blockquote>
+&lt;hr>
+&lt;p>&lt;strong>免责声明：&lt;/strong> 本工具为开源项目，仅供学习交流，过度使用可能导致账号异常，请遵守B站用户协议。清理前建议导出关注列表备份。&lt;/p>
+&lt;p>后面打算做个js版的&amp;hellip;先挖个坑。&lt;/p>
+&lt;blockquote>
+&lt;p>好用！觉得好用可以给我一个star吗qwq：&lt;a class="link" href="https://github.com/wuko233/bili-follow-cleaner" target="_blank" rel="noopener"
+>仓库&lt;/a>&lt;/p>&lt;/blockquote>
+&lt;blockquote>
+&lt;p>欢迎大佬指点或pr，代码水平不够QAQ&lt;/p>&lt;/blockquote>
+&lt;blockquote>
+&lt;p>遇到问题？欢迎在评论区留言！&lt;/p>&lt;/blockquote></description></item></channel></rss>
