@@ -13,6 +13,18 @@ tags:
 **功能说明：** 自动扫描B站关注列表，批量取关超过设定天数未发动态的用户  
 **仓库地址：** [https://github.com/wuko233/bili-follow-cleaner](https://github.com/wuko233/bili-follow-cleaner)
 
+---
+
+2025年8月18日
+
+**更新了release，现在windows用户可以直接下载已经编译好的程序直接运行：**
+
+下载脚本程序 → **[点我下载（github）](https://github.com/wuko233/bili-follow-cleaner/releases/download/release-v0.1.0/main.exe)** **[点我下载（cf镜像，内地推荐）](http://go.wuko.top/https://github.com/wuko233/bili-follow-cleaner/releases/download/release-v0.1.0/main.exe)**
+
+[![Release](https://img.shields.io/github/v/release/wuko233/bili-follow-cleaner)](https://github.com/wuko233/bili-follow-cleaner/releases)
+
+---
+
 ## 🔰 第一步：安装Python环境（5分钟）
 > 这是运行脚本的基础，就像手机需要操作系统才能运行APP
 
