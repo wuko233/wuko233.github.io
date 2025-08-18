@@ -19,9 +19,7 @@ tags:
 
 **更新了release，现在windows用户可以直接下载已经编译好的程序直接运行：**
 
-下载脚本程序 → **[点我下载（github）](https://github.com/wuko233/bili-follow-cleaner/releases/download/release-v0.1.0/main.exe)** **[点我下载（cf镜像，内地推荐）](http://go.wuko.top/https://github.com/wuko233/bili-follow-cleaner/releases/download/release-v0.1.0/main.exe)**
-
-[![Release](https://img.shields.io/github/v/release/wuko233/bili-follow-cleaner)](https://github.com/wuko233/bili-follow-cleaner/releases)
+下载脚本程序 → [![Release](https://img.shields.io/github/v/release/wuko233/bili-follow-cleaner)](https://github.com/wuko233/bili-follow-cleaner/releases)
 
 ---
 
