@@ -1,5 +1,5 @@
 ---
-title: 【更新中】杂项misc解密记录
+title: 【归档】杂项misc解密记录
 date: 2024-10-31
 slug: buuctf-misc
 image: cover.png

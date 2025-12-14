@@ -1,7 +1,7 @@
 ---
 title: 【CTF】pwn学习之路
 date: 2025-05-21
-description: 小白初试pwn，会学会吗。。
+description: 小白初试pwn，会学会吗。。25.12 看来是无功而返了。。
 slug: pwnpwnpwn
 image: cover.jpg
 tag: 
@@ -888,3 +888,5 @@ sh.interactive()
 ```
 
 利用system函数执行bin/sh，其中0是指定的system()的返回地址，因为要进shell，注定不会返回，所以可以瞎写一串数字，后接传入的参数。
+
+---
