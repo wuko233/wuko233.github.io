@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>路由器 on wuko's blog</title><link>https://blog.wuko.top/tags/%E8%B7%AF%E7%94%B1%E5%99%A8/</link><description>Recent content in 路由器 on wuko's blog</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Mon, 21 Mar 2022 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.wuko.top/tags/%E8%B7%AF%E7%94%B1%E5%99%A8/index.xml" rel="self" type="application/rss+xml"/><item><title>记:天翼网关ZXHN F650V2.0.0P1T3超管破解</title><link>https://blog.wuko.top/posts/2022/03/21/tianyigwpj.html/</link><pubDate>Mon, 21 Mar 2022 00:00:00 +0000</pubDate><guid>https://blog.wuko.top/posts/2022/03/21/tianyigwpj.html/</guid><description>&lt;h1 id="前情提要"&gt;前情提要
+&lt;/h1&gt;&lt;p&gt;本地的电信免费给换了光猫(新光猫不带wifi功能&amp;hellip;)旧光猫就没用了，所以能拿来瞎搞了。这次尝试破解其超级管理员密码。&lt;/p&gt;
+&lt;p&gt;&lt;a class="link" href="https://imgtu.com/i/OAdbDg" target="_blank" rel="noopener"
+&gt;&lt;img src="https://s1.ax1x.com/2022/05/03/OAdbDg.jpg"
+loading="lazy"
+alt="OAdbDg.jpg"
+&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;借鉴:&lt;a class="link" href="https://b23.tv/VTdqeQW" target="_blank" rel="noopener"
+&gt;不拆机破解电信光猫的超级密码（适用于中兴ZXHN F650）&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id="设备信息不一样可能会失效"&gt;设备信息(不一样可能会失效)
+&lt;/h1&gt;&lt;p&gt;`设备类型&lt;/p&gt;
+&lt;p&gt;GPON天翼网关(4口单频)&lt;/p&gt;
+&lt;p&gt;产品型号&lt;/p&gt;
+&lt;p&gt;ZXHN F650&lt;/p&gt;
+&lt;p&gt;软件版本号&lt;/p&gt;
+&lt;p&gt;V2.0.0P1T3`&lt;/p&gt;
+&lt;h1 id="正文"&gt;正文
+&lt;/h1&gt;&lt;p&gt;因为先前这个网关的wifi是关闭着的，所以先用网线接到了电脑上，进入192.168.1.1输入默认用户密码打开了无线功能，方便后面用手机调试(因为本人电脑过于拉胯，故许多操作都用手机，实际上仅用电脑便可实现全部操作)。&lt;/p&gt;
+&lt;p&gt;插入U盘，打开网关储存管理中U盘文件管理。&lt;/p&gt;
+&lt;p&gt;下载抓包软件Fiddler，点击Rules&amp;ndash;Automatic Breakpoints&amp;ndash;Before Requests(汉化版为规则&amp;gt;自动断点&amp;gt;请求前)&lt;/p&gt;
+&lt;p&gt;返回浏览器文件管理界面，点击任意文件。&lt;/p&gt;
+&lt;p&gt;返回Fiddler，查看拦截下的请求，修改&lt;code&gt;body&lt;/code&gt;中的&lt;code&gt;path&lt;/code&gt;中的&lt;code&gt;value&lt;/code&gt;为&lt;code&gt;/&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;终止拦截:点击Rules&amp;ndash;Automatic Breakpoints&amp;ndash;Disabled(汉化版为规则&amp;gt;自动断点&amp;gt;关闭)&lt;/p&gt;
+&lt;p&gt;返回浏览器网关界面，发现进入网关根目录。&lt;/p&gt;
+&lt;p&gt;进入&lt;code&gt;/userconfig/cfg&lt;/code&gt;，找到&lt;code&gt;db_user_cfg.xml&lt;/code&gt;后复制其至U盘，弹出U盘后插入至电脑。&lt;/p&gt;
+&lt;p&gt;下载软件&lt;code&gt;RouterPassView&lt;/code&gt;(警惕p2p下崽器，误点请直接结束进程，血的教训)&lt;/p&gt;
+&lt;p&gt;打开RouterPassView，导入刚才的文件&lt;code&gt;db_user_cfg.xml&lt;/code&gt;(CTRL+O)，&lt;code&gt;CTRL+F&lt;/code&gt;搜索&lt;code&gt;telecomadmin&lt;/code&gt;，然后就看到了你的超级管理账号和密码啦！&lt;/p&gt;
+&lt;p&gt;&lt;a class="link" href="https://imgtu.com/i/OAdqbQ" target="_blank" rel="noopener"
+&gt;&lt;img src="https://s1.ax1x.com/2022/05/03/OAdqbQ.jpg"
+loading="lazy"
+alt="OAdqbQ.jpg"
+&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;之后输入超管账号密码即可进入高级设置，记得关掉网关的远程通信以防止超级管理密码被远程修改。&lt;/p&gt;</description></item></channel></rss>
