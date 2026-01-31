@@ -1,0 +1,755 @@
+<!doctype html><html lang=zh-CN dir=ltr><head><meta charset=utf-8><meta name=viewport content='width=device-width,initial-scale=1'><meta name=description content="详细解题过程与心得。小学就接触的项目（指安卓逆向破解游戏XD"><title>ctf reverse解题+学习</title><link rel=canonical href=https://blog.wuko.top/posts/2024/11/26/letzreverseit.html/><link rel=stylesheet href=/scss/style.min.833d6eed45de56f48306bf57268d5b8cdfc8a60e8e7bdc99810464fcd033f7c6.css><meta property='og:title' content="ctf reverse解题+学习"><meta property='og:description' content="详细解题过程与心得。小学就接触的项目（指安卓逆向破解游戏XD"><meta property='og:url' content='https://blog.wuko.top/posts/2024/11/26/letzreverseit.html/'><meta property='og:site_name' content="wuko's blog"><meta property='og:type' content='article'><meta property='article:section' content='Post'><meta property='article:published_time' content='2024-11-26T00:00:00+00:00'><meta property='article:modified_time' content='2024-11-26T00:00:00+00:00'><meta property='og:image' content='https://blog.wuko.top/posts/2024/11/26/letzreverseit.html/cover.jpg'><meta name=twitter:title content="ctf reverse解题+学习"><meta name=twitter:description content="详细解题过程与心得。小学就接触的项目（指安卓逆向破解游戏XD"><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content='https://blog.wuko.top/posts/2024/11/26/letzreverseit.html/cover.jpg'><link rel="shortcut icon" href=/favicon.png></head><body class=article-page><script>(function(){const e="StackColorScheme";localStorage.getItem(e)||localStorage.setItem(e,"auto")})()</script><script>(function(){const t="StackColorScheme",e=localStorage.getItem(t),n=window.matchMedia("(prefers-color-scheme: dark)").matches===!0;e=="dark"||e==="auto"&&n?document.documentElement.dataset.scheme="dark":document.documentElement.dataset.scheme="light"})()</script><div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky"><button class="hamburger hamburger--spin" type=button id=toggle-menu aria-label=切换菜单>
+<span class=hamburger-box><span class=hamburger-inner></span></span></button><header><figure class=site-avatar><a href=/><img src=/img/avatar_hu_af0a7c4a31bebdf7.png width=300 height=300 class=site-logo loading=lazy alt=Avatar>
+</a><span class=emoji>💭</span></figure><div class=site-meta><h1 class=site-name><a href=/>wuko's blog</a></h1><h2 class=site-description>从零开始，由心而发。欢迎共同交流学习！</h2></div></header><ol class=menu-social><li><a href=https://github.com/wuko233 target=_blank title=GitHub rel=me><svg class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6.0 00-1.3-3.2 4.2 4.2.0 00-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3.0 00-6.2.0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2.0 00-.1 3.2A4.6 4.6.0 004 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"/></svg></a></li><li><a href=https://twitter.com/@Arair237 target=_blank title=Twitter rel=me><svg class="icon icon-tabler icon-tabler-brand-twitter" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M22 4.01c-1 .49-1.98.689-3 .99-1.121-1.265-2.783-1.335-4.38-.737S11.977 6.323 12 8v1c-3.245.083-6.135-1.395-8-4 0 0-4.182 7.433 4 11-1.872 1.247-3.739 2.088-6 2 3.308 1.803 6.913 2.423 10.034 1.517 3.58-1.04 6.522-3.723 7.651-7.742a13.84 13.84.0 00.497-3.753C20.18 7.773 21.692 5.25 22 4.009z"/></svg></a></li></ol><ol class=menu id=main-menu><li><a href=/><svg class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><polyline points="5 12 3 12 12 3 21 12 19 12"/><path d="M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"/><path d="M9 21v-6a2 2 0 012-2h2a2 2 0 012 2v6"/></svg>
+<span>Home</span></a></li><li><a href=/pages/about.html/><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-vocabulary"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10 19H4a1 1 0 01-1-1V4a1 1 0 011-1h6a2 2 0 012 2 2 2 0 012-2h6a1 1 0 011 1v14a1 1 0 01-1 1h-6a2 2 0 00-2 2 2 2 0 00-2-2z"/><path d="M12 5v16"/><path d="M7 7h1"/><path d="M7 11h1"/><path d="M16 7h1"/><path d="M16 11h1"/><path d="M16 15h1"/></svg>
+<span>About</span></a></li><li><a href=/pages/archives/><svg class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><rect x="3" y="4" width="18" height="4" rx="2"/><path d="M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8"/><line x1="10" y1="12" x2="14" y2="12"/></svg>
+<span>Archives</span></a></li><li><a href=/pages/search/><svg class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="10" cy="10" r="7"/><line x1="21" y1="21" x2="15" y2="15"/></svg>
+<span>Search</span></a></li><li><a href=/pages/links/><svg class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M10 14a3.5 3.5.0 005 0l4-4a3.5 3.5.0 00-5-5l-.5.5"/><path d="M14 10a3.5 3.5.0 00-5 0l-4 4a3.5 3.5.0 005 5l.5-.5"/></svg>
+<span>Links</span></a></li><li><a href=/pages/money/><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-tip-jar"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M14 10h-2.5a1.5 1.5.0 000 3h1a1.5 1.5.0 010 3H10"/><path d="M12 9v1"/><path d="M12 16v1"/><path d="M17 4v1.882c0 .685.387 1.312 1 1.618s1 .933 1 1.618V18a3 3 0 01-3 3H8a3 3 0 01-3-3V9.118c0-.685.387-1.312 1-1.618s1-.933 1-1.618V4"/><path d="M6 4h12z"/></svg>
+<span>Donate</span></a></li><li class=menu-bottom-section><ol class=menu><li id=dark-mode-toggle><svg class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="8" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg>
+<svg class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="16" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg>
+<span>暗色模式</span></li></ol></li></ol></aside><aside class="sidebar right-sidebar sticky"><section class="widget archives"><div class=widget-icon><svg class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><line x1="5" y1="9" x2="19" y2="9"/><line x1="5" y1="15" x2="19" y2="15"/><line x1="11" y1="4" x2="7" y2="20"/><line x1="17" y1="4" x2="13" y2="20"/></svg></div><h2 class="widget-title section-title">目录</h2><div class=widget--toc><nav id=TableOfContents><ol><li><a href=#buueasyre>[BUU]easyre</a></li><li><a href=#buureverse1>[BUU]reverse1</a></li><li><a href=#buureverse2>[BUU]reverse2</a></li><li><a href=#buu内涵的软件>[BUU]内涵的软件</a></li><li><a href=#buu新年快乐>[BUU]新年快乐</a></li><li><a href=#buuxor>[BUU]xor</a></li><li><a href=#buureverse3>[BUU]reverse3</a></li><li><a href=#buuhelloword>[BUU]helloword</a></li><li><a href=#buu不一样的flag>[BUU]不一样的flag</a></li><li><a href=#swpuctf-2021-新生赛非常简单的逻辑题>[SWPUCTF 2021 新生赛]非常简单的逻辑题</a></li></ol></nav></div></section></aside><main class="main full-width"><article class="has-image main-article"><header class=article-header><div class=article-image><a href=/posts/2024/11/26/letzreverseit.html/><img src=/posts/2024/11/26/letzreverseit.html/cover_hu_599374501696030f.jpg srcset="/posts/2024/11/26/letzreverseit.html/cover_hu_599374501696030f.jpg 800w, /posts/2024/11/26/letzreverseit.html/cover_hu_f18df2616859c7b1.jpg 1600w" width=800 height=499 loading=lazy alt="Featured image of post ctf reverse解题+学习"></a></div><div class=article-details><header class=article-category><a href=/categories/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/ style=background-color:#2a9d8f;color:#fff>网络安全</a></header><div class=article-title-wrapper><h2 class=article-title><a href=/posts/2024/11/26/letzreverseit.html/>ctf reverse解题+学习</a></h2><h3 class=article-subtitle>详细解题过程与心得。小学就接触的项目（指安卓逆向破解游戏XD</h3></div><footer class=article-time><div><svg class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M11.795 21H5a2 2 0 01-2-2V7a2 2 0 012-2h12a2 2 0 012 2v4"/><circle cx="18" cy="18" r="4"/><path d="M15 3v4"/><path d="M7 3v4"/><path d="M3 11h16"/><path d="M18 16.496V18l1 1"/></svg>
+<time class=article-time--published datetime=2024-11-26T00:00:00Z>Nov 26, 2024</time></div><div><svg class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/></svg>
+<time class=article-time--reading>阅读时长: 8 分钟</time></div></footer></div></header><section class=article-content><blockquote><p>[平台]题目</p></blockquote><h2 id=buueasyre>[BUU]easyre</h2><p>IDA pro查看伪代码快捷键<code>F5</code></p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-c data-lang=c><span class=line><span class=cl><span class=kt>int</span> <span class=kr>__fastcall</span> <span class=nf>main</span><span class=p>(</span><span class=kt>int</span> <span class=n>argc</span><span class=p>,</span> <span class=k>const</span> <span class=kt>char</span> <span class=o>**</span><span class=n>argv</span><span class=p>,</span> <span class=k>const</span> <span class=kt>char</span> <span class=o>**</span><span class=n>envp</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=kt>int</span> <span class=n>b</span><span class=p>;</span> <span class=c1>// [rsp+28h] [rbp-8h] BYREF
+</span></span></span><span class=line><span class=cl>  <span class=kt>int</span> <span class=n>a</span><span class=p>;</span> <span class=c1>// [rsp+2Ch] [rbp-4h] BYREF
+</span></span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=nf>_main</span><span class=p>();</span>
+</span></span><span class=line><span class=cl>  <span class=nf>scanf</span><span class=p>(</span><span class=s>&#34;%d%d&#34;</span><span class=p>,</span> <span class=o>&amp;</span><span class=n>a</span><span class=p>,</span> <span class=o>&amp;</span><span class=n>b</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=k>if</span> <span class=p>(</span> <span class=n>a</span> <span class=o>==</span> <span class=n>b</span> <span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=nf>printf</span><span class=p>(</span><span class=s>&#34;flag{this_Is_a_EaSyRe}&#34;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=k>else</span>
+</span></span><span class=line><span class=cl>    <span class=nf>printf</span><span class=p>(</span><span class=s>&#34;sorry,you can&#39;t get flag&#34;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=k>return</span> <span class=mi>0</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>EZ，<code>flag{this_Is_a_EaSyRe}</code></p><h2 id=buureverse1>[BUU]reverse1</h2><p>IDA Pro查看字符串类型快捷键：<code>Shift + F12</code></p><p>直接找到了<code>.data:000000014001C000 0000000E C {hello_world}</code></p><p>但提交并不对，继续查找，找到：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>.rdata:0000000140019C90	00000019	C	this is the right flag!\n
+</span></span></code></pre></td></tr></table></div></div><p>双击进入，查看是哪段函数调用了该字符串<code>Ctrl + X</code>:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-c data-lang=c><span class=line><span class=cl>  <span class=nf>sub_1400111D1</span><span class=p>(</span><span class=s>&#34;input the flag:&#34;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=nf>sub_14001128F</span><span class=p>(</span><span class=s>&#34;%20s&#34;</span><span class=p>,</span> <span class=n>Str1</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=n>v5</span> <span class=o>=</span> <span class=nf>j_strlen</span><span class=p>(</span><span class=n>Str2</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=k>if</span> <span class=p>(</span> <span class=o>!</span><span class=nf>strncmp</span><span class=p>(</span><span class=n>Str1</span><span class=p>,</span> <span class=n>Str2</span><span class=p>,</span> <span class=n>v5</span><span class=p>)</span> <span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=nf>sub_1400111D1</span><span class=p>(</span><span class=s>&#34;this is the right flag!</span><span class=se>\n</span><span class=s>&#34;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=k>else</span>
+</span></span><span class=line><span class=cl>    <span class=nf>sub_1400111D1</span><span class=p>(</span><span class=s>&#34;wrong flag</span><span class=se>\n</span><span class=s>&#34;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=k>return</span> <span class=mi>0</span><span class=p>;</span>
+</span></span></code></pre></td></tr></table></div></div><p><code>strcmp</code>判断str1与str2是否相等，str1是输入的字符串，所以str2应该就是flag的值，点击str2高亮它，发现它上面经过了一个处理：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-c data-lang=c><span class=line><span class=cl><span class=k>for</span> <span class=p>(</span> <span class=n>j</span> <span class=o>=</span> <span class=mi>0</span><span class=p>;</span> <span class=p>;</span> <span class=o>++</span><span class=n>j</span> <span class=p>)</span>
+</span></span><span class=line><span class=cl>  <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=n>v10</span> <span class=o>=</span> <span class=n>j</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=p>(</span> <span class=n>j</span> <span class=o>&gt;</span> <span class=nf>j_strlen</span><span class=p>(</span><span class=n>Str2</span><span class=p>)</span> <span class=p>)</span>
+</span></span><span class=line><span class=cl>      <span class=k>break</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=p>(</span> <span class=n>Str2</span><span class=p>[</span><span class=n>j</span><span class=p>]</span> <span class=o>==</span> <span class=mi>111</span> <span class=p>)</span>
+</span></span><span class=line><span class=cl>      <span class=n>Str2</span><span class=p>[</span><span class=n>j</span><span class=p>]</span> <span class=o>=</span> <span class=mi>48</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>可以看到，经过一个遍历，str2中的111被改变为48，这是ascii码，选中数字后按下<code>R</code>转化为字符：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-c data-lang=c><span class=line><span class=cl>    <span class=k>if</span> <span class=p>(</span> <span class=n>Str2</span><span class=p>[</span><span class=n>j</span><span class=p>]</span> <span class=o>==</span> <span class=sc>&#39;o&#39;</span> <span class=p>)</span>
+</span></span><span class=line><span class=cl>      <span class=n>Str2</span><span class=p>[</span><span class=n>j</span><span class=p>]</span> <span class=o>=</span> <span class=sc>&#39;0&#39;</span><span class=p>;</span>
+</span></span></code></pre></td></tr></table></div></div><p>双击str2，可以看到str2是<code>{hello_world}</code>，那么flag即为：<code>{hell0_w0rld}</code></p><h2 id=buureverse2>[BUU]reverse2</h2><p>一样的步骤，F5分析main:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-c data-lang=c><span class=line><span class=cl><span class=k>for</span> <span class=p>(</span> <span class=n>i</span> <span class=o>=</span> <span class=mi>0</span><span class=p>;</span> <span class=n>i</span> <span class=o>&lt;=</span> <span class=nf>strlen</span><span class=p>(</span><span class=o>&amp;</span><span class=n>flag</span><span class=p>);</span> <span class=o>++</span><span class=n>i</span> <span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=k>if</span> <span class=p>(</span> <span class=o>*</span><span class=p>(</span><span class=o>&amp;</span><span class=n>flag</span> <span class=o>+</span> <span class=n>i</span><span class=p>)</span> <span class=o>==</span> <span class=mi>105</span> <span class=o>||</span> <span class=o>*</span><span class=p>(</span><span class=o>&amp;</span><span class=n>flag</span> <span class=o>+</span> <span class=n>i</span><span class=p>)</span> <span class=o>==</span> <span class=mi>114</span> <span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=o>*</span><span class=p>(</span><span class=o>&amp;</span><span class=n>flag</span> <span class=o>+</span> <span class=n>i</span><span class=p>)</span> <span class=o>=</span> <span class=mi>49</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>R转换为字符：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-c data-lang=c><span class=line><span class=cl><span class=k>for</span> <span class=p>(</span> <span class=n>i</span> <span class=o>=</span> <span class=mi>0</span><span class=p>;</span> <span class=n>i</span> <span class=o>&lt;=</span> <span class=nf>strlen</span><span class=p>(</span><span class=o>&amp;</span><span class=n>flag</span><span class=p>);</span> <span class=o>++</span><span class=n>i</span> <span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=k>if</span> <span class=p>(</span> <span class=o>*</span><span class=p>(</span><span class=o>&amp;</span><span class=n>flag</span> <span class=o>+</span> <span class=n>i</span><span class=p>)</span> <span class=o>==</span> <span class=sc>&#39;i&#39;</span> <span class=o>||</span> <span class=o>*</span><span class=p>(</span><span class=o>&amp;</span><span class=n>flag</span> <span class=o>+</span> <span class=n>i</span><span class=p>)</span> <span class=o>==</span> <span class=sc>&#39;r&#39;</span> <span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=o>*</span><span class=p>(</span><span class=o>&amp;</span><span class=n>flag</span> <span class=o>+</span> <span class=n>i</span><span class=p>)</span> <span class=o>=</span> <span class=sc>&#39;1&#39;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>遍历，如果字符是<code>i</code>或者<code>r</code>，转换为<code>1</code>。</p><p>双击flag:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-c data-lang=c><span class=line><span class=cl><span class=p>.</span><span class=nl>data</span><span class=p>:</span><span class=mo>00000000006010</span><span class=mi>80</span> <span class=n>flag</span>            <span class=n>db</span> <span class=mi>7</span><span class=n>Bh</span>                  <span class=p>;</span> <span class=n>DATA</span> <span class=nl>XREF</span><span class=p>:</span> <span class=n>main</span><span class=o>+</span><span class=mi>34</span><span class=err>↑</span><span class=n>r</span>
+</span></span><span class=line><span class=cl><span class=p>.</span><span class=nl>data</span><span class=p>:</span><span class=mo>00000000006010</span><span class=mi>80</span>                                         <span class=p>;</span> <span class=n>main</span><span class=o>+</span><span class=mi>44</span><span class=err>↑</span><span class=n>r</span> <span class=p>...</span>
+</span></span><span class=line><span class=cl><span class=p>.</span><span class=nl>data</span><span class=p>:</span><span class=mo>00000000006010</span><span class=mi>81</span> <span class=n>aHackingForFun</span>  <span class=n>db</span> <span class=err>&#39;</span><span class=n>hacking_for_fun</span><span class=p>}</span><span class=err>&#39;</span><span class=p>,</span><span class=mi>0</span>
+</span></span></code></pre></td></tr></table></div></div><p>其中<code>7Bh</code>R一下就是<code>{</code></p><p>所以flag处理前是<code>{hacking_for_fun}</code>，处理后就是：<code>{hack1ng_fo1_fun}</code></p><h2 id=buu内涵的软件>[BUU]内涵的软件</h2><p><code>shift + F12</code>秒了&mldr;</p><p><code>DBAPP{49d3c93df25caad81232130f3d2ebfad}</code></p><p>但还是分析下：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-c data-lang=c><span class=line><span class=cl><span class=kt>int</span> <span class=kr>__cdecl</span> <span class=nf>main_0</span><span class=p>(</span><span class=kt>int</span> <span class=n>argc</span><span class=p>,</span> <span class=k>const</span> <span class=kt>char</span> <span class=o>**</span><span class=n>argv</span><span class=p>,</span> <span class=k>const</span> <span class=kt>char</span> <span class=o>**</span><span class=n>envp</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=kt>char</span> <span class=n>v4</span><span class=p>[</span><span class=mi>4</span><span class=p>];</span> <span class=c1>// [esp+4Ch] [ebp-Ch] BYREF
+</span></span></span><span class=line><span class=cl>  <span class=k>const</span> <span class=kt>char</span> <span class=o>*</span><span class=n>v5</span><span class=p>;</span> <span class=c1>// [esp+50h] [ebp-8h]
+</span></span></span><span class=line><span class=cl>  <span class=kt>int</span> <span class=n>v6</span><span class=p>;</span> <span class=c1>// [esp+54h] [ebp-4h]
+</span></span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=n>v6</span> <span class=o>=</span> <span class=mi>5</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=n>v5</span> <span class=o>=</span> <span class=s>&#34;DBAPP{49d3c93df25caad81232130f3d2ebfad}&#34;</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=k>while</span> <span class=p>(</span> <span class=n>v6</span> <span class=o>&gt;=</span> <span class=mi>0</span> <span class=p>)</span>
+</span></span><span class=line><span class=cl>  <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nf>printf</span><span class=p>(</span><span class=n>aD</span><span class=p>,</span> <span class=n>v6</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=nf>sub_40100A</span><span class=p>();</span>
+</span></span><span class=line><span class=cl>    <span class=o>--</span><span class=n>v6</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl>  <span class=nf>printf</span><span class=p>(</span>
+</span></span><span class=line><span class=cl>    <span class=s>&#34;</span><span class=se>\n</span><span class=s>&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=s>&#34;</span><span class=se>\n</span><span class=s>&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=s>&#34;</span><span class=se>\n</span><span class=s>&#34;</span>
+</span></span><span class=line><span class=cl>    <span class=s>&#34;这里本来应该是答案的,但是粗心的程序员忘记把变量写进来了,你要不逆向试试看:(Y/N)</span><span class=se>\n</span><span class=s>&#34;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=n>v4</span><span class=p>[</span><span class=mi>0</span><span class=p>]</span> <span class=o>=</span> <span class=mi>1</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=nf>scanf</span><span class=p>(</span><span class=s>&#34;%c&#34;</span><span class=p>,</span> <span class=n>v4</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=k>if</span> <span class=p>(</span> <span class=n>v4</span><span class=p>[</span><span class=mi>0</span><span class=p>]</span> <span class=o>==</span> <span class=mi>89</span> <span class=p>)</span>
+</span></span><span class=line><span class=cl>  <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nf>printf</span><span class=p>(</span><span class=n>aOdIda</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=nf>sub_40100A</span><span class=p>();</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl>  <span class=k>else</span>
+</span></span><span class=line><span class=cl>  <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=p>(</span> <span class=n>v4</span><span class=p>[</span><span class=mi>0</span><span class=p>]</span> <span class=o>==</span> <span class=mi>78</span> <span class=p>)</span>
+</span></span><span class=line><span class=cl>      <span class=nf>printf</span><span class=p>(</span><span class=n>asc_425034</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=k>else</span>
+</span></span><span class=line><span class=cl>      <span class=nf>printf</span><span class=p>(</span><span class=s>&#34;输入错误,没有提示.&#34;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=nf>sub_40100A</span><span class=p>();</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>定义了字符串v5但是没有使用，所以是<code>忘记把变量写进来了</code></p><h2 id=buu新年快乐>[BUU]新年快乐</h2><p><code>DIE</code>查壳：UPX(3.91)[NRV,best]</p><p>脱壳，虽然打不开程序了，但是ida可以分析了：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span><span class=lnt>9
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-c data-lang=c><span class=line><span class=cl><span class=nf>strcpy</span><span class=p>(</span><span class=n>Str2</span><span class=p>,</span> <span class=s>&#34;HappyNewYear!&#34;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl><span class=o>*</span><span class=p>(</span><span class=n>_WORD</span> <span class=o>*</span><span class=p>)</span><span class=n>Str1</span> <span class=o>=</span> <span class=n>word_40306B</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=nf>memset</span><span class=p>(</span><span class=o>&amp;</span><span class=n>Str1</span><span class=p>[</span><span class=mi>2</span><span class=p>],</span> <span class=mi>0</span><span class=p>,</span> <span class=mh>0x1Eu</span><span class=p>);</span>
+</span></span><span class=line><span class=cl><span class=nf>printf</span><span class=p>(</span><span class=s>&#34;please input the true flag:&#34;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl><span class=nf>scanf</span><span class=p>(</span><span class=s>&#34;%s&#34;</span><span class=p>,</span> <span class=n>Str1</span><span class=p>);</span>
+</span></span><span class=line><span class=cl><span class=k>if</span> <span class=p>(</span> <span class=o>!</span><span class=nf>strncmp</span><span class=p>(</span><span class=n>Str1</span><span class=p>,</span> <span class=n>Str2</span><span class=p>,</span> <span class=nf>strlen</span><span class=p>(</span><span class=n>Str2</span><span class=p>))</span> <span class=p>)</span>
+</span></span><span class=line><span class=cl>  <span class=k>return</span> <span class=nf>puts</span><span class=p>(</span><span class=n>aThisIsTrueFlag</span><span class=p>);</span>
+</span></span><span class=line><span class=cl><span class=k>else</span>
+</span></span><span class=line><span class=cl>  <span class=k>return</span> <span class=nf>puts</span><span class=p>(</span><span class=n>Buffer</span><span class=p>);</span>
+</span></span></code></pre></td></tr></table></div></div><p>得到了<code>HappyNewYear!</code></p><h2 id=buuxor>[BUU]xor</h2><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-c data-lang=c><span class=line><span class=cl><span class=nf>memset</span><span class=p>(</span><span class=n>__b</span><span class=p>,</span> <span class=mi>0</span><span class=p>,</span> <span class=mh>0x100uLL</span><span class=p>);</span>
+</span></span><span class=line><span class=cl><span class=nf>printf</span><span class=p>(</span><span class=s>&#34;Input your flag:</span><span class=se>\n</span><span class=s>&#34;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl><span class=nf>get_line</span><span class=p>(</span><span class=n>__b</span><span class=p>,</span> <span class=mi>256LL</span><span class=p>);</span>
+</span></span><span class=line><span class=cl><span class=k>if</span> <span class=p>(</span> <span class=nf>strlen</span><span class=p>(</span><span class=n>__b</span><span class=p>)</span> <span class=o>!=</span> <span class=mi>33</span> <span class=p>)</span>
+</span></span><span class=line><span class=cl>  <span class=k>goto</span> <span class=n>LABEL_7</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=k>for</span> <span class=p>(</span> <span class=n>i</span> <span class=o>=</span> <span class=mi>1</span><span class=p>;</span> <span class=n>i</span> <span class=o>&lt;</span> <span class=mi>33</span><span class=p>;</span> <span class=o>++</span><span class=n>i</span> <span class=p>)</span>
+</span></span><span class=line><span class=cl>  <span class=n>__b</span><span class=p>[</span><span class=n>i</span><span class=p>]</span> <span class=o>^=</span> <span class=n>__b</span><span class=p>[</span><span class=n>i</span> <span class=o>-</span> <span class=mi>1</span><span class=p>];</span>  <span class=c1>//异或操作
+</span></span></span><span class=line><span class=cl><span class=k>if</span> <span class=p>(</span> <span class=o>!</span><span class=nf>strncmp</span><span class=p>(</span><span class=n>__b</span><span class=p>,</span> <span class=n>global</span><span class=p>,</span> <span class=mh>0x21uLL</span><span class=p>)</span> <span class=p>)</span>
+</span></span><span class=line><span class=cl>  <span class=nf>printf</span><span class=p>(</span><span class=s>&#34;Success&#34;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl><span class=k>else</span>
+</span></span><span class=line><span class=cl><span class=nl>LABEL_7</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>  <span class=nf>printf</span><span class=p>(</span><span class=s>&#34;Failed&#34;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl><span class=k>return</span> <span class=mi>0</span><span class=p>;</span>
+</span></span></code></pre></td></tr></table></div></div><p>输入<code>__b</code>，异或后与<code>global</code>进行比较，所以<code>global</code>应该是flag异或后的值。</p><p>提取<code>global</code>，<code>shift + E</code>导出数据：</p><p><img src=/posts/2024/11/26/letzreverseit.html/xor.png width=1482 height=894 srcset="/posts/2024/11/26/letzreverseit.html/xor_hu_93019a4c402df61c.png 480w, /posts/2024/11/26/letzreverseit.html/xor_hu_74c71e187b6b7d87.png 1024w" loading=lazy alt=xor class=gallery-image data-flex-grow=165 data-flex-basis=397px></p><p>python写一遍异或的部分:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>lst</span> <span class=o>=</span> <span class=p>[</span><span class=mi>102</span><span class=p>,</span> <span class=mi>10</span><span class=p>,</span> <span class=mi>107</span><span class=p>,</span> <span class=mi>12</span><span class=p>,</span> <span class=mi>119</span><span class=p>,</span> <span class=mi>38</span><span class=p>,</span> <span class=mi>79</span><span class=p>,</span> <span class=mi>46</span><span class=p>,</span> <span class=mi>64</span><span class=p>,</span> <span class=mi>17</span><span class=p>,</span> <span class=mi>120</span><span class=p>,</span> <span class=mi>13</span><span class=p>,</span> <span class=mi>90</span><span class=p>,</span> <span class=mi>59</span><span class=p>,</span> <span class=mi>85</span><span class=p>,</span> <span class=mi>17</span><span class=p>,</span> <span class=mi>112</span><span class=p>,</span> <span class=mi>25</span><span class=p>,</span> <span class=mi>70</span><span class=p>,</span> <span class=mi>31</span><span class=p>,</span> <span class=mi>118</span><span class=p>,</span> <span class=mi>34</span><span class=p>,</span> <span class=mi>77</span><span class=p>,</span> <span class=mi>35</span><span class=p>,</span> <span class=mi>68</span><span class=p>,</span> <span class=mi>14</span><span class=p>,</span> <span class=mi>103</span><span class=p>,</span> <span class=mi>6</span><span class=p>,</span> <span class=mi>104</span><span class=p>,</span> <span class=mi>15</span><span class=p>,</span> <span class=mi>71</span><span class=p>,</span> <span class=mi>50</span><span class=p>,</span> <span class=mi>79</span><span class=p>,</span> <span class=mi>0</span><span class=p>]</span>
+</span></span><span class=line><span class=cl><span class=n>flag</span> <span class=o>=</span> <span class=nb>chr</span><span class=p>(</span><span class=n>lst</span><span class=p>[</span><span class=mi>0</span><span class=p>])</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>for</span> <span class=n>i</span> <span class=ow>in</span> <span class=nb>range</span><span class=p>(</span><span class=mi>1</span><span class=p>,</span> <span class=nb>len</span><span class=p>(</span><span class=n>lst</span><span class=p>)):</span>
+</span></span><span class=line><span class=cl>    <span class=n>flag</span> <span class=o>+=</span> <span class=nb>chr</span><span class=p>(</span><span class=n>lst</span><span class=p>[</span><span class=n>i</span><span class=p>]</span> <span class=o>^</span> <span class=n>lst</span><span class=p>[</span><span class=n>i</span> <span class=o>-</span> <span class=mi>1</span><span class=p>])</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=n>flag</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># flag{QianQiuWanDai_YiTongJiangHu}O</span>
+</span></span></code></pre></td></tr></table></div></div><p>得到：<code>flag{QianQiuWanDai_YiTongJiangHu}</code></p><h2 id=buureverse3>[BUU]reverse3</h2><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-c data-lang=c><span class=line><span class=cl><span class=n>nt</span> <span class=kr>__cdecl</span> <span class=nf>main_0</span><span class=p>(</span><span class=kt>int</span> <span class=n>argc</span><span class=p>,</span> <span class=k>const</span> <span class=kt>char</span> <span class=o>**</span><span class=n>argv</span><span class=p>,</span> <span class=k>const</span> <span class=kt>char</span> <span class=o>**</span><span class=n>envp</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=kt>size_t</span> <span class=n>v3</span><span class=p>;</span> <span class=c1>// eax
+</span></span></span><span class=line><span class=cl>  <span class=k>const</span> <span class=kt>char</span> <span class=o>*</span><span class=n>v4</span><span class=p>;</span> <span class=c1>// eax
+</span></span></span><span class=line><span class=cl>  <span class=kt>size_t</span> <span class=n>v5</span><span class=p>;</span> <span class=c1>// eax
+</span></span></span><span class=line><span class=cl>  <span class=kt>char</span> <span class=n>v7</span><span class=p>;</span> <span class=c1>// [esp+0h] [ebp-188h]
+</span></span></span><span class=line><span class=cl>  <span class=kt>char</span> <span class=n>v8</span><span class=p>;</span> <span class=c1>// [esp+0h] [ebp-188h]
+</span></span></span><span class=line><span class=cl>  <span class=kt>signed</span> <span class=kt>int</span> <span class=n>j</span><span class=p>;</span> <span class=c1>// [esp+DCh] [ebp-ACh]
+</span></span></span><span class=line><span class=cl>  <span class=kt>int</span> <span class=n>i</span><span class=p>;</span> <span class=c1>// [esp+E8h] [ebp-A0h]
+</span></span></span><span class=line><span class=cl>  <span class=kt>signed</span> <span class=kt>int</span> <span class=n>v11</span><span class=p>;</span> <span class=c1>// [esp+E8h] [ebp-A0h]
+</span></span></span><span class=line><span class=cl>  <span class=kt>char</span> <span class=n>Destination</span><span class=p>[</span><span class=mi>108</span><span class=p>];</span> <span class=c1>// [esp+F4h] [ebp-94h] BYREF
+</span></span></span><span class=line><span class=cl>  <span class=kt>char</span> <span class=n>Str</span><span class=p>[</span><span class=mi>28</span><span class=p>];</span> <span class=c1>// [esp+160h] [ebp-28h] BYREF
+</span></span></span><span class=line><span class=cl>  <span class=kt>char</span> <span class=n>v14</span><span class=p>[</span><span class=mi>8</span><span class=p>];</span> <span class=c1>// [esp+17Ch] [ebp-Ch] BYREF
+</span></span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=k>for</span> <span class=p>(</span> <span class=n>i</span> <span class=o>=</span> <span class=mi>0</span><span class=p>;</span> <span class=n>i</span> <span class=o>&lt;</span> <span class=mi>100</span><span class=p>;</span> <span class=o>++</span><span class=n>i</span> <span class=p>)</span>
+</span></span><span class=line><span class=cl>  <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=p>(</span> <span class=p>(</span><span class=kt>unsigned</span> <span class=kt>int</span><span class=p>)</span><span class=n>i</span> <span class=o>&gt;=</span> <span class=mh>0x64</span> <span class=p>)</span>
+</span></span><span class=line><span class=cl>      <span class=nf>j____report_rangecheckfailure</span><span class=p>();</span>
+</span></span><span class=line><span class=cl>    <span class=n>Destination</span><span class=p>[</span><span class=n>i</span><span class=p>]</span> <span class=o>=</span> <span class=mi>0</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl>  <span class=nf>sub_41132F</span><span class=p>(</span><span class=s>&#34;please enter the flag:&#34;</span><span class=p>,</span> <span class=n>v7</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=nf>sub_411375</span><span class=p>(</span><span class=s>&#34;%20s&#34;</span><span class=p>,</span> <span class=p>(</span><span class=kt>char</span><span class=p>)</span><span class=n>Str</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=n>v3</span> <span class=o>=</span> <span class=nf>j_strlen</span><span class=p>(</span><span class=n>Str</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=n>v4</span> <span class=o>=</span> <span class=p>(</span><span class=k>const</span> <span class=kt>char</span> <span class=o>*</span><span class=p>)</span><span class=nf>sub_4110BE</span><span class=p>(</span><span class=n>Str</span><span class=p>,</span> <span class=n>v3</span><span class=p>,</span> <span class=n>v14</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=nf>strncpy</span><span class=p>(</span><span class=n>Destination</span><span class=p>,</span> <span class=n>v4</span><span class=p>,</span> <span class=mh>0x28u</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=n>v11</span> <span class=o>=</span> <span class=nf>j_strlen</span><span class=p>(</span><span class=n>Destination</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=k>for</span> <span class=p>(</span> <span class=n>j</span> <span class=o>=</span> <span class=mi>0</span><span class=p>;</span> <span class=n>j</span> <span class=o>&lt;</span> <span class=n>v11</span><span class=p>;</span> <span class=o>++</span><span class=n>j</span> <span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=n>Destination</span><span class=p>[</span><span class=n>j</span><span class=p>]</span> <span class=o>+=</span> <span class=n>j</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=n>v5</span> <span class=o>=</span> <span class=nf>j_strlen</span><span class=p>(</span><span class=n>Destination</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=k>if</span> <span class=p>(</span> <span class=o>!</span><span class=nf>strncmp</span><span class=p>(</span><span class=n>Destination</span><span class=p>,</span> <span class=n>Str2</span><span class=p>,</span> <span class=n>v5</span><span class=p>)</span> <span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=nf>sub_41132F</span><span class=p>(</span><span class=s>&#34;rigth flag!</span><span class=se>\n</span><span class=s>&#34;</span><span class=p>,</span> <span class=n>v8</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=k>else</span>
+</span></span><span class=line><span class=cl>    <span class=nf>sub_41132F</span><span class=p>(</span><span class=s>&#34;wrong flag!</span><span class=se>\n</span><span class=s>&#34;</span><span class=p>,</span> <span class=n>v8</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=k>return</span> <span class=mi>0</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>先查看<code>Str2</code>变量，得到值<code>e3nifIH9b_C@n@dH</code>，然后一步一步往上推。</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-c data-lang=c><span class=line><span class=cl>  <span class=k>for</span> <span class=p>(</span> <span class=n>j</span> <span class=o>=</span> <span class=mi>0</span><span class=p>;</span> <span class=n>j</span> <span class=o>&lt;</span> <span class=n>v11</span><span class=p>;</span> <span class=o>++</span><span class=n>j</span> <span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=n>Destination</span><span class=p>[</span><span class=n>j</span><span class=p>]</span> <span class=o>+=</span> <span class=n>j</span><span class=p>;</span>
+</span></span></code></pre></td></tr></table></div></div><p><code>Destination</code>为输入的flag后经过处理的字符串，在这个循环中又经过了位移处理：</p><p>每个字符向右偏移它位置的值。</p><p>举个例子就好理解了：</p><p>假设<code>Destination</code>为<code>{'A', 'B'}</code>，那么<code>A = A + 0</code>(A位于0)，<code>B = B + 1 = C</code>(B位于1，B+1为C，ASCII码)。</p><p>AI写个逆向脚本：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>original_str</span> <span class=o>=</span> <span class=s2>&#34;e3nifIH9b_C@n@dH&#34;</span>
+</span></span><span class=line><span class=cl><span class=n>result_str</span> <span class=o>=</span> <span class=s2>&#34;&#34;</span>
+</span></span><span class=line><span class=cl><span class=n>index</span> <span class=o>=</span> <span class=mi>0</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>for</span> <span class=n>char</span> <span class=ow>in</span> <span class=n>original_str</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>    <span class=c1># 获取ASCII码 → 减索引 → 转回字符</span>
+</span></span><span class=line><span class=cl>    <span class=n>decoded_char</span> <span class=o>=</span> <span class=nb>chr</span><span class=p>(</span><span class=nb>ord</span><span class=p>(</span><span class=n>char</span><span class=p>)</span> <span class=o>-</span> <span class=n>index</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=n>result_str</span> <span class=o>+=</span> <span class=n>decoded_char</span>
+</span></span><span class=line><span class=cl>    <span class=n>index</span> <span class=o>+=</span> <span class=mi>1</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=n>result_str</span><span class=p>)</span> <span class=c1>#e2lfbDB2ZV95b3V9</span>
+</span></span></code></pre></td></tr></table></div></div><p><code>e2lfbDB2ZV95b3V9</code></p><p>然后继续溯源，<code>sub_4110BE()</code>返回<code>sub_411AB0()</code>函数处理后的内容，先查看它传入411了什么参数：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-c data-lang=c><span class=line><span class=cl><span class=kt>char</span> <span class=n>v14</span><span class=p>[</span><span class=mi>8</span><span class=p>];</span>
+</span></span><span class=line><span class=cl><span class=n>v4</span> <span class=o>=</span> <span class=p>(</span><span class=k>const</span> <span class=kt>char</span> <span class=o>*</span><span class=p>)</span><span class=nf>sub_4110BE</span><span class=p>(</span><span class=n>Str</span><span class=p>,</span> <span class=n>v3</span><span class=p>,</span> <span class=p>(</span><span class=kt>int</span> <span class=o>*</span><span class=p>)</span><span class=n>v14</span><span class=p>);</span>
+</span></span></code></pre></td></tr></table></div></div><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span><span class=lnt>39
+</span><span class=lnt>40
+</span><span class=lnt>41
+</span><span class=lnt>42
+</span><span class=lnt>43
+</span><span class=lnt>44
+</span><span class=lnt>45
+</span><span class=lnt>46
+</span><span class=lnt>47
+</span><span class=lnt>48
+</span><span class=lnt>49
+</span><span class=lnt>50
+</span><span class=lnt>51
+</span><span class=lnt>52
+</span><span class=lnt>53
+</span><span class=lnt>54
+</span><span class=lnt>55
+</span><span class=lnt>56
+</span><span class=lnt>57
+</span><span class=lnt>58
+</span><span class=lnt>59
+</span><span class=lnt>60
+</span><span class=lnt>61
+</span><span class=lnt>62
+</span><span class=lnt>63
+</span><span class=lnt>64
+</span><span class=lnt>65
+</span><span class=lnt>66
+</span><span class=lnt>67
+</span><span class=lnt>68
+</span><span class=lnt>69
+</span><span class=lnt>70
+</span><span class=lnt>71
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-c data-lang=c><span class=line><span class=cl><span class=kt>void</span> <span class=o>*</span><span class=kr>__cdecl</span> <span class=nf>sub_411AB0</span><span class=p>(</span><span class=kt>char</span> <span class=o>*</span><span class=n>a1</span><span class=p>,</span> <span class=kt>unsigned</span> <span class=kt>int</span> <span class=n>a2</span><span class=p>,</span> <span class=kt>int</span> <span class=o>*</span><span class=n>a3</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=kt>int</span> <span class=n>v4</span><span class=p>;</span> <span class=c1>// [esp+D4h] [ebp-38h]
+</span></span></span><span class=line><span class=cl>  <span class=kt>int</span> <span class=n>v5</span><span class=p>;</span> <span class=c1>// [esp+D4h] [ebp-38h]
+</span></span></span><span class=line><span class=cl>  <span class=kt>int</span> <span class=n>v6</span><span class=p>;</span> <span class=c1>// [esp+D4h] [ebp-38h]
+</span></span></span><span class=line><span class=cl>  <span class=kt>int</span> <span class=n>v7</span><span class=p>;</span> <span class=c1>// [esp+D4h] [ebp-38h]
+</span></span></span><span class=line><span class=cl>  <span class=kt>int</span> <span class=n>i</span><span class=p>;</span> <span class=c1>// [esp+E0h] [ebp-2Ch]
+</span></span></span><span class=line><span class=cl>  <span class=kt>unsigned</span> <span class=kt>int</span> <span class=n>v9</span><span class=p>;</span> <span class=c1>// [esp+ECh] [ebp-20h]
+</span></span></span><span class=line><span class=cl>  <span class=kt>int</span> <span class=n>v10</span><span class=p>;</span> <span class=c1>// [esp+ECh] [ebp-20h]
+</span></span></span><span class=line><span class=cl>  <span class=kt>int</span> <span class=n>v11</span><span class=p>;</span> <span class=c1>// [esp+ECh] [ebp-20h]
+</span></span></span><span class=line><span class=cl>  <span class=kt>void</span> <span class=o>*</span><span class=n>v12</span><span class=p>;</span> <span class=c1>// [esp+F8h] [ebp-14h]
+</span></span></span><span class=line><span class=cl>  <span class=kt>char</span> <span class=o>*</span><span class=n>v13</span><span class=p>;</span> <span class=c1>// [esp+104h] [ebp-8h]
+</span></span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=k>if</span> <span class=p>(</span> <span class=o>!</span><span class=n>a1</span> <span class=o>||</span> <span class=o>!</span><span class=n>a2</span> <span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=mi>0</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=n>v9</span> <span class=o>=</span> <span class=n>a2</span> <span class=o>/</span> <span class=mi>3</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=k>if</span> <span class=p>(</span> <span class=p>(</span><span class=kt>int</span><span class=p>)(</span><span class=n>a2</span> <span class=o>/</span> <span class=mi>3</span><span class=p>)</span> <span class=o>%</span> <span class=mi>3</span> <span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=o>++</span><span class=n>v9</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=n>v10</span> <span class=o>=</span> <span class=mi>4</span> <span class=o>*</span> <span class=n>v9</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=o>*</span><span class=n>a3</span> <span class=o>=</span> <span class=n>v10</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=n>v12</span> <span class=o>=</span> <span class=nf>malloc</span><span class=p>(</span><span class=n>v10</span> <span class=o>+</span> <span class=mi>1</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=k>if</span> <span class=p>(</span> <span class=o>!</span><span class=n>v12</span> <span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=k>return</span> <span class=mi>0</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=nf>j_memset</span><span class=p>(</span><span class=n>v12</span><span class=p>,</span> <span class=mi>0</span><span class=p>,</span> <span class=n>v10</span> <span class=o>+</span> <span class=mi>1</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=n>v13</span> <span class=o>=</span> <span class=n>a1</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=n>v11</span> <span class=o>=</span> <span class=n>a2</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=n>v4</span> <span class=o>=</span> <span class=mi>0</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=k>while</span> <span class=p>(</span> <span class=n>v11</span> <span class=o>&gt;</span> <span class=mi>0</span> <span class=p>)</span>
+</span></span><span class=line><span class=cl>  <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=n>byte_41A144</span><span class=p>[</span><span class=mi>2</span><span class=p>]</span> <span class=o>=</span> <span class=mi>0</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=n>byte_41A144</span><span class=p>[</span><span class=mi>1</span><span class=p>]</span> <span class=o>=</span> <span class=mi>0</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=n>byte_41A144</span><span class=p>[</span><span class=mi>0</span><span class=p>]</span> <span class=o>=</span> <span class=mi>0</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=k>for</span> <span class=p>(</span> <span class=n>i</span> <span class=o>=</span> <span class=mi>0</span><span class=p>;</span> <span class=n>i</span> <span class=o>&lt;</span> <span class=mi>3</span> <span class=o>&amp;&amp;</span> <span class=n>v11</span> <span class=o>&gt;=</span> <span class=mi>1</span><span class=p>;</span> <span class=o>++</span><span class=n>i</span> <span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=n>byte_41A144</span><span class=p>[</span><span class=n>i</span><span class=p>]</span> <span class=o>=</span> <span class=o>*</span><span class=n>v13</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>      <span class=o>--</span><span class=n>v11</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>      <span class=o>++</span><span class=n>v13</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=p>(</span> <span class=o>!</span><span class=n>i</span> <span class=p>)</span>
+</span></span><span class=line><span class=cl>      <span class=k>break</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=k>switch</span> <span class=p>(</span> <span class=n>i</span> <span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=k>case</span> <span class=mi>1</span><span class=o>:</span>
+</span></span><span class=line><span class=cl>        <span class=o>*</span><span class=p>((</span><span class=n>_BYTE</span> <span class=o>*</span><span class=p>)</span><span class=n>v12</span> <span class=o>+</span> <span class=n>v4</span><span class=p>)</span> <span class=o>=</span> <span class=n>aAbcdefghijklmn</span><span class=p>[(</span><span class=kt>int</span><span class=p>)(</span><span class=kt>unsigned</span> <span class=kr>__int8</span><span class=p>)</span><span class=n>byte_41A144</span><span class=p>[</span><span class=mi>0</span><span class=p>]</span> <span class=o>&gt;&gt;</span> <span class=mi>2</span><span class=p>];</span>
+</span></span><span class=line><span class=cl>        <span class=n>v5</span> <span class=o>=</span> <span class=n>v4</span> <span class=o>+</span> <span class=mi>1</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>        <span class=o>*</span><span class=p>((</span><span class=n>_BYTE</span> <span class=o>*</span><span class=p>)</span><span class=n>v12</span> <span class=o>+</span> <span class=n>v5</span><span class=p>)</span> <span class=o>=</span> <span class=n>aAbcdefghijklmn</span><span class=p>[((</span><span class=n>byte_41A144</span><span class=p>[</span><span class=mi>1</span><span class=p>]</span> <span class=o>&amp;</span> <span class=mh>0xF0</span><span class=p>)</span> <span class=o>&gt;&gt;</span> <span class=mi>4</span><span class=p>)</span> <span class=o>|</span> <span class=p>(</span><span class=mi>16</span> <span class=o>*</span> <span class=p>(</span><span class=n>byte_41A144</span><span class=p>[</span><span class=mi>0</span><span class=p>]</span> <span class=o>&amp;</span> <span class=mi>3</span><span class=p>))];</span>
+</span></span><span class=line><span class=cl>        <span class=o>*</span><span class=p>((</span><span class=n>_BYTE</span> <span class=o>*</span><span class=p>)</span><span class=n>v12</span> <span class=o>+</span> <span class=o>++</span><span class=n>v5</span><span class=p>)</span> <span class=o>=</span> <span class=n>aAbcdefghijklmn</span><span class=p>[</span><span class=mi>64</span><span class=p>];</span>
+</span></span><span class=line><span class=cl>        <span class=o>*</span><span class=p>((</span><span class=n>_BYTE</span> <span class=o>*</span><span class=p>)</span><span class=n>v12</span> <span class=o>+</span> <span class=o>++</span><span class=n>v5</span><span class=p>)</span> <span class=o>=</span> <span class=n>aAbcdefghijklmn</span><span class=p>[</span><span class=mi>64</span><span class=p>];</span>
+</span></span><span class=line><span class=cl>        <span class=n>v4</span> <span class=o>=</span> <span class=n>v5</span> <span class=o>+</span> <span class=mi>1</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>        <span class=k>break</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>      <span class=k>case</span> <span class=mi>2</span><span class=o>:</span>
+</span></span><span class=line><span class=cl>        <span class=o>*</span><span class=p>((</span><span class=n>_BYTE</span> <span class=o>*</span><span class=p>)</span><span class=n>v12</span> <span class=o>+</span> <span class=n>v4</span><span class=p>)</span> <span class=o>=</span> <span class=n>aAbcdefghijklmn</span><span class=p>[(</span><span class=kt>int</span><span class=p>)(</span><span class=kt>unsigned</span> <span class=kr>__int8</span><span class=p>)</span><span class=n>byte_41A144</span><span class=p>[</span><span class=mi>0</span><span class=p>]</span> <span class=o>&gt;&gt;</span> <span class=mi>2</span><span class=p>];</span>
+</span></span><span class=line><span class=cl>        <span class=n>v6</span> <span class=o>=</span> <span class=n>v4</span> <span class=o>+</span> <span class=mi>1</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>        <span class=o>*</span><span class=p>((</span><span class=n>_BYTE</span> <span class=o>*</span><span class=p>)</span><span class=n>v12</span> <span class=o>+</span> <span class=n>v6</span><span class=p>)</span> <span class=o>=</span> <span class=n>aAbcdefghijklmn</span><span class=p>[((</span><span class=n>byte_41A144</span><span class=p>[</span><span class=mi>1</span><span class=p>]</span> <span class=o>&amp;</span> <span class=mh>0xF0</span><span class=p>)</span> <span class=o>&gt;&gt;</span> <span class=mi>4</span><span class=p>)</span> <span class=o>|</span> <span class=p>(</span><span class=mi>16</span> <span class=o>*</span> <span class=p>(</span><span class=n>byte_41A144</span><span class=p>[</span><span class=mi>0</span><span class=p>]</span> <span class=o>&amp;</span> <span class=mi>3</span><span class=p>))];</span>
+</span></span><span class=line><span class=cl>        <span class=o>*</span><span class=p>((</span><span class=n>_BYTE</span> <span class=o>*</span><span class=p>)</span><span class=n>v12</span> <span class=o>+</span> <span class=o>++</span><span class=n>v6</span><span class=p>)</span> <span class=o>=</span> <span class=n>aAbcdefghijklmn</span><span class=p>[((</span><span class=n>byte_41A144</span><span class=p>[</span><span class=mi>2</span><span class=p>]</span> <span class=o>&amp;</span> <span class=mh>0xC0</span><span class=p>)</span> <span class=o>&gt;&gt;</span> <span class=mi>6</span><span class=p>)</span> <span class=o>|</span> <span class=p>(</span><span class=mi>4</span> <span class=o>*</span> <span class=p>(</span><span class=n>byte_41A144</span><span class=p>[</span><span class=mi>1</span><span class=p>]</span> <span class=o>&amp;</span> <span class=mh>0xF</span><span class=p>))];</span>
+</span></span><span class=line><span class=cl>        <span class=o>*</span><span class=p>((</span><span class=n>_BYTE</span> <span class=o>*</span><span class=p>)</span><span class=n>v12</span> <span class=o>+</span> <span class=o>++</span><span class=n>v6</span><span class=p>)</span> <span class=o>=</span> <span class=n>aAbcdefghijklmn</span><span class=p>[</span><span class=mi>64</span><span class=p>];</span>
+</span></span><span class=line><span class=cl>        <span class=n>v4</span> <span class=o>=</span> <span class=n>v6</span> <span class=o>+</span> <span class=mi>1</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>        <span class=k>break</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>      <span class=k>case</span> <span class=mi>3</span><span class=o>:</span>
+</span></span><span class=line><span class=cl>        <span class=o>*</span><span class=p>((</span><span class=n>_BYTE</span> <span class=o>*</span><span class=p>)</span><span class=n>v12</span> <span class=o>+</span> <span class=n>v4</span><span class=p>)</span> <span class=o>=</span> <span class=n>aAbcdefghijklmn</span><span class=p>[(</span><span class=kt>int</span><span class=p>)(</span><span class=kt>unsigned</span> <span class=kr>__int8</span><span class=p>)</span><span class=n>byte_41A144</span><span class=p>[</span><span class=mi>0</span><span class=p>]</span> <span class=o>&gt;&gt;</span> <span class=mi>2</span><span class=p>];</span>
+</span></span><span class=line><span class=cl>        <span class=n>v7</span> <span class=o>=</span> <span class=n>v4</span> <span class=o>+</span> <span class=mi>1</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>        <span class=o>*</span><span class=p>((</span><span class=n>_BYTE</span> <span class=o>*</span><span class=p>)</span><span class=n>v12</span> <span class=o>+</span> <span class=n>v7</span><span class=p>)</span> <span class=o>=</span> <span class=n>aAbcdefghijklmn</span><span class=p>[((</span><span class=n>byte_41A144</span><span class=p>[</span><span class=mi>1</span><span class=p>]</span> <span class=o>&amp;</span> <span class=mh>0xF0</span><span class=p>)</span> <span class=o>&gt;&gt;</span> <span class=mi>4</span><span class=p>)</span> <span class=o>|</span> <span class=p>(</span><span class=mi>16</span> <span class=o>*</span> <span class=p>(</span><span class=n>byte_41A144</span><span class=p>[</span><span class=mi>0</span><span class=p>]</span> <span class=o>&amp;</span> <span class=mi>3</span><span class=p>))];</span>
+</span></span><span class=line><span class=cl>        <span class=o>*</span><span class=p>((</span><span class=n>_BYTE</span> <span class=o>*</span><span class=p>)</span><span class=n>v12</span> <span class=o>+</span> <span class=o>++</span><span class=n>v7</span><span class=p>)</span> <span class=o>=</span> <span class=n>aAbcdefghijklmn</span><span class=p>[((</span><span class=n>byte_41A144</span><span class=p>[</span><span class=mi>2</span><span class=p>]</span> <span class=o>&amp;</span> <span class=mh>0xC0</span><span class=p>)</span> <span class=o>&gt;&gt;</span> <span class=mi>6</span><span class=p>)</span> <span class=o>|</span> <span class=p>(</span><span class=mi>4</span> <span class=o>*</span> <span class=p>(</span><span class=n>byte_41A144</span><span class=p>[</span><span class=mi>1</span><span class=p>]</span> <span class=o>&amp;</span> <span class=mh>0xF</span><span class=p>))];</span>
+</span></span><span class=line><span class=cl>        <span class=o>*</span><span class=p>((</span><span class=n>_BYTE</span> <span class=o>*</span><span class=p>)</span><span class=n>v12</span> <span class=o>+</span> <span class=o>++</span><span class=n>v7</span><span class=p>)</span> <span class=o>=</span> <span class=n>aAbcdefghijklmn</span><span class=p>[</span><span class=n>byte_41A144</span><span class=p>[</span><span class=mi>2</span><span class=p>]</span> <span class=o>&amp;</span> <span class=mh>0x3F</span><span class=p>];</span>
+</span></span><span class=line><span class=cl>        <span class=n>v4</span> <span class=o>=</span> <span class=n>v7</span> <span class=o>+</span> <span class=mi>1</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>        <span class=k>break</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl>  <span class=o>*</span><span class=p>((</span><span class=n>_BYTE</span> <span class=o>*</span><span class=p>)</span><span class=n>v12</span> <span class=o>+</span> <span class=n>v4</span><span class=p>)</span> <span class=o>=</span> <span class=mi>0</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=k>return</span> <span class=n>v12</span><span class=p>;</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>AI分析，这是一个<code>Base64编码函数</code>:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-c data-lang=c><span class=line><span class=cl><span class=kt>char</span><span class=o>*</span> <span class=nf>base64_encode</span><span class=p>(</span><span class=k>const</span> <span class=kt>void</span><span class=o>*</span> <span class=n>input</span><span class=p>,</span> <span class=kt>size_t</span> <span class=n>len</span><span class=p>,</span> <span class=kt>int</span><span class=o>*</span> <span class=n>out_len</span><span class=p>);</span>
+</span></span></code></pre></td></tr></table></div></div><p>解码得到：<code>{i_l0ve_you}</code></p><h2 id=buuhelloword>[BUU]helloword</h2><p>下载，发现是安卓逆向，同样可以用<code>IDA Pro</code>解决：</p><p>新建项目，拖入主类<code>classes.dex</code>，加载过后，查看所有字符串<code>Shift+F12</code>，再接一个<code>Ctrl+F</code>查找，输入flag，找到：</p><p><code>flag{7631a988259a00816deda84afb29430a}</code></p><h2 id=buu不一样的flag>[BUU]不一样的flag</h2><p>找到主函数：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span><span class=lnt>37
+</span><span class=lnt>38
+</span><span class=lnt>39
+</span><span class=lnt>40
+</span><span class=lnt>41
+</span><span class=lnt>42
+</span><span class=lnt>43
+</span><span class=lnt>44
+</span><span class=lnt>45
+</span><span class=lnt>46
+</span><span class=lnt>47
+</span><span class=lnt>48
+</span><span class=lnt>49
+</span><span class=lnt>50
+</span><span class=lnt>51
+</span><span class=lnt>52
+</span><span class=lnt>53
+</span><span class=lnt>54
+</span><span class=lnt>55
+</span><span class=lnt>56
+</span><span class=lnt>57
+</span><span class=lnt>58
+</span><span class=lnt>59
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-c data-lang=c><span class=line><span class=cl><span class=kt>int</span> <span class=kr>__cdecl</span> <span class=n>__noreturn</span> <span class=nf>main</span><span class=p>(</span><span class=kt>int</span> <span class=n>argc</span><span class=p>,</span> <span class=k>const</span> <span class=kt>char</span> <span class=o>**</span><span class=n>argv</span><span class=p>,</span> <span class=k>const</span> <span class=kt>char</span> <span class=o>**</span><span class=n>envp</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=p>{</span>
+</span></span><span class=line><span class=cl>  <span class=n>_BYTE</span> <span class=n>v3</span><span class=p>[</span><span class=mi>29</span><span class=p>];</span> <span class=c1>// [esp+17h] [ebp-35h] BYREF
+</span></span></span><span class=line><span class=cl>  <span class=kt>int</span> <span class=n>v4</span><span class=p>;</span> <span class=c1>// [esp+34h] [ebp-18h]
+</span></span></span><span class=line><span class=cl>  <span class=kt>int</span> <span class=n>v5</span><span class=p>;</span> <span class=c1>// [esp+38h] [ebp-14h] BYREF
+</span></span></span><span class=line><span class=cl>  <span class=kt>int</span> <span class=n>i</span><span class=p>;</span> <span class=c1>// [esp+3Ch] [ebp-10h]
+</span></span></span><span class=line><span class=cl>  <span class=n>_BYTE</span> <span class=n>v7</span><span class=p>[</span><span class=mi>12</span><span class=p>];</span> <span class=c1>// [esp+40h] [ebp-Ch] BYREF
+</span></span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>  <span class=nf>__main</span><span class=p>();</span>
+</span></span><span class=line><span class=cl>  <span class=n>v3</span><span class=p>[</span><span class=mi>26</span><span class=p>]</span> <span class=o>=</span> <span class=mi>0</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=o>*&amp;</span><span class=n>v3</span><span class=p>[</span><span class=mi>27</span><span class=p>]</span> <span class=o>=</span> <span class=mi>0</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=n>v4</span> <span class=o>=</span> <span class=mi>0</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>  <span class=nf>strcpy</span><span class=p>(</span><span class=n>v3</span><span class=p>,</span> <span class=s>&#34;*11110100001010000101111#&#34;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>  <span class=k>while</span> <span class=p>(</span> <span class=mi>1</span> <span class=p>)</span>
+</span></span><span class=line><span class=cl>  <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=nf>puts</span><span class=p>(</span><span class=s>&#34;you can choose one action to execute&#34;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=nf>puts</span><span class=p>(</span><span class=s>&#34;1 up&#34;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=nf>puts</span><span class=p>(</span><span class=s>&#34;2 down&#34;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=nf>puts</span><span class=p>(</span><span class=s>&#34;3 left&#34;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=nf>printf</span><span class=p>(</span><span class=s>&#34;4 right</span><span class=se>\n</span><span class=s>:&#34;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=nf>scanf</span><span class=p>(</span><span class=s>&#34;%d&#34;</span><span class=p>,</span> <span class=o>&amp;</span><span class=n>v5</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=p>(</span> <span class=n>v5</span> <span class=o>==</span> <span class=mi>2</span> <span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=o>++*&amp;</span><span class=n>v3</span><span class=p>[</span><span class=mi>25</span><span class=p>];</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>    <span class=k>else</span> <span class=k>if</span> <span class=p>(</span> <span class=n>v5</span> <span class=o>&gt;</span> <span class=mi>2</span> <span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=k>if</span> <span class=p>(</span> <span class=n>v5</span> <span class=o>==</span> <span class=mi>3</span> <span class=p>)</span>
+</span></span><span class=line><span class=cl>      <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=o>--</span><span class=n>v4</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>      <span class=p>}</span>
+</span></span><span class=line><span class=cl>      <span class=k>else</span>
+</span></span><span class=line><span class=cl>      <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=k>if</span> <span class=p>(</span> <span class=n>v5</span> <span class=o>!=</span> <span class=mi>4</span> <span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=nl>LABEL_13</span><span class=p>:</span>
+</span></span><span class=line><span class=cl>          <span class=nf>exit</span><span class=p>(</span><span class=mi>1</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>        <span class=o>++</span><span class=n>v4</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>      <span class=p>}</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>    <span class=k>else</span>
+</span></span><span class=line><span class=cl>    <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=k>if</span> <span class=p>(</span> <span class=n>v5</span> <span class=o>!=</span> <span class=mi>1</span> <span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=k>goto</span> <span class=n>LABEL_13</span><span class=p>;</span>
+</span></span><span class=line><span class=cl>      <span class=o>--*&amp;</span><span class=n>v3</span><span class=p>[</span><span class=mi>25</span><span class=p>];</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>    <span class=k>for</span> <span class=p>(</span> <span class=n>i</span> <span class=o>=</span> <span class=mi>0</span><span class=p>;</span> <span class=n>i</span> <span class=o>&lt;=</span> <span class=mi>1</span><span class=p>;</span> <span class=o>++</span><span class=n>i</span> <span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=k>if</span> <span class=p>(</span> <span class=o>*&amp;</span><span class=n>v3</span><span class=p>[</span><span class=mi>4</span> <span class=o>*</span> <span class=n>i</span> <span class=o>+</span> <span class=mi>25</span><span class=p>]</span> <span class=o>&gt;=</span> <span class=mi>5u</span> <span class=p>)</span>
+</span></span><span class=line><span class=cl>        <span class=nf>exit</span><span class=p>(</span><span class=mi>1</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=p>(</span> <span class=n>v7</span><span class=p>[</span><span class=mi>5</span> <span class=o>*</span> <span class=o>*&amp;</span><span class=n>v3</span><span class=p>[</span><span class=mi>25</span><span class=p>]</span> <span class=o>-</span> <span class=mi>41</span> <span class=o>+</span> <span class=n>v4</span><span class=p>]</span> <span class=o>==</span> <span class=mi>49</span> <span class=p>)</span>
+</span></span><span class=line><span class=cl>      <span class=nf>exit</span><span class=p>(</span><span class=mi>1</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=k>if</span> <span class=p>(</span> <span class=n>v7</span><span class=p>[</span><span class=mi>5</span> <span class=o>*</span> <span class=o>*&amp;</span><span class=n>v3</span><span class=p>[</span><span class=mi>25</span><span class=p>]</span> <span class=o>-</span> <span class=mi>41</span> <span class=o>+</span> <span class=n>v4</span><span class=p>]</span> <span class=o>==</span> <span class=mi>35</span> <span class=p>)</span>
+</span></span><span class=line><span class=cl>    <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=nf>puts</span><span class=p>(</span><span class=s>&#34;</span><span class=se>\n</span><span class=s>ok, the order you enter is the flag!&#34;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>      <span class=nf>exit</span><span class=p>(</span><span class=mi>0</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl>  <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>首先，它开头定义了一个字符数组<code>v3</code>，存放<code>*11110100001010000101111#</code>。</p><p>对代码分析可得，在经过多次输入操作后，满足<code>v7[5 * *&amp;v3[25] - 41 + v4] == 35</code>后，也就是<code>v7[5 * *&amp;v3[25] - 41 + v4] == '#'</code>，输出<code>ok, the order you enter is the flag!</code>，flag即是输入的命令。</p><p>AI分析，原来是个迷宫游戏：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span><span class=lnt>24
+</span><span class=lnt>25
+</span><span class=lnt>26
+</span><span class=lnt>27
+</span><span class=lnt>28
+</span><span class=lnt>29
+</span><span class=lnt>30
+</span><span class=lnt>31
+</span><span class=lnt>32
+</span><span class=lnt>33
+</span><span class=lnt>34
+</span><span class=lnt>35
+</span><span class=lnt>36
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-c data-lang=c><span class=line><span class=cl><span class=kt>int</span> <span class=kr>__cdecl</span> <span class=n>__noreturn</span> <span class=nf>main</span><span class=p>()</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>    <span class=kt>char</span> <span class=n>game_map</span><span class=p>[</span><span class=mi>27</span><span class=p>]</span> <span class=o>=</span> <span class=s>&#34;*11110100001010000101111#&#34;</span><span class=p>;</span> <span class=c1>// 5x5迷宫地图
+</span></span></span><span class=line><span class=cl>    <span class=kt>int</span> <span class=n>current_col</span> <span class=o>=</span> <span class=mi>0</span><span class=p>;</span>  <span class=c1>// 当前列坐标
+</span></span></span><span class=line><span class=cl>    <span class=kt>int</span> <span class=n>current_row</span> <span class=o>=</span> <span class=mi>0</span><span class=p>;</span>  <span class=c1>// 当前行坐标 (存储在game_map[25]的位置)
+</span></span></span><span class=line><span class=cl>    <span class=kt>int</span> <span class=n>user_input</span><span class=p>;</span>       <span class=c1>// 用户输入的方向
+</span></span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>    <span class=k>while</span><span class=p>(</span><span class=mi>1</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>        <span class=c1>// 打印操作选项
+</span></span></span><span class=line><span class=cl>        <span class=nf>puts</span><span class=p>(</span><span class=s>&#34;1 up</span><span class=se>\n</span><span class=s>2 down</span><span class=se>\n</span><span class=s>3 left</span><span class=se>\n</span><span class=s>4 right&#34;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>        <span class=nf>scanf</span><span class=p>(</span><span class=s>&#34;%d&#34;</span><span class=p>,</span> <span class=o>&amp;</span><span class=n>user_input</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>        <span class=c1>// 根据输入调整坐标
+</span></span></span><span class=line><span class=cl>        <span class=k>switch</span><span class=p>(</span><span class=n>user_input</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>            <span class=k>case</span> <span class=mi>1</span><span class=o>:</span> <span class=n>current_row</span><span class=o>--</span><span class=p>;</span> <span class=k>break</span><span class=p>;</span>    <span class=c1>// 上移
+</span></span></span><span class=line><span class=cl>            <span class=k>case</span> <span class=mi>2</span><span class=o>:</span> <span class=n>current_row</span><span class=o>++</span><span class=p>;</span> <span class=k>break</span><span class=p>;</span>    <span class=c1>// 下移
+</span></span></span><span class=line><span class=cl>            <span class=k>case</span> <span class=mi>3</span><span class=o>:</span> <span class=n>current_col</span><span class=o>--</span><span class=p>;</span> <span class=k>break</span><span class=p>;</span>    <span class=c1>// 左移
+</span></span></span><span class=line><span class=cl>            <span class=k>case</span> <span class=mi>4</span><span class=o>:</span> <span class=n>current_col</span><span class=o>++</span><span class=p>;</span> <span class=k>break</span><span class=p>;</span>    <span class=c1>// 右移
+</span></span></span><span class=line><span class=cl>            <span class=k>default</span><span class=o>:</span> <span class=nf>exit</span><span class=p>(</span><span class=mi>1</span><span class=p>);</span>                <span class=c1>// 非法输入
+</span></span></span><span class=line><span class=cl>        <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>        <span class=c1>// 边界检查（地图范围0-4）
+</span></span></span><span class=line><span class=cl>        <span class=k>if</span><span class=p>(</span><span class=n>current_row</span> <span class=o>&lt;</span> <span class=mi>0</span> <span class=o>||</span> <span class=n>current_row</span> <span class=o>&gt;</span><span class=mi>4</span> <span class=o>||</span> <span class=n>current_col</span> <span class=o>&lt;</span><span class=mi>0</span> <span class=o>||</span> <span class=n>current_col</span> <span class=o>&gt;</span><span class=mi>4</span><span class=p>)</span> <span class=p>{</span>
+</span></span><span class=line><span class=cl>            <span class=nf>exit</span><span class=p>(</span><span class=mi>1</span><span class=p>);</span> <span class=c1>// 越界
+</span></span></span><span class=line><span class=cl>        <span class=p>}</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>        <span class=c1>// 获取当前位置的字符
+</span></span></span><span class=line><span class=cl>        <span class=kt>char</span> <span class=n>current_cell</span> <span class=o>=</span> <span class=n>game_map</span><span class=p>[</span><span class=mi>1</span> <span class=o>+</span> <span class=mi>5</span><span class=o>*</span><span class=n>current_row</span> <span class=o>+</span> <span class=n>current_col</span><span class=p>];</span> <span class=c1>// +1跳过首字符*
+</span></span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>        <span class=k>if</span><span class=p>(</span><span class=n>current_cell</span> <span class=o>==</span> <span class=sc>&#39;1&#39;</span><span class=p>)</span> <span class=p>{</span>    <span class=c1>// 撞到障碍物
+</span></span></span><span class=line><span class=cl>            <span class=nf>exit</span><span class=p>(</span><span class=mi>1</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>        <span class=p>}</span> <span class=k>else</span> <span class=k>if</span><span class=p>(</span><span class=n>current_cell</span> <span class=o>==</span> <span class=sc>&#39;#&#39;</span><span class=p>)</span> <span class=p>{</span> <span class=c1>// 到达终点
+</span></span></span><span class=line><span class=cl>            <span class=nf>puts</span><span class=p>(</span><span class=s>&#34;Flag是你的操作序列!&#34;</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>            <span class=nf>exit</span><span class=p>(</span><span class=mi>0</span><span class=p>);</span>
+</span></span><span class=line><span class=cl>        <span class=p>}</span>
+</span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=p>}</span>
+</span></span></code></pre></td></tr></table></div></div><p>对着箭画靶子，再来分析源代码：</p><p><code>*&amp;v3[25]</code>即是y轴坐标，输入2执行++，1执行&ndash;</p><p><code>v4</code>即是x轴坐标，初始为零，输入3执行&ndash;，4执行++</p><p><code>LABEL_13</code>用于处理异常</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span><span class=lnt>9
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-c data-lang=c><span class=line><span class=cl><span class=k>for</span> <span class=p>(</span> <span class=n>i</span> <span class=o>=</span> <span class=mi>0</span><span class=p>;</span> <span class=n>i</span> <span class=o>&lt;=</span> <span class=mi>1</span><span class=p>;</span> <span class=o>++</span><span class=n>i</span> <span class=p>)</span>  <span class=c1>// 边界检查
+</span></span></span><span class=line><span class=cl>    <span class=p>{</span>
+</span></span><span class=line><span class=cl>      <span class=k>if</span> <span class=p>(</span> <span class=o>*&amp;</span><span class=n>v3</span><span class=p>[</span><span class=mi>4</span> <span class=o>*</span> <span class=n>i</span> <span class=o>+</span> <span class=mi>25</span><span class=p>]</span> <span class=o>&gt;=</span> <span class=mi>5u</span> <span class=p>)</span> <span class=c1>// 等价于 v3[25 + 4*i] 大于等于5
+</span></span></span><span class=line><span class=cl>        <span class=nf>exit</span><span class=p>(</span><span class=mi>1</span><span class=p>);</span> <span class=c1>// 越界退出
+</span></span></span><span class=line><span class=cl>    <span class=p>}</span>
+</span></span><span class=line><span class=cl><span class=k>if</span> <span class=p>(</span> <span class=n>v7</span><span class=p>[</span><span class=mi>5</span> <span class=o>*</span> <span class=o>*&amp;</span><span class=n>v3</span><span class=p>[</span><span class=mi>25</span><span class=p>]</span> <span class=o>-</span> <span class=mi>41</span> <span class=o>+</span> <span class=n>v4</span><span class=p>]</span> <span class=o>==</span> <span class=sc>&#39;1&#39;</span> <span class=p>)</span> <span class=c1>// 5 * 当前行 - 41 + 当前列
+</span></span></span><span class=line><span class=cl>      <span class=nf>exit</span><span class=p>(</span><span class=mi>1</span><span class=p>);</span> <span class=c1>// 撞墙退出
+</span></span></span><span class=line><span class=cl><span class=k>if</span> <span class=p>(</span> <span class=n>v7</span><span class=p>[</span><span class=mi>5</span> <span class=o>*</span> <span class=o>*&amp;</span><span class=n>v3</span><span class=p>[</span><span class=mi>25</span><span class=p>]</span> <span class=o>-</span> <span class=mi>41</span> <span class=o>+</span> <span class=n>v4</span><span class=p>]</span> <span class=o>==</span> <span class=sc>&#39;#&#39;</span> <span class=p>)</span>
+</span></span><span class=line><span class=cl>      <span class=c1>//输出成功
+</span></span></span></code></pre></td></tr></table></div></div><p><code>v7</code> 的地址紧接在 <code>v3</code> 之后（栈空间连续）</p><p><code>v7[0]</code> 对应 <code>v3[41]</code>（因为 <code>v7</code> 是 <code>_BYTE[12]</code>）</p><p>所以v7要刻意减去41，也就是转化为v3。</p><p>地图：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>* 1 1 1 1
+</span></span><span class=line><span class=cl>0 1 0 0 0
+</span></span><span class=line><span class=cl>0 1 0 1 0
+</span></span><span class=line><span class=cl>0 0 0 1 0
+</span></span><span class=line><span class=cl>1 1 1 1 #
+</span></span></code></pre></td></tr></table></div></div><p>可以得到flag:</p><p><code>222441144222</code></p><h2 id=swpuctf-2021-新生赛非常简单的逻辑题>[SWPUCTF 2021 新生赛]非常简单的逻辑题</h2><p>先分析一波源码：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span><span class=lnt>7
+</span><span class=lnt>8
+</span><span class=lnt>9
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>flag</span> <span class=o>=</span> <span class=s1>&#39;xxxxxxxxxxxxxxxxxxxxx&#39;</span>
+</span></span><span class=line><span class=cl><span class=n>s</span> <span class=o>=</span> <span class=s1>&#39;wesyvbniazxchjko1973652048@$+-&amp;*&lt;&gt;&#39;</span> <span class=c1># 秘钥</span>
+</span></span><span class=line><span class=cl><span class=n>result</span> <span class=o>=</span> <span class=s1>&#39;&#39;</span>
+</span></span><span class=line><span class=cl><span class=k>for</span> <span class=n>i</span> <span class=ow>in</span> <span class=nb>range</span><span class=p>(</span><span class=nb>len</span><span class=p>(</span><span class=n>flag</span><span class=p>)):</span>
+</span></span><span class=line><span class=cl>    <span class=n>s1</span> <span class=o>=</span> <span class=nb>ord</span><span class=p>(</span><span class=n>flag</span><span class=p>[</span><span class=n>i</span><span class=p>])</span><span class=o>//</span><span class=mi>17</span>  <span class=c1># 商</span>
+</span></span><span class=line><span class=cl>    <span class=n>s2</span> <span class=o>=</span> <span class=nb>ord</span><span class=p>(</span><span class=n>flag</span><span class=p>[</span><span class=n>i</span><span class=p>])</span><span class=o>%</span><span class=mi>17</span> <span class=c1># 余数</span>
+</span></span><span class=line><span class=cl>    <span class=n>result</span> <span class=o>+=</span> <span class=n>s</span><span class=p>[(</span><span class=n>s1</span><span class=o>+</span><span class=n>i</span><span class=p>)</span><span class=o>%</span><span class=mi>34</span><span class=p>]</span><span class=o>+</span><span class=n>s</span><span class=p>[</span><span class=o>-</span><span class=p>(</span><span class=n>s2</span><span class=o>+</span><span class=n>i</span><span class=o>+</span><span class=mi>1</span><span class=p>)</span><span class=o>%</span><span class=mi>34</span><span class=p>]</span>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=n>result</span><span class=p>)</span>
+</span></span><span class=line><span class=cl><span class=c1># result = &#39;v0b9n1nkajz@j0c4jjo3oi1h1i937b395i5y5e0e$i&#39; </span>
+</span></span></code></pre></td></tr></table></div></div><p>暴力破解：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-python data-lang=python><span class=line><span class=cl><span class=n>result</span> <span class=o>=</span> <span class=s1>&#39;v0b9n1nkajz@j0c4jjo3oi1h1i937b395i5y5e0e$i&#39;</span>
+</span></span><span class=line><span class=cl><span class=n>s</span> <span class=o>=</span> <span class=s1>&#39;wesyvbniazxchjko1973652048@$+-&amp;*&lt;&gt;&#39;</span>
+</span></span><span class=line><span class=cl><span class=n>flag</span> <span class=o>=</span> <span class=s1>&#39;&#39;</span>
+</span></span><span class=line><span class=cl><span class=n>index</span> <span class=o>=</span> <span class=mi>0</span> <span class=c1># flag的索引</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=k>for</span> <span class=n>j</span> <span class=ow>in</span> <span class=nb>range</span><span class=p>(</span><span class=mi>0</span><span class=p>,</span> <span class=nb>len</span><span class=p>(</span><span class=n>result</span><span class=p>),</span> <span class=mi>2</span><span class=p>):</span> <span class=c1># </span>
+</span></span><span class=line><span class=cl>    <span class=k>for</span> <span class=n>i</span> <span class=ow>in</span> <span class=nb>range</span><span class=p>(</span><span class=mi>0</span><span class=p>,</span> <span class=mi>255</span><span class=p>):</span>
+</span></span><span class=line><span class=cl>        <span class=n>s1</span> <span class=o>=</span> <span class=n>i</span> <span class=o>//</span> <span class=mi>17</span>
+</span></span><span class=line><span class=cl>        <span class=n>s2</span> <span class=o>=</span> <span class=n>i</span> <span class=o>%</span> <span class=mi>17</span>
+</span></span><span class=line><span class=cl>        <span class=n>ss1</span> <span class=o>=</span> <span class=n>s</span><span class=p>[(</span><span class=n>s1</span><span class=o>+</span><span class=n>index</span><span class=p>)</span><span class=o>%</span><span class=mi>34</span><span class=p>]</span>
+</span></span><span class=line><span class=cl>        <span class=n>ss2</span> <span class=o>=</span> <span class=n>s</span><span class=p>[</span><span class=o>-</span><span class=p>(</span><span class=n>s2</span><span class=o>+</span><span class=n>index</span><span class=o>+</span><span class=mi>1</span><span class=p>)</span><span class=o>%</span><span class=mi>34</span><span class=p>]</span>
+</span></span><span class=line><span class=cl>        <span class=n>r</span> <span class=o>=</span> <span class=n>ss1</span> <span class=o>+</span> <span class=n>ss2</span>
+</span></span><span class=line><span class=cl>        <span class=k>if</span> <span class=n>r</span> <span class=o>==</span> <span class=n>result</span><span class=p>[</span><span class=n>j</span><span class=p>:</span><span class=n>j</span><span class=o>+</span><span class=mi>2</span><span class=p>]:</span>
+</span></span><span class=line><span class=cl>            <span class=n>flag</span> <span class=o>+=</span> <span class=nb>chr</span><span class=p>(</span><span class=n>i</span><span class=p>)</span>
+</span></span><span class=line><span class=cl>            <span class=n>index</span> <span class=o>+=</span> <span class=mi>1</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=nb>print</span><span class=p>(</span><span class=n>flag</span><span class=p>)</span>
+</span></span></code></pre></td></tr></table></div></div><p>输出：<code>NSSCTF{Fake_RERE_QAQ}</code></p></section><footer class=article-footer><section class=article-copyright><svg class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><path d="M14.5 9a3.5 4 0 100 6"/></svg>
+<span>Licensed under CC BY-NC-SA 4.0</span></section></footer></article><aside class=related-content--wrapper><h2 class=section-title>相关文章</h2><div class=related-content><div class="flex article-list--tile"><article class=has-image><a href=/posts/2025/06/11/checksecinstalldiff.html/><div class=article-image><img src=/posts/2025/06/11/checksecinstalldiff.html/cover.0b47bec42efd62326522dcceec7c0c9f_hu_307eb29a98e42e9d.jpg width=250 height=150 loading=lazy alt="Featured image of post checksec横表格不显示架构(arch)问题解决（不同版本安装）" data-key=checksecInstallDiff data-hash="md5-C0e+xC79YjJlItzO7HwMnw=="></div><div class=article-details><h2 class=article-title>checksec横表格不显示架构(arch)问题解决（不同版本安装）</h2></div></a></article><article class=has-image><a href=/posts/2025/05/21/pwnpwnpwn.html/><div class=article-image><img src=/posts/2025/05/21/pwnpwnpwn.html/cover.f3cde723f3a7e5dd369bf97f7e1681d9_hu_10465eb67aba4740.jpg width=250 height=150 loading=lazy alt="Featured image of post 【CTF】pwn学习之路" data-key=pwnpwnpwn data-hash="md5-883nI/On5d02m/l/fhaB2Q=="></div><div class=article-details><h2 class=article-title>【CTF】pwn学习之路</h2></div></a></article><article class=has-image><a href=/posts/2024/11/20/ms08-067review-atk.html/><div class=article-image><img src=/posts/2024/11/20/ms08-067review-atk.html/done.2c98c6fe9545be9398f9dacf51ac2466_hu_729a64e7dfa7860e.png width=250 height=150 loading=lazy alt="Featured image of post 【漏洞】windows漏洞MS08-067复现与攻击" data-key=ms08-067review-atk data-hash="md5-LJjG/pVFvpOY+drPUawkZg=="></div><div class=article-details><h2 class=article-title>【漏洞】windows漏洞MS08-067复现与攻击</h2></div></a></article><article class=has-image><a href=/posts/2024/11/14/web-ctf.html/><div class=article-image><img src=/posts/2024/11/14/web-ctf.html/cover.caaa69c4cd00b265033fd3c5ceb4e8e7_hu_ac0666ffa70324c1.png width=250 height=150 loading=lazy alt="Featured image of post 【归档】ctf web类解密" data-key=web-ctf data-hash="md5-yqppxM0AsmUDP9PFzrTo5w=="></div><div class=article-details><h2 class=article-title>【归档】ctf web类解密</h2></div></a></article><article class=has-image><a href=/posts/2024/10/31/buuctf-misc.html/><div class=article-image><img src=/posts/2024/10/31/buuctf-misc.html/cover.84ba7b145c4f34398a249d691706685d_hu_edc9e71b4c32ad6.png width=250 height=150 loading=lazy alt="Featured image of post 【归档】杂项misc解密记录" data-key=buuctf-misc data-hash="md5-hLp7FFxPNDmKJJ1pFwZoXQ=="></div><div class=article-details><h2 class=article-title>【归档】杂项misc解密记录</h2></div></a></article></div></div></aside><script src=https://giscus.app/client.js data-repo=wuko233/wuko233.github.io data-repo-id="MDEwOlJlcG9zaXRvcnk0MDAxMzU0ODE=" data-category=Announcements data-category-id=DIC_kwDOF9mVOc4CnNtv data-mapping=title data-strict=0 data-reactions-enabled=1 data-emit-metadata=0 data-input-position=top data-theme=light_high_contrast data-lang=en data-loading crossorigin=anonymous async></script><script>function setGiscusTheme(e){let t=document.querySelector("iframe.giscus-frame");t&&t.contentWindow.postMessage({giscus:{setConfig:{theme:e}}},"https://giscus.app")}(function(){addEventListener("message",t=>{if(event.origin!=="https://giscus.app")return;e()}),window.addEventListener("onColorSchemeChange",e);function e(){setGiscusTheme(document.documentElement.dataset.scheme==="light"?"light_high_contrast":"noborder_dark")}})()</script><footer class=site-footer><section class=copyright>&copy;
+2020 -
+2026 wuko's blog</section><section class=powerby>本站总访问量<span id=busuanzi_value_site_pv>0</span>次<br><a href="https://icp.gov.moe/?keyword=20220237" target=_blank>萌ICP备20220237号</a><script async src=//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js></script><br>使用 <a href=https://gohugo.io/ target=_blank rel=noopener>Hugo</a> 构建<br>主题 <b><a href=https://github.com/CaiJimmy/hugo-theme-stack target=_blank rel=noopener data-version=3.33.0>Stack</a></b> 由 <a href=https://jimmycai.com target=_blank rel=noopener>Jimmy</a> 设计</section></footer><div class=pswp tabindex=-1 role=dialog aria-hidden=true><div class=pswp__bg></div><div class=pswp__scroll-wrap><div class=pswp__container><div class=pswp__item></div><div class=pswp__item></div><div class=pswp__item></div></div><div class="pswp__ui pswp__ui--hidden"><div class=pswp__top-bar><div class=pswp__counter></div><button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+<button class="pswp__button pswp__button--share" title=Share></button>
+<button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+<button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button><div class=pswp__preloader><div class=pswp__preloader__icn><div class=pswp__preloader__cut><div class=pswp__preloader__donut></div></div></div></div></div><div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap"><div class=pswp__share-tooltip></div></div><button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+</button>
+<button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button><div class=pswp__caption><div class=pswp__caption__center></div></div></div></div></div><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo=" crossorigin=anonymous defer></script><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU=" crossorigin=anonymous defer></script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css crossorigin=anonymous><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css crossorigin=anonymous></main></div><script src=https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z+KMkF24hUW8WePSA9HM=" crossorigin=anonymous></script><script type=text/javascript src=/ts/main.c922af694cc257bf1ecc41c0dd7b0430f9114ec280ccf67cd2c6ad55f5316c4e.js defer></script><script>(function(){const e=document.createElement("link");e.href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap",e.type="text/css",e.rel="stylesheet",document.head.appendChild(e)})()</script></body></html>
