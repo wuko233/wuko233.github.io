@@ -5,6 +5,10 @@ links:
     description: 热爱技术与设计，追求极致的用户体验,喜欢分享开发经验和生活见闻。
     website: http://www.baifun.top/
     image: mako-1-CgWecjlm.jpg
+  - title: KS_LM_KF的个人网站
+    description: 发生甚么事了？
+    website: http://www.kslmkf.com/
+    image: https://www.kslmkf.com/wp-content/uploads/2026/01/1768665269-308e9a4b85a47db29b756bb7f597d7fc-scaled.jpg
 menu:
     main: 
         weight: 4
