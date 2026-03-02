@@ -8,6 +8,11 @@ links:
   - title: KS_LM_KF的个人网站
     description: 发生甚么事了？
     website: http://www.kslmkf.com/
+    image: https://www.kslmkf.com/wp-content/uploads/2026/01/1768665269-308e9a4b85a47db29b756bb7f597d7fc-scaled.jpg
+  - title: wuko's blog
+    description: 从零开始，由心而发。欢迎共同交流学习！
+    website: https://blog.wuko.top
+    image: https://blog.wuko.top/favicon.png
 menu:
     main: 
         weight: 4
