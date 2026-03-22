@@ -459,6 +459,20 @@ UUID=C59EA99716BFB733 /run/media/wuko233/C59EA99716BFB733 lowntfs-3g defaults,ui
 
 然后在你的Steam设置，存储空间里导入库，库的地址必须是到`steamapps`的上级，也就是Steam的安装位置。
 
+### 双系统时差问题
+
+win的时间是将BIOS时间当作本地时间，而Linux则是当作UTC（Coordinated Universal Time），这就导致了Linux时间会快8个小时，而你在Linux校准时间后，Win的时间就会慢8个小时。。。
+
+解决：
+
+让Linux使用本地时间：
+
+```sh
+timedatectl set-local-rtc 1 --adjust-system-clock
+```
+
+当然，你也可以通过更改Windows的注册表，让Win使用UTC，但是感觉还是Linux改比较方便。
+
 ## 体验
 
 ![仅供演示](005.png)
