@@ -3,7 +3,7 @@ title: 记：Linux历程&ArchLinux双系统折腾日记
 date: 2026-03-21
 slug: myArchLinux
 image: 006.png
-description:: 本文记录了笔者从初中初次接触 Linux，到最终成功安装 Arch Linux 双系统的完整历程。文章以时间线展开，回顾了 Termux、Ubuntu、Armbian、Debian 等多个发行版的使用经历，重点讲述了笔者因 Windows 系统问题而决心转向 Arch Linux 的过程。安装过程中遇到了 ISO 启动失败、缺少网络工具、硬盘分区识别、双系统引导配置等一系列问题，并分享了解决经验。文章还详细介绍了桌面环境 Niri 的配置、软件安装技巧（如 clash-verge 的安装）、网络优化以及实际使用体验，最后以对 Arch Linux 用户的幽默祝愿收尾。这是一篇既包含技术干货，又充满个人色彩的 Linux 折腾实录。
+description: 本文记录了笔者从初中初次接触 Linux，到最终成功安装 Arch Linux 双系统的完整历程。文章以时间线展开，回顾了 Termux、Ubuntu、Armbian、Debian 等多个发行版的使用经历，重点讲述了笔者因 Windows 系统问题而决心转向 Arch Linux 的过程。安装过程中遇到了 ISO 启动失败、缺少网络工具、硬盘分区识别、双系统引导配置等一系列问题，并分享了解决经验。文章还详细介绍了桌面环境 Niri 的配置、软件安装技巧（如 clash-verge 的安装）、网络优化以及实际使用体验，最后以对 Arch Linux 用户的幽默祝愿收尾。这是一篇既包含技术干货，又充满个人色彩的 Linux 折腾实录。
 categories: 
     - Linux
 tags: 
