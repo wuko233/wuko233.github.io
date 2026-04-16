@@ -1,0 +1,633 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>杂谈 on wuko's blog</title><link>https://blog.wuko.top/tags/%E6%9D%82%E8%B0%88/</link><description>Recent content in 杂谈 on wuko's blog</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Sat, 21 Mar 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.wuko.top/tags/%E6%9D%82%E8%B0%88/index.xml" rel="self" type="application/rss+xml"/><item><title>记：Linux历程&amp;ArchLinux双系统折腾日记</title><link>https://blog.wuko.top/posts/2026/03/21/myarchlinux.html/</link><pubDate>Sat, 21 Mar 2026 00:00:00 +0000</pubDate><guid>https://blog.wuko.top/posts/2026/03/21/myarchlinux.html/</guid><description>&lt;img src="https://blog.wuko.top/posts/2026/03/21/myarchlinux.html/006.png" alt="Featured image of post 记：Linux历程&amp;ArchLinux双系统折腾日记" /&gt;&lt;blockquote&gt;
+&lt;p&gt;本文记录了笔者从初中初次接触 Linux，到最终成功安装 Arch Linux 双系统的完整历程。文章以时间线展开，回顾了 Termux、Ubuntu、Armbian、Debian 等多个发行版的使用经历，重点讲述了笔者因 Windows 系统问题而决心转向 Arch Linux 的过程。安装过程中遇到了 ISO 启动失败、缺少网络工具、硬盘分区识别、双系统引导配置等一系列问题，并分享了解决经验。文章还详细介绍了桌面环境 Niri 的配置、软件安装技巧（如 clash-verge 的安装）、网络优化以及实际使用体验，最后以对 Arch Linux 用户的幽默祝愿收尾。这是一篇既包含技术干货，又充满个人色彩的 Linux 折腾实录。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;hr&gt;
+&lt;h1 id="前"&gt;前
+&lt;/h1&gt;&lt;p&gt;第一次接触linux，最早还是在初中。当时为了持久化运行&lt;code&gt;go-cqhttp&lt;/code&gt;(现在已经被制裁了)，试过了安卓的多个终端模拟器，最后选择了广为人知的&lt;code&gt;Termux&lt;/code&gt;。虽然不用额外安装linux容器也可以直接跑，但是当时毕竟还是更喜欢图形化界面，于是又装了&lt;code&gt;Ubuntu18.04&lt;/code&gt;，桌面用的&lt;code&gt;KDE&lt;/code&gt;，用vnc连接。&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://blog.wuko.top/posts/2026/03/21/myarchlinux.html/001.png"
+width="1900"
+height="1200"
+srcset="https://blog.wuko.top/posts/2026/03/21/myarchlinux.html/001_hu_92d307b1e7cb9672.png 480w, https://blog.wuko.top/posts/2026/03/21/myarchlinux.html/001_hu_de74d9066032a640.png 1024w"
+loading="lazy"
+alt="Ubuntu18.04 with KDE"
+class="gallery-image"
+data-flex-grow="158"
+data-flex-basis="380px"
+&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;下一次用桌面端Linux，是在22年末，新冠疫情影响，被困亲戚家。没有电脑，只有两台手机，一台骁龙625的vivoX9用于娱乐，一台麒麟659的华为畅享用来上网课（3000毫安五年的衰减，导致这台华为只能插电用，断电了直接60秒关机。有一次线上考试途中手机没电关机了，直接导致了笔者喜提传奇LCD新手机，详见： &lt;a class="link" href="https://blog.wuko.top/posts/2023/02/02/xiaomi-xaga-%E8%B4%AD%E6%9C%BA%E4%B8%8E%E4%BD%BF%E7%94%A8%E4%BD%93%E9%AA%8C.html/" target="_blank" rel="noopener"
+&gt;Xiaomi XAGA 购机与使用体验&lt;/a&gt;）。&lt;/p&gt;
+&lt;p&gt;依旧是最熟悉的Ubuntu，不过这次是20.04版本，跑在华为，在vivo用ssh连接，桌面使用&lt;code&gt;xfce&lt;/code&gt;。&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://blog.wuko.top/posts/2026/03/21/myarchlinux.html/003.jpg"
+width="1080"
+height="965"
+srcset="https://blog.wuko.top/posts/2026/03/21/myarchlinux.html/003_hu_a17fde450433c001.jpg 480w, https://blog.wuko.top/posts/2026/03/21/myarchlinux.html/003_hu_8b444db9c5b7426d.jpg 1024w"
+loading="lazy"
+alt="Ubuntu20.04"
+class="gallery-image"
+data-flex-grow="111"
+data-flex-basis="268px"
+&gt;&lt;/p&gt;
+&lt;p&gt;装桌面端的初衷是为了方便编辑文档和表格（但其实并不方便），但是装好以后也没用几次，因为没过几个星期就换了新手机。&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://blog.wuko.top/posts/2026/03/21/myarchlinux.html/002.jpg"
+width="1440"
+height="720"
+srcset="https://blog.wuko.top/posts/2026/03/21/myarchlinux.html/002_hu_a730c7d897ccaeac.jpg 480w, https://blog.wuko.top/posts/2026/03/21/myarchlinux.html/002_hu_1b881d2080324bd7.jpg 1024w"
+loading="lazy"
+alt="xfce"
+class="gallery-image"
+data-flex-grow="200"
+data-flex-basis="480px"
+&gt;&lt;/p&gt;
+&lt;p&gt;也算是第一次把linux当主力了。&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;下一次桌面端Linux就是实体机了。家里的电脑是09年组装的，在笔者为其更新到Win10企业版后出现了因显驱太老旧而不支持某些新特性的问题，于是便想着装个双系统。系统依旧是那个最熟悉的Ubuntu，可能是22.04或者20.04。桌面使用GNOME。&lt;/p&gt;
+&lt;p&gt;烤录启动盘，分区，安装，一切流程都异常顺利，但是拔出启动盘后却进不了Linux的引导。由于我当时是小白中的小白，于是便不了了之，后来直接整个平台升级了，详见：&lt;a class="link" href="https://blog.wuko.top/posts/2024/06/09/pczhuangji.html/" target="_blank" rel="noopener"
+&gt;第一次捡垃圾装PC&amp;amp;我的电脑历程&lt;/a&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;高二高三的时候，捡矿渣捡了一台玩客云，armv7架构的CPU（啥都跑不了），1GB的RAM，8GB的emmc，装了&lt;code&gt;Armbian&lt;/code&gt;，还塞了什么1Panel、青龙、pma、docker、跑着nginx、MySQL，内网还跑着WordPress，Alist，当然还有go-cqhttp。总之什么有意思就装什么。当然，1g的内存，就没装桌面了。&lt;/p&gt;
+&lt;p&gt;终于，这个花了笔者50的大矿渣在为我日夜不息中强度工作一年多后，在一次1Panel更新后的重启，emmc成功挂了，直接卡引导了。由于临近高考，所以也没心思修，直到现在还静静躺在柜子里吃灰。&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;再往后就上了大学。经导师介绍帮一个老师开发某些项目并且部署上线，到了才知道原来是从零部署。8代i7withAMD亮机卡，1T大机械，装着32位win7（23333）。先把硬盘格式化了，只装纯命令行的&lt;code&gt;Debian13&lt;/code&gt;。安装还好，配网才花时间。&lt;/p&gt;
+&lt;p&gt;校园大内网，想要实现互联网连接，一个方法是以个人身份进行认证，另一个方法是向学校的信管中心申请固定IP+互联网连接。先来说说第一个，笔者学校最便宜的资费为35元30天，带宽只有可怜的10M，还限制3台设备登录，没有IPv6，不知道的以为是20年前的套餐呢。那肯定选后者，经过漫长的逐层审批和流程，终于是得到了IP。但是线下有两台服务器，只有一个网口和一个4口路由器，路由器又得满足老师办公需求不能用，最后从家里拿了个百兆交换机先用着，等了半个月协调来了一个交换机。安装系统只花了两个小时，配网配了快俩月。&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;大一还参加了网安社团，所以第一次接触到了&lt;code&gt;Kali&lt;/code&gt;这个发行版，安装自带一堆渗透工具，给之前用Debian/Armbian当服务器的我看呆了（Debian装上啥都没有，但是还是我见少了，后面装Arch才知道还能这么少）。当时还用着VMware。&lt;/p&gt;
+&lt;p&gt;VMware还是太不优雅了，每次启动程序再打开虚拟机，虽然配置了快捷方式可以一键打开虚拟机，但是总觉得体验有点撕裂。后来朋友推荐下知道了HyperV，win自带的虚拟机，配合ExHyperV管理器，使用体验确实要好上不少。&lt;/p&gt;
+&lt;p&gt;但是体验终究还是差了点，遂尝试&lt;code&gt;WSL&lt;/code&gt;（Windows Subsystem for Linux），体感非常不错，一键启动，终端和win原生终端一样，并且和win的文件管理是互通的，可以直接拖拽，在虚拟机的话还需要装工具，而且还会时不时出问题。于是便一直用到了上个星期。&lt;/p&gt;
+&lt;h1 id="arch-linux"&gt;Arch Linux
+&lt;/h1&gt;&lt;h2 id="因"&gt;因
+&lt;/h2&gt;&lt;p&gt;起因是因为经常要切换不同窗口打字，基本上每次切换都会触发类似按下Ins键的效果，而且还取消不了，只能切换两次输入法才能恢复正常。本来以为是在老家没有地线导致的干扰，没想到到了学校还是这样，没招了，只能试着更新Windows，更新后问题是解决了，但是一堆莫名其妙的bug出现了，先是开机锁屏pin图标乱飞，锁屏壁纸原生的和自定义的打架，玩游戏经常掉显驱（也可能是AMD的问题，但是更新前很少），还有各种小问题。&lt;/p&gt;
+&lt;p&gt;再加上最近在开发一个Linux安全应用，使用win WSL开发监测不到一些事件，索性打算直接装个双系统使。&lt;/p&gt;
+&lt;h2 id="一时兴起"&gt;一时兴起
+&lt;/h2&gt;&lt;p&gt;就在有这个想法后，我想到了老早前看到过的视频，大概就是什么超好看的Linux桌面配置，里面用的系统就是&lt;code&gt;Arch Linux&lt;/code&gt;，并且先前实验室的一个学长的笔记本也装着arch，于是便一时兴起决定装Arch Linux，但问题在于当时时间是晚上十点，违反了装机法之不要在晚上装机，这也为后面埋下了伏笔&amp;hellip;&lt;/p&gt;
+&lt;p&gt;先从arch官网下载了一个iso镜像，放到了我之前装机格式化过的VentoryU盘里，随后到win设置里关闭了快速启动（还不能直接关），再到BIOS里关闭了安全启动。&lt;/p&gt;
+&lt;h3 id="iso启动失败"&gt;ISO启动失败
+&lt;/h3&gt;&lt;p&gt;插盘，进ISO，想象中的图形化安装引导界面并没有出现（其实没问题也不会出现，我后面才知道），有的只有一堆报错，&lt;code&gt;ACPI BIOS Error： AE_ALREADY_EXISTS&lt;/code&gt;和&lt;code&gt;# INIT NOT FOUND&lt;/code&gt;。咕噜了一下，貌似是因为联想fTPM和AMD平台对某些内核不兼容。跟着教程手动从GRUB启动，找到ISO的挂载位置，直接设置内核并加载：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;span class="lnt"&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-sh" data-lang="sh"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;linux &lt;span class="o"&gt;(&lt;/span&gt;hd0,msdos1&lt;span class="o"&gt;)&lt;/span&gt;/ventoy/arch/boot/x86_64/vmlinuz-linux &lt;span class="nv"&gt;archisobasedir&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;arch &lt;span class="nv"&gt;archisolabel&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;ARCH_202603 tpm_tis.interrupts&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;initrd &lt;span class="o"&gt;(&lt;/span&gt;hd0,msdos1&lt;span class="o"&gt;)&lt;/span&gt;/ventoy/arch/boot/x86_64/initramfs-linux.img
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;boot
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id="iso没网洛工具上不了网"&gt;ISO没网洛工具上不了网
+&lt;/h3&gt;&lt;p&gt;成功进到了iso系统里，然后就又发现不对了：&lt;/p&gt;
+&lt;p&gt;没有有线网连接，只能试着连无线网，试着用&lt;code&gt;iwctl&lt;/code&gt;，结果居然没有iwctl，好嘛，那就用&lt;code&gt;nmcil&lt;/code&gt;，啥叫nmcil not found？随后我试了一堆工具，惊讶地发现，这个镜像系统没有无线网络工具&amp;hellip;&lt;/p&gt;
+&lt;p&gt;那就试试USB网络共享呗，插上手机，&lt;code&gt;IP link&lt;/code&gt;有了usb0，试着用&lt;code&gt;dhcpcd&lt;/code&gt;获取IP地址，您猜怎么着，dhcpcd也没有。没招了，因为不知道手机USB共享的具体IP地址，按照教程手动&lt;code&gt;ip&lt;/code&gt;配置网关DNS，怎么都上不了网。&lt;/p&gt;
+&lt;p&gt;紧急请教dalao，大佬直接扣了个问号，随后直接线下送来了他的镜像U盘，插上才知道，之前过的都是什么苦日子：&lt;/p&gt;
+&lt;p&gt;iso进不去，是因为我下的精简包，全量安装镜像直接进去没一点问题；没有网络工具，是因为我下的精简包，全量包工具很全，USB共享即插即用。&lt;/p&gt;
+&lt;p&gt;惨痛的经验教训，不要用时间换空间，一定要下全量包。&lt;/p&gt;
+&lt;p&gt;于是便借用大佬的镜像盘继续安装，详细步骤参考了：&lt;a class="link" href="https://zhuanlan.zhihu.com/p/1979668742423201303" target="_blank" rel="noopener"
+&gt;【萌新向】ArchLinux 2026.1安装教程&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id="找不到未分配的盘空间"&gt;找不到未分配的盘空间
+&lt;/h3&gt;&lt;p&gt;然后进行分盘，又遇到问题了：&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;lsblk&lt;/code&gt;，找不到我预留的500G空间。&lt;/p&gt;
+&lt;p&gt;我的笔记本有两块硬盘，第一块海力士1T分了两个盘，一个win系统盘，一个数据盘；第二块350元买的致态7100Ti1T(对，就是现在涨到1300元的那个23333)原本是一个整盘，没有分区。为了装Arch Linux，进行了磁盘整理后压缩了500G空间出来。&lt;/p&gt;
+&lt;p&gt;理论上，&lt;code&gt;lsblk&lt;/code&gt;会显示两个硬盘，第一个硬盘下面有win的两个区和EFI，而第二个盘应该会显示那一个区和未分配的500G。&lt;/p&gt;
+&lt;p&gt;一切都和预想中的一样，除了那500G。我用&lt;code&gt;fdisk -l&lt;/code&gt;也并没有找到那500G的空间。这500G就像是公摊面积一样从我的实际容量里消失了。&lt;/p&gt;
+&lt;p&gt;我还试着重进了两次ISO，无功而返。最后解决方法是在win里打开&lt;code&gt;DiskGenius&lt;/code&gt;手动建立了一个500G的分区（Ext4），并且建立了100G和400G的两个逻辑分区（分别为&lt;code&gt;/&lt;/code&gt;和&lt;code&gt;/home&lt;/code&gt;准备）。&lt;/p&gt;
+&lt;p&gt;然后打开ISO系统，终于能识别了。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;在这里，我差点犯下了一个大错，足以毁掉我的整个笔记本系统：&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;每次进入Linux时，硬盘的分区名字（设备节点名的顺序）是会变的——上一次还在&lt;code&gt;/dev/nvme0n1&lt;/code&gt;，下一次启动可能就变&lt;code&gt;/dev/nvme1n1&lt;/code&gt;了。&lt;/p&gt;
+&lt;p&gt;而我，并没有每次查看&lt;code&gt;lsblk&lt;/code&gt;，而是直接沿用了上一次的路径。&lt;/p&gt;
+&lt;p&gt;所幸，在我挂载硬盘时，因为两个盘的区的序号不同，我在挂载时直接报错了不存在，这才发现了问题：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
+&lt;/span&gt;&lt;span class="lnt"&gt; 2
+&lt;/span&gt;&lt;span class="lnt"&gt; 3
+&lt;/span&gt;&lt;span class="lnt"&gt; 4
+&lt;/span&gt;&lt;span class="lnt"&gt; 5
+&lt;/span&gt;&lt;span class="lnt"&gt; 6
+&lt;/span&gt;&lt;span class="lnt"&gt; 7
+&lt;/span&gt;&lt;span class="lnt"&gt; 8
+&lt;/span&gt;&lt;span class="lnt"&gt; 9
+&lt;/span&gt;&lt;span class="lnt"&gt;10
+&lt;/span&gt;&lt;span class="lnt"&gt;11
+&lt;/span&gt;&lt;span class="lnt"&gt;12
+&lt;/span&gt;&lt;span class="lnt"&gt;13
+&lt;/span&gt;&lt;span class="lnt"&gt;14
+&lt;/span&gt;&lt;span class="lnt"&gt;15
+&lt;/span&gt;&lt;span class="lnt"&gt;16
+&lt;/span&gt;&lt;span class="lnt"&gt;17
+&lt;/span&gt;&lt;span class="lnt"&gt;18
+&lt;/span&gt;&lt;span class="lnt"&gt;19
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-sh" data-lang="sh"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;before：
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&amp;gt; lsblk
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;nvme0n1
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;├─nvme0n1p5
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;└─nvme0n1p6
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;nvme1n1
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;├─nvme1n1p1
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;└─nvme1n1p2
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;after:
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&amp;gt; lsblk
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;nvme0n1 ← 现在是之前的那块 nvme1n1（没有p5/p6）
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;└─nvme0n1p1
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;└─nvme0n1p2
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;nvme1n1 ← 现在是之前的那块 nvme0n1（有p5/p6）
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;├─nvme1n1p5
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;└─nvme1n1p6
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;万幸两块盘数据分区编号不同，我也没有执行格式化，不然直接当场爆炸，数据全丢了。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;————挂载不同硬盘一定要用UUID————&lt;/strong&gt;&lt;/p&gt;
+&lt;h3 id="双系统引导与一些建议"&gt;双系统引导与一些建议
+&lt;/h3&gt;&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-sh" data-lang="sh"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;nvme1n1p1 260M vfat WIndows EFI
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;确认Windows的EFI在&lt;code&gt;nvme1n1p1&lt;/code&gt; ，挂载它为&lt;code&gt;/mnt/boot/&lt;/code&gt;，进入系统：&lt;code&gt;arch-chroot /mnt&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;就是常规的那些设置，不过双系统需要注意，需要安装&lt;code&gt;os-prober&lt;/code&gt;，并配置&lt;code&gt;/etc/default/grub&lt;/code&gt;，添加或取消注释：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-sh" data-lang="sh"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nv"&gt;GRUB_DISABLE_OS_PROBER&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="nb"&gt;false&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;再生成配置：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;grub-mkconfig -o /boot/grub/grub.cfg
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;确保Windows系统被添加：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;span class="lnt"&gt;3
+&lt;/span&gt;&lt;span class="lnt"&gt;4
+&lt;/span&gt;&lt;span class="lnt"&gt;5
+&lt;/span&gt;&lt;span class="lnt"&gt;6
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Generating grub configuration file ...
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Found linux image: /boot/vmlinuz-linux
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Found initrd image: /boot/initramfs-linux.img
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Found Windows Boot Manager on /dev/nvme0n1p1
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Adding boot menu entry for UEFI Firmware Settings ...
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;done
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;还有一件事，退出ISO系统前，先在chroot里把该装的工具装好，比如&lt;code&gt;dhcpcd&lt;/code&gt;、&lt;code&gt;iwd&lt;/code&gt;、&lt;code&gt;networkmanager&lt;/code&gt;、&lt;code&gt;vim&lt;/code&gt;等等，它默认安装的是精简镜像（就是上面啥都木有的系统），不然就等着再进一次ISO了= =。&lt;/p&gt;
+&lt;h2 id="舒适化"&gt;舒适化
+&lt;/h2&gt;&lt;p&gt;在经历了以上内容，已经是第二天的凌晨了，宿舍早已断电（11点），没办法，只能第二天再继续配置。&lt;/p&gt;
+&lt;p&gt;第二天，在配置好该配置的东西后，到了选桌面的环节了！先前已经用过了&lt;code&gt;KDE&lt;/code&gt;、&lt;code&gt;xfce&lt;/code&gt;以及&lt;code&gt;GNOME&lt;/code&gt;，这次肯定要用个没用过的新奇的玩意儿，况且装Arch Linux的一个驱动力也是漂亮的桌面。那肯定是时新的&lt;code&gt;Wayland&lt;/code&gt;了！&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;niri&lt;/code&gt;和&lt;code&gt;hyprland&lt;/code&gt;，这两个窗口管理器之间犹豫了好久，最后选择了&lt;code&gt;niri&lt;/code&gt;，因为更喜欢rust来着233。&lt;/p&gt;
+&lt;p&gt;抄的这个大佬的作业：&lt;a class="link" href="https://github.com/SHORiN-KiWATA/Shorin-ArchLinux-Guide/" target="_blank" rel="noopener"
+&gt;SHORiN-KiWATA/Shorin-ArchLinux-Guide/&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;配置好后是这样子滴：&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://blog.wuko.top/posts/2026/03/21/myarchlinux.html/004.png"
+width="2560"
+height="1600"
+srcset="https://blog.wuko.top/posts/2026/03/21/myarchlinux.html/004_hu_50ed7e1c641a7732.png 480w, https://blog.wuko.top/posts/2026/03/21/myarchlinux.html/004_hu_4c89d5bd76f3ccf9.png 1024w"
+loading="lazy"
+alt="Arch Linux"
+class="gallery-image"
+data-flex-grow="160"
+data-flex-basis="384px"
+&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;窗口管理器: &lt;code&gt;Niri&lt;/code&gt; (滚动式 Wayland 合成器)&lt;/p&gt;
+&lt;p&gt;任务栏: &lt;code&gt;Waybar&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;终端: &lt;code&gt;Kitty&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;应用启动器: &lt;code&gt;Fuzzel&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;输入法: &lt;code&gt;Fcitx5&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;壁纸管理: &lt;code&gt;Waypaper&lt;/code&gt; + &lt;code&gt;Swww&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;锁屏: &lt;code&gt;Hyprlock&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;通知: &lt;code&gt;Mako&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;剪贴板: &lt;code&gt;Cliphist&lt;/code&gt; + &lt;code&gt;Shorinclip&lt;/code&gt;&lt;/p&gt;
+&lt;h3 id="刷新率"&gt;刷新率
+&lt;/h3&gt;&lt;p&gt;默认niri刷新率只有60fps，需要手动改一下，先查看现在支持的分辨率：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
+&lt;/span&gt;&lt;span class="lnt"&gt; 2
+&lt;/span&gt;&lt;span class="lnt"&gt; 3
+&lt;/span&gt;&lt;span class="lnt"&gt; 4
+&lt;/span&gt;&lt;span class="lnt"&gt; 5
+&lt;/span&gt;&lt;span class="lnt"&gt; 6
+&lt;/span&gt;&lt;span class="lnt"&gt; 7
+&lt;/span&gt;&lt;span class="lnt"&gt; 8
+&lt;/span&gt;&lt;span class="lnt"&gt; 9
+&lt;/span&gt;&lt;span class="lnt"&gt;10
+&lt;/span&gt;&lt;span class="lnt"&gt;11
+&lt;/span&gt;&lt;span class="lnt"&gt;12
+&lt;/span&gt;&lt;span class="lnt"&gt;13
+&lt;/span&gt;&lt;span class="lnt"&gt;14
+&lt;/span&gt;&lt;span class="lnt"&gt;15
+&lt;/span&gt;&lt;span class="lnt"&gt;16
+&lt;/span&gt;&lt;span class="lnt"&gt;17
+&lt;/span&gt;&lt;span class="lnt"&gt;18
+&lt;/span&gt;&lt;span class="lnt"&gt;19
+&lt;/span&gt;&lt;span class="lnt"&gt;20
+&lt;/span&gt;&lt;span class="lnt"&gt;21
+&lt;/span&gt;&lt;span class="lnt"&gt;22
+&lt;/span&gt;&lt;span class="lnt"&gt;23
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-sh" data-lang="sh"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&amp;gt; niri msg outputs
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;Output &lt;span class="s2"&gt;&amp;#34;California Institute of Technology 0x1615 Unknown&amp;#34;&lt;/span&gt; &lt;span class="o"&gt;(&lt;/span&gt;eDP-1&lt;span class="o"&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; Current mode: 2560x1600 @ 60.002 Hz
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; Variable refresh rate: supported, disabled
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; Physical size: 340x220 mm
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; Logical position: 0, &lt;span class="m"&gt;0&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; Logical size: 1706x1066
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; Scale: 1.5
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; Transform: normal
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; Available modes:
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; 2560x1600@60.002 &lt;span class="o"&gt;(&lt;/span&gt;current&lt;span class="o"&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; 2560x1600@120.002
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; 1920x1200@60.002
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; 1920x1080@60.002
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; 1600x1200@60.002
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; 1680x1050@60.002
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; 1280x1024@60.002
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; 1440x900@60.002
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; 1280x800@60.002
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; 1280x720@60.002
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; 1024x768@60.002
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; 800x600@60.002
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; 640x480@60.002
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;任意editor打开&lt;code&gt;~/.config/niri/config.kdl&lt;/code&gt;，把output改成你想要的分辨率和帧率。&lt;/p&gt;
+&lt;p&gt;因为我的&lt;code&gt;output&lt;/code&gt;是用include从&lt;code&gt;output.config&lt;/code&gt;导入的，所以修改它就可以了：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;span class="lnt"&gt;3
+&lt;/span&gt;&lt;span class="lnt"&gt;4
+&lt;/span&gt;&lt;span class="lnt"&gt;5
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;› cat .config/niri/output.kdl
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;output &amp;#34;eDP-1&amp;#34; {
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; mode &amp;#34;2560x1600@120.002&amp;#34;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; scale 1.5
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;注意，帧率必须要和&lt;code&gt;niri msg outputs&lt;/code&gt;的输出保持一致，比如我的配置改成120就会报错。&lt;/p&gt;
+&lt;h3 id="网络"&gt;网络
+&lt;/h3&gt;&lt;p&gt;我这次用的shell是&lt;code&gt;fish&lt;/code&gt;，fish支持一个很实用的功能，函数：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;span class="lnt"&gt;3
+&lt;/span&gt;&lt;span class="lnt"&gt;4
+&lt;/span&gt;&lt;span class="lnt"&gt;5
+&lt;/span&gt;&lt;span class="lnt"&gt;6
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-sh" data-lang="sh"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="k"&gt;function&lt;/span&gt; update-github520
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;正在更新 GitHub520 hosts...&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; sudo sed -i &lt;span class="s2"&gt;&amp;#34;/# GitHub520 Host Start/,/# GitHub520 Host End/d&amp;#34;&lt;/span&gt; /etc/hosts
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; curl https://raw.hellogithub.com/hosts &lt;span class="p"&gt;|&lt;/span&gt; sudo tee -a /etc/hosts &amp;gt; /dev/null
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; &lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;&amp;#34;✅ 更新完成！&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;end
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;如上实现了Github的快速更新host，只需要写入&lt;code&gt;~/.config/fish/config.fish&lt;/code&gt;就可以！或者直接在终端输入这些，然后发送&lt;code&gt;funcsave update-github520&lt;/code&gt;就可以自动保存！&lt;/p&gt;
+&lt;p&gt;照猫画虎，我还创建了例如快速绕过校园网登录之类的快速命令，很舒服~&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;strong&gt;艰难的代理软件配置之路&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;先试着装&lt;code&gt;clash-verge&lt;/code&gt;，AUR好慢，时间越来越长。。。&lt;/p&gt;
+&lt;p&gt;遂尝试配置&lt;code&gt;Hiddfy&lt;/code&gt;，下载appimage，打不开，显示缺少GL，以为是显驱有问题，又把openGL和Vulkan的AMD驱动重装了一遍，还是打不开。怀疑是软件问题，于是去OSU!官网下了个Lazer的Appimage，结果顺利打开了，而且延迟比Win还低。。&lt;/p&gt;
+&lt;p&gt;于是继续回到&lt;code&gt;clash-verge&lt;/code&gt;，放弃AUR安装，dalao提醒可以通过deb包安装，遂尝试。&lt;/p&gt;
+&lt;p&gt;下载安装&lt;code&gt;debtap&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-sh" data-lang="sh"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 安装 debtap&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;yay -S debtap
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;没错，还是AUR，但是好歹这个没有那么慢。。。&lt;/p&gt;
+&lt;p&gt;安装完后更新debtap数据库：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-sh" data-lang="sh"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 更新 debtap 数据库&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;sudo debtap -u
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;您猜怎么着，又卡住了，还是连接缓慢。。。&lt;/p&gt;
+&lt;p&gt;但是debtap的话国内是有镜像源的！&lt;/p&gt;
+&lt;p&gt;直接换源：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;span class="lnt"&gt;3
+&lt;/span&gt;&lt;span class="lnt"&gt;4
+&lt;/span&gt;&lt;span class="lnt"&gt;5
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-sh" data-lang="sh"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 把 Debian 的源替换为中科大源&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;sudo sed -i &lt;span class="s2"&gt;&amp;#34;s|http://ftp.debian.org/debian/dists|https://mirrors.ustc.edu.cn/debian/dists|g&amp;#34;&lt;/span&gt; /usr/bin/debtap
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 把 Ubuntu 的源替换为中科大源&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;sudo sed -i &lt;span class="s2"&gt;&amp;#34;s|http://archive.ubuntu.com/ubuntu/dists|https://mirrors.ustc.edu.cn/ubuntu/dists|g&amp;#34;&lt;/span&gt; /usr/bin/debtap
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;再次运行，成功更新！&lt;/p&gt;
+&lt;p&gt;转换deb包：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-sh" data-lang="sh"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;debtap -q clash-verge-rev_2.4.6_amd64.deb
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;安装转换后的包：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-sh" data-lang="sh"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;sudo pacman -U clash-verge-rev*.pkg.tar.zst
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;但是，事情会有这么简单吗：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;span class="lnt"&gt;3
+&lt;/span&gt;&lt;span class="lnt"&gt;4
+&lt;/span&gt;&lt;span class="lnt"&gt;5
+&lt;/span&gt;&lt;span class="lnt"&gt;6
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-sh" data-lang="sh"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&amp;gt; sudo pacman -U ./clash-verge-2.4.6-1-x86_64.pkg.tar.zst
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;正在加载软件包...
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;正在解析依赖关系...
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;警告：无法解决 &lt;span class="s2"&gt;&amp;#34;gtk&amp;#34;&lt;/span&gt;，&lt;span class="s2"&gt;&amp;#34;clash-verge&amp;#34;&lt;/span&gt; 的一个依赖关系
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;:: 因为无法解决依赖关系，以下软件包无法进行更新：
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt; clash-verge
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;因为Arch和Debian/Ubuntu的依赖名字不一样（gtk3与ggtk），所以报错了。。&lt;/p&gt;
+&lt;p&gt;现在就只有手动修改依赖文件了：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
+&lt;/span&gt;&lt;span class="lnt"&gt; 2
+&lt;/span&gt;&lt;span class="lnt"&gt; 3
+&lt;/span&gt;&lt;span class="lnt"&gt; 4
+&lt;/span&gt;&lt;span class="lnt"&gt; 5
+&lt;/span&gt;&lt;span class="lnt"&gt; 6
+&lt;/span&gt;&lt;span class="lnt"&gt; 7
+&lt;/span&gt;&lt;span class="lnt"&gt; 8
+&lt;/span&gt;&lt;span class="lnt"&gt; 9
+&lt;/span&gt;&lt;span class="lnt"&gt;10
+&lt;/span&gt;&lt;span class="lnt"&gt;11
+&lt;/span&gt;&lt;span class="lnt"&gt;12
+&lt;/span&gt;&lt;span class="lnt"&gt;13
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-sh" data-lang="sh"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 创建一个临时工作目录&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;mkdir ~/clash-verge-fix
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nb"&gt;cd&lt;/span&gt; ~/clash-verge-fix
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 解压你转换好的包&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;tar -xzf ~/Downloads/clash-verge-2.4.6-1-x86_64.pkg.tar.zst
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 编辑 .PKGINFO 文件，把依赖的 &amp;#34;gtk&amp;#34; 改成 &amp;#34;gtk3&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;nano .PKGINFO
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 找到类似 depend = gtk 的行，改成 depend = gtk3&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 重新打包&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;tar -czf clash-verge-fixed.pkg.tar.zst ./*
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;好麻烦，有没有更简单的步骤呢？有的兄弟，有的：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt; 1
+&lt;/span&gt;&lt;span class="lnt"&gt; 2
+&lt;/span&gt;&lt;span class="lnt"&gt; 3
+&lt;/span&gt;&lt;span class="lnt"&gt; 4
+&lt;/span&gt;&lt;span class="lnt"&gt; 5
+&lt;/span&gt;&lt;span class="lnt"&gt; 6
+&lt;/span&gt;&lt;span class="lnt"&gt; 7
+&lt;/span&gt;&lt;span class="lnt"&gt; 8
+&lt;/span&gt;&lt;span class="lnt"&gt; 9
+&lt;/span&gt;&lt;span class="lnt"&gt;10
+&lt;/span&gt;&lt;span class="lnt"&gt;11
+&lt;/span&gt;&lt;span class="lnt"&gt;12
+&lt;/span&gt;&lt;span class="lnt"&gt;13
+&lt;/span&gt;&lt;span class="lnt"&gt;14
+&lt;/span&gt;&lt;span class="lnt"&gt;15
+&lt;/span&gt;&lt;span class="lnt"&gt;16
+&lt;/span&gt;&lt;span class="lnt"&gt;17
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-sh" data-lang="sh"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;debtap clash-verge-rev_2.4.6_amd64.deb
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="o"&gt;==&lt;/span&gt;&amp;gt; Extracting package data...
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="o"&gt;==&lt;/span&gt;&amp;gt; Fixing possible directories structure differencies...
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="o"&gt;==&lt;/span&gt;&amp;gt; Generating .PKGINFO file...
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;:: Enter Packager name &lt;span class="o"&gt;(&lt;/span&gt;can be left blank&lt;span class="o"&gt;)&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;:: Enter package license &lt;span class="o"&gt;(&lt;/span&gt;can be left blank, you can enter multiple licenses comma separated&lt;span class="o"&gt;)&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;*** Creation of .PKGINFO file in progress. It may take a few minutes, please wait...
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="o"&gt;==&lt;/span&gt;&amp;gt; Checking and generating .INSTALL file &lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="k"&gt;if&lt;/span&gt; necessary&lt;span class="o"&gt;)&lt;/span&gt;...
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;:: If you want to edit .PKGINFO and .INSTALL files &lt;span class="o"&gt;(&lt;/span&gt;in this order&lt;span class="o"&gt;)&lt;/span&gt;, press &lt;span class="o"&gt;(&lt;/span&gt;1&lt;span class="o"&gt;)&lt;/span&gt; For vi &lt;span class="o"&gt;(&lt;/span&gt;2&lt;span class="o"&gt;)&lt;/span&gt; For nano &lt;span class="o"&gt;(&lt;/span&gt;3&lt;span class="o"&gt;)&lt;/span&gt; For default editor &lt;span class="o"&gt;(&lt;/span&gt;4&lt;span class="o"&gt;)&lt;/span&gt; For a custom editor or any other key to &lt;span class="k"&gt;continue&lt;/span&gt;:
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;去掉&lt;code&gt;-q&lt;/code&gt;参数，它就会询问你是否要编辑&lt;code&gt;.PKGINFO&lt;/code&gt;，直接在这步使用&lt;code&gt;vi&lt;/code&gt;或者&lt;code&gt;nano&lt;/code&gt;编辑，去掉&lt;code&gt;gtk&lt;/code&gt;就大功告成了！&lt;/p&gt;
+&lt;p&gt;然后在运行安装就成功了！&lt;/p&gt;
+&lt;h3 id="flatpak"&gt;Flatpak
+&lt;/h3&gt;&lt;p&gt;查看当前源:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-sh" data-lang="sh"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;flatpak remotes --show-details
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;配置上交镜像：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-sh" data-lang="sh"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;sudo flatpak remote-modify flathub --url&lt;span class="o"&gt;=&lt;/span&gt;https://mirror.sjtu.edu.cn/flathub
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;hr&gt;
+&lt;p&gt;&lt;strong&gt;Flatpak踩坑点&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;需要读取外部文件作为依赖的软件别用flatpak安装，比如&lt;code&gt;vscode&lt;/code&gt;或&lt;code&gt;OSS&lt;/code&gt;，会有权限问题。&lt;/p&gt;
+&lt;p&gt;使用Flatpak安装的QQ打开就要禁止自动更新，不然会因为QQ 内置的自动更新机制与 Flatpak 的沙盒环境冲突，直接白屏。&lt;/p&gt;
+&lt;h3 id="网易云"&gt;网易云
+&lt;/h3&gt;&lt;p&gt;个人感觉&lt;code&gt;go-musicfox&lt;/code&gt;完全够用，而且应该不会被冻结号（之前用&lt;code&gt;YesPlayMusic&lt;/code&gt;账号会被警告）：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-sh" data-lang="sh"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;yay -S go-musicfox
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;就是需要一定的学习成本，可以在TUI里按&lt;code&gt;?&lt;/code&gt;查看命令。&lt;/p&gt;
+&lt;h3 id="cherry-studio"&gt;Cherry Studio
+&lt;/h3&gt;&lt;p&gt;原来这个居然支持Linux，之前不知道还装了&lt;code&gt;OpenWebUI&lt;/code&gt;:&lt;/p&gt;
+&lt;p&gt;&lt;a class="link" href="https://www.cherry-ai.com/" target="_blank" rel="noopener"
+&gt;Cherry-Studio-x86_64.AppImage&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id="appimagelauncher"&gt;AppImageLauncher
+&lt;/h3&gt;&lt;p&gt;自动处理AppImage，双击即运行、一键创建菜单图标、统一管理，它还提供右键菜单，可以直接更新或卸载已集成的 AppImage，非常方便:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-sh" data-lang="sh"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;yay -S appimagelauncher
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id="steam双系统导入库"&gt;Steam双系统导入库
+&lt;/h3&gt;&lt;p&gt;安装还好，配置好网络就行。&lt;/p&gt;
+&lt;p&gt;关键在于如何导入win的游戏。&lt;/p&gt;
+&lt;p&gt;首先先挂载你的win盘到Linux：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;span class="lnt"&gt;2
+&lt;/span&gt;&lt;span class="lnt"&gt;3
+&lt;/span&gt;&lt;span class="lnt"&gt;4
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-sh" data-lang="sh"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nv"&gt;UUID&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;6CDEDCC1DEDC852C /run/media/wuko233/Data lowntfs-3g defaults,uid&lt;span class="o"&gt;=&lt;/span&gt;1000,gid&lt;span class="o"&gt;=&lt;/span&gt;1000,rw,user,exec,auto,allow_other,big_writes,windows_names,umask&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;000&lt;/span&gt; &lt;span class="m"&gt;0&lt;/span&gt; &lt;span class="m"&gt;0&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nv"&gt;UUID&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;C59EA99716BFB733 /run/media/wuko233/C59EA99716BFB733 lowntfs-3g defaults,uid&lt;span class="o"&gt;=&lt;/span&gt;1000,gid&lt;span class="o"&gt;=&lt;/span&gt;1000,rw,user,exec,big_writes,windows_names,umask&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="m"&gt;000&lt;/span&gt; &lt;span class="m"&gt;0&lt;/span&gt; &lt;span class="m"&gt;0&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;strong&gt;!!!请使用UUID挂载!!!&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;然后在你的Steam设置，存储空间里导入库，库的地址必须是到&lt;code&gt;steamapps&lt;/code&gt;的上级，也就是Steam的安装位置。&lt;/p&gt;
+&lt;h3 id="双系统时差问题"&gt;双系统时差问题
+&lt;/h3&gt;&lt;p&gt;win的时间是将BIOS时间当作本地时间，而Linux则是当作UTC（Coordinated Universal Time），这就导致了Linux时间会快8个小时，而你在Linux校准时间后，Win的时间就会慢8个小时。。。&lt;/p&gt;
+&lt;p&gt;解决：&lt;/p&gt;
+&lt;p&gt;让Linux使用本地时间：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;div class="chroma"&gt;
+&lt;table class="lntable"&gt;&lt;tr&gt;&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code&gt;&lt;span class="lnt"&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class="lntd"&gt;
+&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-sh" data-lang="sh"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;timedatectl set-local-rtc &lt;span class="m"&gt;1&lt;/span&gt; --adjust-system-clock
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;当然，你也可以通过更改Windows的注册表，让Win使用UTC，但是感觉还是Linux改比较方便。&lt;/p&gt;
+&lt;h2 id="体验"&gt;体验
+&lt;/h2&gt;&lt;p&gt;&lt;img src="https://blog.wuko.top/posts/2026/03/21/myarchlinux.html/005.png"
+width="2560"
+height="1600"
+srcset="https://blog.wuko.top/posts/2026/03/21/myarchlinux.html/005_hu_cbaaec369d1f62cb.png 480w, https://blog.wuko.top/posts/2026/03/21/myarchlinux.html/005_hu_cefcf949ae8cd52.png 1024w"
+loading="lazy"
+alt="仅供演示"
+class="gallery-image"
+data-flex-grow="160"
+data-flex-basis="384px"
+&gt;&lt;/p&gt;
+&lt;p&gt;已经高强度用了一周了，总体来说，很舒服。除了浏览器这类的，基本上手可以一直保持在键盘上，像在写这篇博文时我就基本没用鼠标。&lt;/p&gt;
+&lt;p&gt;开发的话，体验也比Windows要好，终于理解那些用Mac写代码的人了：浑然一体，之类的？&lt;/p&gt;
+&lt;p&gt;动画比Windows好太多了，虽然还需要适应操作逻辑，但感觉适应了之后效率应该会更高。&lt;/p&gt;
+&lt;p&gt;中文输入法能用就行，中文分词没有，等之后想办法解决了再加进来，当前有点难受。某些X11应用输不了中文，待解决。。。&lt;/p&gt;
+&lt;p&gt;游戏差强人意，能玩，但是像一些挂机游戏没适配Wayland就很难受&amp;hellip;&lt;del&gt;OSU!Lazer夯爆了，不但完美适配，还能直接导入win的游戏数据。&lt;/del&gt;&lt;/p&gt;
+&lt;p&gt;最满意的地方就是它的占用、功耗和静音了。以当前写文档环境为例：&lt;/p&gt;
+&lt;p&gt;浏览器五六个标签页，三个vscode页面，一个网易云cil，一个steam，qq微信，Cherry Studio&lt;/p&gt;
+&lt;p&gt;占用内存&lt;code&gt;9.33GB&lt;/code&gt;，100电量用到20花了5个半小时，功耗基本上都在13w左右徘徊。&lt;/p&gt;
+&lt;p&gt;安静是真安静，因为风扇压根不转，刚装上还以为是风扇驱动有问题2333。&lt;/p&gt;
+&lt;p&gt;办公的话，还是用win吧，特指文档表格那些，LibreOffice之前用过，只能说勉强能用，WPS Office，不适配高分屏，要么小模块要么高糊屏。最主要是预览和win预览效果完全不一样，为了迎合大部分人的格式，还是用windows吧。。&lt;/p&gt;
+&lt;h1 id="末"&gt;末
+&lt;/h1&gt;&lt;p&gt;&lt;img src="https://blog.wuko.top/posts/2026/03/21/myarchlinux.html/006.png"
+width="2560"
+height="1600"
+srcset="https://blog.wuko.top/posts/2026/03/21/myarchlinux.html/006_hu_bd7cbf13450b4cb9.png 480w, https://blog.wuko.top/posts/2026/03/21/myarchlinux.html/006_hu_de9a62a180d1027b.png 1024w"
+loading="lazy"
+alt="Arch Linux"
+class="gallery-image"
+data-flex-grow="160"
+data-flex-basis="384px"
+&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;愿 &lt;code&gt;pacman -Syu&lt;/code&gt; 永远不冲突，依赖永远完美解决&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;愿 AUR 里的每个 PKGBUILD 都干净利落，无需手动改&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;愿 GRUB 每次 &lt;code&gt;mkconfig&lt;/code&gt; 都能精准找到内核&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;愿 &lt;code&gt;initramfs&lt;/code&gt; 永远完整，不掉驱动&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;愿 &lt;code&gt;systemd-boot&lt;/code&gt; 的 entry 永远正确&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;愿显卡驱动永不撕裂，NVIDIA 和 Wayland 和谐共处 （@ks_lm_kf）&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;愿 Wi-Fi 每次开机自动连上，不抢在 dhcpcd 前面&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;愿蓝牙设备秒连，不出现「br-connection-page-timeout」&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;愿休眠唤醒后一切正常，声卡不消失，触控板不抽风&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;愿 &lt;code&gt;sudo&lt;/code&gt; 永远记得你的密码，不会在关键时刻说你不在 sudoers 里&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;愿 &lt;code&gt;/etc&lt;/code&gt; 里的每个备份都刚好在改崩之前&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;愿 &lt;code&gt;arch-chroot&lt;/code&gt; 用的那根 U 盘永远在你手边&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;愿论坛的 Arch Wiki 永远能打开，且你刚好搜到对的条目&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;最后再加一句——
+&lt;strong&gt;「愿 Rolling Release 永远丝滑，你永远不需要回滚。」&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;祝你 Arch 之路，一滚不挂，一启就亮。🚀&lt;/p&gt;</description></item></channel></rss>

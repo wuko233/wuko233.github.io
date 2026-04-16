@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>装机 on wuko's blog</title><link>https://blog.wuko.top/tags/%E8%A3%85%E6%9C%BA/</link><description>Recent content in 装机 on wuko's blog</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Sun, 09 Jun 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.wuko.top/tags/%E8%A3%85%E6%9C%BA/index.xml" rel="self" type="application/rss+xml"/><item><title>第一次捡垃圾装PC&amp;我的电脑历程</title><link>https://blog.wuko.top/posts/2024/06/09/pczhuangji.html/</link><pubDate>Sun, 09 Jun 2024 00:00:00 +0000</pubDate><guid>https://blog.wuko.top/posts/2024/06/09/pczhuangji.html/</guid><description>&lt;img src="https://blog.wuko.top/posts/2024/06/09/pczhuangji.html/004.jpg" alt="Featured image of post 第一次捡垃圾装PC&amp;我的电脑历程" /&gt;&lt;h2 id="前言"&gt;前言
+&lt;/h2&gt;&lt;p&gt;自打我记事以来，家里就已经有了一台电脑，这让我很早就接触到了互联网以及了解了很多这方面的知识。时与变迁，这台电脑的配置已经远远落后于时代（鲁大师击败全国百分之一），在经历了加内存（1+2换2+2）、升系统（xp-7-10）、加固态、加显卡（HD6450）后，终于得出结论：平台没救了。于是便有了本次装机。&lt;/p&gt;
+&lt;h2 id="关于旧电脑"&gt;关于旧电脑
+&lt;/h2&gt;&lt;p&gt;先看配置：&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;配件&lt;/th&gt;
+&lt;th&gt;23333&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;CPU&lt;/td&gt;
+&lt;td&gt;AMD 速龙II X2 240 2.8GHz 2C2G&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;主板&lt;/td&gt;
+&lt;td&gt;映泰MCP6P M2&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;显卡&lt;/td&gt;
+&lt;td&gt;主板集成&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;内存&lt;/td&gt;
+&lt;td&gt;ddr2 800MHz 2g *2&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;其他&lt;/td&gt;
+&lt;td&gt;IDE光驱、250g希捷机械&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;2009，我家花费两千元左右买了电脑。&lt;/p&gt;
+&lt;p&gt;2011，注册了我的第一个QQ与微博（腾讯）。&lt;/p&gt;
+&lt;p&gt;2018，学习C4D，并用这台电脑渲染了累计十多个小时。。&lt;/p&gt;
+&lt;p&gt;2019，学习了Python，使用这台电脑开发了众多项目（虽然基本都弃坑了）。&lt;/p&gt;
+&lt;p&gt;2020，承担了网课重任，为了视频升级成了Win7，并且开始接触网站建设。&lt;/p&gt;
+&lt;p&gt;2021，电脑正式归我，开始接触Linux。&lt;/p&gt;
+&lt;p&gt;&amp;hellip;&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://blog.wuko.top/posts/2024/06/09/pczhuangji.html/001.jpg"
+width="1080"
+height="1921"
+srcset="https://blog.wuko.top/posts/2024/06/09/pczhuangji.html/001_hu_51415d4b43675692.jpg 480w, https://blog.wuko.top/posts/2024/06/09/pczhuangji.html/001_hu_9461cde69f2bd035.jpg 1024w"
+loading="lazy"
+alt="老主板"
+class="gallery-image"
+data-flex-grow="56"
+data-flex-basis="134px"
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://blog.wuko.top/posts/2024/06/09/pczhuangji.html/002.jpg"
+width="1324"
+height="1080"
+srcset="https://blog.wuko.top/posts/2024/06/09/pczhuangji.html/002_hu_ebf06b447fdf5fa5.jpg 480w, https://blog.wuko.top/posts/2024/06/09/pczhuangji.html/002_hu_85f0719200902174.jpg 1024w"
+loading="lazy"
+alt="老CPu"
+class="gallery-image"
+data-flex-grow="122"
+data-flex-basis="294px"
+&gt;&lt;/p&gt;
+&lt;p&gt;感谢多年陪伴，这麽多年下来这套配置依然能够流畅win10ltsc与办公，但是因为集显驱动没有win10支持，以及主板PCIe x16槽接触不良无法稳定加装显卡，于是便有了装新机的念头。&lt;/p&gt;
+&lt;h2 id="硬件的购入"&gt;硬件的购入
+&lt;/h2&gt;&lt;p&gt;提前看了非常多的捡垃圾视频，最后确定了以下的配置：&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;配件&lt;/th&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;th&gt;价格&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;CPU&lt;/td&gt;
+&lt;td&gt;AMD A8-7500&lt;/td&gt;
+&lt;td&gt;25.97&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;显卡&lt;/td&gt;
+&lt;td&gt;AMD Radeon R7&lt;/td&gt;
+&lt;td&gt;核显&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;主板&lt;/td&gt;
+&lt;td&gt;映泰A68mpl&lt;/td&gt;
+&lt;td&gt;38&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;散热&lt;/td&gt;
+&lt;td&gt;寒冰100&lt;/td&gt;
+&lt;td&gt;17.9&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;内存&lt;/td&gt;
+&lt;td&gt;威刚ddr3 1600Mhz 4g *2&lt;/td&gt;
+&lt;td&gt;14.37&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;硬盘&lt;/td&gt;
+&lt;td&gt;幻隐 HC2000 256g SATA3 SSD&lt;/td&gt;
+&lt;td&gt;拆机&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;希捷 200g HDD&lt;/td&gt;
+&lt;td&gt;拆机&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;电源&lt;/td&gt;
+&lt;td&gt;康舒PC6001 280W&lt;/td&gt;
+&lt;td&gt;拆机&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;机箱&lt;/td&gt;
+&lt;td&gt;H2&lt;/td&gt;
+&lt;td&gt;27.9&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;共计&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;124.14&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;即使换了新机箱，加起来的价格也不到125元！&lt;/p&gt;
+&lt;p&gt;另外特别说说我的固态硬盘，是23年6月国产颗粒大火的时候最低价78买的，现在24年6月卖149，赚翻了XD。&lt;/p&gt;
+&lt;h2 id="到货装机"&gt;到货装机
+&lt;/h2&gt;&lt;p&gt;&lt;img src="https://blog.wuko.top/posts/2024/06/09/pczhuangji.html/003.jpg"
+width="1309"
+height="1080"
+srcset="https://blog.wuko.top/posts/2024/06/09/pczhuangji.html/003_hu_df0500e027e66571.jpg 480w, https://blog.wuko.top/posts/2024/06/09/pczhuangji.html/003_hu_314b00ca6aecc21d.jpg 1024w"
+loading="lazy"
+alt="主板"
+class="gallery-image"
+data-flex-grow="121"
+data-flex-basis="290px"
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://blog.wuko.top/posts/2024/06/09/pczhuangji.html/004.jpg"
+width="1588"
+height="1080"
+srcset="https://blog.wuko.top/posts/2024/06/09/pczhuangji.html/004_hu_9b896273b6344023.jpg 480w, https://blog.wuko.top/posts/2024/06/09/pczhuangji.html/004_hu_99e2e5d1b14858a7.jpg 1024w"
+loading="lazy"
+alt="所有"
+class="gallery-image"
+data-flex-grow="147"
+data-flex-basis="352px"
+&gt;&lt;/p&gt;
+&lt;h3 id="开始装机"&gt;开始装机
+&lt;/h3&gt;&lt;p&gt;有条件请播放油管源，B站压缩的太狠了。。。。。。。。&lt;/p&gt;
+&lt;p&gt;B站源&lt;/p&gt;
+&lt;p&gt;【【空】第一次装机】 &lt;a class="link" href="https://www.bilibili.com/video/BV19t421j7CC" target="_blank" rel="noopener"
+&gt;https://www.bilibili.com/video/BV19t421j7CC&lt;/a&gt; (若只哔哩哔哩iframe禁不了自动播放)&lt;/p&gt;
+&lt;p&gt;Youtube&lt;/p&gt;
+&lt;iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/Y46J1B-CdOo?si=klUA9WKxS2mcmRt0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen&gt;&lt;/iframe&gt;
+&lt;p&gt;成功点亮！&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://blog.wuko.top/posts/2024/06/09/pczhuangji.html/005.jpg"
+width="1768"
+height="1080"
+srcset="https://blog.wuko.top/posts/2024/06/09/pczhuangji.html/005_hu_a53386ad8cf5fc89.jpg 480w, https://blog.wuko.top/posts/2024/06/09/pczhuangji.html/005_hu_dd545fdf2e73b221.jpg 1024w"
+loading="lazy"
+class="gallery-image"
+data-flex-grow="163"
+data-flex-basis="392px"
+&gt;&lt;/p&gt;
+&lt;p&gt;彩色中文BIOS界面！居然还能用鼠标，科技感满满！再也不是原来的蓝天白云了。&lt;/p&gt;
+&lt;p&gt;测试没问题就装到了机箱：
+&lt;img src="https://blog.wuko.top/posts/2024/06/09/pczhuangji.html/006.jpg"
+width="1080"
+height="1921"
+srcset="https://blog.wuko.top/posts/2024/06/09/pczhuangji.html/006_hu_9c62fa429a2ffab5.jpg 480w, https://blog.wuko.top/posts/2024/06/09/pczhuangji.html/006_hu_86569fbbd5a08862.jpg 1024w"
+loading="lazy"
+class="gallery-image"
+data-flex-grow="56"
+data-flex-basis="134px"
+&gt;&lt;/p&gt;
+&lt;p&gt;真难装。。。比前面还难装，主板和机箱孔位死活对不齐，最后大力出奇迹解决了。理线？盖板一盖，谁也不爱！&lt;/p&gt;
+&lt;h3 id="体验"&gt;体验
+&lt;/h3&gt;&lt;p&gt;懒得重装系统了，没想到可以直接进系统并且没有任何兼容问题，要知道我用的可是精简版的Windows 10 企业版 LTSC 21H2，开机炒鸡快，爽歪歪。&lt;/p&gt;
+&lt;p&gt;用DDU删掉了原来的N卡驱动，到AMD官网下载了最新的驱动（A8-7600 with Radeon™ R7 Series Drivers 220623），安装之后&amp;hellip;感觉显示效果很奇怪，并且全屏进入游戏后会出现色彩异常，最后换到了一个更老的驱动才恢复正常，只能说不愧是A卡？&lt;/p&gt;
+&lt;p&gt;得益于双热管塔式散热，电脑桌面挂机CPU温度在3摄氏度左右，正常办公码字温度在10摄氏度，满负荷游戏在35摄氏度，均为夏天，真怕给CPU干感冒了2333。&lt;/p&gt;
+&lt;p&gt;SATA3接口，原来买的固态终于能满速跑了。鲁大师跑分21.5W，击败全国百分之九的人，旧电脑跑分会死机。&lt;/p&gt;
+&lt;p&gt;唯一担心的就是电源，280W在打游戏时非常烫，电源呼呼吹热风，但是几个月以来没有过死机蓝屏症状（除了打开AMD relive打游戏会卡死），很不错了。&lt;/p&gt;
+&lt;h2 id="尾声"&gt;尾声
+&lt;/h2&gt;&lt;p&gt;文章从一月写到六月，终于是在这高考结束第二天写完了。有了新电脑后才发现，最快乐的时候不是用它打游戏，而是装机并点亮的瞬间&amp;hellip;现在经常看着桌面发呆，游戏也玩腻了&amp;hellip;&lt;/p&gt;</description></item></channel></rss>

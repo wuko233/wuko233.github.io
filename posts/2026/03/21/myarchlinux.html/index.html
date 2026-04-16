@@ -1,0 +1,265 @@
+<!doctype html><html lang=zh-CN dir=ltr><head><meta charset=utf-8><meta name=viewport content='width=device-width,initial-scale=1'><meta name=description content="本文记录了笔者从初中初次接触 Linux，到最终成功安装 Arch Linux 双系统的完整历程。文章以时间线展开，回顾了 Termux、Ubuntu、Armbian、Debian 等多个发行版的使用经历，重点讲述了笔者因 Windows 系统问题而决心转向 Arch Linux 的过程。安装过程中遇到了 ISO 启动失败、缺少网络工具、硬盘分区识别、双系统引导配置等一系列问题，并分享了解决经验。文章还详细介绍了桌面环境 Niri 的配置、软件安装技巧（如 clash-verge 的安装）、网络优化以及实际使用体验，最后以对 Arch Linux 用户的幽默祝愿收尾。这是一篇既包含技术干货，又充满个人色彩的 Linux 折腾实录。"><title>记：Linux历程&amp;ArchLinux双系统折腾日记</title><link rel=canonical href=https://blog.wuko.top/posts/2026/03/21/myarchlinux.html/><link rel=stylesheet href=/scss/style.min.86591c898bd806857815fbb8c47e8d3fed97c133b78e83d9bfc27b164dd0aa2b.css><meta property='og:title' content="记：Linux历程&ArchLinux双系统折腾日记"><meta property='og:description' content="本文记录了笔者从初中初次接触 Linux，到最终成功安装 Arch Linux 双系统的完整历程。文章以时间线展开，回顾了 Termux、Ubuntu、Armbian、Debian 等多个发行版的使用经历，重点讲述了笔者因 Windows 系统问题而决心转向 Arch Linux 的过程。安装过程中遇到了 ISO 启动失败、缺少网络工具、硬盘分区识别、双系统引导配置等一系列问题，并分享了解决经验。文章还详细介绍了桌面环境 Niri 的配置、软件安装技巧（如 clash-verge 的安装）、网络优化以及实际使用体验，最后以对 Arch Linux 用户的幽默祝愿收尾。这是一篇既包含技术干货，又充满个人色彩的 Linux 折腾实录。"><meta property='og:url' content='https://blog.wuko.top/posts/2026/03/21/myarchlinux.html/'><meta property='og:site_name' content="wuko's blog"><meta property='og:type' content='article'><meta property='article:section' content='Post'><meta property='article:tag' content='ArchLinux'><meta property='article:tag' content='杂谈'><meta property='article:published_time' content='2026-03-21T00:00:00+00:00'><meta property='article:modified_time' content='2026-03-21T00:00:00+00:00'><meta property='og:image' content='https://blog.wuko.top/posts/2026/03/21/myarchlinux.html/006.png'><meta name=twitter:title content="记：Linux历程&ArchLinux双系统折腾日记"><meta name=twitter:description content="本文记录了笔者从初中初次接触 Linux，到最终成功安装 Arch Linux 双系统的完整历程。文章以时间线展开，回顾了 Termux、Ubuntu、Armbian、Debian 等多个发行版的使用经历，重点讲述了笔者因 Windows 系统问题而决心转向 Arch Linux 的过程。安装过程中遇到了 ISO 启动失败、缺少网络工具、硬盘分区识别、双系统引导配置等一系列问题，并分享了解决经验。文章还详细介绍了桌面环境 Niri 的配置、软件安装技巧（如 clash-verge 的安装）、网络优化以及实际使用体验，最后以对 Arch Linux 用户的幽默祝愿收尾。这是一篇既包含技术干货，又充满个人色彩的 Linux 折腾实录。"><meta name=twitter:card content="summary_large_image"><meta name=twitter:image content='https://blog.wuko.top/posts/2026/03/21/myarchlinux.html/006.png'><link rel="shortcut icon" href=/favicon.png></head><body class=article-page><script>(function(){const e="StackColorScheme";localStorage.getItem(e)||localStorage.setItem(e,"auto")})()</script><script>(function(){const t="StackColorScheme",e=localStorage.getItem(t),n=window.matchMedia("(prefers-color-scheme: dark)").matches===!0;e=="dark"||e==="auto"&&n?document.documentElement.dataset.scheme="dark":document.documentElement.dataset.scheme="light"})()</script><div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky"><button class="hamburger hamburger--spin" type=button id=toggle-menu aria-label=切换菜单>
+<span class=hamburger-box><span class=hamburger-inner></span></span></button><header><figure class=site-avatar><a href=/><img src=/img/avatar_hu_af0a7c4a31bebdf7.png width=300 height=300 class=site-logo loading=lazy alt=Avatar>
+</a><span class=emoji>💭</span></figure><div class=site-meta><h1 class=site-name><a href=/>wuko's blog</a></h1><h2 class=site-description>从零开始，由心而发。欢迎共同交流学习！</h2></div></header><ol class=menu-social><li><a href=https://github.com/wuko233 target=_blank title=GitHub rel=me><svg class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M9 19c-4.3 1.4-4.3-2.5-6-3m12 5v-3.5c0-1 .1-1.4-.5-2 2.8-.3 5.5-1.4 5.5-6a4.6 4.6.0 00-1.3-3.2 4.2 4.2.0 00-.1-3.2s-1.1-.3-3.5 1.3a12.3 12.3.0 00-6.2.0C6.5 2.8 5.4 3.1 5.4 3.1a4.2 4.2.0 00-.1 3.2A4.6 4.6.0 004 9.5c0 4.6 2.7 5.7 5.5 6-.6.6-.6 1.2-.5 2V21"/></svg></a></li><li><a href=https://twitter.com/@Arair237 target=_blank title=Twitter rel=me><svg class="icon icon-tabler icon-tabler-brand-twitter" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M22 4.01c-1 .49-1.98.689-3 .99-1.121-1.265-2.783-1.335-4.38-.737S11.977 6.323 12 8v1c-3.245.083-6.135-1.395-8-4 0 0-4.182 7.433 4 11-1.872 1.247-3.739 2.088-6 2 3.308 1.803 6.913 2.423 10.034 1.517 3.58-1.04 6.522-3.723 7.651-7.742a13.84 13.84.0 00.497-3.753C20.18 7.773 21.692 5.25 22 4.009z"/></svg></a></li></ol><ol class=menu id=main-menu><li><a href=/><svg class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><polyline points="5 12 3 12 12 3 21 12 19 12"/><path d="M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"/><path d="M9 21v-6a2 2 0 012-2h2a2 2 0 012 2v6"/></svg>
+<span>Home</span></a></li><li><a href=/pages/about.html/><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-vocabulary"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M10 19H4a1 1 0 01-1-1V4a1 1 0 011-1h6a2 2 0 012 2 2 2 0 012-2h6a1 1 0 011 1v14a1 1 0 01-1 1h-6a2 2 0 00-2 2 2 2 0 00-2-2z"/><path d="M12 5v16"/><path d="M7 7h1"/><path d="M7 11h1"/><path d="M16 7h1"/><path d="M16 11h1"/><path d="M16 15h1"/></svg>
+<span>About</span></a></li><li><a href=/pages/archives/><svg class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><rect x="3" y="4" width="18" height="4" rx="2"/><path d="M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8"/><line x1="10" y1="12" x2="14" y2="12"/></svg>
+<span>Archives</span></a></li><li><a href=/pages/search/><svg class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="10" cy="10" r="7"/><line x1="21" y1="21" x2="15" y2="15"/></svg>
+<span>Search</span></a></li><li><a href=/pages/links/><svg class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M10 14a3.5 3.5.0 005 0l4-4a3.5 3.5.0 00-5-5l-.5.5"/><path d="M14 10a3.5 3.5.0 00-5 0l-4 4a3.5 3.5.0 005 5l.5-.5"/></svg>
+<span>Links</span></a></li><li><a href=/pages/money/><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-tip-jar"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M14 10h-2.5a1.5 1.5.0 000 3h1a1.5 1.5.0 010 3H10"/><path d="M12 9v1"/><path d="M12 16v1"/><path d="M17 4v1.882c0 .685.387 1.312 1 1.618s1 .933 1 1.618V18a3 3 0 01-3 3H8a3 3 0 01-3-3V9.118c0-.685.387-1.312 1-1.618s1-.933 1-1.618V4"/><path d="M6 4h12z"/></svg>
+<span>Donate</span></a></li><li class=menu-bottom-section><ol class=menu><li id=dark-mode-toggle><svg class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="8" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg>
+<svg class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="16" cy="12" r="2"/><rect x="2" y="6" width="20" height="12" rx="6"/></svg>
+<span>暗色模式</span></li></ol></li></ol></aside><aside class="sidebar right-sidebar sticky"><section class="widget archives"><div class=widget-icon><svg class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><line x1="5" y1="9" x2="19" y2="9"/><line x1="5" y1="15" x2="19" y2="15"/><line x1="11" y1="4" x2="7" y2="20"/><line x1="17" y1="4" x2="13" y2="20"/></svg></div><h2 class="widget-title section-title">目录</h2><div class=widget--toc><nav id=TableOfContents><ol><li><a href=#因>因</a></li><li><a href=#一时兴起>一时兴起</a><ol><li><a href=#iso启动失败>ISO启动失败</a></li><li><a href=#iso没网洛工具上不了网>ISO没网洛工具上不了网</a></li><li><a href=#找不到未分配的盘空间>找不到未分配的盘空间</a></li><li><a href=#双系统引导与一些建议>双系统引导与一些建议</a></li></ol></li><li><a href=#舒适化>舒适化</a><ol><li><a href=#刷新率>刷新率</a></li><li><a href=#网络>网络</a></li><li><a href=#flatpak>Flatpak</a></li><li><a href=#网易云>网易云</a></li><li><a href=#cherry-studio>Cherry Studio</a></li><li><a href=#appimagelauncher>AppImageLauncher</a></li><li><a href=#steam双系统导入库>Steam双系统导入库</a></li><li><a href=#双系统时差问题>双系统时差问题</a></li></ol></li><li><a href=#体验>体验</a></li></ol></nav></div></section></aside><main class="main full-width"><article class="has-image main-article"><header class=article-header><div class=article-image><a href=/posts/2026/03/21/myarchlinux.html/><img src=/posts/2026/03/21/myarchlinux.html/006_hu_2c60e45eb5c1863.png srcset="/posts/2026/03/21/myarchlinux.html/006_hu_2c60e45eb5c1863.png 800w, /posts/2026/03/21/myarchlinux.html/006_hu_fb60074ab967811.png 1600w" width=800 height=500 loading=lazy alt="Featured image of post 记：Linux历程&amp;ArchLinux双系统折腾日记"></a></div><div class=article-details><header class=article-category><a href=/categories/linux/ style=background-color:#bec0ef;color:#0f123d>Linux</a></header><div class=article-title-wrapper><h2 class=article-title><a href=/posts/2026/03/21/myarchlinux.html/>记：Linux历程&amp;ArchLinux双系统折腾日记</a></h2><h3 class=article-subtitle>本文记录了笔者从初中初次接触 Linux，到最终成功安装 Arch Linux 双系统的完整历程。文章以时间线展开，回顾了 Termux、Ubuntu、Armbian、Debian 等多个发行版的使用经历，重点讲述了笔者因 Windows 系统问题而决心转向 Arch Linux 的过程。安装过程中遇到了 ISO 启动失败、缺少网络工具、硬盘分区识别、双系统引导配置等一系列问题，并分享了解决经验。文章还详细介绍了桌面环境 Niri 的配置、软件安装技巧（如 clash-verge 的安装）、网络优化以及实际使用体验，最后以对 Arch Linux 用户的幽默祝愿收尾。这是一篇既包含技术干货，又充满个人色彩的 Linux 折腾实录。</h3></div><footer class=article-time><div><svg class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><path d="M11.795 21H5a2 2 0 01-2-2V7a2 2 0 012-2h12a2 2 0 012 2v4"/><circle cx="18" cy="18" r="4"/><path d="M15 3v4"/><path d="M7 3v4"/><path d="M3 11h16"/><path d="M18 16.496V18l1 1"/></svg>
+<time class=article-time--published datetime=2026-03-21T00:00:00Z>Mar 21, 2026</time></div><div><svg class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 15"/></svg>
+<time class=article-time--reading>阅读时长: 15 分钟</time></div></footer></div></header><section class=article-content><blockquote><p>本文记录了笔者从初中初次接触 Linux，到最终成功安装 Arch Linux 双系统的完整历程。文章以时间线展开，回顾了 Termux、Ubuntu、Armbian、Debian 等多个发行版的使用经历，重点讲述了笔者因 Windows 系统问题而决心转向 Arch Linux 的过程。安装过程中遇到了 ISO 启动失败、缺少网络工具、硬盘分区识别、双系统引导配置等一系列问题，并分享了解决经验。文章还详细介绍了桌面环境 Niri 的配置、软件安装技巧（如 clash-verge 的安装）、网络优化以及实际使用体验，最后以对 Arch Linux 用户的幽默祝愿收尾。这是一篇既包含技术干货，又充满个人色彩的 Linux 折腾实录。</p></blockquote><hr><h1 id=前>前</h1><p>第一次接触linux，最早还是在初中。当时为了持久化运行<code>go-cqhttp</code>(现在已经被制裁了)，试过了安卓的多个终端模拟器，最后选择了广为人知的<code>Termux</code>。虽然不用额外安装linux容器也可以直接跑，但是当时毕竟还是更喜欢图形化界面，于是又装了<code>Ubuntu18.04</code>，桌面用的<code>KDE</code>，用vnc连接。</p><p><img src=/posts/2026/03/21/myarchlinux.html/001.png width=1900 height=1200 srcset="/posts/2026/03/21/myarchlinux.html/001_hu_92d307b1e7cb9672.png 480w, /posts/2026/03/21/myarchlinux.html/001_hu_de74d9066032a640.png 1024w" loading=lazy alt="Ubuntu18.04 with KDE" class=gallery-image data-flex-grow=158 data-flex-basis=380px></p><hr><p>下一次用桌面端Linux，是在22年末，新冠疫情影响，被困亲戚家。没有电脑，只有两台手机，一台骁龙625的vivoX9用于娱乐，一台麒麟659的华为畅享用来上网课（3000毫安五年的衰减，导致这台华为只能插电用，断电了直接60秒关机。有一次线上考试途中手机没电关机了，直接导致了笔者喜提传奇LCD新手机，详见： <a class=link href=https://blog.wuko.top/posts/2023/02/02/xiaomi-xaga-%E8%B4%AD%E6%9C%BA%E4%B8%8E%E4%BD%BF%E7%94%A8%E4%BD%93%E9%AA%8C.html/ target=_blank rel=noopener>Xiaomi XAGA 购机与使用体验</a>）。</p><p>依旧是最熟悉的Ubuntu，不过这次是20.04版本，跑在华为，在vivo用ssh连接，桌面使用<code>xfce</code>。</p><p><img src=/posts/2026/03/21/myarchlinux.html/003.jpg width=1080 height=965 srcset="/posts/2026/03/21/myarchlinux.html/003_hu_a17fde450433c001.jpg 480w, /posts/2026/03/21/myarchlinux.html/003_hu_8b444db9c5b7426d.jpg 1024w" loading=lazy alt=Ubuntu20.04 class=gallery-image data-flex-grow=111 data-flex-basis=268px></p><p>装桌面端的初衷是为了方便编辑文档和表格（但其实并不方便），但是装好以后也没用几次，因为没过几个星期就换了新手机。</p><p><img src=/posts/2026/03/21/myarchlinux.html/002.jpg width=1440 height=720 srcset="/posts/2026/03/21/myarchlinux.html/002_hu_a730c7d897ccaeac.jpg 480w, /posts/2026/03/21/myarchlinux.html/002_hu_1b881d2080324bd7.jpg 1024w" loading=lazy alt=xfce class=gallery-image data-flex-grow=200 data-flex-basis=480px></p><p>也算是第一次把linux当主力了。</p><hr><p>下一次桌面端Linux就是实体机了。家里的电脑是09年组装的，在笔者为其更新到Win10企业版后出现了因显驱太老旧而不支持某些新特性的问题，于是便想着装个双系统。系统依旧是那个最熟悉的Ubuntu，可能是22.04或者20.04。桌面使用GNOME。</p><p>烤录启动盘，分区，安装，一切流程都异常顺利，但是拔出启动盘后却进不了Linux的引导。由于我当时是小白中的小白，于是便不了了之，后来直接整个平台升级了，详见：<a class=link href=https://blog.wuko.top/posts/2024/06/09/pczhuangji.html/ target=_blank rel=noopener>第一次捡垃圾装PC&我的电脑历程</a></p><hr><p>高二高三的时候，捡矿渣捡了一台玩客云，armv7架构的CPU（啥都跑不了），1GB的RAM，8GB的emmc，装了<code>Armbian</code>，还塞了什么1Panel、青龙、pma、docker、跑着nginx、MySQL，内网还跑着WordPress，Alist，当然还有go-cqhttp。总之什么有意思就装什么。当然，1g的内存，就没装桌面了。</p><p>终于，这个花了笔者50的大矿渣在为我日夜不息中强度工作一年多后，在一次1Panel更新后的重启，emmc成功挂了，直接卡引导了。由于临近高考，所以也没心思修，直到现在还静静躺在柜子里吃灰。</p><hr><p>再往后就上了大学。经导师介绍帮一个老师开发某些项目并且部署上线，到了才知道原来是从零部署。8代i7withAMD亮机卡，1T大机械，装着32位win7（23333）。先把硬盘格式化了，只装纯命令行的<code>Debian13</code>。安装还好，配网才花时间。</p><p>校园大内网，想要实现互联网连接，一个方法是以个人身份进行认证，另一个方法是向学校的信管中心申请固定IP+互联网连接。先来说说第一个，笔者学校最便宜的资费为35元30天，带宽只有可怜的10M，还限制3台设备登录，没有IPv6，不知道的以为是20年前的套餐呢。那肯定选后者，经过漫长的逐层审批和流程，终于是得到了IP。但是线下有两台服务器，只有一个网口和一个4口路由器，路由器又得满足老师办公需求不能用，最后从家里拿了个百兆交换机先用着，等了半个月协调来了一个交换机。安装系统只花了两个小时，配网配了快俩月。</p><hr><p>大一还参加了网安社团，所以第一次接触到了<code>Kali</code>这个发行版，安装自带一堆渗透工具，给之前用Debian/Armbian当服务器的我看呆了（Debian装上啥都没有，但是还是我见少了，后面装Arch才知道还能这么少）。当时还用着VMware。</p><p>VMware还是太不优雅了，每次启动程序再打开虚拟机，虽然配置了快捷方式可以一键打开虚拟机，但是总觉得体验有点撕裂。后来朋友推荐下知道了HyperV，win自带的虚拟机，配合ExHyperV管理器，使用体验确实要好上不少。</p><p>但是体验终究还是差了点，遂尝试<code>WSL</code>（Windows Subsystem for Linux），体感非常不错，一键启动，终端和win原生终端一样，并且和win的文件管理是互通的，可以直接拖拽，在虚拟机的话还需要装工具，而且还会时不时出问题。于是便一直用到了上个星期。</p><h1 id=arch-linux>Arch Linux</h1><h2 id=因>因</h2><p>起因是因为经常要切换不同窗口打字，基本上每次切换都会触发类似按下Ins键的效果，而且还取消不了，只能切换两次输入法才能恢复正常。本来以为是在老家没有地线导致的干扰，没想到到了学校还是这样，没招了，只能试着更新Windows，更新后问题是解决了，但是一堆莫名其妙的bug出现了，先是开机锁屏pin图标乱飞，锁屏壁纸原生的和自定义的打架，玩游戏经常掉显驱（也可能是AMD的问题，但是更新前很少），还有各种小问题。</p><p>再加上最近在开发一个Linux安全应用，使用win WSL开发监测不到一些事件，索性打算直接装个双系统使。</p><h2 id=一时兴起>一时兴起</h2><p>就在有这个想法后，我想到了老早前看到过的视频，大概就是什么超好看的Linux桌面配置，里面用的系统就是<code>Arch Linux</code>，并且先前实验室的一个学长的笔记本也装着arch，于是便一时兴起决定装Arch Linux，但问题在于当时时间是晚上十点，违反了装机法之不要在晚上装机，这也为后面埋下了伏笔&mldr;</p><p>先从arch官网下载了一个iso镜像，放到了我之前装机格式化过的VentoryU盘里，随后到win设置里关闭了快速启动（还不能直接关），再到BIOS里关闭了安全启动。</p><h3 id=iso启动失败>ISO启动失败</h3><p>插盘，进ISO，想象中的图形化安装引导界面并没有出现（其实没问题也不会出现，我后面才知道），有的只有一堆报错，<code>ACPI BIOS Error： AE_ALREADY_EXISTS</code>和<code># INIT NOT FOUND</code>。咕噜了一下，貌似是因为联想fTPM和AMD平台对某些内核不兼容。跟着教程手动从GRUB启动，找到ISO的挂载位置，直接设置内核并加载：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-sh data-lang=sh><span class=line><span class=cl>linux <span class=o>(</span>hd0,msdos1<span class=o>)</span>/ventoy/arch/boot/x86_64/vmlinuz-linux <span class=nv>archisobasedir</span><span class=o>=</span>arch <span class=nv>archisolabel</span><span class=o>=</span>ARCH_202603 tpm_tis.interrupts<span class=o>=</span><span class=m>0</span>
+</span></span><span class=line><span class=cl>initrd <span class=o>(</span>hd0,msdos1<span class=o>)</span>/ventoy/arch/boot/x86_64/initramfs-linux.img
+</span></span><span class=line><span class=cl>boot
+</span></span></code></pre></td></tr></table></div></div><h3 id=iso没网洛工具上不了网>ISO没网洛工具上不了网</h3><p>成功进到了iso系统里，然后就又发现不对了：</p><p>没有有线网连接，只能试着连无线网，试着用<code>iwctl</code>，结果居然没有iwctl，好嘛，那就用<code>nmcil</code>，啥叫nmcil not found？随后我试了一堆工具，惊讶地发现，这个镜像系统没有无线网络工具&mldr;</p><p>那就试试USB网络共享呗，插上手机，<code>IP link</code>有了usb0，试着用<code>dhcpcd</code>获取IP地址，您猜怎么着，dhcpcd也没有。没招了，因为不知道手机USB共享的具体IP地址，按照教程手动<code>ip</code>配置网关DNS，怎么都上不了网。</p><p>紧急请教dalao，大佬直接扣了个问号，随后直接线下送来了他的镜像U盘，插上才知道，之前过的都是什么苦日子：</p><p>iso进不去，是因为我下的精简包，全量安装镜像直接进去没一点问题；没有网络工具，是因为我下的精简包，全量包工具很全，USB共享即插即用。</p><p>惨痛的经验教训，不要用时间换空间，一定要下全量包。</p><p>于是便借用大佬的镜像盘继续安装，详细步骤参考了：<a class=link href=https://zhuanlan.zhihu.com/p/1979668742423201303 target=_blank rel=noopener>【萌新向】ArchLinux 2026.1安装教程</a></p><h3 id=找不到未分配的盘空间>找不到未分配的盘空间</h3><p>然后进行分盘，又遇到问题了：</p><p><code>lsblk</code>，找不到我预留的500G空间。</p><p>我的笔记本有两块硬盘，第一块海力士1T分了两个盘，一个win系统盘，一个数据盘；第二块350元买的致态7100Ti1T(对，就是现在涨到1300元的那个23333)原本是一个整盘，没有分区。为了装Arch Linux，进行了磁盘整理后压缩了500G空间出来。</p><p>理论上，<code>lsblk</code>会显示两个硬盘，第一个硬盘下面有win的两个区和EFI，而第二个盘应该会显示那一个区和未分配的500G。</p><p>一切都和预想中的一样，除了那500G。我用<code>fdisk -l</code>也并没有找到那500G的空间。这500G就像是公摊面积一样从我的实际容量里消失了。</p><p>我还试着重进了两次ISO，无功而返。最后解决方法是在win里打开<code>DiskGenius</code>手动建立了一个500G的分区（Ext4），并且建立了100G和400G的两个逻辑分区（分别为<code>/</code>和<code>/home</code>准备）。</p><p>然后打开ISO系统，终于能识别了。</p><p><strong>在这里，我差点犯下了一个大错，足以毁掉我的整个笔记本系统：</strong></p><p>每次进入Linux时，硬盘的分区名字（设备节点名的顺序）是会变的——上一次还在<code>/dev/nvme0n1</code>，下一次启动可能就变<code>/dev/nvme1n1</code>了。</p><p>而我，并没有每次查看<code>lsblk</code>，而是直接沿用了上一次的路径。</p><p>所幸，在我挂载硬盘时，因为两个盘的区的序号不同，我在挂载时直接报错了不存在，这才发现了问题：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-sh data-lang=sh><span class=line><span class=cl>before：
+</span></span><span class=line><span class=cl>&gt; lsblk
+</span></span><span class=line><span class=cl>nvme0n1
+</span></span><span class=line><span class=cl>├─nvme0n1p5
+</span></span><span class=line><span class=cl>└─nvme0n1p6
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>nvme1n1
+</span></span><span class=line><span class=cl>├─nvme1n1p1
+</span></span><span class=line><span class=cl>└─nvme1n1p2
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>after:
+</span></span><span class=line><span class=cl>&gt; lsblk
+</span></span><span class=line><span class=cl>nvme0n1  ← 现在是之前的那块 nvme1n1（没有p5/p6）
+</span></span><span class=line><span class=cl>└─nvme0n1p1
+</span></span><span class=line><span class=cl>└─nvme0n1p2
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>nvme1n1  ← 现在是之前的那块 nvme0n1（有p5/p6）
+</span></span><span class=line><span class=cl>├─nvme1n1p5
+</span></span><span class=line><span class=cl>└─nvme1n1p6
+</span></span></code></pre></td></tr></table></div></div><p>万幸两块盘数据分区编号不同，我也没有执行格式化，不然直接当场爆炸，数据全丢了。</p><p><strong>————挂载不同硬盘一定要用UUID————</strong></p><h3 id=双系统引导与一些建议>双系统引导与一些建议</h3><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-sh data-lang=sh><span class=line><span class=cl>nvme1n1p1 260M vfat WIndows EFI
+</span></span></code></pre></td></tr></table></div></div><p>确认Windows的EFI在<code>nvme1n1p1</code> ，挂载它为<code>/mnt/boot/</code>，进入系统：<code>arch-chroot /mnt</code></p><p>就是常规的那些设置，不过双系统需要注意，需要安装<code>os-prober</code>，并配置<code>/etc/default/grub</code>，添加或取消注释：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-sh data-lang=sh><span class=line><span class=cl><span class=nv>GRUB_DISABLE_OS_PROBER</span><span class=o>=</span><span class=nb>false</span>
+</span></span></code></pre></td></tr></table></div></div><p>再生成配置：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-bash data-lang=bash><span class=line><span class=cl>grub-mkconfig -o /boot/grub/grub.cfg
+</span></span></code></pre></td></tr></table></div></div><p>确保Windows系统被添加：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>Generating grub configuration file ...
+</span></span><span class=line><span class=cl>Found linux image: /boot/vmlinuz-linux
+</span></span><span class=line><span class=cl>Found initrd image: /boot/initramfs-linux.img
+</span></span><span class=line><span class=cl>Found Windows Boot Manager on /dev/nvme0n1p1
+</span></span><span class=line><span class=cl>Adding boot menu entry for UEFI Firmware Settings ...
+</span></span><span class=line><span class=cl>done
+</span></span></code></pre></td></tr></table></div></div><p>还有一件事，退出ISO系统前，先在chroot里把该装的工具装好，比如<code>dhcpcd</code>、<code>iwd</code>、<code>networkmanager</code>、<code>vim</code>等等，它默认安装的是精简镜像（就是上面啥都木有的系统），不然就等着再进一次ISO了= =。</p><h2 id=舒适化>舒适化</h2><p>在经历了以上内容，已经是第二天的凌晨了，宿舍早已断电（11点），没办法，只能第二天再继续配置。</p><p>第二天，在配置好该配置的东西后，到了选桌面的环节了！先前已经用过了<code>KDE</code>、<code>xfce</code>以及<code>GNOME</code>，这次肯定要用个没用过的新奇的玩意儿，况且装Arch Linux的一个驱动力也是漂亮的桌面。那肯定是时新的<code>Wayland</code>了！</p><p><code>niri</code>和<code>hyprland</code>，这两个窗口管理器之间犹豫了好久，最后选择了<code>niri</code>，因为更喜欢rust来着233。</p><p>抄的这个大佬的作业：<a class=link href=https://github.com/SHORiN-KiWATA/Shorin-ArchLinux-Guide/ target=_blank rel=noopener>SHORiN-KiWATA/Shorin-ArchLinux-Guide/</a></p><p>配置好后是这样子滴：</p><p><img src=/posts/2026/03/21/myarchlinux.html/004.png width=2560 height=1600 srcset="/posts/2026/03/21/myarchlinux.html/004_hu_50ed7e1c641a7732.png 480w, /posts/2026/03/21/myarchlinux.html/004_hu_4c89d5bd76f3ccf9.png 1024w" loading=lazy alt="Arch Linux" class=gallery-image data-flex-grow=160 data-flex-basis=384px></p><hr><p>窗口管理器: <code>Niri</code> (滚动式 Wayland 合成器)</p><p>任务栏: <code>Waybar</code></p><p>终端: <code>Kitty</code></p><p>应用启动器: <code>Fuzzel</code></p><p>输入法: <code>Fcitx5</code></p><p>壁纸管理: <code>Waypaper</code> + <code>Swww</code></p><p>锁屏: <code>Hyprlock</code></p><p>通知: <code>Mako</code></p><p>剪贴板: <code>Cliphist</code> + <code>Shorinclip</code></p><h3 id=刷新率>刷新率</h3><p>默认niri刷新率只有60fps，需要手动改一下，先查看现在支持的分辨率：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span><span class=lnt>18
+</span><span class=lnt>19
+</span><span class=lnt>20
+</span><span class=lnt>21
+</span><span class=lnt>22
+</span><span class=lnt>23
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-sh data-lang=sh><span class=line><span class=cl>&gt; niri msg outputs
+</span></span><span class=line><span class=cl>Output <span class=s2>&#34;California Institute of Technology 0x1615 Unknown&#34;</span> <span class=o>(</span>eDP-1<span class=o>)</span>
+</span></span><span class=line><span class=cl>  Current mode: 2560x1600 @ 60.002 Hz
+</span></span><span class=line><span class=cl>  Variable refresh rate: supported, disabled
+</span></span><span class=line><span class=cl>  Physical size: 340x220 mm
+</span></span><span class=line><span class=cl>  Logical position: 0, <span class=m>0</span>
+</span></span><span class=line><span class=cl>  Logical size: 1706x1066
+</span></span><span class=line><span class=cl>  Scale: 1.5
+</span></span><span class=line><span class=cl>  Transform: normal
+</span></span><span class=line><span class=cl>  Available modes:
+</span></span><span class=line><span class=cl>    2560x1600@60.002 <span class=o>(</span>current<span class=o>)</span>
+</span></span><span class=line><span class=cl>    2560x1600@120.002
+</span></span><span class=line><span class=cl>    1920x1200@60.002
+</span></span><span class=line><span class=cl>    1920x1080@60.002
+</span></span><span class=line><span class=cl>    1600x1200@60.002
+</span></span><span class=line><span class=cl>    1680x1050@60.002
+</span></span><span class=line><span class=cl>    1280x1024@60.002
+</span></span><span class=line><span class=cl>    1440x900@60.002
+</span></span><span class=line><span class=cl>    1280x800@60.002
+</span></span><span class=line><span class=cl>    1280x720@60.002
+</span></span><span class=line><span class=cl>    1024x768@60.002
+</span></span><span class=line><span class=cl>    800x600@60.002
+</span></span><span class=line><span class=cl>    640x480@60.002
+</span></span></code></pre></td></tr></table></div></div><p>任意editor打开<code>~/.config/niri/config.kdl</code>，把output改成你想要的分辨率和帧率。</p><p>因为我的<code>output</code>是用include从<code>output.config</code>导入的，所以修改它就可以了：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>› cat .config/niri/output.kdl 
+</span></span><span class=line><span class=cl>output &#34;eDP-1&#34; {
+</span></span><span class=line><span class=cl>    mode &#34;2560x1600@120.002&#34;
+</span></span><span class=line><span class=cl>    scale 1.5
+</span></span><span class=line><span class=cl>}
+</span></span></code></pre></td></tr></table></div></div><p>注意，帧率必须要和<code>niri msg outputs</code>的输出保持一致，比如我的配置改成120就会报错。</p><h3 id=网络>网络</h3><p>我这次用的shell是<code>fish</code>，fish支持一个很实用的功能，函数：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-sh data-lang=sh><span class=line><span class=cl><span class=k>function</span> update-github520
+</span></span><span class=line><span class=cl>    <span class=nb>echo</span> <span class=s2>&#34;正在更新 GitHub520 hosts...&#34;</span>
+</span></span><span class=line><span class=cl>    sudo sed -i <span class=s2>&#34;/# GitHub520 Host Start/,/# GitHub520 Host End/d&#34;</span> /etc/hosts
+</span></span><span class=line><span class=cl>    curl https://raw.hellogithub.com/hosts <span class=p>|</span> sudo tee -a /etc/hosts &gt; /dev/null
+</span></span><span class=line><span class=cl>    <span class=nb>echo</span> <span class=s2>&#34;✅ 更新完成！&#34;</span>
+</span></span><span class=line><span class=cl>end
+</span></span></code></pre></td></tr></table></div></div><p>如上实现了Github的快速更新host，只需要写入<code>~/.config/fish/config.fish</code>就可以！或者直接在终端输入这些，然后发送<code>funcsave update-github520</code>就可以自动保存！</p><p>照猫画虎，我还创建了例如快速绕过校园网登录之类的快速命令，很舒服~</p><hr><p><strong>艰难的代理软件配置之路</strong></p><p>先试着装<code>clash-verge</code>，AUR好慢，时间越来越长。。。</p><p>遂尝试配置<code>Hiddfy</code>，下载appimage，打不开，显示缺少GL，以为是显驱有问题，又把openGL和Vulkan的AMD驱动重装了一遍，还是打不开。怀疑是软件问题，于是去OSU!官网下了个Lazer的Appimage，结果顺利打开了，而且延迟比Win还低。。</p><p>于是继续回到<code>clash-verge</code>，放弃AUR安装，dalao提醒可以通过deb包安装，遂尝试。</p><p>下载安装<code>debtap</code>:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-sh data-lang=sh><span class=line><span class=cl><span class=c1># 安装 debtap</span>
+</span></span><span class=line><span class=cl>yay -S debtap
+</span></span></code></pre></td></tr></table></div></div><p>没错，还是AUR，但是好歹这个没有那么慢。。。</p><p>安装完后更新debtap数据库：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-sh data-lang=sh><span class=line><span class=cl><span class=c1># 更新 debtap 数据库</span>
+</span></span><span class=line><span class=cl>sudo debtap -u
+</span></span></code></pre></td></tr></table></div></div><p>您猜怎么着，又卡住了，还是连接缓慢。。。</p><p>但是debtap的话国内是有镜像源的！</p><p>直接换源：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-sh data-lang=sh><span class=line><span class=cl><span class=c1># 把 Debian 的源替换为中科大源</span>
+</span></span><span class=line><span class=cl>sudo sed -i <span class=s2>&#34;s|http://ftp.debian.org/debian/dists|https://mirrors.ustc.edu.cn/debian/dists|g&#34;</span> /usr/bin/debtap
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 把 Ubuntu 的源替换为中科大源</span>
+</span></span><span class=line><span class=cl>sudo sed -i <span class=s2>&#34;s|http://archive.ubuntu.com/ubuntu/dists|https://mirrors.ustc.edu.cn/ubuntu/dists|g&#34;</span> /usr/bin/debtap
+</span></span></code></pre></td></tr></table></div></div><p>再次运行，成功更新！</p><p>转换deb包：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-sh data-lang=sh><span class=line><span class=cl>debtap -q clash-verge-rev_2.4.6_amd64.deb
+</span></span></code></pre></td></tr></table></div></div><p>安装转换后的包：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-sh data-lang=sh><span class=line><span class=cl>sudo pacman -U clash-verge-rev*.pkg.tar.zst
+</span></span></code></pre></td></tr></table></div></div><p>但是，事情会有这么简单吗：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span><span class=lnt>5
+</span><span class=lnt>6
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-sh data-lang=sh><span class=line><span class=cl>&gt; sudo pacman -U ./clash-verge-2.4.6-1-x86_64.pkg.tar.zst
+</span></span><span class=line><span class=cl>正在加载软件包...
+</span></span><span class=line><span class=cl>正在解析依赖关系...
+</span></span><span class=line><span class=cl>警告：无法解决 <span class=s2>&#34;gtk&#34;</span>，<span class=s2>&#34;clash-verge&#34;</span> 的一个依赖关系
+</span></span><span class=line><span class=cl>:: 因为无法解决依赖关系，以下软件包无法进行更新：
+</span></span><span class=line><span class=cl>      clash-verge
+</span></span></code></pre></td></tr></table></div></div><p>因为Arch和Debian/Ubuntu的依赖名字不一样（gtk3与ggtk），所以报错了。。</p><p>现在就只有手动修改依赖文件了：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-sh data-lang=sh><span class=line><span class=cl><span class=c1># 创建一个临时工作目录</span>
+</span></span><span class=line><span class=cl>mkdir ~/clash-verge-fix
+</span></span><span class=line><span class=cl><span class=nb>cd</span> ~/clash-verge-fix
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 解压你转换好的包</span>
+</span></span><span class=line><span class=cl>tar -xzf ~/Downloads/clash-verge-2.4.6-1-x86_64.pkg.tar.zst
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 编辑 .PKGINFO 文件，把依赖的 &#34;gtk&#34; 改成 &#34;gtk3&#34;</span>
+</span></span><span class=line><span class=cl>nano .PKGINFO
+</span></span><span class=line><span class=cl><span class=c1># 找到类似 depend = gtk 的行，改成 depend = gtk3</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=c1># 重新打包</span>
+</span></span><span class=line><span class=cl>tar -czf clash-verge-fixed.pkg.tar.zst ./*
+</span></span></code></pre></td></tr></table></div></div><p>好麻烦，有没有更简单的步骤呢？有的兄弟，有的：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
+</span><span class=lnt> 2
+</span><span class=lnt> 3
+</span><span class=lnt> 4
+</span><span class=lnt> 5
+</span><span class=lnt> 6
+</span><span class=lnt> 7
+</span><span class=lnt> 8
+</span><span class=lnt> 9
+</span><span class=lnt>10
+</span><span class=lnt>11
+</span><span class=lnt>12
+</span><span class=lnt>13
+</span><span class=lnt>14
+</span><span class=lnt>15
+</span><span class=lnt>16
+</span><span class=lnt>17
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-sh data-lang=sh><span class=line><span class=cl>debtap clash-verge-rev_2.4.6_amd64.deb
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=o>==</span>&gt; Extracting package data...
+</span></span><span class=line><span class=cl><span class=o>==</span>&gt; Fixing possible directories structure differencies...
+</span></span><span class=line><span class=cl><span class=o>==</span>&gt; Generating .PKGINFO file...
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>:: Enter Packager name <span class=o>(</span>can be left blank<span class=o>)</span>:
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>:: Enter package license <span class=o>(</span>can be left blank, you can enter multiple licenses comma separated<span class=o>)</span>:
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>*** Creation of .PKGINFO file in progress. It may take a few minutes, please wait...
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=o>==</span>&gt; Checking and generating .INSTALL file <span class=o>(</span><span class=k>if</span> necessary<span class=o>)</span>...
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl>:: If you want to edit .PKGINFO and .INSTALL files <span class=o>(</span>in this order<span class=o>)</span>, press <span class=o>(</span>1<span class=o>)</span> For vi <span class=o>(</span>2<span class=o>)</span> For nano <span class=o>(</span>3<span class=o>)</span> For default editor <span class=o>(</span>4<span class=o>)</span> For a custom editor or any other key to <span class=k>continue</span>: 
+</span></span></code></pre></td></tr></table></div></div><p>去掉<code>-q</code>参数，它就会询问你是否要编辑<code>.PKGINFO</code>，直接在这步使用<code>vi</code>或者<code>nano</code>编辑，去掉<code>gtk</code>就大功告成了！</p><p>然后在运行安装就成功了！</p><h3 id=flatpak>Flatpak</h3><p>查看当前源:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-sh data-lang=sh><span class=line><span class=cl>flatpak remotes --show-details
+</span></span></code></pre></td></tr></table></div></div><p>配置上交镜像：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-sh data-lang=sh><span class=line><span class=cl>sudo flatpak remote-modify flathub --url<span class=o>=</span>https://mirror.sjtu.edu.cn/flathub
+</span></span></code></pre></td></tr></table></div></div><hr><p><strong>Flatpak踩坑点</strong></p><p>需要读取外部文件作为依赖的软件别用flatpak安装，比如<code>vscode</code>或<code>OSS</code>，会有权限问题。</p><p>使用Flatpak安装的QQ打开就要禁止自动更新，不然会因为QQ 内置的自动更新机制与 Flatpak 的沙盒环境冲突，直接白屏。</p><h3 id=网易云>网易云</h3><p>个人感觉<code>go-musicfox</code>完全够用，而且应该不会被冻结号（之前用<code>YesPlayMusic</code>账号会被警告）：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-sh data-lang=sh><span class=line><span class=cl>yay -S go-musicfox
+</span></span></code></pre></td></tr></table></div></div><p>就是需要一定的学习成本，可以在TUI里按<code>?</code>查看命令。</p><h3 id=cherry-studio>Cherry Studio</h3><p>原来这个居然支持Linux，之前不知道还装了<code>OpenWebUI</code>:</p><p><a class=link href=https://www.cherry-ai.com/ target=_blank rel=noopener>Cherry-Studio-x86_64.AppImage</a></p><h3 id=appimagelauncher>AppImageLauncher</h3><p>自动处理AppImage，双击即运行、一键创建菜单图标、统一管理，它还提供右键菜单，可以直接更新或卸载已集成的 AppImage，非常方便:</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-sh data-lang=sh><span class=line><span class=cl>yay -S appimagelauncher
+</span></span></code></pre></td></tr></table></div></div><h3 id=steam双系统导入库>Steam双系统导入库</h3><p>安装还好，配置好网络就行。</p><p>关键在于如何导入win的游戏。</p><p>首先先挂载你的win盘到Linux：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span><span class=lnt>2
+</span><span class=lnt>3
+</span><span class=lnt>4
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-sh data-lang=sh><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=nv>UUID</span><span class=o>=</span>6CDEDCC1DEDC852C /run/media/wuko233/Data lowntfs-3g defaults,uid<span class=o>=</span>1000,gid<span class=o>=</span>1000,rw,user,exec,auto,allow_other,big_writes,windows_names,umask<span class=o>=</span><span class=m>000</span> <span class=m>0</span> <span class=m>0</span>
+</span></span><span class=line><span class=cl>
+</span></span><span class=line><span class=cl><span class=nv>UUID</span><span class=o>=</span>C59EA99716BFB733 /run/media/wuko233/C59EA99716BFB733 lowntfs-3g defaults,uid<span class=o>=</span>1000,gid<span class=o>=</span>1000,rw,user,exec,big_writes,windows_names,umask<span class=o>=</span><span class=m>000</span> <span class=m>0</span> <span class=m>0</span>
+</span></span></code></pre></td></tr></table></div></div><p><strong>!!!请使用UUID挂载!!!</strong></p><p>然后在你的Steam设置，存储空间里导入库，库的地址必须是到<code>steamapps</code>的上级，也就是Steam的安装位置。</p><h3 id=双系统时差问题>双系统时差问题</h3><p>win的时间是将BIOS时间当作本地时间，而Linux则是当作UTC（Coordinated Universal Time），这就导致了Linux时间会快8个小时，而你在Linux校准时间后，Win的时间就会慢8个小时。。。</p><p>解决：</p><p>让Linux使用本地时间：</p><div class=highlight><div class=chroma><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
+</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-sh data-lang=sh><span class=line><span class=cl>timedatectl set-local-rtc <span class=m>1</span> --adjust-system-clock
+</span></span></code></pre></td></tr></table></div></div><p>当然，你也可以通过更改Windows的注册表，让Win使用UTC，但是感觉还是Linux改比较方便。</p><h2 id=体验>体验</h2><p><img src=/posts/2026/03/21/myarchlinux.html/005.png width=2560 height=1600 srcset="/posts/2026/03/21/myarchlinux.html/005_hu_cbaaec369d1f62cb.png 480w, /posts/2026/03/21/myarchlinux.html/005_hu_cefcf949ae8cd52.png 1024w" loading=lazy alt=仅供演示 class=gallery-image data-flex-grow=160 data-flex-basis=384px></p><p>已经高强度用了一周了，总体来说，很舒服。除了浏览器这类的，基本上手可以一直保持在键盘上，像在写这篇博文时我就基本没用鼠标。</p><p>开发的话，体验也比Windows要好，终于理解那些用Mac写代码的人了：浑然一体，之类的？</p><p>动画比Windows好太多了，虽然还需要适应操作逻辑，但感觉适应了之后效率应该会更高。</p><p>中文输入法能用就行，中文分词没有，等之后想办法解决了再加进来，当前有点难受。某些X11应用输不了中文，待解决。。。</p><p>游戏差强人意，能玩，但是像一些挂机游戏没适配Wayland就很难受&mldr;<del>OSU!Lazer夯爆了，不但完美适配，还能直接导入win的游戏数据。</del></p><p>最满意的地方就是它的占用、功耗和静音了。以当前写文档环境为例：</p><p>浏览器五六个标签页，三个vscode页面，一个网易云cil，一个steam，qq微信，Cherry Studio</p><p>占用内存<code>9.33GB</code>，100电量用到20花了5个半小时，功耗基本上都在13w左右徘徊。</p><p>安静是真安静，因为风扇压根不转，刚装上还以为是风扇驱动有问题2333。</p><p>办公的话，还是用win吧，特指文档表格那些，LibreOffice之前用过，只能说勉强能用，WPS Office，不适配高分屏，要么小模块要么高糊屏。最主要是预览和win预览效果完全不一样，为了迎合大部分人的格式，还是用windows吧。。</p><h1 id=末>末</h1><p><img src=/posts/2026/03/21/myarchlinux.html/006.png width=2560 height=1600 srcset="/posts/2026/03/21/myarchlinux.html/006_hu_bd7cbf13450b4cb9.png 480w, /posts/2026/03/21/myarchlinux.html/006_hu_de9a62a180d1027b.png 1024w" loading=lazy alt="Arch Linux" class=gallery-image data-flex-grow=160 data-flex-basis=384px></p><ul><li><p>愿 <code>pacman -Syu</code> 永远不冲突，依赖永远完美解决</p></li><li><p>愿 AUR 里的每个 PKGBUILD 都干净利落，无需手动改</p></li><li><p>愿 GRUB 每次 <code>mkconfig</code> 都能精准找到内核</p></li><li><p>愿 <code>initramfs</code> 永远完整，不掉驱动</p></li><li><p>愿 <code>systemd-boot</code> 的 entry 永远正确</p></li><li><p>愿显卡驱动永不撕裂，NVIDIA 和 Wayland 和谐共处 （@ks_lm_kf）</p></li><li><p>愿 Wi-Fi 每次开机自动连上，不抢在 dhcpcd 前面</p></li><li><p>愿蓝牙设备秒连，不出现「br-connection-page-timeout」</p></li><li><p>愿休眠唤醒后一切正常，声卡不消失，触控板不抽风</p></li><li><p>愿 <code>sudo</code> 永远记得你的密码，不会在关键时刻说你不在 sudoers 里</p></li><li><p>愿 <code>/etc</code> 里的每个备份都刚好在改崩之前</p></li><li><p>愿 <code>arch-chroot</code> 用的那根 U 盘永远在你手边</p></li><li><p>愿论坛的 Arch Wiki 永远能打开，且你刚好搜到对的条目</p></li></ul><p>最后再加一句——
+<strong>「愿 Rolling Release 永远丝滑，你永远不需要回滚。」</strong></p><p>祝你 Arch 之路，一滚不挂，一启就亮。🚀</p></section><footer class=article-footer><section class=article-tags><a href=/tags/archlinux/>ArchLinux</a>
+<a href=/tags/%E6%9D%82%E8%B0%88/>杂谈</a></section><section class=article-copyright><svg class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z"/><circle cx="12" cy="12" r="9"/><path d="M14.5 9a3.5 4 0 100 6"/></svg>
+<span>Licensed under CC BY-NC-SA 4.0</span></section></footer></article><script src=https://giscus.app/client.js data-repo=wuko233/wuko233.github.io data-repo-id="MDEwOlJlcG9zaXRvcnk0MDAxMzU0ODE=" data-category=Announcements data-category-id=DIC_kwDOF9mVOc4CnNtv data-mapping=title data-strict=0 data-reactions-enabled=1 data-emit-metadata=0 data-input-position=top data-theme=light_high_contrast data-lang=en data-loading crossorigin=anonymous async></script><script>function setGiscusTheme(e){let t=document.querySelector("iframe.giscus-frame");t&&t.contentWindow.postMessage({giscus:{setConfig:{theme:e}}},"https://giscus.app")}(function(){addEventListener("message",t=>{if(event.origin!=="https://giscus.app")return;e()}),window.addEventListener("onColorSchemeChange",e);function e(){setGiscusTheme(document.documentElement.dataset.scheme==="light"?"light_high_contrast":"noborder_dark")}})()</script><footer class=site-footer><section class=copyright>&copy;
+2020 -
+2026 wuko's blog</section><section class=powerby>本站总访问量<span id=busuanzi_value_site_pv>0</span>次<br><a href="https://icp.gov.moe/?keyword=20220237" target=_blank>萌ICP备20220237号</a><script async src=//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js></script><br>使用 <a href=https://gohugo.io/ target=_blank rel=noopener>Hugo</a> 构建<br>主题 <b><a href=https://github.com/CaiJimmy/hugo-theme-stack target=_blank rel=noopener data-version=3.34.2>Stack</a></b> 由 <a href=https://jimmycai.com target=_blank rel=noopener>Jimmy</a> 设计</section></footer><div class=pswp tabindex=-1 role=dialog aria-hidden=true><div class=pswp__bg></div><div class=pswp__scroll-wrap><div class=pswp__container><div class=pswp__item></div><div class=pswp__item></div><div class=pswp__item></div></div><div class="pswp__ui pswp__ui--hidden"><div class=pswp__top-bar><div class=pswp__counter></div><button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+<button class="pswp__button pswp__button--share" title=Share></button>
+<button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+<button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button><div class=pswp__preloader><div class=pswp__preloader__icn><div class=pswp__preloader__cut><div class=pswp__preloader__donut></div></div></div></div></div><div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap"><div class=pswp__share-tooltip></div></div><button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+</button>
+<button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button><div class=pswp__caption><div class=pswp__caption__center></div></div></div></div></div><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo=" crossorigin=anonymous defer></script><script src=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU=" crossorigin=anonymous defer></script><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css crossorigin=anonymous><link rel=stylesheet href=https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css crossorigin=anonymous></main></div><script src=https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z+KMkF24hUW8WePSA9HM=" crossorigin=anonymous></script><script type=text/javascript src=/ts/main.c922af694cc257bf1ecc41c0dd7b0430f9114ec280ccf67cd2c6ad55f5316c4e.js defer></script><script>(function(){const e=document.createElement("link");e.href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap",e.type="text/css",e.rel="stylesheet",document.head.appendChild(e)})()</script></body></html>

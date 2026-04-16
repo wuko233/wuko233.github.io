@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>电子 on wuko's blog</title><link>https://blog.wuko.top/tags/%E7%94%B5%E5%AD%90/</link><description>Recent content in 电子 on wuko's blog</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Sat, 14 Oct 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.wuko.top/tags/%E7%94%B5%E5%AD%90/index.xml" rel="self" type="application/rss+xml"/><item><title>记：小白初试电烙铁之鼠标微动更换</title><link>https://blog.wuko.top/posts/2023/10/14/my_first_eironexperence.html/</link><pubDate>Sat, 14 Oct 2023 00:00:00 +0000</pubDate><guid>https://blog.wuko.top/posts/2023/10/14/my_first_eironexperence.html/</guid><description>&lt;img src="https://blog.wuko.top/posts/2023/10/14/my_first_eironexperence.html/013.png" alt="Featured image of post 记：小白初试电烙铁之鼠标微动更换" /&gt;&lt;h1 id="记小白初试电烙铁之鼠标微动更换"&gt;记：小白初试电烙铁之鼠标微动更换
+&lt;/h1&gt;&lt;blockquote&gt;
+&lt;p&gt;省流：翻车了，但是又救回来了&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id="前言"&gt;前言
+&lt;/h2&gt;&lt;p&gt;在本人从十年前的红光鼠标换到现在的罗技g102之间，其实是有一年多的时间在用一个三无的二模无线鼠标（2.4Ghz+蓝牙），说实话其实还蛮好用的，除了太小（半边手都在鼠标垫上摩擦，并且我还玩OSU。。。）和太贵（价格能买一套小米无线键鼠还有剩余，何况我还用不上蓝牙）外，基本上没有缺点。&lt;/p&gt;
+&lt;p&gt;直到用了一年后的某一天，得益于它使用的静音微动，寿命短，左键开始罢工。勉强用了一个月后，还是下单了G102，随后这个鼠标就开始在柜子里吃灰，直到一天，偶然刷到电烙铁的视频，我的目光就投到了它的身上，于是便有了这篇文章。&lt;/p&gt;
+&lt;h2 id="开始"&gt;开始
+&lt;/h2&gt;&lt;p&gt;先看下总花费吧（叠券了）：&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;物&lt;/th&gt;
+&lt;th&gt;价&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;907电烙铁&lt;/td&gt;
+&lt;td&gt;24.6 CNY&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;6337含松香锡丝 0.6 mm&lt;/td&gt;
+&lt;td&gt;11.81 CNY&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;烙铁架＋海绵＋松香&lt;/td&gt;
+&lt;td&gt;6.08 CNY&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;吸锡器&lt;/td&gt;
+&lt;td&gt;0.38 CNY&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;凯华方形静音微动*2&lt;/td&gt;
+&lt;td&gt;0.55 CNY&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;总合计&lt;/td&gt;
+&lt;td&gt;43.42 CNY&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;没错，全部包邮！也就是说，如果你工具齐全的话，只需要五毛多就可以换掉原先的微动，几乎零成本。可惜本人从未接触过电烙铁，遂购入全套电烙铁装备，开始了本小白的第一次焊锡。&lt;/p&gt;
+&lt;p&gt;等待所有东西到货以及一个空闲的周末，迫不及待拆开鼠标，和家伙们来一张合影:&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://blog.wuko.top/posts/2023/10/14/my_first_eironexperence.html/013.png"
+width="889"
+height="649"
+srcset="https://blog.wuko.top/posts/2023/10/14/my_first_eironexperence.html/013_hu_1cdf6b16a09917e9.png 480w, https://blog.wuko.top/posts/2023/10/14/my_first_eironexperence.html/013_hu_b7b34fe2516c5aea.png 1024w"
+loading="lazy"
+alt="合影"
+class="gallery-image"
+data-flex-grow="136"
+data-flex-basis="328px"
+&gt;&lt;/p&gt;
+&lt;h3 id="拆微动"&gt;拆微动
+&lt;/h3&gt;&lt;p&gt;首先给高温海绵加水，不宜太多，不然容易流得到处都是；也不要不加水就开始用，不然直接烧黑海绵，还会损害烙铁头…设定325℃，给电烙铁通电，等待烙铁头变热。往上沾点松香，烙铁头冒烟时，差不多就到了可以熔锡的温度了。&lt;/p&gt;
+&lt;p&gt;拉锡丝触碰烙铁头，可以一触即熔就OK。给烙铁头上一层锡，防止烙铁头与空气接触加热被氧化。固定好鼠标的电路板，有能力的可以买一个夹具台或者直接上焊台(，不建议一只手拿电路板一只手拿电烙铁，容易出事故。&lt;/p&gt;
+&lt;p&gt;找到鼠标微动位置，翻到背面找到对应针脚，一般是2或3个，向每一个针脚上挂一定量的锡，利用低温锡来降低电路板原有的高温锡，来回反复用烙铁头加热各个针脚上的锡直至正面微动松动，利用重力或者些许外力给微动整下来。&lt;/p&gt;
+&lt;p&gt;到这里任务就已经完成三分之一了，讲讲我上面步骤所踩的坑吧。&lt;/p&gt;
+&lt;p&gt;首先是&lt;del&gt;犯下了&lt;/del&gt;&lt;strong&gt;过度加热&lt;del&gt;之罪&lt;/del&gt;&lt;/strong&gt;，加热电路板时间过长，这为后面的翻车埋下了伏笔…&lt;/p&gt;
+&lt;p&gt;其次是没准备好焊接的环境。熔化的锡把桌垫表面烫坏了，后面垫了一张鼠标垫。还有就是应该备一个小风扇来吸走焊接产生的烟雾，偶尔一次可能还好，但为长期健康着想，还是少吸点吧&amp;hellip;&lt;/p&gt;
+&lt;p&gt;最后是挂的锡不宜太多，本人一开始弄了太多结果落到了其他元件针脚上&amp;hellip;清理了好久。&lt;/p&gt;
+&lt;h3 id="清理锡安装新微动"&gt;清理锡&amp;amp;安装新微动
+&lt;/h3&gt;&lt;p&gt;个人认为最难的一部分，对于没有经验的小白来说可能是最耗时的部分，本人花了一个多小时才清理干净，在此讲一下本人摸索到的方法：&lt;/p&gt;
+&lt;p&gt;先把板子竖直立起来，有锡的那面对准拿烙铁的手，另一面也就是装微动的那面对准拿吸锡器的另一只手。先把吸锡器头怼到正面焊盘，再用烙铁加热背面的锡，待锡熔化时同时按下吸锡器和抬起烙铁，这样一个通透的焊孔就出现了，然后我就发现我的板子焊盘被我整掉了&amp;hellip;&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://blog.wuko.top/posts/2023/10/14/my_first_eironexperence.html/014.png"
+width="519"
+height="251"
+srcset="https://blog.wuko.top/posts/2023/10/14/my_first_eironexperence.html/014_hu_6e6ab732016615a6.png 480w, https://blog.wuko.top/posts/2023/10/14/my_first_eironexperence.html/014_hu_f4457ef897703133.png 1024w"
+loading="lazy"
+alt="焊盘脱落"
+class="gallery-image"
+data-flex-grow="206"
+data-flex-basis="496px"
+&gt;&lt;/p&gt;
+&lt;p&gt;急忙上网查资料，原来正是因为我先前连续加热时间过长，高温导致了焊盘离板子而去&amp;hellip;所以&lt;strong&gt;切忌加热时间过长&lt;/strong&gt;！惨痛的教训：(&lt;/p&gt;
+&lt;p&gt;总之先把微动装上去吧，看看好不好使&amp;hellip;&lt;/p&gt;
+&lt;p&gt;凯华这个微动的针脚中间金属片是凸出来的，一开始试着大力出奇迹直接捅进去，结果针脚歪了也没进去，于是请出家中十年前的老虎钳扶正了针脚并且把凸出部分压了压，轻松搞定。&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://blog.wuko.top/posts/2023/10/14/my_first_eironexperence.html/015.png"
+width="512"
+height="780"
+srcset="https://blog.wuko.top/posts/2023/10/14/my_first_eironexperence.html/015_hu_f40b23727ec121ff.png 480w, https://blog.wuko.top/posts/2023/10/14/my_first_eironexperence.html/015_hu_fd939597a3eab90.png 1024w"
+loading="lazy"
+alt="装好的微动"
+class="gallery-image"
+data-flex-grow="65"
+data-flex-basis="157px"
+&gt;&lt;/p&gt;
+&lt;p&gt;继续掏出烙铁，翻到板子背面给针脚上锡，覆盖焊盘略微突出即可。&lt;/p&gt;
+&lt;p&gt;插电，开机，轻松秒杀&amp;hellip;的情景并没有出现。&lt;/p&gt;
+&lt;p&gt;焊盘脱落导致了微动并没有连接到主板，左键依然无法使用。&lt;/p&gt;
+&lt;p&gt;于是乎，事情被搁置，直到下一个周末。&lt;/p&gt;
+&lt;h3 id="飞线锡"&gt;飞线（锡）
+&lt;/h3&gt;&lt;p&gt;隔了一周，又重拾起板子。&lt;/p&gt;
+&lt;p&gt;用小刀找准线路，刮掉绿漆，把里面的铜线露出来，和以前一样的步骤，熔坨锡在针脚上面。&lt;/p&gt;
+&lt;p&gt;因为我刮的地方离针脚还蛮近，所以懒得用导线连接直接用一坨锡连接了，如果用导线连接的活，线头记得沾点松香，防止线头不沾锡。&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://blog.wuko.top/posts/2023/10/14/my_first_eironexperence.html/016.png"
+width="367"
+height="335"
+srcset="https://blog.wuko.top/posts/2023/10/14/my_first_eironexperence.html/016_hu_2229cfd7a51d5b04.png 480w, https://blog.wuko.top/posts/2023/10/14/my_first_eironexperence.html/016_hu_d0244c3ac7778b50.png 1024w"
+loading="lazy"
+alt="两坨丑丑的锡"
+class="gallery-image"
+data-flex-grow="109"
+data-flex-basis="262px"
+&gt;&lt;/p&gt;
+&lt;p&gt;虽然很难看但是能用就行！装回去插到电脑上测试，解决！&lt;/p&gt;
+&lt;p&gt;&lt;img src="https://blog.wuko.top/posts/2023/10/14/my_first_eironexperence.html/017.png"
+width="532"
+height="459"
+srcset="https://blog.wuko.top/posts/2023/10/14/my_first_eironexperence.html/017_hu_c6e382157534676a.png 480w, https://blog.wuko.top/posts/2023/10/14/my_first_eironexperence.html/017_hu_35f169553eaecc4c.png 1024w"
+loading="lazy"
+alt="耶鼠复活了"
+class="gallery-image"
+data-flex-grow="115"
+data-flex-basis="278px"
+&gt;&lt;/p&gt;
+&lt;h2 id="后语"&gt;后语
+&lt;/h2&gt;&lt;p&gt;实践花了两个星期，但写完这篇文章花了一个月&amp;hellip;高三时间真的好宝贵= =&lt;/p&gt;
+&lt;p&gt;属此文以录高三生活中的忙里偷闲。&lt;/p&gt;</description></item></channel></rss>
