@@ -9,6 +9,10 @@ links:
     description: 发生甚么事了？
     website: http://www.kslmkf.com/
     image: https://www.kslmkf.com/wp-content/uploads/2026/01/1768665269-308e9a4b85a47db29b756bb7f597d7fc-scaled.jpg
+  - title: MallocPointer
+    description: 一个爱好编程和计算机技术以及clouldflare使用的BiliBili在校生一枚
+    website: https://blog.airymoon.com/
+    image: https://gravatar.com/noisypeanutd2c9295a3d
   - title: wuko's blog
     description: 从零开始，由心而发。欢迎共同交流学习！
     website: https://blog.wuko.top
