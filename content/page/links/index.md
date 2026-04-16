@@ -12,7 +12,7 @@ links:
   - title: MallocPointer
     description: 一个爱好编程和计算机技术以及clouldflare使用的BiliBili在校生一枚
     website: https://blog.airymoon.com/
-    image: https://gravatar.com/noisypeanutd2c9295a3d
+    image: https://blog.airymoon.com/profile/me.jpg
   - title: wuko's blog
     description: 从零开始，由心而发。欢迎共同交流学习！
     website: https://blog.wuko.top
