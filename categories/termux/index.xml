@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Termux on wuko's blog</title><link>https://blog.wuko.top/categories/termux/</link><description>Recent content in Termux on wuko's blog</description><generator>Hugo -- gohugo.io</generator><language>zh-CN</language><lastBuildDate>Sat, 04 Dec 2021 00:00:00 +0000</lastBuildDate><atom:link href="https://blog.wuko.top/categories/termux/index.xml" rel="self" type="application/rss+xml"/><item><title>Termux启动语改为Screenfect</title><link>https://blog.wuko.top/posts/2021/12/04/tremux%E5%90%AF%E5%8A%A8%E8%AF%AD%E4%BF%AE%E6%94%B9%E4%B8%BAscreenfetch.html/</link><pubDate>Sat, 04 Dec 2021 00:00:00 +0000</pubDate><guid>https://blog.wuko.top/posts/2021/12/04/tremux%E5%90%AF%E5%8A%A8%E8%AF%AD%E4%BF%AE%E6%94%B9%E4%B8%BAscreenfetch.html/</guid><description>&lt;blockquote&gt;
+&lt;p&gt;最近更新了下termux，结果配置被清了，启动语变成了原版，所以借此机会记录下修改termux启动语为screenfetch，以免下次忘记。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id="安装-screenfetch-包"&gt;安装 &lt;em&gt;screenfetch&lt;/em&gt; 包:
+&lt;/h3&gt;&lt;p&gt;&lt;code&gt;pkg install screenfetch&lt;/code&gt;&lt;/p&gt;
+&lt;h3 id="输出至启动语文件"&gt;输出至启动语文件
+&lt;/h3&gt;&lt;p&gt;&lt;code&gt;screenfetch &amp;gt; $PREFIX/etc/motd&lt;/code&gt;&lt;/p&gt;
+&lt;h3 id="新建活动窗口"&gt;新建活动窗口
+&lt;/h3&gt;&lt;p&gt;&lt;img src="https://blog.wuko.top/posts/2021/2021-12-04-img1.png"
+loading="lazy"
+alt="2021-12-04-img1.png"
+&gt;&lt;/p&gt;
+&lt;p&gt;大功告成！&lt;/p&gt;
+&lt;!-- 属性什么的不要错了，最好用双引号括住 --&gt;
+&lt;!-- 网易云的iframe需要做些调整，调整如下 --&gt;
+&lt;iframe src="//music.163.com/outchain/player?type=2&amp;id=22785170&amp;auto=0&amp;height=66" frameborder="0" width="100%" height="86px"&gt;
+&lt;/iframe&gt;</description></item></channel></rss>
