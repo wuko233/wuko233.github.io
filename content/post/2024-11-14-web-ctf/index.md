@@ -2,7 +2,7 @@
 title: 【归档】ctf web类解密
 date: 2024-11-14
 slug: web-ctf
-image: cover.png
+image: cover.jpg
 tag: 
     - CTF
     - 网络安全

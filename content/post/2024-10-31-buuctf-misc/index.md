@@ -2,7 +2,7 @@
 title: 【归档】杂项misc解密记录
 date: 2024-10-31
 slug: buuctf-misc
-image: cover.png
+image: cover.jpg
 tag: 
     - CTF
     - 网络安全
@@ -26,7 +26,7 @@ categories:
 
 查看文件元数据，末尾得到flag：
 
-![sc1](sc1.png)
+![sc1](sc1.jpg)
 
 `flag{stego_is_s0_bor1ing}`
 
@@ -54,7 +54,7 @@ Advanced Archive Password Recovery 统计信息:
 
 修复图片长宽高，得到:`flag{He1l0_d4_ba1}`
 
-![dabai](dabai.png)
+![dabai](dabai.jpg)
 
 ## 乌镇峰会种图
 
@@ -66,7 +66,7 @@ Advanced Archive Password Recovery 统计信息:
 
 用`wireshark`打开，查找关键词找到password：
 
-![wireshark](wireshark.png)
+![wireshark](wireshark.jpg)
 
 `flag{ffb7567a1d4f4abdffdb54e022f8facd}`
 
@@ -74,7 +74,7 @@ Advanced Archive Password Recovery 统计信息:
 
 下载下来发现是`.exe`文件，直接运行失败，拖到`IDA pro`里查看，发现其开头为`data:image/jpg;base64`后跟一串base64，将它转换为图片：
 
-![n1](n1.png)
+![n1](n1.jpg)
 
 扫码得到：`KEY{dca57f966e4e4e31fd5b15417da63269}`
 
@@ -92,7 +92,7 @@ base64解码: `flag{70354300a5100ba78068805661b93a5c}`
 
 下载，直接查看图片属性，得到flag：`flag{870c5a72806115cb5439345d8b014396}`
 
-![secret](secret1.png)
+![secret](secret1.jpg)
 
 ## zip伪加密
 
@@ -112,7 +112,7 @@ base64解码: `flag{70354300a5100ba78068805661b93a5c}`
 
 `wireshark`打开，http分类，找到upload:
 
-![lostdata](lostdata.png)
+![lostdata](lostdata.jpg)
 
 `flag{da73d88936010da1eeeb36e945ec4b97}`
 
@@ -130,7 +130,7 @@ base64解码: `flag{70354300a5100ba78068805661b93a5c}`
 
 `Stegsolve.jar`打开提取数据：
 
-![lsb2](lsb2.png)
+![lsb2](lsb2.jpg)
 
 `Hey I think we can write safely in this file without any one seeing it. Anyway, the secret key is: st3g0_ saurus_wr3cks`
 
@@ -176,7 +176,7 @@ base64解码得到：`377cbadda1eca2f2f73d36277781f00a`
 
 `wireshark`追踪http流，得到一大串base64码，转换成图片：
 
-![ga](ga.png)
+![ga](ga.jpg)
 
 `flag{209acebf6324a09671abc31c869de72c}`
 
@@ -186,7 +186,7 @@ base64解码得到：`377cbadda1eca2f2f73d36277781f00a`
 
 解压打开一看，不是哥们：
 
-![ljf](ljf.png)
+![ljf](ljf.jpg)
 
 查阅得知，这是`brainfuck`加密，很形象的名字，差点大脑升级，，，
 
@@ -224,7 +224,7 @@ base64解码得到：`377cbadda1eca2f2f73d36277781f00a`
 
 这次直接下载了`D盾`，一顿扫描：
 
-![webshell](webshell1.png)
+![webshell](webshell1.jpg)
 
 在`/member/zp.php`中31行找到flag：`ba8e6c6f35a53933b871480bb9a9545c`
 
@@ -242,7 +242,7 @@ base64解码得到：`377cbadda1eca2f2f73d36277781f00a`
 
 图片查看16进制，发现后面还有zip，`binwalk`提取出zip，鉴定为zip伪加密，解压得到`flag.vmdk`，用`DiskGenius`打开，得到三个文件夹，拷贝到桌面删不掉了。。。而且也打不开。遂挂载到虚拟机用kali打开：
 
-![vmdkk](vmdk.png)
+![vmdkk](vmdk.jpg)
 
 ````
 +++++ +++++ [->++ +++++ +++<] >++.+ +++++ .<+++ [->-- -<]>- -.+++ +++.<
@@ -277,7 +277,7 @@ base64解码得到：`377cbadda1eca2f2f73d36277781f00a`
  .\steghide.exe extract -sf .\good-已合并.jpg
 ````
 
-![steghide](steghide.png)
+![steghide](steghide.jpg)
 
 解密得到`ko.txt`:
 
@@ -345,7 +345,7 @@ zip伪加密修复，解压得到文本与图片：
 
 `java Extract Misc.jpg`
 
-![out](f5.png)
+![out](f5.jpg)
 
 解密得到的文件查看16进制，发现是zip，改后缀发现加密，使用伪加密修复，解压得到flag：
 
@@ -355,7 +355,7 @@ zip伪加密修复，解压得到文本与图片：
 
 wireshark打开，过滤ftp，发现可疑数据：
 
-![file](secrectfile.png)
+![file](secrectfile.jpg)
 
 恢复到时间排序，找到文件的传输数据(`tcp.stream eq 6`)，~~ 追踪流导出文件，得到rar压缩包 ~~，这样导出只能得到一部分文件。。。用foremost提取文件，得到加密的rar，使用`APCHPR`秒了：`1903`
 
@@ -420,7 +420,7 @@ foremost提取出zip，发现加密，输入之前找到的密码，得到flag�
 
 让AI写了循环解码脚本，得到：`comEON_YOuAreSOSoS0great`
 
-![decrypto](decrypto.png)
+![decrypto](decrypto.jpg)
 
 ````python
 import base64
@@ -509,7 +509,7 @@ gnuplot> plot "changed.txt"
 
 得到：
 
-![gnuplot](gnuplot.png)
+![gnuplot](gnuplot.jpg)
 
 扫码得到：`flag{40fc0a979f759c8892f4dc045e28b820}`
 
@@ -523,7 +523,7 @@ foremost提取出rar，里面有个加密的`hehe.gif`，使用`APCHPR`秒了：
 
 放到`StegSolve.jar`， red plane得到二维码：
 
-![StegSolve](StegSolve.png)
+![StegSolve](StegSolve.jpg)
 
 扫码得到：`flag{shanxiajingwu_won_the_game}`
 

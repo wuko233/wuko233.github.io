@@ -22,7 +22,7 @@ categories:
 
 ### misc1
 
-![misc1](misc1.png)
+![misc1](misc1.jpg)
 
 > 提示：flag在图片数据中
 
@@ -34,7 +34,7 @@ categories:
 
 ### misc2
 
-![misc2](misc2.png)
+![misc2](misc2.jpg)
 
 > 提示：这不只是个图片
 
@@ -53,7 +53,7 @@ ZIP
 
 ### misc3
 
-![misc3_1](misc3_1.png)
+![misc3_1](misc3_1.jpg)
 
 > 提示：为啥图片不全呢？
 
@@ -195,7 +195,7 @@ base64解码得到
 
 `flag在http://ip/web/web1/flag/flag.txt`
 
-![web1](web1.png)
+![web1](web1.jpg)
 
 访问得到`geek{crazy}`
 
