@@ -66,7 +66,7 @@ Advanced Archive Password Recovery 统计信息:
 
 用`wireshark`打开，查找关键词找到password：
 
-![wireshark](wireshark'.png)
+![wireshark](wireshark.png)
 
 `flag{ffb7567a1d4f4abdffdb54e022f8facd}`
 

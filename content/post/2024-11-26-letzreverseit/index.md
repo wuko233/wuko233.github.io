@@ -211,7 +211,7 @@ return 0;
 
 提取`global`，`shift + E`导出数据：
 
-![xor](xor.png)
+![xor](xor.jpg)
 
 python写一遍异或的部分:
 
