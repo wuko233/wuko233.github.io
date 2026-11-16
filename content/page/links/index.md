@@ -17,10 +17,10 @@ links:
     description: 努力学习计算机知识的萌新，偶尔做一些有趣的小玩意儿。
     website: https://voyage-star.com/
     image: https://voyage-star.com/assets/img/avatar.jpg
-  - title: wuko's blog
-    description: 从零开始，由心而发。欢迎共同交流学习！
-    website: https://blog.wuko.top
-    image: https://blog.wuko.top/favicon.png
+  - title: 洞见
+    description: 一个记录生活见闻、深度思考和技术观点的个人空间。
+    website: https://www.summeriver.tech
+    image: https://www.summeriver.tech/favicon.ico
 menu:
     main: 
         weight: 4
