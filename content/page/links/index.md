@@ -10,10 +10,10 @@ links:
     website: http://www.kslmkf.com/
     image: https://www.kslmkf.com/wp-content/uploads/2026/01/1768665269-308e9a4b85a47db29b756bb7f597d7fc-scaled.jpg
   - title: MallocPointer
-    description: 一个爱好编程和计算机技术以及clouldflare使用的BiliBili在校生一枚
+    description: 一个爱好编程和计算机技术以及cloudflare使用的BiliBili在校生一枚
     website: https://blog.airymoon.com/
     image: https://blog.airymoon.com/profile/me.jpg
-  - title: 东林海院某学生的个人主页
+  - title: Snowfluff
     description: 努力学习计算机知识的萌新，偶尔做一些有趣的小玩意儿。
     website: https://voyage-star.com/
     image: https://voyage-star.com/assets/img/avatar.jpg
