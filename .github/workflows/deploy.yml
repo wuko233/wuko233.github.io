@@ -11,8 +11,6 @@ jobs:
         runs-on: ubuntu-latest
 
         permissions:
-            # Give the default GITHUB_TOKEN write permission to commit and push the
-            # added or changed files to the repository.
             contents: write
 
         steps:
@@ -38,6 +36,13 @@ jobs:
               with:
                   hugo-version: "latest"
                   extended: true
+
+            - name: Install Dart Sass
+              run: |
+                  curl -sLJO "https://github.com/sass/dart-sass/releases/download/1.105.1/dart-sass-1.105.1-linux-x64.tar.gz"
+                  mkdir -p "${HOME}/.local"
+                  tar -C "${HOME}/.local" -xf "dart-sass-1.105.1-linux-x64.tar.gz"
+                  echo "${HOME}/.local/dart-sass" >> $GITHUB_PATH
 
             - name: Build
               run: hugo --minify --gc
