@@ -1,3 +1,10 @@
 /*
     You can add your own custom styles here.
 */
+
+// Lato is loaded from Google's official mainland-China mirror
+// (fonts.googleapis.cn) in layouts/partials/footer/components/custom-font.html.
+// Keep it first in the stack; fall back to system fonts if the CDN is unavailable.
+:root {
+    --base-font-family: "Lato", var(--sys-font-family), "Microsoft YaHei", sans-serif;
+}
